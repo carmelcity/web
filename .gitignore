@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+.next
+.env
+_archive
+.fleek
+out
+.vercel

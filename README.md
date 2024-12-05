@@ -1,2 +1,1 @@
-# web
-The Carmel Web SDK
+# Carmel Web
