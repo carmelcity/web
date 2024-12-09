@@ -1,0 +1,1 @@
+export { WalletActivity } from './WalletActivity';

@@ -1,9 +1,0 @@
-{
-  "sites": [
-    {
-      "slug": "teeny-gpu-hollow",
-      "distDir": "out",
-      "buildCommand": "yarn run build"
-    }
-  ]
-}
