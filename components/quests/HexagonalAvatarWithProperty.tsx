@@ -19,15 +19,15 @@ export const HexagonalAvatarWithProperty = ({
   return (
     <div className="flex">
       <Link href={`/${username}`} className="relative w-10 z-10 mt-0.5">
-        <div className="absolute bottom-0 -right-2 w-6 h-6 z-10 bg-center bg-no-repeat">
-          <Image src={appLogo} alt={alt} className="object-fit w-full h-full" />
-        </div>
+        {/* <div className="absolute bottom-0 -right-2 w-6 h-6 z-10 bg-center bg-no-repeat">
+          <Image src={appLogo} alt={alt} className="object-fit w-full h-full" width={300} height={300} />
+        </div> */}
         <div
           className="w-10 h-10 bg-dark-green-secondary"
           style={{
             clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
           }}>
-          <Image src={profileImage || placeholder} alt={alt} className="object-fit w-full h-full" />
+          <Image src={profileImage || placeholder} alt={alt} className="object-fit w-full h-full" width={300} height={300}/>
         </div>
       </Link>
       <div

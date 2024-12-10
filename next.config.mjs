@@ -8,9 +8,9 @@ export default {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'data.fitroot.xyz',
+        hostname: 'storage.googleapis.com',
         port: '',
-        pathname: '/ipfs/**',
+        pathname: '/*/**',
       },
     ],
   },

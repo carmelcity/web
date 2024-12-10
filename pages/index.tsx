@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { ContactsScreen } from '~/components/contacts/screens';
-import { StoriesScreen } from '~/components/stories/screens';
+import { CarmelsScreen } from '~/components/carmels/screens';
 
 const MyWalletPage = ({ user }: any) => {
   return (
@@ -10,7 +10,7 @@ const MyWalletPage = ({ user }: any) => {
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <StoriesScreen />
+      <CarmelsScreen />
       {/* <ContactsScreen user={user} /> */}
     </>
   );
