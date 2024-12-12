@@ -1,0 +1,1 @@
+export { DocumentDuplicate } from './DocumentDuplicate';

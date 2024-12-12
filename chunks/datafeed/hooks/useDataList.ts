@@ -1,41 +1,41 @@
-"use client"
+'use client';
 
-import useSWR from 'swr'
-import { useEffect, useState } from 'react'
+import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 
-const URL = `${process.env.NEXT_PUBLIC_GATEWAY_URL}/carmel`
+const URL = `${process.env.NEXT_PUBLIC_GATEWAY_URL}/carmel`;
 
 /**
- * 
- * @param base 
- * @returns 
+ *
+ * @param base
+ * @returns
  */
 const postFetch = async (base: string) => {
-    return fetch(`${URL}/${base}`, { method: 'POST', body: JSON.stringify({})}).then(res => res.json())
-}
+  return fetch(`${URL}/${base}`, { method: 'POST', body: JSON.stringify({}) }).then(res => res.json());
+};
 
 /**
- * 
- * @returns 
+ *
+ * @returns
  */
-const useDataList = ({ base }: any) => {    
-    const [isReady, setIsReady] = useState(false)
-    const [all, setAll] = useState<any>(undefined)
+const useDataList = ({ base }: any) => {
+  const [isReady, setIsReady] = useState(false);
+  const [all, setAll] = useState<any>(undefined);
 
-    const { data, error, mutate } = useSWR(base, postFetch)
+  const { data, error, mutate } = useSWR(base, postFetch);
 
-    const refresh = async () => {
-        await mutate()
-    }
+  const refresh = async () => {
+    await mutate();
+  };
 
-    useEffect(() => {
-        if (!data || !data.data) return 
-        setAll(data.data)
+  useEffect(() => {
+    if (!data || !data.data) return;
+    setAll(data.data);
 
-        setIsReady(true)
-    }, [data])
+    setIsReady(true);
+  }, [data]);
 
-    return { all, isReady, refresh }
-}
+  return { all, isReady, refresh };
+};
 
-export default useDataList
+export default useDataList;

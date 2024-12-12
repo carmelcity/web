@@ -1,0 +1,1 @@
+export { QuestsIcon } from './Quests';

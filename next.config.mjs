@@ -1,13 +1,17 @@
+import nodeExternals from 'webpack-node-externals';
+
 /** @type {import('next').NextConfig} */
-
-const props = { 
-  // assetPrefix: "./",
-  output: "export", 
-  trailingSlash: true,
+export default {
   reactStrictMode: true,
+  // externals: [nodeExternals()],
   images: {
-    unoptimized: true
-  }
-}
-
-export default props
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/*/**',
+      },
+    ],
+  },
+};
