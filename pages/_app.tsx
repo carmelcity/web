@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 import '../styles/globals.css';
 import '../styles/tiles.css';
 import type { AppProps } from 'next/app';
-import * as config from '../sdk/config';
 import 'remixicon/fonts/remixicon.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
