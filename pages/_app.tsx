@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
       <ThemeProvider attribute="class">
-        <Component {...pageProps} config={config} user={user} />
+        <Component {...pageProps} config={{}} user={user} />
         <ToastContainer />
     </ThemeProvider>
   );
