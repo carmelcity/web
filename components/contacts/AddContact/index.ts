@@ -1,1 +1,0 @@
-export { AddContactModal } from './AddContactModal';

@@ -1,1 +1,0 @@
-export { FeaturedAcademy } from './FeaturedAcademy';

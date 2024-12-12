@@ -16,17 +16,17 @@ const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
 
-export const TopNavBar = ({ data }: TopNavbarProps) => {
+export const TopNavBar = ({ data }: any) => {
   const [navbarElements, setNavbarElemens] = useState(topNavbarRoutes);
 
   const handleNavClick = (targetHref: string) => {
-    const updatedNavData = updateNavbarElements(navbarElements, targetHref);
+    const updatedNavData: any = updateNavbarElements(navbarElements, targetHref);
     setNavbarElemens(updatedNavData);
   };
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    const updatedNavData = navbarElements.map((item: any) => ({
+    const updatedNavData: any = navbarElements.map((item: any) => ({
       ...item,
       current: item.href === currentPath,
     }));

@@ -79,7 +79,7 @@ export const CarmelCard = (props: any) => {
   }
   const People = () => {
     return <div className="flex flex-row w-full pl-4 mt-4 lg:mt-0 items-center justify-start">
-      { people.map((p: any) => <div className='-ml-2 z-10'><HexagonalAvatar src={props.authorImageLink} className=""/></div>)}
+      { people.map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><HexagonalAvatar src={props.authorImageLink} className=""/></div>)}
 <div className="flex items-center justify-center ml-3 mt-1">
   <span className="text-cyan text-sm font-bold"> +3 more talking </span>
 </div>

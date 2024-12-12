@@ -47,8 +47,8 @@ export const Hero = (props: any) => {
       className={`flex flex-col items-start gap-4 z-30 ${props.moreClasses} w-auto z-30 p-8 pb-20`}>
       <div className="flex lg:flex-row flex-col items-center w-full">
       { props.invert ? 
-        [<ImageContent {...props}/>,<TextContent {...props}/>]  :
-        [<TextContent {...props}/>,<ImageContent {...props}/>]
+        [<ImageContent {...props} key="d1"/>,<TextContent key="d2" {...props}/>]  :
+        [<TextContent key="e1" {...props}/>,<ImageContent key="e2" {...props}/>]
       }
       </div>
     </motion.div>

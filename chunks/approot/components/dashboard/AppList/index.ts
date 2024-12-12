@@ -1,1 +1,0 @@
-export { AppsList } from './AppsList';

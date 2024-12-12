@@ -1,1 +1,0 @@
-export { DocumentDuplicateGrey } from './DocumentDuplicateGrey';

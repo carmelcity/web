@@ -7,7 +7,7 @@ import { SidebarNavigation } from '~/components/layout/SidebarNavigation';
 import { Navbar } from '~/components/layout/Navbar';
 
 export const AppLayout = ({ children, user }: any) => {
-  const navData = [];
+  const navData: any = [];
   const isLoading = true;
   const router = useRouter();
 
@@ -26,7 +26,7 @@ export const AppLayout = ({ children, user }: any) => {
           </div>
         
         <div className="flex flex-col w-full">
-          <TopNavBar isDashboard={false} notNeeded={false} />
+          <TopNavBar />
           {children}
         </div>
           <div className="lg:hidden">

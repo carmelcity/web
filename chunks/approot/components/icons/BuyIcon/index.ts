@@ -1,1 +1,0 @@
-export { BuyIcon } from './Buy';

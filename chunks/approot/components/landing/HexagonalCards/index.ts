@@ -1,1 +1,0 @@
-export { HexagonalCards } from './HexagonalCards';
