@@ -1,7 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { Hero } from '../hero';
-import { Grid } from '../grid';
 import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';

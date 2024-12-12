@@ -1,1 +1,0 @@
-export { CarmelWay } from './CarmelWay';

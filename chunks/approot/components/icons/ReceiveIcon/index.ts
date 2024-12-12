@@ -1,1 +1,0 @@
-export { ReceiveIcon } from './ReceiveIcon';

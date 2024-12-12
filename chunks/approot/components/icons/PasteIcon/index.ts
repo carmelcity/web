@@ -1,1 +1,0 @@
-export { PasteIcon } from './PasteIcon';

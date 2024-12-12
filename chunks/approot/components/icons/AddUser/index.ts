@@ -1,1 +1,0 @@
-export { AddUserIcon } from './AddUser';

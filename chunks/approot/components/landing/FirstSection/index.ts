@@ -1,1 +1,0 @@
-export { FirstSection } from './FirstSection';

@@ -1,12 +1,5 @@
 import React from 'react';
-import Check from '../explore/check';
 import Image from 'next/image';
-import Explore from '../explore';
-import assetsXS from '~/images/landing/assets.webp';
-import assetsSM from '~/images/landing/assets.webp';
-import assetsMD from '~/images/landing/assets.webp';
-import assetsLG from '~/images/landing/assets.webp';
-import assetsXL from '~/images/landing/assets.webp';
 import wire from '~/images/Wire.png';
 import secondWire from '~/images/Wire2.png';
 import wireXXS from '~/images/landing/Wire5_XXS.png';
@@ -15,9 +8,6 @@ import wireXS from '~/images/landing/Wire5_XS.png';
 import secondWireXS from '~/images/landing/Wire6_XS.png';
 import wireLG from '~/images/landing/Wire5_LG.png';
 import secondWireLG from '~/images/landing/Wire6_LG.png';
-import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import { leftToRightVariants } from '~/utils/animations';
 
 export const Wires = ({ top }: any) => {
     return (<div><Image src={wire} alt="wireXL" className={`hidden xl:block absolute z-20 top-[${top}%] w-screen animate-pulse`} />

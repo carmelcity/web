@@ -1,1 +1,0 @@
-export { DocumentDuplicate } from './DocumentDuplicate';

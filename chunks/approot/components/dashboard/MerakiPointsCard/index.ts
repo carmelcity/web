@@ -1,1 +1,0 @@
-export { MerakiPointsCard } from './MerakiPointsCard';

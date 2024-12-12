@@ -1,1 +1,0 @@
-export { AchievementsCupIcon } from './AchievementsCup';
