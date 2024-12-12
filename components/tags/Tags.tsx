@@ -22,13 +22,13 @@ export const Tags = ({ tags, tagClass, containerClass, toggleEnabled = false }: 
       {displayedTags.map((tag: string, index: number) => (
         <span
           key={tag}
-          className={`${tagClass ?? ''} flex justify-center items-center font-thin ${
+          className={`${tagClass ?? ''} flex justify-center items-center font-thin cursor-pointer hover:bg-dark-green-secondary  ${
             readex_pro.className
           } px-3 py-1 bg-[#0B6F6F] bg-opacity-25 text-white border border-light-primary border-[0.5px] border-opacity-50 backdrop-blur-sm`}>
           {tag}
         </span>
       ))}
-      {toggleEnabled && tags.length > 2 && (
+      {/* {toggleEnabled && tags.length > 2 && (
         <span
           onClick={toggleTags}
           className={`${tagClass ?? ''} flex justify-center items-center font-thin ${
@@ -36,7 +36,7 @@ export const Tags = ({ tags, tagClass, containerClass, toggleEnabled = false }: 
           } px-3 py-1 bg-[#0B6F6F] bg-opacity-25 text-white border border-light-primary border-[0.5px] cursor-pointer backdrop-blur-sm`}>
           {showAllTags ? '- Show Less' : `+${tags.length - 2} more tags`}
         </span>
-      )}
+      )} */}
     </div>
   );
 };

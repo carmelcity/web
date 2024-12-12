@@ -11,13 +11,12 @@ import { Readex_Pro } from 'next/font/google';
 import { useCarmels } from '~/sdk/hooks/carmels';
 import { Tabs } from '~/components/tabs';
 import logo from '~/public/images/logo/logo-white.svg';
-import { Quests } from '~/components/quests'
-import { useCarmelQuests } from '~/sdk';
+import { Collection } from '../data/Collection'
 
 const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
 export const CarmelsScreen = () => {
-  const { data: questsData = [], isLoading: isLoadingQuests } = useCarmelQuests();
+  // const { data: questsData = [], isLoading: isLoadingQuests } = useCarmels();
   // const router = useRouter()
   // const username: any = router.query.id
 
@@ -89,13 +88,13 @@ export const CarmelsScreen = () => {
                     className={`object-fit w-24 h-24`}
                 />
             <Title
-              decription="Forever"
+              decription="Carmels"
               moreClasses={`text-center text-xl uppercase mb-0`}
               isLoading={isLoadingStories}
             />
             <Title
-              decription="Conversations"
-              moreClasses={`text-center lg:text-3xl text-xl text-white uppercase mb-10`}
+              decription="Forever Conversations"
+              moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
               isLoading={isLoadingStories}
             />
             {/* <Hero data={highlightedStory || storiesData[0]} isLoading={isLoadingStories} /> */}
@@ -107,7 +106,7 @@ export const CarmelsScreen = () => {
                 setSelectedTab(value);
               }}
             />
-          <Quests data={questsData} isLoading={isLoadingQuests} />
+          <Collection data={storiesData} isLoading={isLoadingStories} />
           {/* <Grid data={stories || []} isLoading={isLoadingStories} /> */}
             {/* <Grid data={stories?.slice(0, 9 + displayCounter) || []} isLoading={isLoadingStories} /> */}
             {/* {stories.length > 9 && stories.length > displayCounter + 9 && (
