@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import { getJsonFile } from '../system/core';
 import { storiesData as mockData } from '~/components/carmels/mockData';
 
 const fetcher = async () => {
