@@ -1,4 +1,4 @@
-import HexagonalAvatar from '../hexagonal-avatar/HexagonalAvatar';
+import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
 
 export const HexagonalAvatarTag = (props: any) => {
   return (

@@ -12,7 +12,7 @@ export const QuestCard = (props: any) => {
 
   const handleDetails = () => {
     const url = {
-      pathname: `/quests/${props.slug}`,
+      pathname: `/${props.slug}`,
     };
 
     router.push(url);
@@ -20,13 +20,13 @@ export const QuestCard = (props: any) => {
 
   return (
     <div className={`${props.containerClasses ?? ''} block lg:flex lg:h-72 mx-auto bg-primary-background-blend mb-5`}>
-      <div className="lg:w-96 lg:h-full relative">
+      {/* <div className="lg:w-96 lg:h-full relative">
         <Image src={props.photo} alt="card" className="object-fit lg:h-full w-full" />
-      </div>
+      </div> */}
       <div className="flex flex-col p-4 leading-normal text-left lg:w-2/3">
         <h4 className={`${readexPro.className} 2xl:w-5/6 md:text-4xl tracking-tight dark:text-white`}>{props.title}</h4>
         <div className={`flex lg:hidden items-center`}>
-          <h4 className={`${readexPro.className} text-cyan font-thin`}>Rewards pool</h4>
+          <h4 className={`${readexPro.className} text-cyan font-thin`}>Rewards:</h4>
           <h4 className={`${readexPro.className} text-xl font-normal ml-5 text-cyan`}>{props.reward}</h4>
         </div>
         <p className={`${readexPro.className} mb-3 text-sm font-thin text-gray-400 2xl:w-5/6`}>
@@ -54,7 +54,7 @@ export const QuestCard = (props: any) => {
       </div>
       <div className="mt-5 mr-4 ml-4 lg:ml-auto text-right flex flex-col">
         <div className="hidden lg:block">
-          <h4 className={`${readexPro.className} font-thin text-cyan`}>Rewards pool</h4>
+          <h4 className={`${readexPro.className} font-thin text-cyan`}>Rewards:</h4>
           <h4 className={`${readexPro.className} text-3xl tracking-tight text-cyan`}>{props.reward}</h4>
         </div>
         <div className="mt-auto mb-1">

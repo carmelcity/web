@@ -28,26 +28,17 @@ export const sidebarRoutes = [
     current: false,
   },
   {
-    name: 'Incubator',
-    href: '/incubator',
-    img: 'BeakerIcon',
+    name: 'Communities',
+    href: '/communities',
+    img: 'UserGroupIcon',
     iconActive: marketplaceActive,
     icon: marketplace,
     current: false,
   },
   {
-    name: 'Academy',
-    href: '/academy',
-    img: 'AcademicCapIcon',
-    iconActive: walletActive,
-    icon: wallet,
-    current: false,
-  },
-
-  {
-    name: 'Stories',
-    href: '/stories',
-    img: 'DocumentTextIcon',
+    name: 'Projects',
+    href: '/projects',
+    img: 'FireIcon',
     iconActive: walletActive,
     icon: wallet,
     current: false,
@@ -55,9 +46,22 @@ export const sidebarRoutes = [
   {
     name: 'Store',
     href: '/store',
-    img: 'BuildingStorefrontIcon',
+    img: 'CurrencyDollarIcon',
     iconActive: assetsActive,
     icon: assetsIcon,
     current: false,
   },
 ];
+
+
+/**
+ * Stories
+ * Tutorials
+ * Challenges
+ * 
+ * 
+ * The Carmel Way
+ *    Manifesto
+ *    Principles
+ *    
+ */

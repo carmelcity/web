@@ -4,6 +4,9 @@ import { publicRoutes } from './routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NavbarProps } from './props';
+import LogoSmall from '~/images/carmel.webp';
+import Logo from '~/images/logo/logo-white-with-white-text.svg'
+import Image from 'next/image';
 
 // TODO:
 // 1. Add active class to the current route - DONE
@@ -71,15 +74,14 @@ export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
 
   const renderLogo = () => (
     <div className="flex h-16 items-center hover:opacity-80">
-      <Link href="/">
-        <img src="/images/logo/logo-white-with-white-text.svg" alt="logo" className="h-12 block" />
+      <Link href="/" className='lg:flex hidden'>
+      <Image src={Logo} alt="card" className="w-48 ml-3" />
+      </Link>
+      <Link href="/" className='lg:hidden'>
+          <Image src={LogoSmall} alt="card" className="h-10 w-10" />
       </Link>
     </div>
   );
-
-  if (isDashboard || notNeeded) {
-    return null;
-  }
 
   return (
     <div className="flex fixed w-screen top-0 z-50">
@@ -93,35 +95,13 @@ export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
           backgroundColor: 'rgba(0, 0, 0, 0.2)', // Adjust the opacity value (0.8) as needed
           zIndex: 1000, // Adjust the zIndex value as needed
         }}>
-        {!isDashboard ? (
-          <div className="md:max-w-[1740px] mx-auto w-full items-center flex justify-between h-full flex-col lg:flex-row">
+          <div className="mx-auto w-full items-center flex justify-between h-full lg:flex-row">
             <div className="flex lg:flex-1 justify-between items-center h-full w-full md:w-full">
               {renderLogo()}
-              <div className="lg:hidden ">{renderBurgerMenu()}</div>
             </div>
-            <ul className="flex-2 gap-x-4  hidden lg:flex items-center">{renderLinks()}</ul>
-            <div className="hidden gap-x-6 justify-end items-center  flex-1 lg:flex">{renderNonLinks()}</div>
-            {showMenu && (
-              <ul className="mt-2 my-8 lg:hidden text-center">
-                <div className="flex gap-y-4 mb-10 flex-col">{renderLinks()}</div>
-                <div className="flex gap-y-4 flex-col">{renderNonLinks()}</div>
-              </ul>
-            )}
+            {/* <ul className="flex-2 gap-x-4  hidden lg:flex items-center">{renderLinks()}</ul> */}
+            <div className="gap-x-6 justify-end items-center  flex-1 lg:flex">{renderNonLinks()}</div>           
           </div>
-        ) : (
-          <div className="flex h-full items-center justify-between w-full ">
-            <div className={`${isDashboard && 'lg:hidden'}`}>{renderLogo()}</div>
-            <div className="flex justify-end w-full items-center flex h-full">
-              {publicRoutes.find(r => r.path === '/carmel-universe') && (
-                <Link href="/carmel-universe">
-                  <button className="text-cyan cursor-pointer text-sm md:text-md font-normal hover:opacity-80">
-                    Carmel Universe
-                  </button>
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
       </nav>
     </div>
   );

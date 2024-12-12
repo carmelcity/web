@@ -11,6 +11,7 @@ import profile_placeholder from '~/images/profile_placeholder.webp';
 import { MobileTopNavbarProps } from './props';
 import { updateNavbarElements } from '../utils';
 import turnOff from '~/images/TurnOff.svg';
+import DynamicIcon from '~/components/icons/Dynamic';
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
@@ -34,48 +35,64 @@ export const MobileTopNavbar = ({ data, user }: MobileTopNavbarProps) => {
     setNavbarElemens(updatedNavData);
   }, []);
 
-  const handleLogOut = () => {
-    user.auth.clearAccount();
-    window.location.reload();
+  const handleLogin = () => {
+    // user.auth.clearAccount();
+    // window.location.reload();
   };
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full items-center justify-center">
       <nav className="flex items-center w-full py-3 bg-dark-green">
-        <Link href="/">
-          <Image src={carmelLogo} alt="card" className="h-10 w-10 ml-3" />
-        </Link>
-
-        <ul role="list" className="flex ml-auto items-center px-4">
-          {navbarElements.map((item, index) => (
-            <li key={item.id} className="flex-grow">
-              <Link href={item.href} onClick={() => handleNavClick(item.href)}>
-                <div className="ml-3">{item.icon}</div>
-              </Link>
-            </li>
-          ))}
-          <div
-            className="w-11 h-11 ml-3 bg-dark-green-secondary flex justify-center items-center border border-cyan border-opacity-20 cursor-pointer"
-            onClick={handleLogOut}>
-            <Image src={turnOff} alt="card" />
-          </div>
-          <Link href="/">
+        <Link href="/access" className="w-auto bg-dark-green-secondary ml-2 flex items-center border border-primary/20">
+              <div
+          className="w-8 h-8 m-auto z-10 ml-3 mr-3"
+          style={{
+            clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
+          }}>
             <Image
               src={data?.user?.avatarImage || profile_placeholder}
               width={100}
               height={100}
               alt="card"
-              className="h-11 w-11 ml-3"
-            />
+              className="object-cover w-full h-full"
+              />
+            </div>
+
+            <div className={`${readexPro.className} ml-2 px-4 py-2 text-primary bg-dark-green/50`}>{data?.username}
+              <DynamicIcon name={"ArrowLeftOnRectangleIcon"} width={24} height={24} />
+            </div>
           </Link>
-        </ul>
+        <div className='w-full flex justify-center flex-row'>
+         <Link href={"/"} onClick={() => handleNavClick("/")}>
+            <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
+              <DynamicIcon name={"AcademicCapIcon"} width={20} height={20} />
+            </div>
+        </Link>
+        <Link href={"/"} onClick={() => handleNavClick("/")}>
+        <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
+        <DynamicIcon name={"FlagIcon"} width={20} height={20} />
+            </div>
+        </Link>
+        <Link href={"/"} onClick={() => handleNavClick("/")}>
+        <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
+        <DynamicIcon name={"NewspaperIcon"} width={20} height={20} />
+            </div>
+        </Link>
+        </div>
+        
+        <div className="border border-cyan border-opacity-20 bg-black h-12 p-2 items-center flex mr-2">
+          <Link
+            href="/"
+            className={`${readexPro.className} font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green no-wrap text-sm text-center`}>
+           The&nbsp;Carmel&nbsp;Way
+          </Link>
+        </div>
       </nav>
       <div className="border-t border-cyan border-opacity-20 bg-black h-14 items-center flex">
-        <Image src={rocket} alt="rocket" className="ml-3" />
         <Link
-          href="/"
+          href="/business"
           className={`${readexPro.className} font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green ml-3`}>
-          Get Carmel Studio!
+          Start a Carmel Community for your business
         </Link>
         <Image src={arrow} alt="arrow" className="ml-auto mr-3" />
       </div>

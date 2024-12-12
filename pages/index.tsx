@@ -1,19 +1,20 @@
 import React from 'react';
 import Head from 'next/head';
-import { ContactsScreen } from '~/components/contacts/screens';
 import { CarmelsScreen } from '~/components/carmels/screens';
+import { AppLayout } from '~/components/layout/Layout';
 
-const MyWalletPage = ({ user }: any) => {
+const Main = ({ user }: any) => {
   return (
     <>
       <Head>
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <CarmelsScreen />
-      {/* <ContactsScreen user={user} /> */}
+      <AppLayout>
+        <CarmelsScreen />
+      </AppLayout>
     </>
   );
 };
 
-export default MyWalletPage;
+export default Main;

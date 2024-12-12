@@ -57,7 +57,7 @@ export const publicRoutes = [
   //   type: 'link',
   // },
   {
-    path: '/access/reserve',
+    path: '/business/access',
     name: 'Get Early Access',
     current: false,
     type: 'button',
