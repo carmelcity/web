@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { MobileNavigation } from '~/components/layout/MobileNavigation';
 import { MobileTopNavbar } from '~/components/layout/MobileTopNavbar';
-import { TopNavBar } from '~/components/layout/TopNavBar';
+import { TopNavBar } from '~/components/layout/TopNavbar';
 import { SidebarNavigation } from '~/components/layout/SidebarNavigation';
 import { Navbar } from '~/components/layout/Navbar';
 
