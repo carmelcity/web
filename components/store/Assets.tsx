@@ -1,5 +1,4 @@
 import React from 'react';
-import { AssetsProps } from './props';
 import Image from 'next/image';
 import { Readex_Pro } from 'next/font/google';
 import { AssetsPlaceholder } from '~/components/placeholders/Assets';
@@ -8,7 +7,7 @@ const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
 
-export const Assets = ({ data, filter, isLoading }: AssetsProps) => {
+export const Assets = ({ data, filter, isLoading }: any) => {
   if (isLoading) {
     return <AssetsPlaceholder />;
   }
