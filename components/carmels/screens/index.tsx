@@ -65,7 +65,7 @@ export const CarmelsScreen = () => {
   const highlightedStory = getHighlightedStory(storiesData);
   const stories = useMemo(() => {
     return (selectedTab !== '*'
-      ? storiesData.filter((post: any) => post.data.tags.includes(selectedTab))
+      ? storiesData.filter((post: any) => post.tags.includes(selectedTab))
       : storiesData).filter((post: any) => {
         console.log(post)
         return post.id !== highlightedStory.id
@@ -96,14 +96,14 @@ export const CarmelsScreen = () => {
               isLoading={isLoadingStories}
             />
             {/* <Hero data={highlightedStory || storiesData[0]} isLoading={isLoadingStories} /> */}
-            <Tabs
+            {/* <Tabs
               isLoading={isLoadingStories}
               tabs={tabs}
               selectedTab={selectedTab}
               onClickTab={(value: string) => {
                 setSelectedTab(value);
               }}
-            />
+            /> */}
           <Collection data={storiesData} isLoading={isLoadingStories} />
           {/* <Grid data={stories || []} isLoading={isLoadingStories} /> */}
             {/* <Grid data={stories?.slice(0, 9 + displayCounter) || []} isLoading={isLoadingStories} /> */}

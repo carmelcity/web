@@ -37,26 +37,7 @@ export const TopNavBar = ({ data }: any) => {
     <div className='flex flex-col'>
     <div className="hidden lg:flex z-50 w-full items-center justify-end sticky top-0 bg-dark-green">
       <nav className="flex items-center align-center flex-row py-3">
-      <div className='flex flex-row mr-8'>
-        <Link href={"/"} onClick={() => handleNavClick("/")}>
-            <div className="flex justify-center text-primary items-center cursor-pointer gap-2 p-2 ml-4 border border-cyan hovee:border-opacity-20 border-opacity-0 hover:bg-dark-green-secondary">
-              <DynamicIcon name={"AcademicCapIcon"} width={20} height={20}/> 
-              <span className='mt-1 text-primary'>Tutorials</span>
-            </div>
-        </Link>
-        <Link href={"/"} onClick={() => handleNavClick("/")}>
-        <div className="flex justify-center items-center text-primary cursor-pointer gap-2 p-2 ml-4 border border-cyan hovee:border-opacity-20 border-opacity-0 hover:bg-dark-green-secondary">
-        <DynamicIcon name={"TrophyIcon"} width={20} height={20}/> 
-              <span className='mt-1 text-primary'>Challenges</span>
-            </div>
-        </Link>
-        <Link href={"/"} onClick={() => handleNavClick("/")}>
-        <div className="flex justify-center items-center text-primary cursor-pointer gap-2 p-2 ml-4 border border-cyan hovee:border-opacity-20 border-opacity-0 hover:bg-dark-green-secondary">
-        <DynamicIcon name={"NewspaperIcon"} width={20} height={20}/> 
-              <span className='mt-1 text-primary'>Stories</span>
-            </div>
-        </Link>
-        </div>
+       
         <div className="border border-cyan border-opacity-20 bg-black h-14 items-center flex mr-4">
           <Link
             href="/way"

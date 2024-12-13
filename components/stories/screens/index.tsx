@@ -46,6 +46,26 @@ export const StoriesScreen = () => {
         description: 'Community',
         value: 'Community',
       },
+      {
+        description: 'Community2',
+        value: 'Community',
+      },
+      {
+        description: 'Community3',
+        value: 'Community',
+      },
+      {
+        description: 'Community4',
+        value: 'Community',
+      },
+      {
+        description: 'Community5',
+        value: 'Community',
+      },
+      {
+        description: 'Community6',
+        value: 'Community',
+      },
     ],
     [],
   );
@@ -86,16 +106,16 @@ export const StoriesScreen = () => {
               isLoading={isLoadingStories}
             />
             <StoriesHero data={highlightedStory || storiesData[0]} isLoading={isLoadingStories} />
-            <Tabs
+            {/* <Tabs
               isLoading={isLoadingStories}
               tabs={tabs}
               selectedTab={selectedTab}
               onClickTab={(value: string) => {
                 setSelectedTab(value);
               }}
-            />
-            <StoriesGrid data={stories?.slice(0, 9 + displayCounter) || []} isLoading={isLoadingStories} />
-            {stories.length > 9 && stories.length > displayCounter + 9 && (
+            /> */}
+            <StoriesGrid data={stories || []} isLoading={isLoadingStories} />
+            {/* {stories.length > 9 && stories.length > displayCounter + 9 && (
               <button
                 className={`bg-[#00FFFF] text-black p-4 ${readex_pro.className}`}
                 onClick={() => setDisplayCounter(prev => prev + 6)}>
@@ -108,7 +128,7 @@ export const StoriesScreen = () => {
                 onClick={() => setDisplayCounter(0)}>
                 Collapse
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </div>

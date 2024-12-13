@@ -38,7 +38,7 @@ export const Tabs = ({ tabs, selectedTab, onClickTab, isLoading }: TabsProps) =>
   return (
     <div
       id="scrollContainer"
-      className={`py-5 pr-5 w-full flex items-center justify-center whitespace-nowrap overflow-x-auto gap-2`}
+      className={`py-5 flex items-center justify-center whitespace-nowrap overflow-x-auto w-full gap-2`}
       onScroll={onScroll}>
       {getTabs()}
     </div>
