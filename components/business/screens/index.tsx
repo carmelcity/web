@@ -5,7 +5,6 @@ import { Section } from '~/components/landing/Section';
 import { Hero } from '~/components/access/Hero';
 import { Instructions } from '~/components/landing/Instructions';
 import { SignUp } from '~/components/landing/Signup';
-import * as access from '~/components/access'
 
 export const BusinessScreen = () => {
   return (
@@ -26,7 +25,6 @@ export const BusinessScreen = () => {
 
 
 export const BusinessAccessScreen = () => {
-  const Main: any = (access as any)['register'] || (access as any).early
   return (
     <main className={`flex w-full flex-col justify-start items-center text-center`}>
       <div className="flex flex-col gap-4 w-full max-w-[1920px]">
