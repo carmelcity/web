@@ -3,29 +3,9 @@ import { useMemo, useState } from 'react';
 import { AppCard } from './AppCard';
 import { AppDetailsPlaceholder } from '~/components/placeholders/AppDetails';
 import { AssetCard } from './AssetCard';
-import { Readex_Pro } from 'next/font/google';
-// import { ArrowLeft } from '~/components/icons';
 import { useRouter } from 'next/router';
-import { Tabs } from '~/components/tabs';
 
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
-
-// const [selectedTab, setSelectedTab] = useState('community');
-// const [displayCounter, setDisplayCounter] = useState(0);
-
-export const AppDetails = ({ data, isLoading }: any) => {
-  
-  const router = useRouter();
-  
-  if (isLoading) {
-    return <AppDetailsPlaceholder />;
-  }
-
-  const { app, assets } = data;
-
-
+export const AppDetails = ({ data, isLoading }: any) => {  
   const tabs = useMemo(
     () => [
       {
@@ -51,8 +31,11 @@ export const AppDetails = ({ data, isLoading }: any) => {
     ],
     [],
   );
-  
-  const [selectedTab, setSelectedTab] = useState('posts');
+  if (isLoading) {
+    return <AppDetailsPlaceholder />;
+  }
+
+  const { app, assets } = data;
 
 
   const assetCards = assets.map((item: any, index: number) => {
@@ -69,16 +52,6 @@ export const AppDetails = ({ data, isLoading }: any) => {
         <AppCard data={app} />
       </div>
       <div className="flex flex-col w-full lg:ml-4 lg:mt-0 mt-4">
-      <div className='border-b border-primary/20 mr-4 ml-4 mt-4 pr-8'>
-      {/* <Tabs
-              isLoading={isLoading}
-              tabs={tabs}
-              selectedTab={selectedTab}
-              onClickTab={(value: string) => {
-                setSelectedTab(value);
-              }}
-            /> */}
-             </div>
         <div className="flex flex-wrap w-full sm:px-2 py-2">{assetCards}</div>
       </div>
     </div>
