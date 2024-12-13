@@ -1,8 +1,6 @@
 import React from 'react';
-import { AssetCardProps } from './props';
 import Image from 'next/image';
 import { Readex_Pro } from 'next/font/google';
-import { ShoppingCart } from '~/components/icons';
 import DynamicIcon from '~/components/icons/Dynamic';
 import Link from 'next/link';
 import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
@@ -11,9 +9,8 @@ const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
 
-export const AssetCard = ({ data }: AssetCardProps) => {
+export const AssetCard = ({ data }: any) => {
   const { id, title, image, price } = data;
-
 
   const HexagonalAvatarTag = (props: any) => {
     return (
