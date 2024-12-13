@@ -17,7 +17,7 @@ export const Tab = ({ description, value, onClick, selectedValue, isLoading }: T
 
   return (
     <button
-      className={`${readex_pro.className} ${selected ? selectedStyles : notSelectedStyles} py-2 px-4 text-lg`}
+      className={`${readex_pro.className} ${selected ? selectedStyles : notSelectedStyles} py-2 px-2 lg:px-4 text-sm lg:text-lg`}
       onClick={() => onClick(value)}>
       {description}
     </button>

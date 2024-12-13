@@ -1,13 +1,13 @@
 import React from 'react';
 import Title from './title';
-import Main from './main';
+import { Main } from './main';
 import Assets from './assets';
 import { Readex_Pro } from 'next/font/google';
 import Apps from './apps';
 
 const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
-const Story = ({ story, assets, upperTitle, appsTitle, apps, hideTags, hideHeader, reverse }: any) => {
+export const Story = ({ story, assets, upperTitle, appsTitle, apps, hideTags, hideHeader, reverse }: any) => {
   return (
     <div className="mb-20 flex flex-col gap-4 z-50">
       {/* <Title title={story.header} upperTitle={upperTitle} src={story.logo} /> */}
@@ -18,5 +18,3 @@ const Story = ({ story, assets, upperTitle, appsTitle, apps, hideTags, hideHeade
     </div>
   );
 };
-
-export default Story;

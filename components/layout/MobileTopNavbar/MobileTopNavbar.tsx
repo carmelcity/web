@@ -62,24 +62,10 @@ export const MobileTopNavbar = ({ data, user }: MobileTopNavbarProps) => {
               <DynamicIcon name={"ArrowLeftOnRectangleIcon"} width={24} height={24} />
             </div>
           </Link>
-        <div className='w-full flex justify-center flex-row'>
-         <Link href={"/"} onClick={() => handleNavClick("/")}>
-            <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
-              <DynamicIcon name={"AcademicCapIcon"} width={20} height={20} />
-            </div>
-        </Link>
-        <Link href={"/"} onClick={() => handleNavClick("/")}>
-        <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
-        <DynamicIcon name={"FlagIcon"} width={20} height={20} />
-            </div>
-        </Link>
-        <Link href={"/"} onClick={() => handleNavClick("/")}>
-        <div className="w-11 h-11 ml-2 flex justify-center text-primary items-center cursor-pointer">
-        <DynamicIcon name={"NewspaperIcon"} width={20} height={20} />
-            </div>
-        </Link>
-        </div>
-        
+       
+          <div className='w-full'>
+
+          </div>
         <div className="border border-cyan border-opacity-20 bg-black h-12 p-2 items-center flex mr-2">
           <Link
             href="/"
