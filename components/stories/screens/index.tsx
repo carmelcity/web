@@ -88,7 +88,7 @@ export const StoriesScreen = () => {
   }, [selectedTab, storiesData]);
 
   return (
-    <div>
+    <div className=''>
       <div className="bg-dark-indigo w-full flex justify-center m-auto">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
         <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />

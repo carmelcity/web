@@ -5,6 +5,7 @@ import { MobileTopNavbar } from '~/components/layout/MobileTopNavbar';
 import { TopNavBar } from '~/components/layout/TopNavbar';
 import { SidebarNavigation } from '~/components/layout/SidebarNavigation';
 import { Navbar } from '~/components/layout/Navbar';
+import { AccessButton } from '~/components/access/AccessButton'
 
 export const AppLayout = ({ children, user }: any) => {
   const navData: any = [];
@@ -20,21 +21,20 @@ export const AppLayout = ({ children, user }: any) => {
   return (
     <div className="">
       <div className="flex w-full max-w-[1920px] mx-auto justify-center lg:pb-0">
-          {/* <Navbar isDashboard={false} notNeeded={false} /> */}
-          <div className="w-80 hidden lg:flex">
-            <SidebarNavigation data={navData} user={user} isLoading={false} />
-          </div>
+        <div className="w-80 hidden lg:flex">
+          <SidebarNavigation data={navData} user={user} isLoading={false} />
+        </div>
         
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full z-0">
           <TopNavBar />
           {children}
         </div>
+
           <div className="lg:hidden">
             <MobileTopNavbar data={navData} user={user} />
             <MobileNavigation />
           </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

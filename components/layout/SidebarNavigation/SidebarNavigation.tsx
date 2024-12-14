@@ -8,7 +8,7 @@ import { SidebarNavigationPlaceholder } from '~/components/placeholders/SidebarN
 import { sidebarRoutes } from './routes';
 import profile_placeholder from '~/images/profile_placeholder.webp';
 import DynamicIcon from '~/components/icons/Dynamic';
-
+import { AccessButton } from '~/components/access/AccessButton'
 const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
@@ -48,40 +48,11 @@ export const SidebarNavigation = ({ data, isLoading, user }: SidebarNavigationPr
     return <SidebarNavigationPlaceholder />;
   }
 
-  const UserButton = () => {
-    return  <div onClick={handleLogin} className="cursor-pointer h-9 w-full bg-cyan bg-opacity-20 mb-5 flex items-center border border-primary/20">
-    <div className="mr-auto ml-1 bg-transparent flex justify-center items-center">
-      <div className="flex items-center">
-        <div
-          className="w-7 h-7 m-auto z-10 bg-transparent"
-          style={{
-            clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
-          }}>
-          <Image
-            src={data?.user?.avatarImage || profile_placeholder}
-            width={100}
-            height={100}
-            alt={'profile'}
-            className="object-cover w-full h-full"
-          />
-        </div>
-        <div className="flex items-center justify-center ml-3">
-          <span className={`${readexPro.className} text-cyan text-s font-extralight`}>{'Login'}</span>
-        </div>
-      </div>
-    </div>
-    <div
-      className="w-9 h-full ml-auto bg-dark-green-secondary flex justify-center items-center cursor-pointer text-primary"
-      onClick={handleLogin}>
-      <DynamicIcon name={"ArrowLeftOnRectangleIcon"} width={20} height={20} />
-    </div>
-  </div>
-  }
 
   return (
     <div className="flex z-10 grow sticky top-0 relative flex-col gap-y-5 overflow-y-auto bg-gradient-to-br from-dark-green to-dark-green min-w-[300px] px-6 w-full mr-auto md:h-screen border-r border-cyan/10">
       <div className="flex h-16 shrink-0 items-center mt-4 border-b border-primary/20">
-      <UserButton/>
+      <AccessButton/>
       </div>
       <nav className="flex flex-1 flex-col mt-4">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
