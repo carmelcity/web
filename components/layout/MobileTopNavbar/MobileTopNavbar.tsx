@@ -12,6 +12,7 @@ import { MobileTopNavbarProps } from './props';
 import { updateNavbarElements } from '../utils';
 import turnOff from '~/images/TurnOff.svg';
 import DynamicIcon from '~/components/icons/Dynamic';
+import { AccessButton } from '~/components/access/AccessButton'
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
@@ -43,28 +44,11 @@ export const MobileTopNavbar = ({ data, user }: MobileTopNavbarProps) => {
   return (
     <div className="fixed top-0 left-0 z-50 w-full items-center justify-center">
       <nav className="flex items-center w-full py-3 bg-dark-green">
-        <Link href="/access" className="w-auto bg-dark-green-secondary ml-2 flex items-center border border-primary/20">
-              <div
-          className="w-8 h-8 m-auto z-10 ml-3 mr-3"
-          style={{
-            clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
-          }}>
-            <Image
-              src={data?.user?.avatarImage || profile_placeholder}
-              width={100}
-              height={100}
-              alt="card"
-              className="object-cover w-full h-full"
-              />
-            </div>
-
-            <div className={`${readexPro.className} ml-2 px-4 py-2 text-primary bg-dark-green/50`}>{data?.username}
-              <DynamicIcon name={"ArrowLeftOnRectangleIcon"} width={24} height={24} />
-            </div>
-          </Link>
-       
+      
+        <div className="bg-black h-12 p-2 items-center flex">
+        <AccessButton/>
+        </div>
           <div className='w-full'>
-
           </div>
         <div className="border border-cyan border-opacity-20 bg-black h-12 p-2 items-center flex mr-2">
           <Link
