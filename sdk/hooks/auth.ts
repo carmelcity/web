@@ -1,20 +1,11 @@
-import useSWR from 'swr'
 import axios from 'axios'
 import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
 import { UAParser } from 'ua-parser-js'
-import { useEffect, useState } from 'react'
-import { logger } from '~/utils/logger'
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
 const BASE_URL = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}`
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbkBmbHVpZHRyZW5kcy5jaCIsInVzZXJuYW1lIjoiZGFuIiwic2Vzc2lvblRva2VuIjoiNjc2MWQ2YmVmM2NhMGMzMWNmNDkyZTlhIiwiaWF0IjoxNzM0NDY1MjM1LCJleHAiOjE3MzQ0NjUyNjV9.vzLN3LLbfq6uNMzD8w29nYiu0128W14MNNc-zXWfjQo
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbkBmbHVpZHRyZW5kcy5jaCIsInVzZXJuYW1lIjoiZGFuIiwic2Vzc2lvblRva2VuIjoiNjc2MWQ2YmVmM2NhMGMzMWNmNDkyZTlhIiwiaWF0IjoxNzM0NDY1MjM1LCJleHAiOjE3MzQ0NjUyNjV9.vzLN3LLbfq6uNMzD8w29nYiu0128W14MNNc-zXWfjQo
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbkBmbHVpZHRyZW5kcy5jaCIsInVzZXJuYW1lIjoiZGFuIiwic2Vzc2lvblRva2VuIjoiNjc2MWQ2YmVmM2NhMGMzMWNmNDkyZTlhIiwiaWF0IjoxNzM0NDY1MjM1LCJleHAiOjE3MzQ0NjUyNjV9.vzLN3LLbfq6uNMzD8w29nYiu0128W14MNNc-zXWfjQo
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbkBmbHVpZHRyZW5kcy5jaCIsInNlc3Npb25Ub2tlbiI6IjY3NjFkNmJlZjNjYTBjMzFjZjQ5MmU5YSIsImlhdCI6MTczNDQ2NTI2NywiZXhwIjoxNzM0NDY1Mjk3fQ.DYpi5c4MPm58pH_I2dibEBlmPVT1TtZw7SiTHIb8Xys
 
 export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
@@ -35,10 +26,6 @@ export const useCarmelAuth = () => {
             result.error = e.message
         }
 
-        console.log({
-            result
-        })
-
         if (result && result.session && result.session.authToken) {
             setSession({ ...session, authToken: result.session.authToken })
         }
@@ -47,7 +34,6 @@ export const useCarmelAuth = () => {
     }
 
     const initialize = async () => {
-
         if (session.id) {
             const profile = await getProfile()
             console.log(profile)
@@ -71,8 +57,12 @@ export const useCarmelAuth = () => {
         setSession({ ...data, status: "initialized" })
     }
 
+    const logout = () => {
+        setSession({ ...session, status: "signedout" })
+    }
+
     const isLoggedIn = () => {
-        return session && session.status === "verified"
+        return session && session.status === "registered"
     }
 
     const getProfile = async () => {
@@ -131,6 +121,6 @@ export const useCarmelAuth = () => {
     }
 
     return {
-        getAuthToken, session, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
+        getAuthToken, session, logout, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
     }
 }

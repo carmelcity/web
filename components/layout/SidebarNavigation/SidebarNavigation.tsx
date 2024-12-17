@@ -6,9 +6,9 @@ import { Readex_Pro } from 'next/font/google';
 import { SidebarNavigationProps } from './props';
 import { SidebarNavigationPlaceholder } from '~/components/placeholders/SidebarNavigation';
 import { sidebarRoutes } from './routes';
-import profile_placeholder from '~/images/profile_placeholder.webp';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessButton } from '~/components/access/AccessButton'
+
 const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
@@ -17,12 +17,6 @@ export const SidebarNavigation = ({ data, isLoading, user }: SidebarNavigationPr
   const router = useRouter();
 
   const [navbarElements, setNavbarElemens] = useState(sidebarRoutes);
-
-  const handleLogin = () => {
-    // user.auth.clearAccount();
-    // window.location.reload();
-    router.push('/access')
-  };
 
   const handleNavClick = (targetHref: string) => {
     const updatedNavData = navbarElements.map((item: any) => ({
@@ -48,13 +42,10 @@ export const SidebarNavigation = ({ data, isLoading, user }: SidebarNavigationPr
     return <SidebarNavigationPlaceholder />;
   }
 
-
   return (
     <div className="flex z-10 grow sticky top-0 relative flex-col gap-y-5 overflow-y-auto bg-gradient-to-br from-dark-green to-dark-green min-w-[300px] px-6 w-full mr-auto md:h-screen border-r border-cyan/10">
-      <div className="flex h-16 shrink-0 items-center mt-4 border-b border-primary/20">
       <AccessButton/>
-      </div>
-      <nav className="flex flex-1 flex-col mt-4">
+      <nav className="flex flex-1 flex-col border-t border-primary/20 pt-4 -mt-4">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
             <ul role="list" className="-mx-2 space-y-1">

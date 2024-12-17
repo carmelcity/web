@@ -42,15 +42,16 @@ export const AppLayout = ({ children, user }: any) => {
           <SidebarNavigation data={navData} user={user} isLoading={false} />
         </div>
         
-        <div className="flex flex-col w-full z-0">
-          { auth.isLoggedIn() || <TopNavBar /> }
-          {children}
-        </div>
-
           <div className="lg:hidden">
             <MobileTopNavbar data={navData} user={user} />
             <MobileNavigation />
           </div>
+
+
+        <div className="flex flex-col w-full z-0">
+          {children}
+        </div>
+
       </div>
     </div>
   )
