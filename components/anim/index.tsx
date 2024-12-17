@@ -1,6 +1,10 @@
+"use client"
+
 import React, { useState, useRef, useMemo } from 'react'
 import * as anims from './anims'
-import Lottie from 'react-lottie'
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 export default (opts: any) => {
     const animationData = (anims as any)[opts.id]
