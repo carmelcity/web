@@ -17,6 +17,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(false);
 
+  console.log("MODAL")
   const handleAuth = async (data: any) => {
     if (isRegister && !username) {
       const res = await auth.checkUsername(data)
