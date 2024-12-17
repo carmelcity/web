@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Spinner from '../spinner';
-import { QuestsPlaceholder } from '../placeholders/Quests';
 
 const Container = ({ children, classes }: any) =>
   classes ? <div className={classes}>{children}</div> : <>{children}</>;

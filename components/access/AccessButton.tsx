@@ -116,7 +116,7 @@ export const AccessButton = () => {
           <ConfirmModal isModalOpen={isConfirmOpen} setModalOpen={onToggleConfirm} message={isConfirm} onConfirm={onConfirm}/>
         </div>
         <ul tabIndex={0} className={`dropdown-content ${menuOpen ? '' : 'hidden'} menu bg-dark-green border border-primary/50 z-100 w-64 left-0 top-14 p-2 shadow`}>
-              { MyMenus().map((menu: any) => <li>
+              { MyMenus().map((menu: any, i: number) => <li key={`menu-${i}`} >
                   <div className='text-gray-400 hover:text-primary' onClick={() => handleAccountMenuItem(menu)}>
                       <DynamicIcon name={menu.icon} width={24} height={24}/>
                       {menu.title}
