@@ -5,7 +5,7 @@ const Newsletter = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(email);
+    // console.log(email);
   };
 
   return (

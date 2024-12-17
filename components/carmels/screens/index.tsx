@@ -67,7 +67,6 @@ export const CarmelsScreen = () => {
     return (selectedTab !== '*'
       ? storiesData.filter((post: any) => post.tags.includes(selectedTab))
       : storiesData).filter((post: any) => {
-        console.log(post)
         return post.id !== highlightedStory.id
       })
   }, [selectedTab, storiesData]);
@@ -95,32 +94,7 @@ export const CarmelsScreen = () => {
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
               isLoading={isLoadingStories}
             />
-            {/* <Hero data={highlightedStory || storiesData[0]} isLoading={isLoadingStories} /> */}
-            {/* <Tabs
-              isLoading={isLoadingStories}
-              tabs={tabs}
-              selectedTab={selectedTab}
-              onClickTab={(value: string) => {
-                setSelectedTab(value);
-              }}
-            /> */}
           <Collection data={storiesData} isLoading={isLoadingStories} />
-          {/* <Grid data={stories || []} isLoading={isLoadingStories} /> */}
-            {/* <Grid data={stories?.slice(0, 9 + displayCounter) || []} isLoading={isLoadingStories} /> */}
-            {/* {stories.length > 9 && stories.length > displayCounter + 9 && (
-              <button
-                className={`bg-[#00FFFF] text-black p-4 ${readex_pro.className}`}
-                onClick={() => setDisplayCounter(prev => prev + 6)}>
-                Show More
-              </button>
-            )}
-            {stories.length < displayCounter + 9 && (
-              <button
-                className={`bg-[#00FFFF] text-black p-4 ${readex_pro.className}`}
-                onClick={() => setDisplayCounter(0)}>
-                Show Less
-              </button>
-            )} */}
           </div>
         </div>
       </div>

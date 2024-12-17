@@ -31,7 +31,7 @@ export const QrModal = ({ isModalOpen, setModalOpen, address }: QrModalProps) =>
         } else {
           // User is not connected, request account access
           await window.ethereum.request({ method: 'eth_requestAccounts' });
-          console.log('User connected successfully');
+          // console.log('User connected successfully');
         }
 
         // Close the modal

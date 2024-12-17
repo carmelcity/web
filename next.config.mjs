@@ -2,7 +2,7 @@ import nodeExternals from 'webpack-node-externals';
 
 /** @type {import('next').NextConfig} */
 export default {
-  reactStrictMode: true,
+  reactStrictMode: false,
   // externals: [nodeExternals()],
   images: {
     remotePatterns: [

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -5,6 +7,7 @@ import { Readex_Pro } from 'next/font/google';
 import profile_placeholder from '~/images/profile_placeholder.webp';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessModal } from './AccessModal'
+import { useCarmelAuth } from '~/sdk';
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
@@ -14,6 +17,7 @@ export const AccessButton = ({ data, isLoading, user }: any) => {
   const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
   const [isReady, setIsReady] = useState(false)
+  const auth = useCarmelAuth()
 
   const onToggle = (v: boolean) => {
     if (!v) {
@@ -23,10 +27,31 @@ export const AccessButton = ({ data, isLoading, user }: any) => {
   }
 
   const handleLogin = () => {
+    if (auth.isLoggedIn()) {
+      router.push('/me')
+      return 
+    }
+
     if (isReady) return 
     setIsReady(true)
     setModalOpen(true);
   };
+
+  const ButtonContent = () => {
+    if (auth.isLoggedIn()) {
+      return <div className="flex items-center justify-center ml-3">
+      <span className={`${readexPro.className} text-cyan text-s font-extralight pr-4`}>
+        { auth.session.email }
+      </span>
+    </div>
+    } 
+
+    return <div className="flex items-center justify-center ml-3">
+    <span className={`${readexPro.className} text-cyan text-s font-extralight pr-4`}>
+      Login
+    </span>
+  </div>
+  }
 
   return <div onClick={handleLogin} className="cursor-pointer h-12 w-full bg-cyan bg-opacity-20 mb-5 flex items-center border border-primary/20 mt-6">
     <div className="mr-auto ml-1 bg-transparent flex justify-center items-center">
@@ -44,15 +69,13 @@ export const AccessButton = ({ data, isLoading, user }: any) => {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="flex items-center justify-center ml-3">
-          <span className={`${readexPro.className} text-cyan text-s font-extralight pr-4`}>{'Login'}</span>
-        </div>
+        <ButtonContent />
       </div>
     </div>
     <div
       className="w-9 h-full ml-auto bg-dark-green-secondary flex justify-center items-center cursor-pointer text-primary"
       onClick={handleLogin}>
-      <DynamicIcon name={"ArrowRightEndOnRectangleIcon"} width={20} height={20} />
+      <DynamicIcon name={auth.isLoggedIn() ? "ChevronDownIcon" : "ArrowRightEndOnRectangleIcon"} width={20} height={20} />
     </div>
     <div className='z-200'>
     <AccessModal isModalOpen={isModalOpen} setModalOpen={onToggle} />
