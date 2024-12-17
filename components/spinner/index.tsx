@@ -1,6 +1,6 @@
 import { Triangle } from 'react-loader-spinner';
 
-const Loading = () => (
+export const LoadingSpinner = () => (
   <div className="text-center">
     <Triangle height="80" width="80" color="#4fa94d" ariaLabel="triangle-loading" wrapperStyle={{}} visible={true} />
   </div>
@@ -27,8 +27,8 @@ export const SmallSpinner = () => (
   </div>
 );
 
-const Spinner = () => (
-  <div className="text-center mt-40">
+export const Spinner = () => (
+  <div className="text-center">
     <div role="status">
       <svg
         className="inline mr-2 w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-white"
@@ -47,5 +47,3 @@ const Spinner = () => (
     </div>
   </div>
 );
-
-export default Spinner;

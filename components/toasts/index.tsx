@@ -64,5 +64,8 @@ export const showErrorToast = (message: string) => {
   toast.error(message, {
     position: 'top-right',
     autoClose: 3000,
+    style: {
+      background: 'rgba(1, 55, 47, 1)'
+    }
   });
 };
