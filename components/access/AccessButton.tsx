@@ -53,10 +53,10 @@ export const AccessButton = () => {
   const handleAccountMenuItem = (e: any) => {
     switch(e.id) {
       case "profile":
-        router.push('/me')
+        router.push('/profile')
         break
       case "wallet":
-        router.push('/me')
+        router.push('/wallet')
         break
       case "signout":
         setIsConfirm(`Are you sure you want to sign out?`)
