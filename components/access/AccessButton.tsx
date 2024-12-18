@@ -51,7 +51,6 @@ export const AccessButton = () => {
   }
  
   const handleAccountMenuItem = (e: any) => {
-    console.log(e)
     switch(e.id) {
       case "profile":
         router.push('/me')

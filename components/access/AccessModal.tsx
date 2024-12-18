@@ -1,23 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
-import { Modal } from '~/components/modal';
-import { showSuccessToast, showErrorToast } from '~/components/toasts';
-import DynamicIcon from '~/components/icons/Dynamic';
-import { useCarmelAuth } from '~/sdk';
-import { SmallSpinner } from '~/components/spinner';
+import React, { useEffect, useRef, useState } from 'react'
+import { Readex_Pro } from 'next/font/google'
+import { Modal } from '~/components/modal'
+import { showSuccessToast, showErrorToast } from '~/components/toasts'
+import DynamicIcon from '~/components/icons/Dynamic'
+import { useCarmelAuth } from '~/sdk'
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
-});
+})
 
 export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const auth = useCarmelAuth()
   const [error, setError] = useState("")
-  const [username, setUsername] = useState<string>('');
-  const [isWaiting, setIsWaiting] = useState<boolean>(false);
-  const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('')
+  const [isWaiting, setIsWaiting] = useState<boolean>(false)
+  const [isRegister, setIsRegister] = useState<boolean>(false)
 
-  console.log("MODAL")
   const handleAuth = async (data: any) => {
     if (isRegister && !username) {
       const res = await auth.checkUsername(data)
@@ -37,10 +35,10 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
     }
 
     const result = await auth.getAuthToken(Object.assign({ ...data }, username && { username }))
-    if (!result || result.error) {
-      setError(result.error)
-      setIsWaiting(true)
-      return 
+    
+    if (result.error) {
+      showErrorToast(result.error)
+      return
     }
     
     setIsWaiting(true)
@@ -58,13 +56,12 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
 
   useEffect(() => {
     if (!isModalOpen) {
-      // Reset fields when the modal is closed
       setUsername("")
       setError("")
       setIsWaiting(false)
       setIsRegister(false)
     }
-  }, [isModalOpen]);
+  }, [isModalOpen])
 
   const toggleType = () => {
     setUsername("")

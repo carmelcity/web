@@ -7,7 +7,7 @@ import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmelAuth } from '~/sdk';
 import Animation from "~/components/anim"
 
-export const RegisterScreen = () => {
+export const AccessScreen = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(false)
   const auth = useCarmelAuth()
@@ -67,7 +67,7 @@ export const RegisterScreen = () => {
               isLoading={false}
             />
             <Title
-              decription={error ? `Error` : success ? 'Success' : `Registering...`}
+              decription={error ? `Error` : success ? 'Success' : `Authenticating ...`}
               moreClasses={`text-center lg:text-2xl text-sm text-${error ? '[#cc0000]' : 'white'} uppercase mb-10`}
               isLoading={false}
             />
