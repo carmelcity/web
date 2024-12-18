@@ -9,6 +9,7 @@ artifacts
 .DS_Store
 yarn-error.log
 dist
+out
 .openzeppelin
 .next
 .vercel
