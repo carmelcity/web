@@ -15,5 +15,9 @@ jobs:
           node-version: 22.12
       - name: Install Fleek CLI
         run: npm i -g @fleek-platform/cli
+      - name: Install yarn
+        run: npm i -g yarn
+      - name: Install dependencies
+        run: yarn install
       - name: Build & deploy sites
         run: fleek sites deploy
