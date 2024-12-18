@@ -12,7 +12,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 22.12
       - name: Install Fleek CLI
         run: npm i -g @fleek-platform/cli
       - name: Build & deploy sites
