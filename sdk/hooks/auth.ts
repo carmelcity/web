@@ -6,6 +6,7 @@ import { UAParser } from 'ua-parser-js'
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
 const BASE_URL = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}`
+const DEV_MODE = process.env['NEXT_PUBLIC_DEVMODE']
 
 export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
@@ -16,7 +17,10 @@ export const useCarmelAuth = () => {
         let result: any = { error: "something went wrong "}
     
         try {
-            const { data } = await axios.post(`${BASE_URL}/carmel/${service}`, args, {
+            const { data } = await axios.post(`${BASE_URL}/carmel/${service}`, {
+                ...args,
+                devMode: DEV_MODE
+            }, {
                 headers: Object.assign({
                     'Content-Type': 'application/json'
                 }, bearer && { 'Authorization': `Bearer ${bearer}` })
