@@ -1,11 +1,11 @@
 name: Deploy site
-env:
-  FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
-  FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
 on: pull_request
 jobs:
   deploy:
     runs-on: ubuntu-latest
+      env:
+        FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
+        FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
     steps:
       - name: Check the [${{ env.FLEEK_PROJECT_ID }}]
       - name: Checkout this branch
