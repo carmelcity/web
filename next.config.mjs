@@ -2,9 +2,11 @@ import nodeExternals from 'webpack-node-externals';
 
 /** @type {import('next').NextConfig} */
 export default {
+  output: "export",
   reactStrictMode: false,
-  // externals: [nodeExternals()],
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

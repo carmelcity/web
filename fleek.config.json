@@ -1,0 +1,9 @@
+{
+  "sites": [
+    {
+      "slug": "carmel",
+      "distDir": "out",
+      "buildCommand": "yarn run build"
+    }
+  ]
+}
