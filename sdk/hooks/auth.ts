@@ -30,10 +30,14 @@ export const useCarmelAuth = () => {
             result.error = e.message
         }
 
+        console.log(result)
+
         if (result && result.session && result.session.authToken) {
             setSession({ ...session, authToken: result.session.authToken })
         }
     
+        // result.session && delete result.session
+
         return result
     }
 
@@ -54,6 +58,8 @@ export const useCarmelAuth = () => {
 
         const res = await makeCall({ service: "auth/init", args: { sessionId, device } })
 
+        console.log(res)
+
         if (!res.error) {
             data = { ...data, ...res }
         }
@@ -62,7 +68,10 @@ export const useCarmelAuth = () => {
     }
 
     const logout = () => {
-        setSession({ ...session, status: "signedout" })
+        const newSession = { ...session, status: "signedout" }
+        delete newSession.authToken
+
+        setSession(newSession)
     }
 
     const isLoggedIn = () => {
@@ -117,9 +126,11 @@ export const useCarmelAuth = () => {
             return result
         }
 
+        console.log(result)
+
         const { sessionToken, authToken } = result
 
-        setSession(Object.assign({ ...newSession, token: sessionToken, authToken }))
+        setSession({ ...newSession, token: sessionToken, authToken, status: email ? 'registered' : 'authenticated' })
 
         return result
     }
