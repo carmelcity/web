@@ -1,12 +1,7 @@
 {
   "sites": [
     {
-      "slug": "carmel-preview",
-      "distDir": "out",
-      "buildCommand": "yarn run build"
-    },
-    {
-      "slug": "carmel-dev",
+      "slug": "carmel",
       "distDir": "out",
       "buildCommand": "yarn run build"
     }
