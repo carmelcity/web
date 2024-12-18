@@ -7,6 +7,9 @@ jobs:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
     steps:
+      - name: Check the environment
+        if: ${{ env.FLEEK_TOKEN == '' }}
+        run: 'echo "invalid env"'
       - name: Checkout this branch
         uses: actions/checkout@v3
       - name: Install Node.js
