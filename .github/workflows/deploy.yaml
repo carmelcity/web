@@ -17,7 +17,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build & deploy sites
-        env:
-          FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
-          FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
         run: fleek sites deploy
