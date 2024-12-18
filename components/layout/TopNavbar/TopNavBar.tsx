@@ -37,7 +37,6 @@ export const TopNavBar = ({ data }: any) => {
     <div className='flex flex-col'>
     <div className="hidden lg:flex z-50 w-full items-center justify-end sticky top-0 bg-dark-green">
       <nav className="flex items-center align-center flex-row py-3">
-       
         <div className="border border-cyan border-opacity-20 bg-black h-14 items-center flex mr-4">
           <Link
             href="/way"
