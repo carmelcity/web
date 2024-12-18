@@ -3,13 +3,7 @@ on: pull_request
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
-      FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
     steps:
-      - name: Check the environment
-        if: ${{ env.FLEEK_TOKEN == '' }}
-        run: 'echo "invalid env"'
       - name: Checkout this branch
         uses: actions/checkout@v3
       - name: Install Node.js
@@ -23,4 +17,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build & deploy sites
+        env:
+          FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
+          FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
         run: fleek sites deploy
