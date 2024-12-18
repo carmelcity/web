@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 import { showErrorToast, showSuccessToast } from '../toasts';
 import { SmallSpinner } from '../spinner';
 import { useCarmelAuth } from '~/sdk';
+
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const readex_pro = Readex_Pro({ subsets: ['latin'] });
-
 
 const ProfileImage = ({ isEditable, image, onEdit }: any) => {
   return <div className="absolute top-[59%] xs:top-[67%] xs:left-10">
@@ -56,6 +56,7 @@ const BannerImage = ({ isEditable, image, onEdit, children }: any) => {
 export const Profile = () => {
   const auth = useCarmelAuth()
 
+  const [isLoading, setIsLoading] = useState(true)
   const [bannerImage, setBannerImage] = useState(BANNER_PLACEHOLDER);
   const [profileImage, setProfileImage] = useState(PROFILE_PLACEHOLDER);
   const [isEditable, setIsEditable] = useState(false)
@@ -73,39 +74,59 @@ export const Profile = () => {
 
   const borderColor = isFocused ? '#00FFF0' : isHovered ? '#00FFF052' : '#00FFF029'
 
-  const handleSave = async () => {
-    try {
-      setUpdating(true)
-      setAvatarImageData(undefined)
-      setBannerImageData(undefined)
-      setBannerChanged(false)
-      setAvatarChanged(false)
-      setBioChanged(false)
-      setHasChanges(false)
-      setUpdating(false)
-      showSuccessToast('Changes saved successfully!');
-    } catch (error) {
-      console.error('Error:', error);
-      setUpdating(false)
-      showErrorToast('An error occurred while saving changes');
-    }
+  const refreshData = () => {
+    (async () => {
+      await auth.getFreshProfile()
+    })()
   }
 
-  const handleBioChange = (event: any, maxCharacters: number) => {
-    const input = event.target.value;
-    if (input.trim() !== '' && input.length <= maxCharacters) {
-      setBio(input)
-      if (input !== bio) {
-        setBioChanged(true)
-        setHasChanges(true)
-      } else {
-        setBioChanged(false)
-        setHasChanges(false)
-      }
+  useEffect(() => {
+    refreshData()
+  }, [])
+
+  useEffect(() => {
+    if (!auth.profile || !auth.profile.username) {
+      return 
     }
+    setIsLoading(false)
+  }, [auth.profile])
+
+  const handleEdit = async (e: any) => {
+    e.preventDefault()
+
+    if (!isEditable) {
+      setIsEditable(true)
+      return 
+    }
+
+    const formData = new FormData(e.target)
+    const data: any = Object.fromEntries(formData.entries())
+    
+    setBio(data.bio)
+
+    setIsEditable(false)
+    showSuccessToast("Profile updated")     
   }
 
-  const handleEditBannerClick = () => {
+  // const handleSave = async () => {
+  //   try {
+  //     setUpdating(true)
+  //     setAvatarImageData(undefined)
+  //     setBannerImageData(undefined)
+  //     setBannerChanged(false)
+  //     setAvatarChanged(false)
+  //     setBioChanged(false)
+  //     setHasChanges(false)
+  //     setUpdating(false)
+  //     showSuccessToast('Changes saved successfully!');
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     setUpdating(false)
+  //     showErrorToast('An error occurred while saving changes');
+  //   }
+  // }
+
+  const handleEditBannerEdit = () => {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
@@ -126,7 +147,7 @@ export const Profile = () => {
     input.click()
   }
 
-  const handleEditProfileClick = () => {
+  const handleEditProfileEdit = () => {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
@@ -147,72 +168,76 @@ export const Profile = () => {
     input.click()
   }
 
-  return (
-    <div className={`flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative bg-dark-green/80 border border-primary/50`} style={{ width: isEditable ? '94%' : '100%' }}>
-      
-      <BannerImage image={bannerImage} isEditable={isEditable}>
-          <ProfileImage image={profileImage} isEditable={isEditable}/>
-      </BannerImage>
+  const ProfileSummary = () => {
+    if (!isEditable) {
+      return <div className="mb-12 relative z-10 w-full items-start flex flex-col">
+                <div className={`${readex_pro.className} font-thin text-gray-400 text-lg mt-5 mb-0`}>
+                    { bio }
+                </div>
+              </div>
+    }
 
-      <div className="flex flex-col 2xl:flex-row">
-        <div className="flex flex-col">
-          <div className="relative z-10 mx-auto mt-24 xs:mt-0 xs:ml-60">
-            <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
-              { auth.session.username }
-            </h1>
-          </div>
-          <div className="flex mx-auto mt-0 xs:ml-60">
-            <span className={`${readex_pro.className} font-thin text-primary text-opacity-60 text-lg`}>
-              { auth.session.email }
-            </span>
-          </div>
-          <div className="mb-5 relative z-10 mt-2 px-5 lg:px-0 lg:ml-60">
-            {isEditable ? (
-              <div>
-                <div className={`${readex_pro.className} font-thin text-grey mt-5 mb-0`}>Profile description</div>
+    return <div className="mb-12 relative z-10 w-full items-start flex flex-col px-2 ">
+                <div className={`${readex_pro.className} font-thin text-grey mt-5 mb-0`}>
+                  Update your bio
+                </div>
                 <textarea
-                  value={bio}
-                  onChange={event => handleBioChange(event, 500)}
-                  className={`${readex_pro.className} border border-opacity-10 text-left p-2 bg-secondary mt-2 h-auto w-full sm:w-[500px] min-h-[130px] max-h-60`}
-                  style={{
-                    borderColor: borderColor,
-                    outline: 'none',
-                  }}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
+                  defaultValue={bio}
+                  name="bio"
+                  className={`${readex_pro.className} border border-opacity-10 text-left p-2 bg-secondary mt-2 w-full h-48 border-primary/50`}
                 />
-                <div className={`${readex_pro.className} font-thin text-grey`}>
-                  {bio.length}/{500}
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className={`${readex_pro.className} text-grey font-normal mt-2 h-auto w-full max-h-60`}>
-                  {bio}
-                </div>
-              </div>
-            )}
-          </div>
-          { updating && <div className="flex flex-col sm:flex-row lg:ml-60 px-5 lg:px-0"> <SmallSpinner/> </div> }
-          {isEditable && !updating && (
-            <div className="flex flex-col sm:flex-row lg:ml-60 px-5 lg:px-0">
-              <button
-                onClick={handleSave}
-                disabled={!hasChanges}
-                className={`${readex_pro.className} font-normal xs:mt-4 p-3 w-40 sm:w-40`}
-                style={{
-                  border: `2px solid ${hasChanges ? 'cyan' : '#053D36'}`,
-                  color: hasChanges ? 'cyan' : '#053D36',
-                  cursor: hasChanges ? 'pointer' : 'not-allowed',
-                }}>
-                Save Changes
-              </button>
-            </div>
-          )}
-        </div>
       </div>
+  }
+
+  const ActionButtons = () => {
+    return <div className="flex flex-col w-full items-center">
+        <button
+          type="submit"
+          className={`${readex_pro.className} font-normal text-gray-900 xs:mt-4 p-3 w-40 sm:w-40 bg-primary`}>
+            { isEditable ? 'Save Changes' : 'Edit Profile' }
+        </button>
+      </div>
+  }
+
+  const Username = () => {
+    return <div className="relative z-10 mx-auto mt-24 xs:mt-0 xs:ml-60">
+          <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
+            { auth.profile.username }
+          </h1>
+        </div>
+  }
+
+  const Email = () => {
+    return <div className="flex mx-auto mt-0 xs:ml-60">
+          <span className={`${readex_pro.className} font-thin text-primary text-opacity-60 text-lg`}>
+            { auth.profile.email }
+          </span>
+        </div>
+  }
+
+  const Progress = () => {
+    return <div className="flex flex-col sm:flex-row lg:ml-60 px-5 lg:px-0"> 
+      <SmallSpinner/> 
+    </div>
+  }
+
+  return (
+    <div className={`flex flex-col justify-start relative w-full px-2 lg:px-12 mb-20`}>
+      <form method='post' onSubmit={handleEdit}>
+        <div className={`flex flex-col justify-start relative bg-black/80 border-b border-primary/20 mb-8 w-full`}>
+          <BannerImage image={bannerImage} isEditable={isEditable} onEdit={handleEditBannerEdit}>
+              <ProfileImage image={profileImage} isEditable={isEditable} onEdit={handleEditProfileEdit}/>
+          </BannerImage>
+          <div className="flex flex-col">
+              <Username/>
+              <Email/>
+              <div className='w-full lg:px-60 mt-2 flex flex-col items-center'>
+                <ProfileSummary/>
+              </div>
+          </div>
+        </div>
+        <ActionButtons/>
+      </form>
     </div>
   )
 }

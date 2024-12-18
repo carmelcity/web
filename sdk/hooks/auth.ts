@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
@@ -10,7 +11,7 @@ const DEV_MODE = process.env['NEXT_PUBLIC_DEVMODE']
 
 export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
-
+    const [profile, setProfile] = useState<any>({ })
     const uap = new UAParser()
 
     const makeCall = async ({ service, args, bearer }: any) => {
@@ -30,21 +31,29 @@ export const useCarmelAuth = () => {
             result.error = e.message
         }
 
-        console.log(result)
-
         if (result && result.session && result.session.authToken) {
             setSession({ ...session, authToken: result.session.authToken })
         }
     
-        // result.session && delete result.session
+        result.session && delete result.session
 
         return result
     }
 
+    const getFreshProfile = async () => {
+        if (!session.id) {
+            return
+        }
+
+        const p = await getProfile()
+        setProfile(p.account)
+
+        return p.account
+    }
+
     const initialize = async () => {
         if (session.id) {
-            const profile = await getProfile()
-            console.log(profile)
+            await getFreshProfile()
             return
         }
         
@@ -57,8 +66,6 @@ export const useCarmelAuth = () => {
         }
 
         const res = await makeCall({ service: "auth/init", args: { sessionId, device } })
-
-        console.log(res)
 
         if (!res.error) {
             data = { ...data, ...res }
@@ -136,6 +143,6 @@ export const useCarmelAuth = () => {
     }
 
     return {
-        getAuthToken, session, logout, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
+        getAuthToken, session, profile, getFreshProfile, logout, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
     }
 }
