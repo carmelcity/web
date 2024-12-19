@@ -1,5 +1,10 @@
 name: Deploy Website
-on: pull_request
+
+on:
+  pull_request:
+    branches:
+      - production
+
 jobs:
   deploy:
     if: github.repository == 'carmelnetwork/web'
