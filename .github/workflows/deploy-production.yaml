@@ -12,6 +12,7 @@ jobs:
     env:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
+      FLEEK_SLUG: carmel-production
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
