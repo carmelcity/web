@@ -1,11 +1,3 @@
-import { Triangle } from 'react-loader-spinner';
-
-export const LoadingSpinner = () => (
-  <div className="text-center">
-    <Triangle height="80" width="80" color="#4fa94d" ariaLabel="triangle-loading" wrapperStyle={{}} visible={true} />
-  </div>
-);
-
 export const SmallSpinner = () => (
   <div className="text-center">
     <div role="status">

@@ -244,8 +244,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('daisyui'),
-    require('flowbite/plugin'),
-    require('@tailwindcss/line-clamp'),
     require('tailwind-scrollbar-hide'),
   ],
   daisyui: {
