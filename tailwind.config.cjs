@@ -244,7 +244,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('daisyui'),
-    require('tailwind-scrollbar-hide'),
+    // require('tailwind-scrollbar-hide'),
   ],
   daisyui: {
     styled: true,
