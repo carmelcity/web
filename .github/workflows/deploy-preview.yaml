@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Fleek config
         run: |
-          echo '{"sites":[{"slug":"${{ secrets.DEPLOY_ID }}","distDir":"out","buildCommand":"yarn run build"}]}' > fleek.config.json
+          echo '{"sites":[{"slug":"carmel-preview","distDir":"out","buildCommand":"yarn run build"}]}' > fleek.config.json
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
