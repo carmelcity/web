@@ -1,4 +1,4 @@
-name: Deploy Website
+name: Deploy Preview Website
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - preview
 
 jobs:
-  deploy:
+  deploy-preview:
     if: github.repository == 'carmelnetwork/web'
     runs-on: ubuntu-latest
     env:
