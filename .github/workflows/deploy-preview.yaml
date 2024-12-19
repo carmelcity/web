@@ -12,10 +12,12 @@ jobs:
     env:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
-      DEPLOY_ID: ${{ secrets.DEPLOY_ID }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
+      - name: Setup Fleek config
+        run: |
+          echo '{"sites":[{"slug":"${{ secrets.DEPLOY_ID }}","distDir":"out","buildCommand":"yarn run build"}]}' > fleek.config.json
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
