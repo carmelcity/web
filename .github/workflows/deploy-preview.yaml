@@ -12,12 +12,10 @@ jobs:
     env:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
+      FLEEK_SLUG: carmel-preview
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
-      - name: Setup Fleek config
-        run: |
-          echo '{"sites":[{"slug":"carmel-preview","distDir":"out","buildCommand":"yarn run build"}]}' > fleek.config.json
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
