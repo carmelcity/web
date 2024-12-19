@@ -1,8 +1,6 @@
-import { Readex_Pro } from 'next/font/google';
-import Image from 'next/image';
 import React from 'react';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import Image from 'next/image';
+import { readexPro } from '~/components/fonts';
 
 const Card = ({ title, description }: any) => {
   return (

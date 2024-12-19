@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { topNavbarRoutes } from './routes';
-import { Readex_Pro } from 'next/font/google';
 import Link from 'next/link';
-import { TopNavbarProps } from './props';
-import dropdown from '~/images/dashboard/Dropdown.webp';
 import { updateNavbarElements } from '../utils';
-import profile_placeholder from '~/images/profile_placeholder.webp';
-import rocket from '~/images/dashboard/Rocket.webp';
 import arrow from '~/images/dashboard/ArrowRight.webp';
-import logo from '~/public/images/logo/logo-white.svg';
-import DynamicIcon from '~/components/icons/Dynamic';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const TopNavBar = ({ data }: any) => {
   const [navbarElements, setNavbarElemens] = useState(topNavbarRoutes);

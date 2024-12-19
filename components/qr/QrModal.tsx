@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { Readex_Pro } from 'next/font/google';
 import { Dialog } from '@headlessui/react';
 import { Modal } from '~/components/modal';
 import walletConnect from '~/images/dashboard/WalletConnect.webp';
@@ -12,10 +11,7 @@ import link from '~/images/dashboard/Link.webp';
 import { showSuccessToast } from '~/components/toasts';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import QRCode from 'qrcode.react'; // Import the QRCode component
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const QrModal = ({ isModalOpen, setModalOpen, address }: QrModalProps) => {
   const openMetamaskExtension = async () => {

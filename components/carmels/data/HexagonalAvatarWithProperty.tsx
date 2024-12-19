@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import placeholder from '~/images/userPlaceholder.svg';
-import { Readex_Pro } from 'next/font/google';
 import Link from 'next/link';
 import { HexagonalAvatarProps } from './props';
+import { readexPro } from '~/components/fonts'
 
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
 
 export const HexagonalAvatarWithProperty = ({
   username,

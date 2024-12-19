@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Readex_Pro } from 'next/font/google'
 import { Modal } from '~/components/modal'
 import { showSuccessToast, showErrorToast } from '~/components/toasts'
 import DynamicIcon from '~/components/icons/Dynamic'
 import { useCarmelAuth } from '~/sdk'
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-})
+import { readexPro } from '~/components/fonts'
 
 export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const auth = useCarmelAuth()

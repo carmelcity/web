@@ -1,11 +1,7 @@
 import Image from 'next/image';
 import { HexagonalAvatarWithProperty } from './HexagonalAvatarWithProperty';
-import { Readex_Pro } from 'next/font/google';
 import { useRouter } from 'next/router';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts'
 
 export const QuestCard = (props: any) => {
   const router = useRouter();
