@@ -12,6 +12,7 @@ jobs:
     env:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
+      DEPLOY_ID: ${{ secrets.DEPLOY_ID }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
