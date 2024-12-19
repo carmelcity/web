@@ -72,6 +72,18 @@ export const LandingLayout = ({ children, user }: any) => {
   )
 }
 
+export const WaitLayout = ({ children, user }: any) => {
+  return (
+    <div className="flex w-full h-full mx-auto justify-center pb-16 lg:pb-0">
+        <div className="flex flex-col w-full">
+           <div className='lg:mt-32'>
+            {children}
+          </div>
+        </div>      
+    </div>
+  )
+}
+
 export const AccessLayout = ({ children }: any) => {
   return (
           <div className="bg-dark-indigo w-full flex justify-center m-auto">
