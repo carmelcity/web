@@ -15,7 +15,7 @@ const Title = ({ decription, moreClasses, isLoading }: TitleProps) => {
 
   return (
     <div
-      className={`${orbitron.className} w-full align-middle tracking-[0.4em] text-4xl text-[#00FFFF] ${
+      className={`${orbitron.className} tracking-[0.4em] text-4xl text-[#00FFFF] justify-center flex flex-col ${
         moreClasses ?? ''
       }`}>
       {decription}
