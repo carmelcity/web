@@ -1,14 +1,12 @@
 import React, { ReactElement } from 'react';
 import { StoriesHeroProps } from './props';
 import Link from 'next/link';
-import { Readex_Pro } from 'next/font/google';
 import { Tags } from '~/components/tags';
 import moment from 'moment';
 import { HexagonalAvatarWithProperty } from '~/components/quests/HexagonalAvatarWithProperty';
 import Image from 'next/image';
 import { StoriesHeroPlaceholder } from '~/components/placeholders/StoriesHero';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
+import { readex_pro } from '~/components/fonts'
 
 export const Hero = ({ data, isLoading }: StoriesHeroProps): ReactElement => {
   if (isLoading) {

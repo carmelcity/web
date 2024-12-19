@@ -1,7 +1,5 @@
-import { Readex_Pro } from 'next/font/google';
 import DynamicIcon from '~/components/icons/Dynamic'
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
+import { readex_pro } from '~/components/fonts';
 
 export const Header = ({ text, icon }: any) => {
   return <div className={`${readex_pro.className} text-left flex flex-row`}>

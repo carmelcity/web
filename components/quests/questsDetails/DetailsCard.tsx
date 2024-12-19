@@ -1,16 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Readex_Pro } from 'next/font/google';
-import { Orbitron } from 'next/font/google';
 import placeholderImage from 'images/QuestsDetailsPlaceholder.png';
-
-const orbitron = Orbitron({
-  subsets: ['latin'],
-});
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro, orbitron } from '~/components/fonts';
 
 export const DetailsCard = (props: any) => {
   const router = useRouter();

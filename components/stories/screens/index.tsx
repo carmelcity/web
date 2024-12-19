@@ -7,19 +7,9 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { useCarmelStories } from '~/sdk/hooks/stories';
-import { Tabs } from '~/components/tabs';
-// import Container from '~/containers/main';
-// import { useCarmelPosts } from '~/sdk'
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
 export const StoriesScreen = () => {
-  // const router = useRouter()
-  // const username: any = router.query.id
-
-  // const slug: any = router.query.slug
   const tabs = useMemo(
     () => [
       {

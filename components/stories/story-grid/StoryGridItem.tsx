@@ -1,14 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Readex_Pro } from 'next/font/google';
 import { HexagonalAvatarWithProperty } from '~/components/quests/HexagonalAvatarWithProperty';
 import moment from 'moment';
 import { Tags } from '~/components/tags';
 import { StoriesGridItemProps } from './props';
 import { StoryItemPlaceholder } from '~/components/placeholders/StoryItem';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
+import { readex_pro } from '~/components/fonts';
 
 export const StoryGridItem = ({
   date,

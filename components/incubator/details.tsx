@@ -1,9 +1,6 @@
 import moment from 'moment';
-import { FC } from 'react';
 import { Tags } from '~/components/tags';
-import { Readex_Pro } from 'next/font/google';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
+import { readex_pro } from '~/components/fonts'
 
 const Details = ({ title, date, tags, slug, property, large, moreClasses, isArticle }: any) => (
   <div

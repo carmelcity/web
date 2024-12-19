@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { topNavbarRoutes } from './routes';
-import { Readex_Pro } from 'next/font/google';
 import Link from 'next/link';
-import carmelLogo from '~/images/carmel.webp';
-import rocket from '~/images/dashboard/Rocket.webp';
-import arrow from '~/images/dashboard/ArrowRight.webp';
-import profile_placeholder from '~/images/profile_placeholder.webp';
 import { MobileTopNavbarProps } from './props';
 import { updateNavbarElements } from '../utils';
-import turnOff from '~/images/TurnOff.svg';
-import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessButton } from '~/components/access/AccessButton'
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const MobileTopNavbar = ({ data, user }: MobileTopNavbarProps) => {
   const [navbarElements, setNavbarElemens] = useState(topNavbarRoutes);

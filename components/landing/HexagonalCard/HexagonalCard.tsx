@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import Image from 'next/image';
 import { HexagonalCardProps } from './props';
 import { motion } from 'framer-motion';
 import { imageVariants } from '~/utils/animations';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts';
 
 export const HexagonalCard = ({
   icon,

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Readex_Pro } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { staggerVariants } from '~/utils/animations';
 import Check from '~/components/landing/explore/check';
 import colorSpot from '~/images/early-access/colorSpot4.webp';
 import { useInView } from 'react-intersection-observer';
 
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts'
 
 export default ({ text, children }: any) => {
   const [visibleChecks, setVisibleChecks] = useState([]);

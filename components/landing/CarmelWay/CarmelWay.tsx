@@ -2,7 +2,6 @@ import React from 'react';
 import { CarmelWayProps } from './props';
 import carmelWay from '~/images/CarmelWay.png';
 import carmelWayXS from '~/images/landing/CarmelWay_XS.png';
-import { Readex_Pro } from 'next/font/google';
 import Image from 'next/image';
 import colorSpot from '~/images/spot.png';
 import colorSpotXS from '~/images/landing/Spot2_XS.png';
@@ -10,8 +9,7 @@ import { handleDownloadClick } from '~/utils/helper';
 import colorSpotLG from '~/images/landing/Spot_LG.png';
 import { motion } from 'framer-motion';
 import { rightToLeftVariants, bottomUpVariants } from '~/utils/animations';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts';
 
 export const CarmelWay = ({ header, title, subtitle, description }: CarmelWayProps) => {
   return (

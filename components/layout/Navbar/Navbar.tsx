@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { publicRoutes } from './routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,16 +6,7 @@ import { NavbarProps } from './props';
 import LogoSmall from '~/images/carmel.webp';
 import Logo from '~/images/logo/logo-white-with-white-text.svg'
 import Image from 'next/image';
-
-// TODO:
-// 1. Add active class to the current route - DONE
-// 2. Add "Button styling" to the navbar item request access
-// 3. mobile responsive mode
-// 4. merge with Nav component
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
   const [showMenu, setShowMenu] = useState(false);
