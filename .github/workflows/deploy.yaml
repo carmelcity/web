@@ -1,7 +1,8 @@
 name: Deploy site
-on: pull_request
+on: push
 jobs:
-  deploy-to-fleek:
+  deploy:
+    if: github.repository == 'carmelnetwork/web'
     runs-on: ubuntu-latest
     env:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
