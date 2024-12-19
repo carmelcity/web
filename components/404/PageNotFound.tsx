@@ -1,8 +1,6 @@
 import React from 'react';
-import { Readex_Pro } from 'next/font/google';
+import { readex_pro } from '~/components/fonts';
 import Head from 'next/head';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
 export const PageNotFound = () => {
   return (

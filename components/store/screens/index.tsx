@@ -6,12 +6,9 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { useCarmelAssets } from '~/sdk/hooks/assets';
 import { Tabs } from '~/components/tabs';
 import DynamicIcon from '~/components/icons/Dynamic';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
 export const StoreScreen = () => {
   const tabs = useMemo(

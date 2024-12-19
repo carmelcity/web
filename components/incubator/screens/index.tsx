@@ -5,21 +5,12 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { useIncubator } from '~/sdk/hooks/incubator';
 import { Tabs } from '~/components/tabs';
-import logo from '~/public/images/logo/logo-white.svg';
 import { Collection } from '../data/Collection'
 import DynamicIcon from '~/components/icons/Dynamic';
 
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
-
 export const IncubatorScreen = () => {
-  // const { data: questsData = [], isLoading: isLoadingQuests } = useCarmels();
-  // const router = useRouter()
-  // const username: any = router.query.id
-
-  // const slug: any = router.query.slug
   const tabs = useMemo(
     () => [
       {

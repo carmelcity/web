@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { sidebarRoutes } from '../SidebarNavigation/routes';
-import { Readex_Pro } from 'next/font/google';
 import Link from 'next/link';
 import DynamicIcon from '~/components/icons/Dynamic';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const MobileNavigation = () => {
   const [navbarElements, setNavbarElemens] = useState(sidebarRoutes);

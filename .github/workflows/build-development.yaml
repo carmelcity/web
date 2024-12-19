@@ -1,13 +1,17 @@
-name: Deploy site via Fleek
-on: push
+name: Build the development release (main branch)
+
+on:
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  deploy-to-fleek:
+
+  build-development:
+    if: github.repository == 'carmelnetwork/web'
     runs-on: ubuntu-latest
-    env:
-      FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
-      FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
     steps:
-      - name: Checkout
+      - name: Checkout the code
         uses: actions/checkout@v3
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -19,5 +23,5 @@ jobs:
         run: npm i -g yarn
       - name: Install dependencies
         run: yarn install
-      - name: Build & deploy sites
-        run: fleek sites deploy
+      - name: Build
+        run: yarn build

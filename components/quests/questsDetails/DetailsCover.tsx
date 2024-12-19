@@ -1,10 +1,6 @@
 import Image from 'next/image';
-import { Readex_Pro } from 'next/font/google';
 import { HexagonalAvatarTag } from '../HexagonalAvatarTag';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const DetailsCover = (props: any) => {
   return (

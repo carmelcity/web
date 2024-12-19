@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react'
-import { Readex_Pro } from 'next/font/google'
 import Animation from "~/components/anim"
 import { useRouter } from 'next/router'
 import HorizontalStepper from '~/components/horizontalStepper'
 import { SmallSpinner } from '~/components/spinner'
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts'
 
 export default ({ text, user, fields, setFields, setFinished, handlers }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0)

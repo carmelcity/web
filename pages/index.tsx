@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import { CarmelsScreen } from '~/components/carmels/screens';
-import { AppLayout } from '~/components/layout/Layout';
+import { WaitScreen } from '~/components/wait/screens';
+import { AppLayout, WaitLayout } from '~/components/layout/Layout';
 
 const Main = ({ user }: any) => {
   return (
@@ -10,9 +11,9 @@ const Main = ({ user }: any) => {
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-        <CarmelsScreen />
-      </AppLayout>
+      <WaitLayout>
+          <WaitScreen/>
+      </WaitLayout>
     </>
   );
 };

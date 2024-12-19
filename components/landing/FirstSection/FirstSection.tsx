@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Readex_Pro } from 'next/font/google';
 import Image from 'next/image';
 import hero from '~/images/landing/Hero.webp';
 import heroXXS from '~/images/landing/Hero_XXS.webp';
@@ -8,8 +7,7 @@ import heroSpot from '~/images/landing/HeroSpot.webp';
 import heroSpotXS from '~/images/landing/HeroSpot_XS.webp';
 import { motion } from 'framer-motion';
 import { rightBottomCorner_SLOW_Variants, imageFadeInVariants } from '~/utils/animations';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts';
 
 export const FirstSection = ({ text }: any) => {
   const router = useRouter();

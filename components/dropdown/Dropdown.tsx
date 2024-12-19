@@ -1,12 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Readex_Pro } from 'next/font/google';
 import { DropdownProps } from './props';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts'
 
 export const Dropdown = ({ items, defaultText, onSelect, preselectedItem }: DropdownProps) => {
   const [selectedItem, setSelectedItem] = useState(preselectedItem || defaultText);

@@ -1,9 +1,7 @@
 import { toast } from 'react-toastify';
 import { SmallSpinner } from '../spinner';
 import { CheckMark } from '../icons';
-import { Readex_Pro } from 'next/font/google';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts'
 
 const closeButton = () => {
   return (

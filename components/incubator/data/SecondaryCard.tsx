@@ -1,16 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import { HexagonalAvatarWithProperty } from './HexagonalAvatarWithProperty';
-import { Readex_Pro } from 'next/font/google';
 import { useRouter } from 'next/router';
-import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
 import { Tags } from '~/components/tags';
-import DynamicIcon from '~/components/icons/Dynamic';
-import Link from 'next/link';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts'
 
 export const SecondaryCard = (props: any) => {
   const router = useRouter();

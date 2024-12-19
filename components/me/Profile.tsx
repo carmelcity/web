@@ -1,4 +1,3 @@
-import { Readex_Pro } from 'next/font/google';
 import Image from 'next/image';
 import EditIcon from '~/images/dashboard/EditIcon.webp';
 import PhotoIcon from '~/images/dashboard/PhotoIcon.webp';
@@ -6,11 +5,10 @@ import { useEffect, useState } from 'react';
 import { showErrorToast, showSuccessToast } from '../toasts';
 import { SmallSpinner } from '../spinner';
 import { useCarmelAuth } from '~/sdk';
+import { readex_pro } from '~/components/fonts'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
 
 const ProfileImage = ({ isEditable, image, onEdit }: any) => {
   return <div className="absolute top-[59%] xs:top-[67%] xs:left-10">

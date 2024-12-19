@@ -1,11 +1,6 @@
 import React from 'react';
 import Title from '~/components/landing/title';
 import { HexagonalCards } from '~/components/landing/HexagonalCards';
-import { Readex_Pro } from 'next/font/google';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
 
 const cards = [
   {
