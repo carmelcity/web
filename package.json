@@ -30,6 +30,7 @@
     "daisyui": "^2.42.1",
     "debug": "^4.4.0",
     "dotenv": "^16.0.3",
+    "eosjs": "^22.1.0",
     "framer-motion": "^8.5.0",
     "front-matter": "^4.0.2",
     "it-all": "^2.0.0",
