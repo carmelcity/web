@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { Readex_Pro } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { bottomUpVariants, imageFadeInVariants, rightBottomCorner_SLOW_Variants } from '~/utils/animations';
 import heroImage from '~/images/early-access/request-access.webp';
@@ -8,7 +7,7 @@ import colorSpot from '~/images/early-access/colorSpot.webp';
 import wire1 from '~/images/early-access/wire1.webp';
 import wire2 from '~/images/early-access/wire2.webp';
 
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts'
 
 export default ({ text }: any) => {
   return (

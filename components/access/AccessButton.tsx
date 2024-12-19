@@ -3,18 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Readex_Pro } from 'next/font/google';
 import profile_placeholder from '~/images/profile_placeholder.webp';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessModal } from './AccessModal'
 import { ConfirmModal } from './ConfirmModal';
 import { useCarmelAuth } from '~/sdk';
-import Link from 'next/link';
 import { showSuccessToast, showErrorToast } from '~/components/toasts';
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
 
 export const AccessButton = () => {
   const router = useRouter()

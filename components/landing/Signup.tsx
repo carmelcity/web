@@ -1,9 +1,6 @@
 import React from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { useRouter } from 'next/router';
-import { Wires } from './Wires'
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts';
 
 export const SignUp = ({ text }: any) => {
   const router = useRouter();

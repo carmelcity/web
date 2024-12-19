@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Readex_Pro } from 'next/font/google'
 import Animation from "~/components/anim"
 
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts'
 
 export default ({ text, onStart }: any) => {
     return <div className="xl:w-full mx-5 lg:mx-32 xl:mx-0 h-auto bg-transparent p-10 rounded-md shadow-lg backdrop-blur-lg border border-[2px] border-dark-turquoise z-30 relative mt-2 xl:mt-0">

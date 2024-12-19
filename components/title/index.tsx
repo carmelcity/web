@@ -1,8 +1,6 @@
 import React from 'react';
-import { Orbitron } from 'next/font/google';
 import { TitlePlaceholder } from '../placeholders/Title';
-
-const orbitron = Orbitron({ subsets: ['latin'] });
+import { orbitron } from '~/components/fonts';
 
 interface TitleProps {
   decription: string;

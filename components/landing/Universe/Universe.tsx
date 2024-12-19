@@ -1,16 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
-import tradingCards from '~/images/TradingCards.png';
-import tradingCardsXS from '~/images/landing/TradingCards_XS.png';
-import tradingCardsMD from '~/images/landing/TradingCards_MD.png';
-import { Readex_Pro } from 'next/font/google';
-import { UniverseProps } from './props';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import { imageFadeInVariants } from '~/utils/animations';
-import Check from '../explore/check';
-
-const readexPro = Readex_Pro({ subsets: ['latin'] });
+import { readexPro } from '~/components/fonts';
 
 export const Universe = ({ text }: any) => {
   const router = useRouter();

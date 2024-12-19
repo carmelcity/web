@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import useWindowSize from '~/sdk/hooks/windowSize';
-import { showSuccessToast } from '../toasts';
 import DynamicIcon from '~/components/icons/Dynamic'
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro } from '~/components/fonts';
 
 export const Wallet = () => {
 

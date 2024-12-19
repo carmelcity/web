@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Readex_Pro } from 'next/font/google';
 import { TagsProps } from './props';
-
-const readex_pro = Readex_Pro({ subsets: ['latin'] });
+import { readex_pro } from '~/components/fonts'
 
 export const Tags = ({ tags, tagClass, containerClass, toggleEnabled = false }: TagsProps) => {
   const [showAllTags, setShowAllTags] = useState(false);

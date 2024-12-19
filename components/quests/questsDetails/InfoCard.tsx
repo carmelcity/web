@@ -1,13 +1,4 @@
-import { Readex_Pro } from 'next/font/google';
-import { Orbitron } from 'next/font/google';
-
-const orbitron = Orbitron({
-  subsets: ['latin'],
-});
-
-const readexPro = Readex_Pro({
-  subsets: ['latin'],
-});
+import { readexPro, orbitron } from '~/components/fonts';
 
 export const InfoCard = (props: any) => {
   return (
