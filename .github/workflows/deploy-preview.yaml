@@ -1,0 +1,29 @@
+name: Deploy Preview Website
+
+on:
+  pull_request:
+    branches:
+      - preview
+
+jobs:
+  deploy-preview:
+    if: github.repository == 'carmelnetwork/web'
+    runs-on: ubuntu-latest
+    env:
+      FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
+      FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.12
+      - name: Install Fleek CLI
+        run: npm i -g @fleek-platform/cli
+      - name: Install yarn
+        run: npm i -g yarn
+      - name: Install dependencies
+        run: yarn install
+      - name: Build & deploy sites
+        run: fleek sites deploy
