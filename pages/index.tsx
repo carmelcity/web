@@ -5,6 +5,7 @@ import { WaitScreen } from '~/components/wait/screens';
 import { AppLayout, WaitLayout } from '~/components/layout/Layout';
 
 const Main = ({ env }: any) => {
+  console.log(process.env)
   console.log({
     env
   })
