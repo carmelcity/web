@@ -5,16 +5,6 @@ import { WaitScreen } from '~/components/wait/screens';
 import { AppLayout, WaitLayout } from '~/components/layout/Layout';
 
 const Main = ({ env }: any) => {
-  console.log({
-    env
-  })
-
-  try {
-    console.log(process.env)
-  } catch (e) {
-    console.log(e)
-  }
-
   return (
     <>
       <Head>
@@ -29,17 +19,3 @@ const Main = ({ env }: any) => {
 };
 
 export default Main
-
-
-export async function getStaticProps() {
-  const env = {
-      NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
-      NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL        
-  }
-
-  return {
-    props: {
-      env
-    }
-  }
-}
