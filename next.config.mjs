@@ -14,6 +14,12 @@ export default {
         port: '',
         pathname: '/*/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'files.carmel.io',
+        port: '',
+        pathname: '/*/**',
+      },
     ],
   },
 };
