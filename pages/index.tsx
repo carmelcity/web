@@ -11,9 +11,9 @@ const Main = ({ user }: any) => {
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <WaitLayout>
-          <WaitScreen/>
-      </WaitLayout>
+      <AppLayout>
+          <CarmelsScreen/>
+      </AppLayout>
     </>
   );
 };

@@ -86,6 +86,13 @@ export const Profile = () => {
     if (!auth.profile || !auth.profile.username) {
       return 
     }
+    
+    const { bio, banner, profile } = auth.profile
+      
+    bio && setBio(bio)
+    banner && setBannerImage(banner)
+    profile && setProfileImage(profile)
+
     setIsLoading(false)
   }, [auth.profile])
 
@@ -97,43 +104,35 @@ export const Profile = () => {
       return 
     }
 
+    setIsLoading(true)
+
     const formData = new FormData(e.target)
     const data: any = Object.fromEntries(formData.entries())
-    
+
+    const bioText = data.bio.length > 0 ? `data:application/json;base64,${Buffer.from(data.bio).toString('base64')}` : ""
     setBio(data.bio)
 
+    const result = await auth.updateProfile({
+      bannerImage, profileImage, bioText
+    })
+
+    await auth.getFreshProfile()
+
+    setIsLoading(false)
     setIsEditable(false)
     showSuccessToast("Profile updated")     
   }
 
-  // const handleSave = async () => {
-  //   try {
-  //     setUpdating(true)
-  //     setAvatarImageData(undefined)
-  //     setBannerImageData(undefined)
-  //     setBannerChanged(false)
-  //     setAvatarChanged(false)
-  //     setBioChanged(false)
-  //     setHasChanges(false)
-  //     setUpdating(false)
-  //     showSuccessToast('Changes saved successfully!');
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     setUpdating(false)
-  //     showErrorToast('An error occurred while saving changes');
-  //   }
-  // }
-
-  const handleEditBannerEdit = () => {
+  const handleEditBannerEdit = async () => {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
 
-    input.addEventListener('change', (event: any) => {
+    input.addEventListener('change', async (event: any) => {
       const file = event.target.files[0]
 
       const reader = new FileReader()
-      reader.onload = (e: any) => {
+      reader.onload = async (e: any) => {
         setBannerImageData(file)
         setBannerImage(e.target.result)
         setBannerChanged(true)
@@ -145,21 +144,22 @@ export const Profile = () => {
     input.click()
   }
 
-  const handleEditProfileEdit = () => {
+  const handleEditProfileEdit = async () => {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
 
-    input.addEventListener('change', (event: any) => {
+    input.addEventListener('change', async (event: any) => {
       const file = event.target.files[0]
 
       const reader = new FileReader()
-      reader.onload = (e: any) => {
+      reader.onload = async (e: any) => {
         setAvatarImageData(file)
         setProfileImage(e.target.result)
         setAvatarChanged(true)
         setHasChanges(true)
       }
+
       reader.readAsDataURL(file)
     })
 
@@ -217,6 +217,10 @@ export const Profile = () => {
     return <div className="flex flex-col sm:flex-row lg:ml-60 px-5 lg:px-0"> 
       <SmallSpinner/> 
     </div>
+  }
+  
+  if (isLoading) {
+    return <SmallSpinner/>
   }
 
   return (
