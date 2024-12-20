@@ -9,7 +9,7 @@ import { Profile } from '../Profile'
 import { Header } from '../Header'
 import { Wallet } from '../Wallet'
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ env }: any) => {
   return (
     <main className={`flex w-full flex-col justify-start items-center text-center`}>
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
@@ -20,7 +20,7 @@ export const ProfileScreen = () => {
            <Header text="Profile" icon="IdentificationIcon"/>
         </div>
 
-        <Profile/>
+        <Profile env={env}/>
     </main>
   )
 }

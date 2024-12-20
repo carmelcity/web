@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { publicRoutes } from './routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { NavbarProps } from './props';
 import LogoSmall from '~/images/carmel.webp';
 import Logo from '~/images/logo/logo-white-with-white-text.svg'
 import Image from 'next/image';
 import { readexPro } from '~/components/fonts';
 
-export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
+export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
 
@@ -22,22 +21,6 @@ export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
     };
   }),
     [];
-
-  const renderLinks = () => {
-    return publicRoutes
-      .filter(r => r.type === 'link')
-      .map((route, index) => (
-        <li key={index} className="mr-2 text-sm md:text-md shrink-0">
-          <Link
-            href={route.path}
-            className={`${readexPro.className} cursor-pointer font-normal ${
-              router.pathname === route.path ? 'text-cyan' : 'text-white'
-            } hover:opacity-80`}>
-            {route.name}
-          </Link>
-        </li>
-      ));
-  };
 
   const renderNonLinks = () => {
     return publicRoutes
@@ -77,9 +60,7 @@ export const Navbar = ({ isDashboard, notNeeded }: NavbarProps) => {
     <div className="flex fixed w-screen top-0 z-50">
       <nav
         className={`lg:h-20 h-auto ${
-          isDashboard
-            ? 'bg-dark-green bg-gradient-to-br lg:from-dark-green-secondary lg:to-transparent'
-            : 'bg-transparent  border-b border-b-cyan/50'
+          'bg-transparent  border-b border-b-cyan/50'
         } px-6 w-full backdrop-blur-md`}
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.2)', // Adjust the opacity value (0.8) as needed

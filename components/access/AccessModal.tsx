@@ -5,8 +5,8 @@ import DynamicIcon from '~/components/icons/Dynamic'
 import { useCarmelAuth } from '~/sdk'
 import { readexPro } from '~/components/fonts'
 
-export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
-  const auth = useCarmelAuth()
+export const AccessModal = ({ env, isModalOpen, setModalOpen }: any) => {
+  const auth = useCarmelAuth({ env })
   const [error, setError] = useState("")
   const [username, setUsername] = useState<string>('')
   const [isWaiting, setIsWaiting] = useState<boolean>(false)
