@@ -9,6 +9,12 @@ const Main = ({ env }: any) => {
     env
   })
 
+  try {
+    console.log(process.env)
+  } catch (e) {
+    console.log(e)
+  }
+
   return (
     <>
       <Head>
