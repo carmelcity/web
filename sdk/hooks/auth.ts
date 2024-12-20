@@ -3,11 +3,12 @@ import axios from 'axios'
 import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
 import { UAParser } from 'ua-parser-js'
+import { getOrigin } from '~/utils/main'
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
-const GATEWAY_URL = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}`
-const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL']
+const GATEWAY_URL = `https://api.chunky.io`
+const SITE_URL = getOrigin()
 
 export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
