@@ -11,6 +11,7 @@ import wire2 from '~/images/stories/Wire2.webp';
 import Image from 'next/image';
 import { Spinner } from '~/components/spinner'
 import { useCarmelAuth } from '~/sdk';
+import { PublicEnvScript } from 'next-runtime-env';
 
 export const AppLayout = ({ children, user }: any) => {
   const navData: any = [];
