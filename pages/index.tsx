@@ -4,7 +4,11 @@ import { CarmelsScreen } from '~/components/carmels/screens';
 import { WaitScreen } from '~/components/wait/screens';
 import { AppLayout, WaitLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = ({ env }: any) => {
+  console.log({
+    env
+  })
+
   return (
     <>
       <Head>
@@ -18,4 +22,18 @@ const Main = ({ user }: any) => {
   );
 };
 
-export default Main;
+export default Main
+
+
+export async function getStaticProps() {
+  const env = {
+      NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
+      NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL        
+  }
+
+  return {
+    props: {
+      env
+    }
+  }
+}
