@@ -16,10 +16,10 @@ const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 //       <AppDetails data={appData} isLoading={isLoadingApp} />
 
-export const ChannelScreen = () => {
+export const ChannelScreen = ({ env }: any) => {
   const router = useRouter()
   const slug: any = router.query.slug
-  const { isLoading, error, account } = useCarmelAccount(slug)
+  const { isLoading, error, account } = useCarmelAccount({ username: slug, env })
   
   const Content = ({ children }: any) => {
     return <main className={`flex w-full flex-col justify-start items-center text-center mt-24 lg:mt-4`}>

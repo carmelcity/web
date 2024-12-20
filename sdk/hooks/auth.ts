@@ -7,10 +7,7 @@ import { getOrigin } from '~/utils/main'
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
-const GATEWAY_URL = `https://api.chunky.io`
-const SITE_URL = getOrigin()
-
-export const useCarmelAuth = () => {
+export const useCarmelAuth = ({ env }: any) => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
     const [profile, setProfile] = useState<any>({ })
     const uap = new UAParser()
@@ -19,9 +16,9 @@ export const useCarmelAuth = () => {
         let result: any = { error: "something went wrong "}
     
         try {
-            const { data } = await axios.post(`${GATEWAY_URL}/carmel/${service}`, {
+            const { data } = await axios.post(`${env.NEXT_PUBLIC_GATEWAY_URL}/carmel/${service}`, {
                 ...args,
-                siteUrl: SITE_URL
+                siteUrl: env.NEXT_PUBLIC_SITE_URL
             }, {
                 headers: Object.assign({
                     'Content-Type': 'application/json'

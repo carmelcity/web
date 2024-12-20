@@ -1,8 +1,8 @@
 import { gatewayFetch } from "./utils"
 import useSWR from 'swr'
 
-export const useCarmelAccount = (username: string) => {
-    const { data, isLoading, error } = useSWR(username ? { service: `accounts/${username}` } : null, gatewayFetch)
+export const useCarmelAccount = ({ username, env }: any) => {
+    const { data, isLoading, error } = useSWR(username ? { env, service: `accounts/${username}` } : null, gatewayFetch)
 
     const account = () => {
         if (!data) {
