@@ -6,11 +6,12 @@ import { showErrorToast, showSuccessToast } from '../toasts';
 import { SmallSpinner } from '../spinner';
 import { useCarmelAuth } from '~/sdk';
 import { readex_pro } from '~/components/fonts'
+import Animation from "~/components/anim"
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
-const ProfileImage = ({ isEditable, image, onEdit }: any) => {
+const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
   return <div className="absolute top-[59%] xs:top-[67%] xs:left-10">
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           <Image
@@ -18,7 +19,7 @@ const ProfileImage = ({ isEditable, image, onEdit }: any) => {
             alt="profile"
             width={80}
             height={80}
-            className="mask lg:w-48 lg:h-48 w-48 h-48 mask-hexagon object-fit"
+            className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-48 h-48 mask-hexagon object-fit`}
           />
         </div>
         {isEditable && (
@@ -31,9 +32,10 @@ const ProfileImage = ({ isEditable, image, onEdit }: any) => {
       </div>
 }
 
-const BannerImage = ({ isEditable, image, onEdit, children }: any) => {
+const BannerImage = ({ isLoading, isEditable, image, onEdit, children }: any) => {
   return <div
       className={`
+        ${isLoading && 'animate-pulse'}
         w-full flex justify-center
         bg-cover bg-no-repeat bg-center relative h-60 xs:h-80 z-10
         border border-primary/20
@@ -43,7 +45,7 @@ const BannerImage = ({ isEditable, image, onEdit, children }: any) => {
         <div
           className={`${readex_pro.className} flex text-white bg-black bg-opacity-40 p-3 font-thin cursor-pointer absolute items-center mt-5 sm:bottom-4 right-4 border border-1 border-cyan`}
           onClick={onEdit}>
-          <Image src={PhotoIcon} alt="photo" />
+          <Image src={PhotoIcon} alt="photo"/>
           <span className={`${readex_pro.className} ml-2 font-normal `}>Change Cover</span>
         </div>
       )}
@@ -104,6 +106,7 @@ export const Profile = () => {
       return 
     }
 
+    setIsEditable(false)
     setIsLoading(true)
 
     const formData = new FormData(e.target)
@@ -188,6 +191,10 @@ export const Profile = () => {
   }
 
   const ActionButtons = () => {
+    if (isLoading) {
+      return <SmallSpinner/>
+    }
+
     return <div className="flex flex-col w-full items-center">
         <button
           type="submit"
@@ -213,22 +220,12 @@ export const Profile = () => {
         </div>
   }
 
-  const Progress = () => {
-    return <div className="flex flex-col sm:flex-row lg:ml-60 px-5 lg:px-0"> 
-      <SmallSpinner/> 
-    </div>
-  }
-  
-  if (isLoading) {
-    return <SmallSpinner/>
-  }
-
   return (
     <div className={`flex flex-col justify-start relative w-full px-2 lg:px-12 mb-20`}>
       <form method='post' onSubmit={handleEdit}>
         <div className={`flex flex-col justify-start relative bg-black/80 border-b border-primary/20 mb-8 w-full`}>
-          <BannerImage image={bannerImage} isEditable={isEditable} onEdit={handleEditBannerEdit}>
-              <ProfileImage image={profileImage} isEditable={isEditable} onEdit={handleEditProfileEdit}/>
+          <BannerImage isLoading={isLoading} image={bannerImage} isEditable={isEditable} onEdit={handleEditBannerEdit}>
+              <ProfileImage isLoading={isLoading} image={profileImage} isEditable={isEditable} onEdit={handleEditProfileEdit}/>
           </BannerImage>
           <div className="flex flex-col">
               <Username/>
