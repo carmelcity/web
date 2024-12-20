@@ -3,18 +3,30 @@ import Head from 'next/head';
 import { BusinessAccessScreen } from '~/components/business/screens';
 import { LandingLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = ({ env }: any) => {
   return (
     <>
       <Head>
         <title>Carmel | Business </title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <LandingLayout>
+      <LandingLayout env={env}>
         <BusinessAccessScreen />
       </LandingLayout>
     </>
   );
 };
 
-export default Main;
+export default Main
+
+
+export async function getStaticProps() {
+  return {
+    props: {
+      env: {
+        NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
+        NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL     
+      }
+    }
+  }
+}
