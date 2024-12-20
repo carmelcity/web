@@ -17,7 +17,6 @@ export const AppLayout = ({ children, user }: any) => {
   const isLoading = true;
   const router = useRouter();
   const [isReady, setIsready] = useState(false)
-  const auth = useCarmelAuth()
 
   useEffect(() => {
     setIsready(true)
@@ -57,10 +56,30 @@ export const AppLayout = ({ children, user }: any) => {
   )
 }
 
+export const PrivateLayout = ({ children, user }: any) => {
+  const [isLoading, setIsLoading] = useState(true)
+  const auth = useCarmelAuth()
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!auth.isLoggedIn()) {
+      router.push("/")
+      return
+    }
+  }, [])
+
+  return <AppLayout>
+           <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
+            <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
+            <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />     
+              { isLoading ? <div className='flex flex-col items-center align-center justify-center h-screen'><Spinner/></div> : children }
+          </AppLayout>
+}
+
 export const LandingLayout = ({ children, user }: any) => {
   return (
     <div className="">
-      <div className="flex w-full max-w-[1920px] mx-auto justify-center pb-16 lg:pb-0">
+      <div className="flex w-full mx-auto justify-center pb-16 lg:pb-0">
         <div className="flex flex-col w-full">
            <Navbar isDashboard={false} notNeeded={false} />
            <div className='lg:mt-32'>
