@@ -13,6 +13,8 @@ jobs:
       FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
       FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
       FLEEK_SLUG: carmel-production
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.SITE_URL }}
+      NEXT_PUBLIC_GATEWAY_URL: ${{ secrets.GATEWAY_URL }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
