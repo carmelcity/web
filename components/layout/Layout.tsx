@@ -29,11 +29,11 @@ export const AppLayout = ({ env, children, user }: any) => {
     <div className="">
       <div className="flex w-full max-w-[1920px] mx-auto justify-center lg:pb-0">
         <div className="w-80 hidden lg:flex">
-          <SidebarNavigation env={env}/>
+          <SidebarNavigation/>
         </div>
         
           <div className="lg:hidden">
-            <MobileTopNavbar env={env}/>
+            <MobileTopNavbar/>
             <MobileNavigation />
           </div>
 
@@ -46,9 +46,9 @@ export const AppLayout = ({ env, children, user }: any) => {
   )
 }
 
-export const PrivateLayout = ({ children, env }: any) => {
+export const PrivateLayout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true)
-  const auth = useCarmelAuth({ env })
+  const auth = useCarmelAuth()
   const router = useRouter();
 
   useEffect(() => {

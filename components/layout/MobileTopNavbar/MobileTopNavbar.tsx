@@ -21,7 +21,7 @@ export const MobileTopNavbar = ({ env }: any) => {
   return (
     <div className="fixed top-0 left-0 z-50 w-full items-center justify-center">
       <nav className="flex items-center w-full bg-dark-green border-b border-primary/50">    
-          <AccessButton env={env}/>
+          <AccessButton/>
           <div className='w-full'>
           </div>
           <div className="border border-cyan border-opacity-20 bg-black h-12 p-2 items-center flex mr-4">

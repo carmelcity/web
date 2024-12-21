@@ -7,7 +7,7 @@ import { getOrigin } from '~/utils/main'
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
-export const useCarmelAuth = ({ env }: any) => {
+export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
     const [profile, setProfile] = useState<any>({ })
     const uap = new UAParser()
@@ -16,16 +16,18 @@ export const useCarmelAuth = ({ env }: any) => {
         let result: any = { error: "something went wrong "}
     
         try {
-            const { data } = await axios.post(`${env.NEXT_PUBLIC_GATEWAY_URL}/carmel/${service}`, {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/carmel/${service}`, {
                 ...args,
-                siteUrl: env.NEXT_PUBLIC_SITE_URL
+                siteUrl: `${process.env.NEXT_PUBLIC_SITE_URL}`
             }, {
                 headers: Object.assign({
                     'Content-Type': 'application/json'
                 }, bearer && { 'Authorization': `Bearer ${bearer}` })
             }) 
+            console.log(data)
             result = { ...data }
         } catch (e: any) {
+            console.log(e)
             result.error = e.message
         }
 
@@ -123,12 +125,17 @@ export const useCarmelAuth = ({ env }: any) => {
     const getAuthToken = async ({ email, username }: any) => {
         const newSession = Object.assign({ ...session, status: email ? 'registering' : 'authenticating' }, email && { email }, username && { username })
 
-        setSession(newSession)
+        console.log({
+            newSession, session
+        })
         
         const result: any = await makeCall({ service: "auth/start", args: Object.assign({ 
             sessionId: session.id,
             sessionToken: session.token, 
         }, email && { email }, username && { username }) })
+
+        setSession(result)
+
 
         if (result.error) {
             return result

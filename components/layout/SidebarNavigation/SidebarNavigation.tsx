@@ -40,7 +40,7 @@ export const SidebarNavigation = ({ isLoading, env }: any) => {
 
   return (
     <div className="flex z-10 grow sticky top-0 relative flex-col gap-y-5 overflow-y-auto bg-gradient-to-br from-dark-green to-dark-green min-w-[300px] px-6 w-full mr-auto md:h-screen border-r border-cyan/10">
-      <AccessButton env={env}/>
+      <AccessButton/>
       <nav className="flex flex-1 flex-col border-t border-primary/20 pt-4 -mt-4">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
