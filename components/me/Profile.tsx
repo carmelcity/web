@@ -34,6 +34,7 @@ export const Profile = () => {
   }, [])
 
   useEffect(() => {
+    console.log(auth)
     if (!auth.profile || !auth.profile.username) {
       return 
     }
