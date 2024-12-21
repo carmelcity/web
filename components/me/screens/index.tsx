@@ -20,7 +20,7 @@ export const ProfileScreen = ({ env }: any) => {
            <Header text="Profile" icon="IdentificationIcon"/>
         </div>
 
-        <Profile env={env}/>
+        <Profile/>
     </main>
   )
 }
