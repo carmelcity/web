@@ -136,7 +136,7 @@ export const AccessButton = () => {
           />
 
         <div className='z-200'>
-          <AccessModal env={env} isModalOpen={isModalOpen} setModalOpen={onToggle} />
+          <AccessModal isModalOpen={isModalOpen} setModalOpen={onToggle} />
         </div>
       </div>
 }
