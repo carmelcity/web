@@ -2,7 +2,12 @@ import nodeExternals from 'webpack-node-externals';
 
 /** @type {import('next').NextConfig} */
 export default {
-  output: "export",
+  ssg: false,
+  // output: "export",
+  // env: {
+  //   NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
+  //   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL
+  // },
   reactStrictMode: false,
   trailingSlash: true,
   images: {
