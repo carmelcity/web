@@ -128,8 +128,6 @@ export const useCarmelAuth = () => {
             sessionToken: session.token, 
         }, email && { email }, username && { username }) })
 
-        setSession(result)
-
         if (result.error) {
             return result
         }
