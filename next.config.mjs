@@ -2,6 +2,7 @@ import nodeExternals from 'webpack-node-externals';
 
 /** @type {import('next').NextConfig} */
 export default {
+  ssg: false,
   // output: "export",
   // env: {
   //   NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
