@@ -31,14 +31,14 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
     }
 
     const result = await auth.getAuthToken(Object.assign({ ...data }, username && { username }))
-    
+      
     if (result.error) {
       showErrorToast(result.error)
       return
     }
     
     setIsWaiting(true)
-    showSuccessToast('Email sent');
+    showSuccessToast(`${isRegister ? 'Registration' : 'Login'} link sent via email`);
   }
 
   const handleSubmit = async (e: any) => {

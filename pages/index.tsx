@@ -12,9 +12,9 @@ const Main = () => {
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-          <CarmelsScreen/>
-      </AppLayout>
+      <WaitLayout>
+          <WaitScreen/>
+      </WaitLayout>
     </>
   );
 };
