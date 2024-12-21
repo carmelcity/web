@@ -24,7 +24,6 @@ export const useCarmelAuth = () => {
                     'Content-Type': 'application/json'
                 }, bearer && { 'Authorization': `Bearer ${bearer}` })
             }) 
-            console.log(data)
             result = { ...data }
         } catch (e: any) {
             console.log(e)
@@ -90,7 +89,6 @@ export const useCarmelAuth = () => {
 
     const updateProfile = async({ profileImage, bannerImage, bioText }: any) => {
         const result: any = await makeCall({ service: "update", args: { profileImage, bannerImage, bioText }, bearer: session.authToken })
-        console.log(result)
         return result
     }
 
@@ -125,10 +123,6 @@ export const useCarmelAuth = () => {
     const getAuthToken = async ({ email, username }: any) => {
         const newSession = Object.assign({ ...session, status: email ? 'registering' : 'authenticating' }, email && { email }, username && { username })
 
-        console.log({
-            newSession, session
-        })
-        
         const result: any = await makeCall({ service: "auth/start", args: Object.assign({ 
             sessionId: session.id,
             sessionToken: session.token, 
@@ -136,14 +130,13 @@ export const useCarmelAuth = () => {
 
         setSession(result)
 
-
         if (result.error) {
             return result
         }
 
         const { sessionToken, authToken } = result
 
-        setSession({ ...newSession, token: sessionToken, authToken, status: email ? 'registered' : 'authenticated' })
+        setSession({ ...newSession, token: sessionToken, authToken, status: email ? 'registering' : 'authenticating' })
 
         return result
     }
