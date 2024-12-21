@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { StoreScreen } from '~/components/store/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = ({ env }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
-        <title>Carmel Communities</title>
+        <title>Carmel Store</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout env={env}>
+      <AppLayout>
         <StoreScreen />
       </AppLayout>
     </>
@@ -18,15 +18,3 @@ const Main = ({ env }: any) => {
 };
 
 export default Main
-
-
-export async function getStaticProps() {
-  return {
-    props: {
-      env: {
-        NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
-        NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL     
-      }
-    }
-  }
-}

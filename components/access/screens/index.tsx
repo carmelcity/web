@@ -7,10 +7,10 @@ import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmelAuth } from '~/sdk';
 import Animation from "~/components/anim"
 
-export const AccessScreen = ({ env }: any) => {
+export const AccessScreen = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(false)
-  const auth = useCarmelAuth({ env })
+  const auth = useCarmelAuth()
   const router = useRouter();
 
   const login = () => {
