@@ -20,11 +20,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.12
-        env:
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.SITE_URL }}
-          NEXT_PUBLIC_GATEWAY_URL: ${{ secrets.GATEWAY_URL }}
-      - name: Install Fleek CLI
-        run: npm i -g @fleek-platform/cli
       - name: Install yarn
         run: npm i -g yarn
       - name: Install dependencies
