@@ -8,8 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCarmelAuth } from '~/sdk';
 
-function App({ Component, pageProps }: AppProps) {
-  const auth = useCarmelAuth()
+function App({ Component, pageProps }: any) {
+  const auth = useCarmelAuth({ env: pageProps.env })
 
   useEffect(() => {
     (async () => {
@@ -26,3 +26,15 @@ function App({ Component, pageProps }: AppProps) {
 }
 
 export default App
+
+
+export async function getStaticProps() {
+  return {
+    props: {
+      env: {
+        NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
+        NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL     
+      }
+    }
+  }
+}
