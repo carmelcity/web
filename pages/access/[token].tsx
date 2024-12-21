@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { AccessLayout } from '~/components/layout/Layout';
 import { AccessScreen } from '~/components/access/screens'
 
-const Main = ({ user }: any) => {
+const Main = () => {
    return (
     <>
       <Head>
@@ -11,10 +11,10 @@ const Main = ({ user }: any) => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AccessLayout>
-        <AccessScreen />
+        <AccessScreen/>
       </AccessLayout>
     </>
   );
 };
 
-export default Main;
+export default Main

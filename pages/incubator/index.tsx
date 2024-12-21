@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { IncubatorScreen } from '~/components/incubator/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
@@ -17,4 +17,4 @@ const Main = ({ user }: any) => {
   );
 };
 
-export default Main;
+export default Main

@@ -3,11 +3,11 @@ import Head from 'next/head';
 import { StoriesScreen } from '~/components/stories/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
-        <title>Carmel Incubator</title>
+        <title>Carmel Stories</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
@@ -17,4 +17,4 @@ const Main = ({ user }: any) => {
   );
 };
 
-export default Main;
+export default Main

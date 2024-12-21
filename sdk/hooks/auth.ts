@@ -3,11 +3,9 @@ import axios from 'axios'
 import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
 import { UAParser } from 'ua-parser-js'
+import { getOrigin } from '~/utils/main'
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
-
-const BASE_URL = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}`
-const DEV_MODE = process.env['NEXT_PUBLIC_DEVMODE']
 
 export const useCarmelAuth = () => {
     const [session, setSession, removeSession]: any = useLocalStorage('carmel.session', {})
@@ -18,16 +16,18 @@ export const useCarmelAuth = () => {
         let result: any = { error: "something went wrong "}
     
         try {
-            const { data } = await axios.post(`${BASE_URL}/carmel/${service}`, {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/carmel/${service}`, {
                 ...args,
-                devMode: DEV_MODE
+                siteUrl: `${process.env.NEXT_PUBLIC_SITE_URL}`
             }, {
                 headers: Object.assign({
                     'Content-Type': 'application/json'
                 }, bearer && { 'Authorization': `Bearer ${bearer}` })
             }) 
+            console.log(data)
             result = { ...data }
         } catch (e: any) {
+            console.log(e)
             result.error = e.message
         }
 
@@ -53,7 +53,6 @@ export const useCarmelAuth = () => {
 
     const initialize = async () => {
         if (session.id) {
-            await getFreshProfile()
             return
         }
         
@@ -86,8 +85,12 @@ export const useCarmelAuth = () => {
     }
 
     const getProfile = async () => {
-        const result: any = await makeCall({ service: "me", args: {}, bearer: session.authToken })
+        return makeCall({ service: "me", args: {}, bearer: session.authToken })
+    }
 
+    const updateProfile = async({ profileImage, bannerImage, bioText }: any) => {
+        const result: any = await makeCall({ service: "update", args: { profileImage, bannerImage, bioText }, bearer: session.authToken })
+        console.log(result)
         return result
     }
 
@@ -122,18 +125,21 @@ export const useCarmelAuth = () => {
     const getAuthToken = async ({ email, username }: any) => {
         const newSession = Object.assign({ ...session, status: email ? 'registering' : 'authenticating' }, email && { email }, username && { username })
 
-        setSession(newSession)
+        console.log({
+            newSession, session
+        })
         
         const result: any = await makeCall({ service: "auth/start", args: Object.assign({ 
             sessionId: session.id,
             sessionToken: session.token, 
         }, email && { email }, username && { username }) })
 
+        setSession(result)
+
+
         if (result.error) {
             return result
         }
-
-        console.log(result)
 
         const { sessionToken, authToken } = result
 
@@ -143,6 +149,6 @@ export const useCarmelAuth = () => {
     }
 
     return {
-        getAuthToken, session, profile, getFreshProfile, logout, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
+        getAuthToken, updateProfile, session, profile, getFreshProfile, logout, initialize, checkUsername, getProfile, verifyRegisterToken, isLoggedIn
     }
 }

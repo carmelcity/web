@@ -3,11 +3,11 @@ import Head from 'next/head';
 import { BusinessAccessScreen } from '~/components/business/screens';
 import { LandingLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
-        <title>Carmel | Business </title>
+        <title>Carmel for Business </title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <LandingLayout>
@@ -17,4 +17,4 @@ const Main = ({ user }: any) => {
   );
 };
 
-export default Main;
+export default Main

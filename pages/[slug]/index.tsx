@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ChannelScreen } from '~/components/channel/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = ({ user }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
@@ -11,10 +11,10 @@ const Main = ({ user }: any) => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <ChannelScreen />
+        <ChannelScreen/>
       </AppLayout>
     </>
   );
 };
 
-export default Main;
+export default Main

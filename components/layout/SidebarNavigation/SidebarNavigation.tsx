@@ -9,7 +9,7 @@ import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessButton } from '~/components/access/AccessButton'
 import { readexPro } from '~/components/fonts';
 
-export const SidebarNavigation = ({ data, isLoading, user }: SidebarNavigationProps) => {
+export const SidebarNavigation = ({ isLoading, env }: any) => {
   const router = useRouter();
 
   const [navbarElements, setNavbarElemens] = useState(sidebarRoutes);
