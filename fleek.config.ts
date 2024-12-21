@@ -8,7 +8,7 @@ export default {
   "sites": [
     {
       "slug": FLEEK_SLUG,
-      "distDir": "out",
+      "distDir": ".fleek",
       "buildCommand": "yarn run build"
     }
   ]
