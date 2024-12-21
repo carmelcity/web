@@ -8,8 +8,8 @@ import { Intro } from './Intro'
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
-export const Profile = () => {
-  const auth = useCarmelAuth()
+export const Profile = ({ env }: any) => {
+  const auth = useCarmelAuth({ env })
 
   const [isLoading, setIsLoading] = useState(true)
   const [bannerImage, setBannerImage] = useState(BANNER_PLACEHOLDER);

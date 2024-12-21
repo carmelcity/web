@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { MobileNavigation } from '~/components/layout/MobileNavigation';
 import { MobileTopNavbar } from '~/components/layout/MobileTopNavbar';
-import { TopNavBar } from '~/components/layout/TopNavbar';
 import { SidebarNavigation } from '~/components/layout/SidebarNavigation';
 import { Navbar } from '~/components/layout/Navbar';
 import spot from '~/images/stories/Background.webp';
@@ -12,21 +11,13 @@ import Image from 'next/image';
 import { Spinner } from '~/components/spinner'
 import { useCarmelAuth } from '~/sdk';
 
-export const AppLayout = ({ children, user }: any) => {
-  const navData: any = [];
-  const isLoading = true;
+export const AppLayout = ({ env, children, user }: any) => {
   const router = useRouter();
   const [isReady, setIsready] = useState(false)
 
   useEffect(() => {
     setIsready(true)
   }, [])
-
-  const username: any = router.query.id;
-  const slug: any = router.query.slug;
-
-  const isDashboard = false;
-  // const navbarRules = false
 
   if (!isReady) {
     return <div className="flex w-full h-screen flex-col items-center mx-auto justify-center lg:pb-0">
@@ -38,14 +29,13 @@ export const AppLayout = ({ children, user }: any) => {
     <div className="">
       <div className="flex w-full max-w-[1920px] mx-auto justify-center lg:pb-0">
         <div className="w-80 hidden lg:flex">
-          <SidebarNavigation data={navData} user={user} isLoading={false} />
+          <SidebarNavigation env={env}/>
         </div>
         
           <div className="lg:hidden">
-            <MobileTopNavbar data={navData} user={user} />
+            <MobileTopNavbar env={env}/>
             <MobileNavigation />
           </div>
-
 
         <div className="flex flex-col w-full z-0">
           {children}
@@ -56,9 +46,9 @@ export const AppLayout = ({ children, user }: any) => {
   )
 }
 
-export const PrivateLayout = ({ children, user }: any) => {
+export const PrivateLayout = ({ children, env }: any) => {
   const [isLoading, setIsLoading] = useState(true)
-  const auth = useCarmelAuth()
+  const auth = useCarmelAuth({ env })
   const router = useRouter();
 
   useEffect(() => {
@@ -76,12 +66,12 @@ export const PrivateLayout = ({ children, user }: any) => {
           </AppLayout>
 }
 
-export const LandingLayout = ({ children, user }: any) => {
+export const LandingLayout = ({ children, env }: any) => {
   return (
     <div className="">
       <div className="flex w-full mx-auto justify-center pb-16 lg:pb-0">
         <div className="flex flex-col w-full">
-           <Navbar isDashboard={false} notNeeded={false} />
+           <Navbar />
            <div className='lg:mt-32'>
             {children}
           </div>
@@ -91,7 +81,7 @@ export const LandingLayout = ({ children, user }: any) => {
   )
 }
 
-export const WaitLayout = ({ children, user }: any) => {
+export const WaitLayout = ({ children, env }: any) => {
   return (
     <div className="flex w-full h-full mx-auto justify-center pb-16 lg:pb-0">
         <div className="flex flex-col w-full">
@@ -103,7 +93,7 @@ export const WaitLayout = ({ children, user }: any) => {
   )
 }
 
-export const AccessLayout = ({ children }: any) => {
+export const AccessLayout = ({ children, env }: any) => {
   return (
           <div className="bg-dark-indigo w-full flex justify-center m-auto">
             <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
