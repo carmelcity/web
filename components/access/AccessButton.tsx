@@ -10,7 +10,7 @@ import { ConfirmModal } from './ConfirmModal';
 import { useCarmelAuth } from '~/sdk';
 import { showSuccessToast, showErrorToast } from '~/components/toasts';
 
-export const AccessButton = ({ env }: any) => {
+export const AccessButton = () => {
   const router = useRouter()
   const [isModalOpen, setModalOpen] = useState(false)
   const [isReady, setIsReady] = useState(false)
@@ -18,7 +18,7 @@ export const AccessButton = ({ env }: any) => {
   const [isConfirm, setIsConfirm] = useState("")
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const auth = useCarmelAuth({ env })
+  const auth = useCarmelAuth()
  
   const onToggleConfirm = (v: boolean) => {
     if (!v) {

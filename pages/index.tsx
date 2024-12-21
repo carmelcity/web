@@ -5,14 +5,14 @@ import { WaitScreen } from '~/components/wait/screens';
 import { AppLayout, WaitLayout } from '~/components/layout/Layout';
 import { useRouter } from 'next/router'
 
-const Main = ({ env }: any) => {
+const Main = () => {
   return (
     <>
       <Head>
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout env={env}>
+      <AppLayout>
           <CarmelsScreen/>
       </AppLayout>
     </>
@@ -20,14 +20,3 @@ const Main = ({ env }: any) => {
 };
 
 export default Main
-
-export async function getStaticProps() {
-  return {
-    props: {
-      env: {
-        NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
-        NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL     
-      }
-    }
-  }
-}

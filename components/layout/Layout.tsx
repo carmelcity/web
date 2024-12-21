@@ -46,9 +46,9 @@ export const AppLayout = ({ env, children, user }: any) => {
   )
 }
 
-export const PrivateLayout = ({ children, env }: any) => {
+export const PrivateLayout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true)
-  const auth = useCarmelAuth({ env })
+  const auth = useCarmelAuth()
   const router = useRouter();
 
   useEffect(() => {
