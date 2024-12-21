@@ -15,7 +15,7 @@ export const AccessScreen = () => {
 
   const login = () => {
     setTimeout(() => {
-      router.push('/me')
+      router.push('/profile')
     }, 3000)
   }
 

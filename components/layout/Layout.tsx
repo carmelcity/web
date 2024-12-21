@@ -56,6 +56,8 @@ export const PrivateLayout = ({ children }: any) => {
       router.push("/")
       return
     }
+
+    setIsLoading(false)
   }, [])
 
   return <AppLayout>
