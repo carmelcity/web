@@ -1,12 +1,11 @@
 import axios from 'axios'
 
-export const gatewayFetch = async ({ service, args = {}, bearer = ""}: any) => {
+export const sendGatewayRequest = async ({ service, args, bearer }: any) => {
     let result: any = { error: "something went wrong "}
-
     try {
-        const { data } = await axios.post(`${process.env['NEXT_PUBLIC_GATEWAY_URL']}/carmel/${service}`, {
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/carmel/${service}`, {
             ...args,
-            siteUrl: `${process.env['NEXT_PUBLIC_SITE_URL']}`
+            siteUrl: `${process.env.NEXT_PUBLIC_SITE_URL}`
         }, {
             headers: Object.assign({
                 'Content-Type': 'application/json'
@@ -16,6 +15,5 @@ export const gatewayFetch = async ({ service, args = {}, bearer = ""}: any) => {
     } catch (e: any) {
         result.error = e.message
     }
-
     return result
 }

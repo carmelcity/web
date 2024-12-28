@@ -27,7 +27,7 @@ export const AccessScreen = () => {
         return 
       }
   
-      const result = await auth.verifyRegisterToken({ token })
+      const result = await auth.verifyAuthToken({ token })
 
       if (result.error) {
         setError(result.error.name === "TokenExpiredError" ? "The link expired, try again." : "An error occurred")

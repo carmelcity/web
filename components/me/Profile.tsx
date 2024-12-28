@@ -34,16 +34,15 @@ export const Profile = () => {
   }, [])
 
   useEffect(() => {
-    console.log(auth)
     if (!auth.profile || !auth.profile.username) {
       return 
     }
     
     const { bio, banner, profile } = auth.profile
-      
-    bio && setBio(bio)
-    banner && setBannerImage(banner)
-    profile && setProfileImage(profile)
+
+    setBio(bio)
+    setBannerImage(banner || BANNER_PLACEHOLDER)
+    setProfileImage(profile || PROFILE_PLACEHOLDER)
 
     setIsLoading(false)
   }, [auth.profile])
