@@ -1,4 +1,4 @@
-name: Deploy Production Website
+name: Build the production release (production branch)
 
 on:
   pull_request:
@@ -6,13 +6,11 @@ on:
       - production
 
 jobs:
-  deploy-production:
+
+  build-development:
     if: github.repository == 'carmelnetwork/web'
     runs-on: ubuntu-latest
     env:
-      FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
-      FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
-      FLEEK_SLUG: carmel-production
       NEXT_PUBLIC_SITE_URL: ${{ secrets.SITE_URL }}
       NEXT_PUBLIC_GATEWAY_URL: ${{ secrets.GATEWAY_URL }}
     steps:
@@ -22,11 +20,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.12
-      - name: Install Fleek CLI
-        run: npm i -g @fleek-platform/cli
       - name: Install yarn
         run: npm i -g yarn
       - name: Install dependencies
         run: yarn install
-      - name: Build & deploy sites
-        run: fleek sites deploy
+      - name: Build
+        run: yarn build
