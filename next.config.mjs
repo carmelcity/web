@@ -1,8 +1,5 @@
-import nodeExternals from 'webpack-node-externals';
-
 /** @type {import('next').NextConfig} */
 export default {
-  ssg: false,
   reactStrictMode: false,
   trailingSlash: true,
   images: {
@@ -16,7 +13,7 @@ export default {
       },
       {
         protocol: 'https',
-        hostname: 'files.carmel.io',
+        hostname: 'files.carmel.city',
         port: '',
         pathname: '/*/**',
       },
