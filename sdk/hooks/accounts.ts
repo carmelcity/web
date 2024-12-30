@@ -8,7 +8,7 @@ export const useCarmelAccount = ({ username }: any) => {
         if (!data) {
             return 
         }
-
+        
         return data.account
     }
 
