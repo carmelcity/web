@@ -64,12 +64,11 @@ export const useCarmelAuth = () => {
     }
 
     const getProfile = async () => {
-        const result = await makeCall({ service: "me" })
-        console.log(result)
-        return result
+        return makeCall({ service: "me" })
     }
 
     const updateProfile = async (args: any) => {
+        console.log(args)
         return makeCall({ service: "update", args })
     }
 
