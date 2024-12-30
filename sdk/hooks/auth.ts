@@ -68,6 +68,7 @@ export const useCarmelAuth = () => {
     }
 
     const updateProfile = async (args: any) => {
+        console.log(args)
         return makeCall({ service: "update", args })
     }
 
