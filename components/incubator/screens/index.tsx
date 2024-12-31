@@ -5,7 +5,7 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { useIncubator } from '~/sdk/hooks/incubator';
+import { useCarmelCommunities } from '~/sdk/hooks';
 import { Tabs } from '~/components/tabs';
 import { Collection } from '../data/Collection'
 import DynamicIcon from '~/components/icons/Dynamic';
@@ -33,10 +33,24 @@ export const IncubatorScreen = () => {
     [],
   );
 
-  const [selectedTab, setSelectedTab] = useState('community');
-  const [displayCounter, setDisplayCounter] = useState(0);
+  const [selectedTab, setSelectedTab] = useState('community')
+  const communities = useCarmelCommunities()
+ 
+  const items = () => {
+    return communities
+  }
 
-  const { data: stories = [], isLoading: isLoadingStories }: any = useIncubator();
+  const list = () => {
+    if (items().isLoading) {
+      return []
+    }
+
+    return items().all()
+  }
+
+  const isLoading = () => {
+    return items().isLoading
+  }
 
   return (
     <div>
@@ -48,20 +62,19 @@ export const IncubatorScreen = () => {
           <div className="flex flex-col justify-start items-center w-11/12 pb-32 pt-32 lg:pt-4 min-h-full">
 
           <DynamicIcon name={'BeakerIcon'} width={64} height={64} className="text-primary mt-20 lg:mt-0 -ml-4" />
-
             <Title
               decription="Carmel"
               moreClasses={`text-center text-xl uppercase mb-0`}
-              isLoading={isLoadingStories}
+              isLoading={isLoading()}
             />
             <Title
               decription="Incubator"
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
-              isLoading={isLoadingStories}
+              isLoading={isLoading()}
             />
             <div className='w-full'>
             <Tabs
-              isLoading={isLoadingStories}
+              isLoading={isLoading()}
               tabs={tabs}
               selectedTab={selectedTab}
               onClickTab={(value: string) => {
@@ -69,7 +82,7 @@ export const IncubatorScreen = () => {
               }}
             />
             </div>
-            <Collection data={stories} filter={selectedTab} isLoading={isLoadingStories} />
+            <Collection data={list()} filter={selectedTab} isLoading={isLoading()} />
           </div>
         </div>
       </div>

@@ -4,11 +4,11 @@ import { MainCard } from './MainCard';
 import { SecondaryCard } from './SecondaryCard';
 
 export const Collection = ({ data, isLoading, filter }: any) => {
-  if (isLoading) {
+  if (isLoading || !data) {
     return <QuestsPlaceholder />;
   }
 
-   const getItems = () => {
+  const getItems = () => {
     return data.filter((post: any) => post.type === filter).map((p: any, i: number) => {
       if (p.type === "community" || p.type === "project") {
         return <MainCard key={i} {...p}/>

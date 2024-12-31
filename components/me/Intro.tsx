@@ -14,13 +14,13 @@ const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
     return <div className="absolute top-[59%] xs:top-[67%] xs:left-10">
           <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
-            <Image
+            { isLoading || <Image
               src={image || PROFILE_PLACEHOLDER}
               alt="profile"
               width={80}
               height={80}
               className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-48 h-48 mask-hexagon object-fit`}
-            />
+            /> }
           </div>
           {isEditable && (
             <div
@@ -53,18 +53,18 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
       </div>
   }
 
-  const Username = ({ username }: any) => {
-    return <div className="relative z-10 mx-auto mt-24 xs:mt-0 xs:ml-60">
+  const Username = ({ username, isLoading }: any) => {
+    return <div className={`relative z-10 mx-auto mt-24 xs:mt-0 xs:ml-60`}>
           <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
-            { username }
+            { isLoading ? '' : username }
           </h1>
         </div>
   }
 
-  const Email = ({ email }: any) => {
+  const Email = ({ email, isLoading }: any) => {
     return <div className="flex mx-auto mt-0 xs:ml-60">
           <span className={`${readex_pro.className} font-thin text-primary text-opacity-60 text-lg`}>
-            { email }
+            { isLoading ? '' : email }
           </span>
         </div>
   }
@@ -73,7 +73,7 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
   const ProfileSummary = ({ isEditable, bio }: any) => {
     if (!isEditable) {
       return <div className="mb-12 relative z-10 w-full items-start flex flex-col">
-                <div className={`${readex_pro.className} font-thin text-gray-400 text-lg mt-5 mb-0`}>
+                <div className={`${readex_pro.className} font-thin text-gray-400 text-left text-lg mt-5 mb-0`}>
                     { bio }
                 </div>
               </div>
@@ -109,9 +109,9 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
                         isEditable={isEditable} 
                         onEdit={onProfileEdit}/>
             </BannerImage>
-          <div className="flex flex-col">
-              <Username username={username}/>
-              <Email email={email}/>
+          <div className={`flex flex-col ${isLoading && 'animate-pulse'}`}>
+              <Username username={username} isLoading={isLoading}/>
+              <Email email={email} isLoading={isLoading}/>
               <div className='w-full lg:px-60 mt-2 flex flex-col items-center'>
                 <ProfileSummary bio={bio} isEditable={isEditable}/>
               </div>
