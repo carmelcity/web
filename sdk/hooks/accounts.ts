@@ -41,3 +41,18 @@ export const useCarmelCommunities = () => {
         isLoading, error, all
     }
 }
+
+export const useCarmelProjects = () => {
+    const { data, isLoading, error } = useSWR({ service: `projects` }, sendGatewayRequest)
+
+    const all = () => {
+        if (!data) {
+            return 
+        }
+        
+        return data.projects
+    }
+    return { 
+        isLoading, error, all
+    }
+}
