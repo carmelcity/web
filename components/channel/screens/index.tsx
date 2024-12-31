@@ -10,6 +10,7 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { Intro } from '~/components/me/Intro'
 import { useCarmelAccount } from '~/sdk';
+import { Spinner } from '~/components/spinner';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
