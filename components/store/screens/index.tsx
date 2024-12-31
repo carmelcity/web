@@ -14,15 +14,15 @@ export const StoreScreen = () => {
   const tabs = useMemo(
     () => [
       {
-        description: 'Network Assets',
+        description: 'City',
         value: 'network',
       },
       {
-        description: 'Community Assets',
+        description: 'Communities',
         value: 'community',
       },
       {
-        description: 'Project Assets',
+        description: 'Projects',
         value: 'project',
       }
     ],
@@ -49,7 +49,7 @@ export const StoreScreen = () => {
               isLoading={isLoadingStories}
             />
             <Title
-              decription="Store"
+              decription="Asset Store"
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
               isLoading={isLoadingStories}
             />
@@ -62,7 +62,7 @@ export const StoreScreen = () => {
                 setSelectedTab(value);
               }}
             />
-              <Assets data={stories} filter={selectedTab} isLoading={isLoadingStories} />
+            <Assets data={stories} filter={selectedTab} isLoading={isLoadingStories} />
 
             </div>
           </div>

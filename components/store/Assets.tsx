@@ -14,10 +14,10 @@ export const Assets = ({ data, filter, isLoading }: any) => {
         <div className="my-8 w-full" key={index}>
           <div
             className={`${readexPro.className} lg:text-4xl text-xl border-b border-primary/50 pb-4 w-full mr-auto pl-8 text-left flex items-center text-cyan mb-0 w-full`}>
-            <Image src={item.icon}  width={300} height={300} alt="category" className="mr-5 lg:w-20 lg:h-20 w-12 h-12 mask mask-hexagon" />
+            <Image src={item.icon} width={300} height={300} alt="category" className="mr-5 lg:w-20 lg:h-20 w-12 h-12 mask mask-hexagon" />
             {item.category}
           </div>
-          <div className="flex flex-wrap pt-5 bg-transparent h-auto w-full lg:justify-start justify-center pl-8">
+          <div className="flex flex-wrap pt-5 bg-transparent h-auto w-full lg:justify-start justify-center lg:pl-8 pl-4">
             {item.apps?.map((app: any, key: number) => (
               <div
                 className="block justify-center items-center mr-4 lg:mr-4 mb-4 lg:mb-5 w-[9.5rem] lg:w-52 h-68 bg-dark-green-secondary border border-cyan border-opacity-20"

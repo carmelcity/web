@@ -1,17 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
-import { StoriesScreen } from '~/components/stories/screens';
+import { ProjectsScreen } from '~/components/projects/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = () => {
   return (
     <>
       <Head>
-        <title>Carmel Stories</title>
+        <title>Carmel Projects</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <StoriesScreen />
+        <ProjectsScreen />
       </AppLayout>
     </>
   );
