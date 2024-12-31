@@ -5,7 +5,7 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { useCarmelCommunities } from '~/sdk/hooks';
+import { useCarmelCommunities, useCarmelProjects } from '~/sdk/hooks';
 import { Tabs } from '~/components/tabs';
 import { Collection } from '../data/Collection'
 import DynamicIcon from '~/components/icons/Dynamic';
@@ -14,30 +14,35 @@ export const IncubatorScreen = () => {
   const tabs = useMemo(
     () => [
       {
-        description: 'Communities',
-        value: 'community',
+        description: 'Projects',
+        value: 'projects',
       },
       {
-        description: 'Projects',
-        value: 'project',
+        description: 'Communities',
+        value: 'communities',
       },
       {
         description: 'Challenges',
-        value: 'challenge',
+        value: 'challenges',
       },
       {
         description: 'Tutorials',
-        value: 'tutorial',
+        value: 'tutorials',
       }
     ],
     [],
   );
 
-  const [selectedTab, setSelectedTab] = useState('community')
+  const [selectedTab, setSelectedTab] = useState('projects')
   const communities = useCarmelCommunities()
- 
+  const projects = useCarmelProjects()
+
+  const content: any = {
+    communities, projects
+  }
+  
   const items = () => {
-    return communities
+    return content[selectedTab]
   }
 
   const list = () => {
@@ -82,7 +87,7 @@ export const IncubatorScreen = () => {
               }}
             />
             </div>
-            <Collection data={list()} filter={selectedTab} isLoading={isLoading()} />
+            <Collection data={list()} isLoading={isLoading()} />
           </div>
         </div>
       </div>

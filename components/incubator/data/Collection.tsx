@@ -9,7 +9,7 @@ export const Collection = ({ data, isLoading, filter }: any) => {
   }
 
   const getItems = () => {
-    return data.filter((post: any) => post.type === filter).map((p: any, i: number) => {
+    return data.map((p: any, i: number) => {
       if (p.type === "community" || p.type === "project") {
         return <MainCard key={i} {...p}/>
       }
