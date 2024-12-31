@@ -31,7 +31,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
     }
 
     const result = await auth.getAuthToken(Object.assign({ ...data }, username && { username }))
-      
+    console.log(result)
     if (result.error) {
       showErrorToast(result.error)
       return
