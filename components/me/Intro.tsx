@@ -7,6 +7,7 @@ import { SmallSpinner } from '../spinner';
 import { useCarmelAuth } from '~/sdk';
 import { readex_pro } from '~/components/fonts'
 import Animation from "~/components/anim"
+import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
@@ -96,6 +97,10 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
     onBannerEdit, onProfileEdit,
     email, username, bio
   }: any) => {
+
+    if (isLoading) {
+      return <ProfileHeaderPlaceholder/>
+    }
 
     return <div className={`flex flex-col justify-start relative bg-black/80 border-b border-primary/20 mb-8 w-full`}>
          <BannerImage 
