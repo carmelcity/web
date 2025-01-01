@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { HexagonalAvatarWithProperty } from './HexagonalAvatarWithProperty';
+import { HexagonalAvatarWithProperty } from '../../avatars/HexagonalAvatarWithProperty';
 import { useRouter } from 'next/router';
 import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
 import { Tags } from '~/components/tags';
@@ -34,25 +34,20 @@ export const CarmelCard = (props: any) => {
   } 
   
   const Engagements = () => {
-    return <div className="flex h-20 mr-8 flex-row items-center">
-       <Link href={"/"}>
-            <div className="ml-2 flex justify-center text-primary items-center cursor-pointer mt-1">
+    return <div className="flex h-20 mr-2 flex-row items-center">
+            <div className="ml-2 flex justify-center text-primary items-center mt-1 ">
               <DynamicIcon name={"ChatBubbleOvalLeftEllipsisIcon"} width={24} height={24} />
-              <span className='text-primary p-1'>12</span>
+              <span className='text-text-gray-300 px-1'>{ props.comments }</span>
+              <span className='text-text-gray-300'>comments</span>
             </div>
-        </Link>            
-        <Link href={"/"}>
-            <div className="ml-2 flex justify-center text-primary items-center cursor-pointer mt-1">
+            <div className="ml-2 flex justify-center text-primary items-center mt-1">
               <DynamicIcon name={"HandThumbUpIcon"} width={24} height={24} />
-              <span className='text-primary p-1'>42</span>
+              <span className='text-white p-1'>{ props.upVotes }</span>
             </div>
-        </Link>  
-        <Link href={"/"}>
-            <div className="ml-2 flex justify-center text-primary items-center cursor-pointer mt-1">
+            <div className="ml-2 flex justify-center text-primary items-center mt-1">
               <DynamicIcon name={"HandThumbDownIcon"} width={24} height={24} />
-              <span className='text-primary p-1'>3</span>
+              <span className='text-white p-1'>{ props.downVotes } </span>
             </div>
-        </Link>         
     </div>
   }
   const Author = () => {
@@ -74,13 +69,14 @@ export const CarmelCard = (props: any) => {
     </span> */}
   </div>
   }
-  const People = () => {
-    return <div className="h-20 flex flex-row pl-4 items-center justify-start">
-      { props.people.slice(0, 3).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><HexagonalAvatar src={p.image} className=""/></div>) }
+
+  const People = ({ size }: any) => {
+    return <div className="h-20 px-8 flex flex-row items-center">
+      { props.people.slice(0, size).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><HexagonalAvatar src={p.image} className=""/></div>) }
           <div className="flex items-center justify-center ml-3 mt-1">
-            {props.people.length > 3 && <span className="text-cyan text-sm font-bold"> 
-              +{ props.people.length - 3 } more </span>
-            }
+            <span className="text-gray-300 text-sm font-bold"> 
+              { props.people.length > size ? `+${props.people.length - size}&nbsp;more people` : `${props.people.length} people` }
+            </span> 
           </div>
     </div>
   }
@@ -99,17 +95,16 @@ export const CarmelCard = (props: any) => {
             <Author/>
         </div>
         <Tags tags={props.tags || []} containerClass="mt-4" />
-        <p className={`${readexPro.className} mb-3 text-sm font-thin text-gray-400 2xl:w-5/6 mt-4`}>
+        <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4`}>
           {props.intro.length > 200
             ? props.intro.substring(0, 200) + '...'
             : props.intro}
         </p>
        
-       <div className='flex flex-col lg:items-center lg:flex-row'>
-        <Engagements/>
-        <People/>
-
-        <Action/>
+       <div className='flex flex-col items-center lg:flex-row'>
+          <Engagements/>
+          <People size={5}/>
+          <Action/>
         </div>
 
       </div>

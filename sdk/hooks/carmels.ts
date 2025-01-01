@@ -15,3 +15,18 @@ export const useCarmels = () => {
         isLoading, error, all
     }
 }
+
+export const useCarmel = (id: number) => {
+    const { data, isLoading, error } = useSWR({ service: `carmels/${id}` }, sendGatewayRequest)
+
+    const content = () => {
+        if (!data) {
+            return 
+        }
+        
+        return data.carmel
+    }
+    return { 
+        isLoading, error, carmel: content()
+    }
+}
