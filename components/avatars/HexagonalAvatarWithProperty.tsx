@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import placeholder from '~/images/userPlaceholder.svg';
 import Link from 'next/link';
-import { HexagonalAvatarProps } from './props';
 import { readexPro } from '~/components/fonts'
 
 
@@ -12,7 +11,7 @@ export const HexagonalAvatarWithProperty = ({
   alt,
   profileImage,
   communityName,
-}: HexagonalAvatarProps) => {
+}: any) => {
   return (
     <div className="flex">
       <Link href={`/${username.toLowerCase()}`} className="relative w-10 z-10 mt-0.5">
