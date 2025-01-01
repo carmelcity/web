@@ -7,11 +7,14 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Title from '~/components/title';
 import { useMemo, useState } from 'react';
-import { useCarmelStories } from '~/sdk/hooks/stories';
+import { useCarmelStories, useCarmelChallenges } from '~/sdk/hooks';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { Tabs } from '~/components/tabs';
+import { ChallengesCollection } from '../ChallengesCollection';
 
-export const HubScreen = () => {
+export * from './ChallengeScreen'
+
+export const HubScreen = (props: any) => {
   const tabs = useMemo(
     () => [
       {
@@ -30,27 +33,35 @@ export const HubScreen = () => {
     [],
   );
 
-  const [selectedTab, setSelectedTab] = useState('challenges');
-  const [displayCounter, setDisplayCounter] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(props.tab || 'challenges')
 
-  const { data: storiesData = [], isLoading: isLoadingStories }: any = useCarmelStories();
+  const { data: stories = [], isLoading: isLoadingStories }: any = useCarmelStories();
+  const challenges = useCarmelChallenges()
 
   const getHighlightedStory = (storiesData: any) => {
     return storiesData.find((story: any) => story.highlight);
   };
 
-  const highlightedStory = getHighlightedStory(storiesData);
+  const highlightedStory = getHighlightedStory(stories)
   
   const isLoading = () => {
     return false
   }
 
-   const stories = useMemo(() => {
-    return storiesData
-    // return selectedTab !== 'all'
-    //   ? storiesData.filter((post: any) => post.data.tags.includes(selectedTab))
-    //   : storiesData;
-  }, [selectedTab, storiesData]);
+  const Content = () => {
+    if (selectedTab === "stories") {
+        return <div className='w-full flex flex-col items-center'>
+            <StoriesHero data={highlightedStory || stories[0]} isLoading={isLoadingStories} />
+            <StoriesGrid data={stories || []} isLoading={isLoadingStories} />
+        </div>
+    }
+
+    if (selectedTab === "challenges") {
+      return <ChallengesCollection data={challenges.all()} isLoading={challenges.isLoading} />
+    }
+
+    return <div/>
+  }
 
   return (
     <div>
@@ -80,8 +91,7 @@ export const HubScreen = () => {
                 setSelectedTab(value);
               }}
             />
-            <StoriesHero data={highlightedStory || storiesData[0]} isLoading={isLoadingStories} />
-            <StoriesGrid data={stories || []} isLoading={isLoadingStories} />
+            <Content/>
           </div>
         </div>
       </div>
