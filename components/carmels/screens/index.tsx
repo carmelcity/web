@@ -10,57 +10,7 @@ import logo from '~/public/images/logo/logo-white.svg';
 import { Collection } from '../data/Collection'
 
 export const CarmelsScreen = () => {
-  const tabs = useMemo(
-    () => [
-      {
-        description: 'All Carmels',
-        value: '*',
-      },
-      {
-        description: 'Philosophy',
-        value: 'philosophy',
-      },
-      {
-        description: 'Education',
-        value: 'education',
-      },
-      {
-        description: 'Technology',
-        value: 'technology',
-      },
-      {
-        description: 'Politics',
-        value: 'politics',
-      },
-      {
-        description: 'Economics',
-        value: 'economics',
-      },
-      {
-        description: 'Culture',
-        value: 'culture',
-      },
-    ],
-    [],
-  );
-
-  const [selectedTab, setSelectedTab] = useState('*');
-  const [displayCounter, setDisplayCounter] = useState(0);
-
-  const { data: storiesData = [], isLoading: isLoadingStories }: any = useCarmels();
-
-  const getHighlightedStory = (storiesData: any) => {
-    return storiesData.find((story: any) => story.highlight);
-  };
-
-  const highlightedStory = getHighlightedStory(storiesData);
-  const stories = useMemo(() => {
-    return (selectedTab !== '*'
-      ? storiesData.filter((post: any) => post.tags.includes(selectedTab))
-      : storiesData).filter((post: any) => {
-        return post.id !== highlightedStory.id
-      })
-  }, [selectedTab, storiesData]);
+  const carmels = useCarmels();
 
   return (
     <div>
@@ -78,14 +28,14 @@ export const CarmelsScreen = () => {
             <Title
               decription="Carmels"
               moreClasses={`text-center text-xl uppercase mb-0`}
-              isLoading={isLoadingStories}
+              isLoading={carmels.isLoading}
             />
             <Title
               decription="Forever Conversations"
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
-              isLoading={isLoadingStories}
+              isLoading={carmels.isLoading}
             />
-          <Collection data={storiesData} isLoading={isLoadingStories} />
+          <Collection data={carmels.all()} isLoading={carmels.isLoading} />
           </div>
         </div>
       </div>
