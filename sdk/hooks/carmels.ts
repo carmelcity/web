@@ -1,11 +1,17 @@
-import useSWR from 'swr';
-import { storiesData as mockData } from '~/components/carmels/mockData';
+import { sendGatewayRequest } from "./utils"
+import useSWR from 'swr'
 
-const fetcher = async () => {
-  await new Promise(resolve => {
-    setTimeout(resolve, 1000);
-  });
-  return mockData;
-};
+export const useCarmels = () => {
+    const { data, isLoading, error } = useSWR({ service: `carmels` }, sendGatewayRequest)
 
-export const useCarmels = () => useSWR(['/carmels'], fetcher);
+    const all = () => {
+        if (!data) {
+            return 
+        }
+        
+        return data.carmels
+    }
+    return { 
+        isLoading, error, all
+    }
+}
