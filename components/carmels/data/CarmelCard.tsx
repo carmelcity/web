@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { HexagonalAvatarWithProperty } from '../../avatars/HexagonalAvatarWithProperty';
 import { useRouter } from 'next/router';
-import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
+import { Author } from '~/components/avatars/Author';
+import { People } from '~/components/avatars/People';
 import { Tags } from '~/components/tags';
 import DynamicIcon from '~/components/icons/Dynamic';
-import Link from 'next/link';
 import { readexPro } from '~/components/fonts'
 
 export const CarmelCard = (props: any) => {
@@ -50,36 +49,6 @@ export const CarmelCard = (props: any) => {
             </div>
     </div>
   }
-  const Author = () => {
-    return <div className="flex flex-row mt-auto mb-1">
-      <HexagonalAvatarWithProperty
-        profileImage={props.authorImage}
-        alt="User"
-        username={props.author}
-        appName={props.property}
-        appLogo={props.propertyLogo}
-        communityName={props.community}
-      />           
-    {/* <div
-      className={`${readexPro.className} font-thin md:ml-8 px-2 py-1 h-8 lg:px-5 lg:py-2  lg:h-10 bg-dark-turquoise ml-auto`}>
-      {props.tagText}
-    </div>
-    <span className={`${readexPro.className} hidden 2xl:flex font-thin text-cyan py-2 md:ml-8 font-bold`}>
-      {props.info}
-    </span> */}
-  </div>
-  }
-
-  const People = ({ size }: any) => {
-    return <div className="h-20 px-8 flex flex-row items-center">
-      { props.people.slice(0, size).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><HexagonalAvatar src={p.image} className=""/></div>) }
-          <div className="flex items-center justify-center ml-3 mt-1">
-            <span className="text-gray-300 text-sm font-bold"> 
-              { props.people.length > size ? `+${props.people.length - size}&nbsp;more people` : `${props.people.length} people` }
-            </span> 
-          </div>
-    </div>
-  }
 
   return (
     <div className={`${props.containerClasses ?? ''} block lg:flex  mx-auto bg-primary-background-blend mb-4 mt-8 border border-primary/50`}>
@@ -92,7 +61,7 @@ export const CarmelCard = (props: any) => {
       <div className="flex flex-col p-4 leading-normal text-left w-full">
         <h4 className={`${readexPro.className} text-xl lg:text-2xl tracking-tight dark:text-white`}>{props.title}</h4>
         <div className='flex flex-row'>
-            <Author/>
+            <Author username={props.author} image={props.authorImage} community={props.community}/>
         </div>
         <Tags tags={props.tags || []} containerClass="mt-4" />
         <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4`}>
@@ -103,7 +72,7 @@ export const CarmelCard = (props: any) => {
        
        <div className='flex flex-col items-center lg:flex-row'>
           <Engagements/>
-          <People size={5}/>
+          <People size={5} all={props.people}/>
           <Action/>
         </div>
 
