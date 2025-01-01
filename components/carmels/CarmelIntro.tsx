@@ -9,6 +9,8 @@ import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
 import { Tags } from '~/components/tags';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { readexPro } from '~/components/fonts'
+import { Author } from '~/components/avatars/Author';
+import { People } from '~/components/avatars/People';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
@@ -29,28 +31,6 @@ const Engagements = (props: any) => {
             <span className='text-white p-1'>{ props.downVotes } </span>
           </div>
     </div>
-}
-
-const People = (props: any) => {
-  return <div className="h-20 px-8 flex flex-row items-center">
-    { props.people.slice(0, props.size).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><HexagonalAvatar src={p.image} className=""/></div>) }
-        <div className="flex items-center justify-center ml-3 mt-1">
-          <span className="text-gray-300 text-sm font-bold"> 
-            { props.people.length > props.size ? `+${props.people.length - props.size}&nbsp;more people` : `${props.people.length} people` }
-          </span> 
-        </div>
-  </div>
-}
-
-const Author = (props: any) => {
-  return <div className="flex flex-row mt-auto mb-1">
-    <HexagonalAvatarWithProperty
-      profileImage={props.authorImage}
-      alt="User"
-      username={props.author}
-      communityName={props.community}
-    />           
-  </div>
 }
 
 const BannerImage = ({ isLoading, isEditable, image, onEdit, children }: any) => {
@@ -118,7 +98,10 @@ export const CarmelIntro = ({
           <div className="flex flex-col p-4 leading-normal text-left w-full">
         <h4 className={`${readexPro.className} text-xl lg:text-2xl tracking-tight dark:text-white`}>{carmel.title}</h4>
         <div className='flex flex-row'>
-            <Author {...carmel}/>
+            <Author
+                image={carmel.authorImage}
+                community={carmel.community}
+                username={carmel.author}/>
         </div>
         <Tags tags={carmel.tags || []} containerClass="mt-4" />
         <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4`}>
@@ -127,7 +110,7 @@ export const CarmelIntro = ({
        
        <div className='flex flex-col items-center lg:flex-row'>
           <Engagements {...carmel}/>
-          <People size={5} {...carmel}/>
+          <People size={5} all={carmel.people}/>
         </div>
       </div>
       </div>
