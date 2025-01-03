@@ -11,18 +11,6 @@ import DynamicIcon from '~/components/icons/Dynamic';
 export const ProjectsScreen = () => {
   const projects = useCarmelProjects()
 
-  const list = () => {
-    if (projects.isLoading) {
-      return []
-    }
-
-    return projects.all()
-  }
-
-  const isLoading = () => {
-    return projects.isLoading
-  }
-
   return (
     <div>
       <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4">
@@ -36,14 +24,14 @@ export const ProjectsScreen = () => {
             <Title
               decription="Carmel"
               moreClasses={`text-center text-xl uppercase mb-0`}
-              isLoading={isLoading()}
+              isLoading={projects.isLoading}
             />
             <Title
               decription="Projects"
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase`}
-              isLoading={isLoading()}
+              isLoading={projects.isLoading}
             />
-            <Collection data={list()} isLoading={isLoading()} />
+            <Collection data={projects.all} isLoading={projects.isLoading} />
           </div>
         </div>
       </div>

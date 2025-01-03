@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { HubScreen } from '~/components/hub/screens/';
+import { ChallengesScreen } from '~/components/challenges/screens/';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = () => {
@@ -11,7 +11,7 @@ const Main = () => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <HubScreen tab="challenges"/>
+        <ChallengesScreen />
       </AppLayout>
     </>
   );

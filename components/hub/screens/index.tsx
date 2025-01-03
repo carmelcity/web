@@ -10,7 +10,6 @@ import { useMemo, useState } from 'react';
 import { useCarmelStories, useCarmelChallenges } from '~/sdk/hooks';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { Tabs } from '~/components/tabs';
-import { ChallengesCollection } from '../ChallengesCollection';
 
 export * from './ChallengeScreen'
 

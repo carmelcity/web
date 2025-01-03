@@ -11,18 +11,6 @@ import DynamicIcon from '~/components/icons/Dynamic';
 export const CommunitiesScreen = () => {
   const communities = useCarmelCommunities()
 
-  const list = () => {
-    if (communities.isLoading) {
-      return []
-    }
-
-    return communities.all()
-  }
-
-  const isLoading = () => {
-    return communities.isLoading
-  }
-
   return (
     <div>
       <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4">
@@ -36,14 +24,14 @@ export const CommunitiesScreen = () => {
             <Title
               decription="Carmel"
               moreClasses={`text-center text-xl uppercase mb-0`}
-              isLoading={isLoading()}
+              isLoading={communities.isLoading}
             />
             <Title
               decription="Communities"
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase`}
-              isLoading={isLoading()}
+              isLoading={communities.isLoading}
             />
-            <Collection data={list()} isLoading={isLoading()} />
+            <Collection data={communities.all} isLoading={communities.isLoading} />
           </div>
         </div>
       </div>
