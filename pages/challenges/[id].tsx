@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { ChallengeScreen } from '~/components/hub/screens/ChallengeScreen';
+import { ChallengeScreen } from '~/components/challenges/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = () => {

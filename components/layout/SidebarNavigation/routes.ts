@@ -28,9 +28,9 @@ export const sidebarRoutes = [
     current: false,
   },
   {
-    name: 'Communities',
-    href: '/communities',
-    img: 'UserGroupIcon',
+    name: 'Challenges',
+    href: '/challenges',
+    img: 'TrophyIcon',
     current: false,
   },
   {
@@ -40,9 +40,9 @@ export const sidebarRoutes = [
     current: false,
   },
   {
-    name: 'Hub',
-    href: '/hub',
-    img: 'RectangleGroupIcon',
+    name: 'Communities',
+    href: '/communities',
+    img: 'UserGroupIcon',
     current: false,
   },
   {
