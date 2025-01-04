@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Container } from './Container';
 
 const Username = ({ username, isLoading }: any) => {
-  return <div className={`relative z-10 lg:ml-64 mx-auto lg:mt-0 mt-16`}>
+  return <div className={`relative z-10 lg:ml-56 mx-auto lg:mt-0 mt-16`}>
         <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
           { isLoading ? '' : username }
         </h1>
@@ -13,7 +13,7 @@ const Username = ({ username, isLoading }: any) => {
 }
 
 const ProfileSummary = ({ bio }: any) => {
-    return <div className="relative z-10 lg:ml-64">
+    return <div className="relative z-10 lg:ml-56">
               <div className={`${readex_pro.className} font-thin text-gray-400 text-left text-lg mt-5 mb-0`}>
                   { bio }
               </div>
