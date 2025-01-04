@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import Animation from "~/components/anim"
-
-import { readexPro } from '~/components/fonts'
+import React from 'react'
+import { Animation, readexPro} from "~/elements/"
 
 export default ({ text, onStart }: any) => {
     return <div className="xl:w-full mx-5 lg:mx-32 xl:mx-0 h-auto bg-transparent p-10 rounded-md shadow-lg backdrop-blur-lg border border-[2px] border-dark-turquoise z-30 relative mt-2 xl:mt-0">

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { downloadAppVariants } from '~/utils/animations';
 import Image from 'next/image';
 import Check from './check'
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 const TextContent = ({ moreClasses,
   header,

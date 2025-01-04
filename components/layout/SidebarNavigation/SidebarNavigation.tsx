@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SidebarNavigationProps } from './props';
 import { SidebarNavigationPlaceholder } from '~/components/placeholders/SidebarNavigation';
 import { sidebarRoutes } from './routes';
-import DynamicIcon from '~/components/icons/Dynamic';
 import { AccessButton } from '~/components/access/AccessButton'
-import { readexPro } from '~/components/fonts';
+import { DynamicIcon, readexPro } from '~/elements';
 
 export const SidebarNavigation = ({ isLoading, env }: any) => {
   const router = useRouter();
@@ -26,7 +24,7 @@ export const SidebarNavigation = ({ isLoading, env }: any) => {
     const currentPath = router.asPath;
     const updatedNavData = navbarElements.map((item: any) => ({
       ...item,
-      current: normalizePath(item.href) === normalizePath(currentPath),
+      current: normalizePath(currentPath) === normalizePath(item.href)
     }));
 
     setNavbarElemens(updatedNavData);

@@ -4,7 +4,7 @@ import { topNavbarRoutes } from './routes';
 import Link from 'next/link';
 import { updateNavbarElements } from '../utils';
 import arrow from '~/images/dashboard/ArrowRight.webp';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const TopNavBar = ({ data }: any) => {
   const [navbarElements, setNavbarElemens] = useState(topNavbarRoutes);

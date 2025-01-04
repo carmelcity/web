@@ -1,4 +1,4 @@
-import { Notification, ShoppingCart } from '~/components/icons';
+import { Notification, ShoppingCart } from '~/elements/icons';
 
 export const topNavbarRoutes = [
   {

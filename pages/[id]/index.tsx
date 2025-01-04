@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { ItemScreen } from '~/components/screens';
+import { AccountScreen, CarmelScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 import { useRouter } from 'next/router';
 
@@ -8,16 +8,13 @@ const Main = () => {
   const router = useRouter()
   const id: any = router.query.id
 
-  if (!id) {
-    return <div/>
+  const Content = () => {
+    if (!id) {
+      return <div/>
+    }
+
+    return isNaN(parseInt(id)) ? <AccountScreen/> : <CarmelScreen/>
   }
-
-
-  // if (isNaN(parseInt(slug))) {
-  //   return <AccountProfile username={slug}/>
-  // }
-
-  // return <Carmel id={parseInt(slug)}/>
 
   return (
     <>
@@ -26,7 +23,7 @@ const Main = () => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <ItemScreen name="accounts"/>
+        <Content/>
       </AppLayout>
     </>
   );

@@ -1,5 +1,4 @@
-import DynamicIcon from '~/components/icons/Dynamic'
-import { readex_pro } from '~/components/fonts';
+import { readex_pro, DynamicIcon } from '~/elements';
 
 export const Header = ({ text, icon }: any) => {
   return <div className={`${readex_pro.className} text-left flex flex-row`}>

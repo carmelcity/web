@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Title from '~/components/title';
 import Image from 'next/image';
 import logo from '~/public/images/logo/logo-white.svg';
 import spot from '~/images/stories/Background.webp';

@@ -6,7 +6,7 @@ import Check from '~/components/landing/explore/check';
 import colorSpot from '~/images/early-access/colorSpot4.webp';
 import { useInView } from 'react-intersection-observer';
 
-import { readexPro } from '~/components/fonts'
+import { readexPro } from '~/elements/fonts'
 
 export default ({ text, children }: any) => {
   const [visibleChecks, setVisibleChecks] = useState([]);

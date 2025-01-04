@@ -5,7 +5,7 @@ import { StoriesGrid } from '~/components/stories/story-grid';
 import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
-import Title from '~/components/title';
+import { Title } from '~/elements';
 import { useMemo, useState } from 'react';
 import { useCarmelStories } from '~/sdk/hooks/stories';
 

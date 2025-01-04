@@ -1,6 +1,6 @@
 import React from 'react';
 import { HiOutlineCheck } from 'react-icons/hi';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 const Check = ({ text, moreClasses }: any) => {
   return (

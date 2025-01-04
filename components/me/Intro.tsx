@@ -1,14 +1,8 @@
 import Image from 'next/image';
 import EditIcon from '~/images/dashboard/EditIcon.webp';
-import PhotoIcon from '~/images/dashboard/PhotoIcon.webp';
-import { useEffect, useState } from 'react';
-import { showErrorToast, showSuccessToast } from '../toasts';
-import { SmallSpinner } from '../spinner';
-import { useCarmelAuth } from '~/sdk';
-import { readex_pro } from '~/components/fonts'
-import Animation from "~/components/anim"
+import { readex_pro } from '~/elements/fonts'
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
-import { BannerImage } from '~/components/banners'
+import { BannerImage } from '~/elements'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`

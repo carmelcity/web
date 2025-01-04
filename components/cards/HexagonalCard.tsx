@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { HexagonalCardProps } from './props';
-import { readexPro } from '~/components/fonts'
+import { readexPro } from '~/elements/fonts'
 
 export const HexagonalCard = ({
   icon,

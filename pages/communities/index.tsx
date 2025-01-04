@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { CommunitiesScreen } from '~/components/communities/screens';
+import { CommunitiesListScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = () => {
@@ -11,7 +11,7 @@ const Main = () => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <CommunitiesScreen />
+        <CommunitiesListScreen />
       </AppLayout>
     </>
   );
