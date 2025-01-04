@@ -19,6 +19,8 @@ export const Intro = ({ isLoading, item }:  any) => {
 export const ItemScreen = ({ name }: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
+
+    console.log(name, itemId)
     
     const data = useCarmelItem(name, itemId)
       
