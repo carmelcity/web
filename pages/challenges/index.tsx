@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { ChallengesScreen } from '~/components/challenges/screens/';
+import { SimpleListScreen } from '~/components/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = () => {
@@ -11,7 +11,14 @@ const Main = () => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <ChallengesScreen />
+      <SimpleListScreen
+          title="Carmel"
+          onItemPress='/challenges/:challengeId'
+          actionTitle="View Challenge"
+          subtitle="Challenges"
+          icon="TrophyIcon" 
+          name="challenges" 
+        />
       </AppLayout>
     </>
   );

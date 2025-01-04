@@ -1,5 +1,5 @@
 import { InfiniteScrollComponent } from '../infiniteScroll';
-import { QuestsPlaceholder } from '../placeholders/Quests';
+import { QuestsPlaceholder } from '../placeholders/ListPlaceholder';
 import { QuestCard } from './QuestCard';
 import { QuestsProps } from './props';
 

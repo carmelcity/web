@@ -7,11 +7,11 @@ const Main = () => {
   return (
     <>
       <Head>
-        <title>Carmel Challenge</title>
+        <title>Carmel Assets</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout>
-        <ItemScreen name="challenges" />
+        <ItemScreen name="assetgroups" />
       </AppLayout>
     </>
   );
