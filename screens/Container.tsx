@@ -9,14 +9,14 @@ const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ image, isLoading }: any) => {
-  return <div className="absolute lg:top-[50%] top-[32%] lg:left-10 left-[25%]">
+  return <div className="absolute lg:top-[45%] top-[32%] lg:left-10 left-[33%]">
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={image || PROFILE_PLACEHOLDER}
             alt="profile"
             width={80}
             height={80}
-            className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-48 h-48 mask-hexagon object-fit`}
+            className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-32 h-32 mask-hexagon object-fit`}
           /> }
         </div>
         {/* {isEditable && (
@@ -34,8 +34,12 @@ export const Container = ({ noThumbnail, children, data }: any) => {
         return <div/>
       }
 
-      return <BannerImage isLoading={data.isLoading} image={data.item.banner || BANNER_PLACEHOLDER}>
-              { noThumbnail || <ProfileImage isLoading={data.isLoading} image={data.item.profile || PROFILE_PLACEHOLDER}/> }
+      return <BannerImage isLoading={data.isLoading} 
+        forceBanner
+        banner={data.item.banner || BANNER_PLACEHOLDER}
+        thumbnail={data.item.banner || BANNER_PLACEHOLDER}
+      >
+          { noThumbnail || <ProfileImage isLoading={data.isLoading} image={data.item.profile || PROFILE_PLACEHOLDER}/> }
           </BannerImage>
     }
 

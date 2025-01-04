@@ -1,13 +1,15 @@
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader'
 import { readexPro } from '~/elements/fonts'
-import { useRouter } from 'next/router'
-import { BannerImage, Engagements, ActionButton, Author, People, Tags } from '~/elements';
+import { BannerImage, Engagements, ActionButton, Community, Author, People, Tags } from '~/elements';
 
 export const BaseCard = ({ 
   onPress, 
   isLoading, 
   title, 
   banner, 
+  thumbnail,
+  username,
+  profile,
   intro, 
   actionTitle,
   authorImage,
@@ -20,15 +22,32 @@ export const BaseCard = ({
   people,
   tags,
   shortIntro
-}: any) => {
-    const router = useRouter()
-    
+}: any) => {    
     if (isLoading) {
       return <ProfileHeaderPlaceholder/>
     }
 
+
+    const Username = () => {
+      if (!username) {
+        return <div/>
+      }
+
+    return <div className={`relative z-10 lg:ml-0 mx-auto`}>
+        <h1 className={`${readexPro.className} mt-5 lg:text-4xl text-3xl`}>
+          { isLoading ? '' : username }
+        </h1>
+      </div>
+    }
+
     const CardAuthor = () => {
       if (!author) {
+        if (community) {
+          return <Community
+              image={authorImage}
+              username={community}
+          />
+        }
         return <div/>
       }
 
@@ -41,8 +60,9 @@ export const BaseCard = ({
     }
     
     return <div className={`flex flex-col justify-start relative mb-8 w-full bg-black/80 border border-primary/20`}>
-        <BannerImage isLoading={isLoading} image={banner}/>         
+        <BannerImage isLoading={isLoading} banner={banner} thumbnail={thumbnail || profile}/>         
         <div className="flex flex-col p-4 leading-normal text-left w-full">
+          <Username/>
           <h4 className={`${readexPro.className} text-xl lg:text-2xl tracking-tight dark:text-white`}>{title}</h4>
           <CardAuthor/>
           { tags && <Tags tags={tags || []} containerClass="mt-4" /> }
