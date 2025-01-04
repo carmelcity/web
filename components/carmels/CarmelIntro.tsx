@@ -1,11 +1,5 @@
-import Image from 'next/image';
-import EditIcon from '~/images/dashboard/EditIcon.webp';
-import PhotoIcon from '~/images/dashboard/PhotoIcon.webp';
 import { readex_pro } from '~/components/fonts'
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
-import { HexagonalAvatarWithProperty } from '~/components/avatars/HexagonalAvatarWithProperty';
-import { useRouter } from 'next/router';
-import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
 import { Tags } from '~/components/tags';
 import DynamicIcon from '~/components/icons/Dynamic';
 import { readexPro } from '~/components/fonts'
