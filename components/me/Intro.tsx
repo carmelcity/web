@@ -8,12 +8,13 @@ import { useCarmelAuth } from '~/sdk';
 import { readex_pro } from '~/components/fonts'
 import Animation from "~/components/anim"
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
+import { BannerImage } from '~/components/banners'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
-    return <div className="absolute top-[59%] xs:top-[67%] xs:left-10">
+    return <div className="absolute top-[65%] xs:top-[80%] xs:left-10">
           <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
             { isLoading || <Image
               src={image || PROFILE_PLACEHOLDER}
@@ -31,27 +32,6 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
             </div>
           )}
         </div>
-  }
-  
-  const BannerImage = ({ isLoading, isEditable, image, onEdit, children }: any) => {
-    return <div
-        className={`
-          ${isLoading && 'animate-pulse'}
-          w-full flex justify-center
-          bg-cover bg-no-repeat bg-center relative h-60 xs:h-80 z-10
-          border border-primary/20
-        `}
-        style={{ backgroundImage: `url(${image})` }}>
-        {isEditable && (
-          <div
-            className={`${readex_pro.className} flex text-white bg-black bg-opacity-40 p-3 font-thin cursor-pointer absolute items-center mt-5 sm:bottom-4 right-4 border border-1 border-cyan`}
-            onClick={onEdit}>
-            <Image src={PhotoIcon} alt="photo"/>
-            <span className={`${readex_pro.className} ml-2 font-normal `}>Change Cover</span>
-          </div>
-        )}
-        { children }
-      </div>
   }
 
   const Username = ({ username, isLoading }: any) => {

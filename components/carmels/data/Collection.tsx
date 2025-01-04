@@ -1,5 +1,5 @@
 import { InfiniteScrollComponent } from '~/components/infiniteScroll';
-import { QuestsPlaceholder } from '~/components/placeholders/Quests';
+import { QuestsPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelCard } from './CarmelCard';
 import { QuestsProps } from './props';
 

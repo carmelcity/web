@@ -38,7 +38,7 @@ const AccountProfile = ({ username }: any) => {
 }
 
 const Carmel = ({ id }: any) => {
-    const { isLoading, error, carmel } = useCarmel(id)
+    const { isLoading, error, item } = useCarmel(id)
 
     return <main className={`flex w-full flex-col justify-start items-center text-center mt-24 lg:mt-4`}>
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
@@ -48,7 +48,7 @@ const Carmel = ({ id }: any) => {
         <div className={`flex flex-col justify-start relative w-full px-2 lg:px-12 mb-20`}>
         <CarmelIntro
               isLoading={isLoading}
-              carmel={carmel}
+              carmel={item}
           />
           </div>
     </main>

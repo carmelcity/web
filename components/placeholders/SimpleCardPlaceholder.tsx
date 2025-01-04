@@ -1,4 +1,4 @@
-export const ChallengePlaceholder = () => {
+export const SimpleCardPlaceholder = () => {
     return (
       <div className="flex flex-col justify-start items-center w-full mb-4 pb-10 bg-gradient-to-b from-cyan/50 to-[#052F3500] h-[800px]">
         <div
