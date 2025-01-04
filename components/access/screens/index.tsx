@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Spinner } from '~/components/spinner'
-import Title from '~/components/title';
+import { Title, Animation, Spinner } from '~/elements';
 import Image from 'next/image';
 import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmelAuth } from '~/sdk';
-import Animation from "~/components/anim"
 
 export const AccessScreen = () => {
   const [error, setError] = useState("")

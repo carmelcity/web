@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 const Card = ({ title, description }: any) => {
   return (

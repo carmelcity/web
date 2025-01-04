@@ -6,7 +6,7 @@ import heroImage from '~/images/early-access/request-access.webp';
 import colorSpot from '~/images/early-access/colorSpot.webp';
 import wire1 from '~/images/early-access/wire1.webp';
 import wire2 from '~/images/early-access/wire2.webp';
-import { readexPro } from '~/components/fonts'
+import { readexPro } from '~/elements/fonts'
 
 export default ({ text }: any) => {
   const scrollToBottom = () => {

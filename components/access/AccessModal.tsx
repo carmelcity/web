@@ -1,9 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from '~/components/modal'
-import { showSuccessToast, showErrorToast } from '~/components/toasts'
-import DynamicIcon from '~/components/icons/Dynamic'
+import { DynamicIcon, readexPro, showSuccessToast, showErrorToast } from '~/elements'
 import { useCarmelAuth } from '~/sdk'
-import { readexPro } from '~/components/fonts'
 
 export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const auth = useCarmelAuth()

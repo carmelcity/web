@@ -9,7 +9,7 @@ import { handleDownloadClick } from '~/utils/helper';
 import colorSpotLG from '~/images/landing/Spot_LG.png';
 import { motion } from 'framer-motion';
 import { rightToLeftVariants, bottomUpVariants } from '~/utils/animations';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const CarmelWay = ({ header, title, subtitle, description }: CarmelWayProps) => {
   return (

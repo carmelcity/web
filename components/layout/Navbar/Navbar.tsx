@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import LogoSmall from '~/images/carmel.webp';
 import Logo from '~/images/logo/logo-white-with-white-text.svg'
 import Image from 'next/image';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);

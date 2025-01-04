@@ -1,4 +1,4 @@
-import { CarmelStudio, Notification, ShoppingCart } from '~/components/icons';
+import { CarmelStudio, Notification, ShoppingCart } from '~/elements/icons';
 
 export const topNavbarRoutes = [
   // {
