@@ -1,11 +1,11 @@
 import { InfiniteScrollComponent } from '../infiniteScroll';
-import { QuestsPlaceholder } from '../placeholders/ListPlaceholder';
+import { ListPlaceholder } from '../placeholders/ListPlaceholder';
 import { QuestCard } from './QuestCard';
 import { QuestsProps } from './props';
 
 export const Quests = ({ data, isLoading }: QuestsProps) => {
   if (isLoading) {
-    return <QuestsPlaceholder />;
+    return <ListPlaceholder />;
   }
 
   return (
@@ -27,7 +27,7 @@ export const Quests = ({ data, isLoading }: QuestsProps) => {
         />
       ))}
       elementsNumber={4}
-      loader={<QuestsPlaceholder />}
+      loader={<ListPlaceholder />}
     />
   );
 };
