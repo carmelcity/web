@@ -13,6 +13,20 @@ export const Author = ({
   </div>
 }
 
+export const Community = ({
+  image, username
+}: any) => {
+  return <div className="flex flex-row mt-auto mb-1">
+    <ComplexAvatar
+      noCommunityLink
+      profileImage={image}
+      alt="Community"
+      communityName={"community"}
+      username={username}
+    />           
+</div>
+}
+
  export const People = ({ all, size }: any) => {
     return <div className="h-20 px-8 flex flex-row items-center">
       { all.slice(0, size).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><SimpleAvatar src={p.image} className=""/></div>) }
