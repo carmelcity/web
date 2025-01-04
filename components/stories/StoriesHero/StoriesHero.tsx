@@ -1,12 +1,11 @@
 import { ReactElement } from 'react';
 import { StoriesHeroProps } from './props';
 import Link from 'next/link';
-import { Tags } from '~/components/tags';
+import { Tags, ComplexAvatar } from '~/elements';
 import moment from 'moment';
-import { HexagonalAvatarWithProperty } from '~/components/quests/HexagonalAvatarWithProperty';
 import Image from 'next/image';
 import { StoriesHeroPlaceholder } from '~/components/placeholders/StoriesHero';
-import { readex_pro } from '~/components/fonts';
+import { readex_pro } from '~/elements/fonts';
 
 export const StoriesHero = ({ data, isLoading }: StoriesHeroProps): ReactElement => {
   if (isLoading) {
@@ -32,7 +31,7 @@ export const StoriesHero = ({ data, isLoading }: StoriesHeroProps): ReactElement
           </Link>
           <div className="flex flex-row gap-2 items-center justify-between">
             <p className={`m-0 font-thin ${readex_pro.className}`}>{moment(data.date).format('MMMM D, YYYY')}</p>
-            <HexagonalAvatarWithProperty
+            <ComplexAvatar
               appLogo={data.appLogo}
               alt="hero"
               profileImage={data.userPhoto}

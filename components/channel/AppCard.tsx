@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { readexPro } from '~/components/fonts'
+import { readexPro } from '~/elements/fonts'
 
 export const AppCard = ({ data }: any) => {
   const { banner, profile, name, description, twitter, telegram, discord, assets, followers } = data;

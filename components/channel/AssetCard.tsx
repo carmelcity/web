@@ -1,24 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import DynamicIcon from '~/components/icons/Dynamic';
+import { DynamicIcon, SimpleAvatar } from '~/elements';
 import Link from 'next/link';
-import HexagonalAvatar from '~/components/avatars/HexagonalAvatar';
-import { readexPro } from '~/components/fonts'
+import { readexPro } from '~/elements/fonts'
 
 export const AssetCard = ({ data }: any) => {
-  const { id, title, image, price } = data;
-
-  const HexagonalAvatarTag = (props: any) => {
-    return (
-      <div className="flex">
-        <HexagonalAvatar {...props} />
-        <div className="flex items-center justify-center ml-3 mt-1">
-          <span className="text-cyan text-s font-bold">@</span>
-          {props.nameTag}
-        </div>
-      </div>
-    );
-  };
+  const { id, title, image, price } = data
   
   const Stats = () => {
     return  <div className="flex flex-row mt-auto m-4 items-start">
@@ -48,7 +35,7 @@ export const AssetCard = ({ data }: any) => {
   return (
     <div className="flex flex-col border border-primary/20 bg-dark-green/50 mt-8 lg:w-2/3 w-full px-0 py-0">
       <div className='flex flex-row p-4'>
-          <HexagonalAvatar src={`https://storage.googleapis.com/carmelstorage/accounts/julia.avatar.png`}/>
+          <SimpleAvatar src={`https://storage.googleapis.com/carmelstorage/accounts/julia.avatar.png`}/>
           <div className='flex flex-col pl-2'>
           <span className='text-md ml-2 text-primary'>Dan</span>
           <span className='text-sm ml-2 text-gray-400'>19 sec ago</span>

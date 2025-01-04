@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { HexagonalCardProps } from './props';
 import { motion } from 'framer-motion';
 import { imageVariants } from '~/utils/animations';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const HexagonalCard = ({
   icon,

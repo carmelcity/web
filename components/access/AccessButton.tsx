@@ -4,11 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import profile_placeholder from '~/images/profile_placeholder.webp';
-import DynamicIcon from '~/components/icons/Dynamic';
+import { DynamicIcon, showSuccessToast } from '~/elements';
 import { AccessModal } from './AccessModal'
 import { ConfirmModal } from './ConfirmModal';
 import { useCarmelAuth } from '~/sdk';
-import { showSuccessToast, showErrorToast } from '~/components/toasts';
 
 export const AccessButton = () => {
   const router = useRouter()

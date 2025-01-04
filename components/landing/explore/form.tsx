@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 const Form = () => {
   const [text, setText] = useState('');

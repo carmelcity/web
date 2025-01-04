@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { showSuccessToast } from '../toasts';
-import { SmallSpinner } from '../spinner';
+import { SmallSpinner, showSuccessToast, readex_pro } from '~/elements';
 import { useCarmelAuth } from '~/sdk';
-import { readex_pro } from '~/components/fonts'
 import { Intro } from './Intro'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`

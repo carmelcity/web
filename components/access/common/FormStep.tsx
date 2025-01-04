@@ -1,9 +1,6 @@
-import React, { useState, useCallback } from 'react'
-import Animation from "~/components/anim"
+import React, { useState } from 'react'
+import { Animation, HorizontalStepper, SmallSpinner, readexPro} from "~/elements/"
 import { useRouter } from 'next/router'
-import HorizontalStepper from '~/components/horizontalStepper'
-import { SmallSpinner } from '~/components/spinner'
-import { readexPro } from '~/components/fonts'
 
 export default ({ text, user, fields, setFields, setFinished, handlers }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0)

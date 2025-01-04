@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import DynamicIcon from '~/components/icons/Dynamic'
-import { readexPro } from '~/components/fonts';
+import { DynamicIcon } from '~/elements'
+import { readexPro } from '~/elements/fonts';
 
 export const Wallet = () => {
 

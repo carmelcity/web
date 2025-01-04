@@ -18,13 +18,13 @@ export const useCarmelList = (service: string) => {
 
 export const useCarmelItem = (service: string, id: any) => {
     const { data, isLoading, error } = useSWR({ service: `${service}/${id}` }, sendGatewayRequest)
-
+    
     const content = () => {
         if (!data) {
             return {}
         }
         
-        return data.item
+        return data.item || data.account
     }
     
     return { 

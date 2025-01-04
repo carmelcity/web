@@ -1,6 +1,6 @@
 import moment from 'moment';
-import { Tags } from '~/components/tags';
-import { readexPro } from '~/components/fonts';
+import { Tags } from '~/elements';
+import { readexPro } from '~/elements/fonts';
 
 const Details = ({ title, date, tags, slug, property, large, moreClasses, isArticle }: any) => (
   <div
