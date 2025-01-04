@@ -6,7 +6,7 @@ export const useCarmelList = (service: string) => {
 
     const content = () => {
         if (!data) {
-            return 
+            return []
         }
         
         return data.all
@@ -26,6 +26,7 @@ export const useCarmelItem = (service: string, id: any) => {
         
         return data.item
     }
+    
     return { 
         isLoading, error, item: content()
     }

@@ -1,4 +1,3 @@
-export * from './assets';
 export * from './stories';
 export * from './data';
 export * from './incubator';
