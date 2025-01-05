@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Container = ({ children, classes }: any) =>
@@ -7,25 +7,27 @@ const Container = ({ children, classes }: any) =>
 export const InfiniteScrollComponent = ({ renderItem, elementsNumber, containerClasses, loader }: any) => {
   const [displayedItems, setDisplayedItems] = useState(renderItem?.slice(0, elementsNumber));
 
-  const fetchData = () => {
-    // Simulating data fetching delay until we have real data
-    setTimeout(() => {
-      const currentLength = displayedItems.length;
-      const newData = renderItem.slice(currentLength, currentLength + elementsNumber);
-      setDisplayedItems((prevItems: any) => [...prevItems, ...newData]);
-    }, 500);
-  };
+  const showAll = () => {
+    return displayedItems?.map((item: any, index: number) => <React.Fragment key={index}>{item}</React.Fragment>)
+  }
 
-  return (
-    <InfiniteScroll
-      dataLength={displayedItems?.length || 0}
-      next={fetchData}
-      hasMore={displayedItems?.length < renderItem?.length}
-      loader={loader}
-      className="scrollbar-hide">
-      <Container classes={containerClasses}>
-        {displayedItems?.map((item: any, index: number) => <React.Fragment key={index}>{item}</React.Fragment>)}
-      </Container>
-    </InfiniteScroll>
-  );
+  // const fetchData = () => {
+  // };
+
+  return (<Container classes={containerClasses}>
+        { renderItem }
+    </Container>)
+
+  // return (
+  //   <InfiniteScroll
+  //     dataLength={displayedItems?.length || 0}
+  //     next={fetchData}
+  //     hasMore={displayedItems?.length < renderItem?.length}
+  //     loader={loader}
+  //     className="scrollbar-hide">
+  //     <Container classes={containerClasses}>
+  //       { showAll() }
+  //     </Container>
+  //   </InfiniteScroll>
+  // );
 };

@@ -1,9 +1,11 @@
+import React, { useMemo, useState } from 'react';
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 import { useCarmelItem } from '~/sdk/hooks';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { CarmelCard } from '~/components/cards'
 import { CarmelPosts } from '~/components/posts'
+import { Tabs } from '~/elements';
 
 export const CarmelScreen = () => {
     const router = useRouter()
@@ -11,14 +13,46 @@ export const CarmelScreen = () => {
     
     const data = useCarmelItem('carmels', itemId)
 
+    const [selectedTab, setSelectedTab] = useState('pro')
+
+    const tabs = useMemo(
+      () => [
+        {
+          description: 'For',
+          value: 'pro',
+        },
+        {
+          description: 'Against',
+          value: 'anti',
+        }
+    ],[])
+
+    const filteredPosts = useMemo(() => {
+      if (!data.item.posts) {
+        return []
+      }
+      return data.item.posts.filter((post: any) => {
+        const isAnti = post.isAnti ? true : false
+        return selectedTab === "anti" ? isAnti : !isAnti
+      })
+    }, [selectedTab, data]);
+  
     if (data.isLoading) {
       return <ProfileHeaderPlaceholder/>
     }
 
-    console.log(data.item.posts)
-
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
-      <CarmelPosts posts={data.item.posts}/>
+      <div className='mb-8 border-b w-full pb-4 border-primary/40'>
+          <Tabs
+            isLoading={false}
+            tabs={tabs}
+            selectedTab={selectedTab}
+            onClickTab={(value: string) => {
+              setSelectedTab(value);
+            }}
+          />
+      </div>
+      <CarmelPosts posts={filteredPosts}/>
     </Container>
   }
