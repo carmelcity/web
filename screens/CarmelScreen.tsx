@@ -31,6 +31,7 @@ export const CarmelScreen = () => {
       if (!data.item.posts) {
         return []
       }
+
       return data.item.posts.filter((post: any) => {
         const isAnti = post.isAnti ? true : false
         return selectedTab === "anti" ? isAnti : !isAnti
@@ -63,6 +64,6 @@ export const CarmelScreen = () => {
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
       <TabBar/>
-      <CarmelPosts posts={filteredPosts}/>
+      <CarmelPosts  {...data.item} posts={filteredPosts}/>
     </Container>
   }
