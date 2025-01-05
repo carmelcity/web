@@ -15,17 +15,17 @@ export const CarmelScreen = () => {
 
     const [selectedTab, setSelectedTab] = useState('pro')
 
-    const antiPosts = data.item.posts.filter((post: any) => post.isAnti ? true : false)
-    const proPosts = data.item.posts.filter((post: any) => post.isAnti ? false : true)
+    const antiPosts = () => data.item.posts ? data.item.posts.filter((post: any) => post.isAnti ? true : false) : []
+    const proPosts = () => data.item.posts ? data.item.posts.filter((post: any) => post.isAnti ? false : true) : []
     
     const tabs = useMemo(
       () => [
         {
-          description: `PRO (${proPosts.length})`,
+          description: `PRO (${proPosts().length})`,
           value: 'pro',
         },
         {
-          description: `Against (${antiPosts.length})`,
+          description: `Against (${antiPosts().length})`,
           value: 'anti',
         }
     ],[])
