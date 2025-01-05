@@ -9,7 +9,7 @@ const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ image, isLoading }: any) => {
-  return <div className="absolute lg:top-[45%] top-[32%] lg:left-10 left-[33%]">
+  return <div className="absolute lg:top-[45%] top-[32%] lg:left-10">
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={image || PROFILE_PLACEHOLDER}
@@ -40,7 +40,7 @@ export const Container = ({ noThumbnail, children, data }: any) => {
         thumbnail={data.item.banner || BANNER_PLACEHOLDER}
       >
           { noThumbnail || <ProfileImage isLoading={data.isLoading} image={data.item.profile || PROFILE_PLACEHOLDER}/> }
-          </BannerImage>
+      </BannerImage>
     }
 
     return (
