@@ -73,7 +73,7 @@ export const BaseCard = ({
             { shortIntro && intro.length > 200 ? intro.substring(0, 200) + " ..." : intro }
           </p>     
           <div className='flex flex-col items-center lg:flex-row'>
-              { comments && <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
+              { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
               { people && <People size={5} all={people}/> }
               { noAction || <ActionButton title={actionTitle} onPress={onPress}/> }
           </div>
