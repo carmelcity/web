@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { readex_pro } from '~/elements';
 
-export const CommentBox = ({ name, onCancel }: any)  => {
-    return <div className="lg:ml-auto text-right flex flex-col">
+export const CommentBox = ({ name, onCancel, text = "" }: any)  => {
+    return <div className="lg:ml-auto text-right flex flex-col w-full">
         <textarea
-            defaultValue={""}
+            defaultValue={text}
             name={name}
-            className={`${readex_pro.className} border border-opacity-10 text-left p-2 bg-secondary mt-2 w-full h-32 border-primary/50 mb-4`}
+            className={`${readex_pro.className} border border-opacity-10 text-left p-2 bg-secondary mt-2 w-full h-80 border-primary/50 mb-4`}
         />
         <div className="mt-auto mb-1 flex flex-row gap-4">
         <button

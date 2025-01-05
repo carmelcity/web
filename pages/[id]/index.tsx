@@ -4,7 +4,7 @@ import { AccountScreen, CarmelScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 import { useRouter } from 'next/router';
 
-const Main = () => {
+const Main = (props: any) => {
   const router = useRouter()
   const id: any = router.query.id
 
@@ -13,7 +13,7 @@ const Main = () => {
       return <div/>
     }
 
-    return isNaN(parseInt(id)) ? <AccountScreen/> : <CarmelScreen/>
+    return isNaN(parseInt(id)) ? <AccountScreen {...props}/> : <CarmelScreen {...props}/>
   }
 
   return (
