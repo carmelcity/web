@@ -14,7 +14,7 @@ export const InfiniteScrollComponent = ({ renderItem, elementsNumber, containerC
   // const fetchData = () => {
   // };
 
-  return (<Container classes={containerClasses}>
+  return (<Container>
         { renderItem }
     </Container>)
 

@@ -63,6 +63,10 @@ export const useCarmelAuth = () => {
         return session && session.authToken
     }
 
+    const addComment = async (args: any) => {
+        return makeCall({ service: "comment", args })
+    }
+
     const getProfile = async () => {
         return makeCall({ service: "me" })
     }
@@ -99,6 +103,7 @@ export const useCarmelAuth = () => {
         getFreshProfile, 
         logout, 
         initialize, 
+        addComment,
         checkUsername, 
         getProfile, 
         verifyAuthToken, 
