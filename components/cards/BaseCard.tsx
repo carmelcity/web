@@ -17,16 +17,17 @@ export const BaseCard = ({
   author,
   comments,
   upVotes,
+  communityImage,
   downVotes,
   noAction,
   people,
   tags,
   shortIntro
 }: any) => {    
+
     if (isLoading) {
       return <ProfileHeaderPlaceholder/>
     }
-
 
     const Username = () => {
       if (!username) {
@@ -44,7 +45,7 @@ export const BaseCard = ({
       if (!author) {
         if (community) {
           return <Community
-              image={authorImage}
+              image={communityImage}
               username={community}
           />
         }

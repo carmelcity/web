@@ -35,7 +35,7 @@ const List = ({ items, shortIntro, card, onItemPress, actionTitle, placeholder }
   )
 }
 
-export const ListScreen = ({ name, shortIntro, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
+export const ListScreen = ({ name, children, shortIntro, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const items = useCarmelList(name)
   const router = useRouter()
 
@@ -48,13 +48,13 @@ export const ListScreen = ({ name, shortIntro, onItemPress, actionTitle, icon, t
 
   return (
     <div>
-      <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4">
+      <div className="bg-dark-indigo w-full flex justify-center m-auto lg:mt-4 mt-24">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
         <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
         <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
         <div className="w-full mb-10 flex justify-center relative z-30">
-          <div className="flex flex-col justify-start items-center pb-32 pt-32 lg:pt-4 min-h-full px-8 w-full">
-            { icon ? <DynamicIcon name={icon} width={64} height={64} className="text-primary mt-20 lg:mt-0" />
+          <div className="flex flex-col justify-start items-center pb-32 min-h-full px-8 w-full">
+            { icon ? <DynamicIcon name={icon} width={64} height={64} className="text-primary" />
             : <Image
                     src={logo}
                     alt="card"
@@ -68,9 +68,10 @@ export const ListScreen = ({ name, shortIntro, onItemPress, actionTitle, icon, t
             />
             <Title
               decription={subtitle}
-              moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-10`}
+              moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-4`}
               isLoading={items.isLoading}
             />
+            { children }
             <List 
               items={items}
               card={card}

@@ -29,14 +29,14 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
     }
 
     const result = await auth.getAuthToken(Object.assign({ ...data }, username && { username }))
-    console.log(result)
+    
     if (result.error) {
       showErrorToast(result.error)
       return
     }
     
     setIsWaiting(true)
-    showSuccessToast(`${isRegister ? 'Registration' : 'Login'} link sent via email`);
+    showSuccessToast(`${isRegister ? 'Early Access' : 'Login'} confirmation sent via email`);
   }
 
   const handleSubmit = async (e: any) => {
@@ -68,9 +68,9 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
     setModalOpen(false)
   }
 
-  const modalTitle = () => error ? "Oh no, please try again" : isWaiting ? "Check your email" : isRegister ? "Register" : "Login"
-  const modalIcon = () => error ? "ExclamationTriangleIcon" : isWaiting ? "EnvelopeIcon" : isRegister ? "UserIcon" : "ArrowRightEndOnRectangleIcon"
-  const waitingMessage = () => error ? error : isRegister ? "To register, click on the link in the email" : "To login, click on the link in the email"
+  const modalTitle = () => error ? "Oh no, please try again" : isWaiting ? isRegister ? "You're now on the list" : "Check your email" : isRegister ? "Get Early Access" : "Login"
+  const modalIcon = () => error ? "ExclamationTriangleIcon" : isWaiting ? isRegister ? "CheckCircleIcon" : "EnvelopeIcon" : isRegister ? "CalendarIcon" : "ArrowRightEndOnRectangleIcon"
+  const waitingMessage = () => error ? error : isRegister ? "Stay tuned for early access activation" : "To login, click on the link in the email"
 
   const ModalHeader = () => {
     return <div>
@@ -146,7 +146,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const ModalContent = () => {
     if (isWaiting) {
         return <div className="flex flex-col flex-col">
-            <div className="mt-2 text-center font-normal leading-6 text-primary text-md text-white mt-4">
+            <div className="mt-2 text-center font-normal leading-6 text-gray-400 text-md mt-4">
               { waitingMessage() }
             </div>
         </div>
@@ -169,7 +169,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       className={`${
         readexPro.className
       } w-full h-12 mb-4 mt-4 justify-center m-auto text-sm text-black border border-primary border-opacity-40 border-solid border-1 ${isRegister ? 'bg-primary text-gray-900' : 'bg-primary/10 border-2 bg-dark-green text-primary' }`}>
-          { isRegister ? username ? 'Start Registration' : "Continue" : 'Login Now' }
+          { isRegister ? username ? 'Join The Waiting List' : "Continue" : 'Login Now' }
      </button>
   }
 
@@ -183,7 +183,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
         className={`flex justify-center items-center font-thin cursor-pointer hover:text-primary mt-4 ${
           readexPro.className
         } px-3 py-1 text-gray-400 backdrop-blur-sm text-sm`}>
-        {isRegister ? `Login if you have an account` : `Request an account`}
+        {isRegister ? `Login if you have an account` : `Request early access`}
       </span>
   }
 

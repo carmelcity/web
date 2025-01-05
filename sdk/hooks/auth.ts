@@ -84,7 +84,10 @@ export const useCarmelAuth = () => {
     }
 
     const getAuthToken = async (args: any) => {
-        setSession({ ...session, ...args })
+        let newSession = { ...session }
+        delete newSession.email 
+        delete newSession.username
+        setSession({ ...newSession, ...args })
         return makeCall({ service: "auth/start", args })
     }
 
