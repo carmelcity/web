@@ -15,8 +15,10 @@ export const BaseCard = ({
   authorImage,
   community,
   author,
+  project,
   comments,
   upVotes,
+  projectImage,
   communityImage,
   downVotes,
   noAction,
@@ -54,9 +56,9 @@ export const BaseCard = ({
 
       return <div className='flex flex-row'>
               <Author
-                image={authorImage}
+                image={projectImage || authorImage}
                 community={community}
-                username={author}/>
+                username={project || author}/>
         </div>
     }
     
