@@ -3,6 +3,7 @@ import { useCarmelItem } from '~/sdk/hooks';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { CarmelCard } from '~/components/cards'
+import { CarmelPosts } from '~/components/posts'
 
 export const CarmelScreen = () => {
     const router = useRouter()
@@ -14,7 +15,10 @@ export const CarmelScreen = () => {
       return <ProfileHeaderPlaceholder/>
     }
 
+    console.log(data.item.posts)
+
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
+      <CarmelPosts posts={data.item.posts}/>
     </Container>
   }
