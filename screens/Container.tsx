@@ -9,7 +9,7 @@ const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ image, isLoading }: any) => {
-  return <div className="absolute lg:top-[45%] top-[32%] lg:left-10 left-[33%]">
+  return <div className="absolute lg:top-[45%] top-[20%] lg:left-10">
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={image || PROFILE_PLACEHOLDER}
@@ -40,16 +40,16 @@ export const Container = ({ noThumbnail, children, data }: any) => {
         thumbnail={data.item.banner || BANNER_PLACEHOLDER}
       >
           { noThumbnail || <ProfileImage isLoading={data.isLoading} image={data.item.profile || PROFILE_PLACEHOLDER}/> }
-          </BannerImage>
+      </BannerImage>
     }
 
     return (
-      <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4 w-full">
+      <div className="bg-dark-indigo w-full flex justify-center m-auto w-full lg:mt-4 mt-12">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
         <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
         <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
         <div className="w-full mb-10 flex justify-center w-full relative z-30">
-          <div className="flex flex-col justify-start items-center pb-32 pt-32 lg:pt-4 min-h-full w-full m-4 lg:mt-0 mt-12">
+          <div className="flex flex-col justify-start items-center pb-32 min-h-full w-full m-4 lg:mt-0 mt-12">
               <BannerSection/>
               { children }
           </div>

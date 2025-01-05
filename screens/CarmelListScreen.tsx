@@ -5,13 +5,17 @@ import { ListScreen } from './ListScreen'
 
 export const CarmelListScreen = () => {
     return <ListScreen
-      title="Carmel"
+      title="Top Carmels"
       onItemPress='/:carmelId'
       actionTitle="View Carmel"
-      subtitle="Conversations"
+      subtitle=""
       name="carmels"   
       placeholder={ListPlaceholder}
       shortIntro
       card={CarmelCard}
-    />
+    >
+      <div className='w-full text-lg mt-4 mb-10 text-center'>
+        A Carmel is meaningful conversation about how to build a more human world.
+      </div>
+    </ListScreen>
 }

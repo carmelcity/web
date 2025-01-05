@@ -15,6 +15,6 @@ export const CarmelScreen = () => {
     }
 
     return <Container>
-        <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
+      <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
     </Container>
   }
