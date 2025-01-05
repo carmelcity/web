@@ -57,7 +57,7 @@ export const Tabs = ({ tabs, selectedTab, onClickTab, isLoading }: any) => {
   return (
     <div
       id="scrollContainer"
-      className={`py-5 flex items-center justify-center whitespace-nowrap overflow-x-auto w-full gap-2`}
+      className={`py-5 flex items-center justify-start whitespace-nowrap overflow-x-auto w-full gap-2`}
       onScroll={onScroll}>
       {getTabs()}
     </div>
