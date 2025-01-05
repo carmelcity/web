@@ -18,13 +18,20 @@ export const CarmelCommentCard = ({
                 username={author}/>
         </div>
     }
+
+    const Text = ({ text }: any) => {
+      return <span className='whitespace-pre text-gray-400 text-wrap'>
+        { text }
+      </span>
+    }
     
-    return <div className={`flex flex-col justify-start relative w-full lg:pl-20 pl-10 pb-10`}>
-        <div className="flex flex-col p-4 leading-normal text-left w-full bg-black/20 border border-t border-primary/20">
+    
+    return <div className={`flex flex-col justify-start relative w-full pl-14 w-full`}>
+        <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
-          <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4`}>
-            { text }
-          </p>     
+          <div className={`${readexPro.className} mb-3 text-lg font-thin 2xl:w-5/6 pl-14`}>
+            <Text text={text}/>
+          </div>     
         </div>
     </div>
 }
