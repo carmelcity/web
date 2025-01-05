@@ -17,7 +17,7 @@ export const useCarmelList = (service: string) => {
 }
 
 export const useCarmelItem = (service: string, id: any) => {
-    const { data, isLoading, error } = useSWR({ service: `${service}/${id}` }, sendGatewayRequest)
+    const { data, isLoading, error, mutate } = useSWR({ service: `${service}/${id}` }, sendGatewayRequest)
     
     const content = () => {
         if (!data) {
@@ -28,6 +28,6 @@ export const useCarmelItem = (service: string, id: any) => {
     }
     
     return { 
-        isLoading, error, item: content()
+        isLoading, error, item: content(), refresh: mutate
     }
 }

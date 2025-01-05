@@ -7,7 +7,7 @@ import { CarmelCard } from '~/components/cards'
 import { CarmelPosts } from '~/components/posts'
 import { Tabs } from '~/elements';
 
-export const CarmelScreen = () => {
+export const CarmelScreen = (props: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
     
@@ -61,9 +61,13 @@ export const CarmelScreen = () => {
       </div>
     }
 
+    const onRefresh = () => {
+      data.refresh()
+    }
+
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
       <TabBar/>
-      <CarmelPosts  {...data.item} posts={filteredPosts}/>
+      <CarmelPosts onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/>
     </Container>
   }
