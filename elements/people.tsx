@@ -1,4 +1,5 @@
 import { SimpleAvatar, ComplexAvatar } from './avatars';
+import moment from 'moment'
 
 export const Author = ({
     image, username, community
@@ -11,6 +12,21 @@ export const Author = ({
         communityName={community}
       />           
   </div>
+}
+
+
+export const PostAuthor = ({
+  image, username, updatedOn
+}: any) => {
+  return <div className="flex flex-row mt-auto mb-1">
+    <ComplexAvatar
+      noCommunityLink
+      profileImage={image}
+      alt="User"
+      username={username}
+      communityName={moment.unix(updatedOn / 1000).fromNow()}
+    />           
+</div>
 }
 
 export const Community = ({
