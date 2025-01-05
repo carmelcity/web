@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Spinner } from '~/components/spinner'
-import Title from '~/components/title';
+import { Title, Animation, Spinner } from '~/elements';
 import Image from 'next/image';
 import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmelAuth } from '~/sdk';
-import Animation from "~/components/anim"
 
 export const AccessScreen = () => {
   const [error, setError] = useState("")
@@ -15,7 +13,7 @@ export const AccessScreen = () => {
 
   const login = () => {
     setTimeout(() => {
-      router.push('/me')
+      router.push('/profile')
     }, 3000)
   }
 
@@ -27,7 +25,7 @@ export const AccessScreen = () => {
         return 
       }
   
-      const result = await auth.verifyRegisterToken({ token })
+      const result = await auth.verifyAuthToken({ token })
 
       if (result.error) {
         setError(result.error.name === "TokenExpiredError" ? "The link expired, try again." : "An error occurred")

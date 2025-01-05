@@ -1,5 +1,5 @@
 import React from 'react';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 const Title = ({ text }: any) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { WalletScreen } from '~/components/me/screens'
+import { User } from '~/screens'
 import { PrivateLayout } from '~/components/layout/Layout'
 
 const Main = () => {
@@ -11,7 +11,7 @@ const Main = () => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <PrivateLayout>
-        <WalletScreen/>
+        <User.WalletScreen/>
       </PrivateLayout>
     </>
   )

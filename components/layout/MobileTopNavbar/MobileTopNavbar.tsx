@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { topNavbarRoutes } from './routes';
 import Link from 'next/link';
 import { AccessButton } from '~/components/access/AccessButton'
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const MobileTopNavbar = ({ env }: any) => {
   const [navbarElements, setNavbarElemens] = useState(topNavbarRoutes);

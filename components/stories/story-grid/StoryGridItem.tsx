@@ -1,12 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { HexagonalAvatarWithProperty } from '~/components/quests/HexagonalAvatarWithProperty';
 import moment from 'moment';
-import { Tags } from '~/components/tags';
+import { Tags, ComplexAvatar } from '~/elements';
 import { StoriesGridItemProps } from './props';
 import { StoryItemPlaceholder } from '~/components/placeholders/StoryItem';
-import { readex_pro } from '~/components/fonts';
+import { readex_pro } from '~/elements/fonts';
 
 export const StoryGridItem = ({
   date,
@@ -53,7 +52,7 @@ export const StoryGridItem = ({
             </div>
           </Link>
           <div className="flex mx-5 mb-5">
-            <HexagonalAvatarWithProperty
+            <ComplexAvatar
               username={username}
               appLogo={appLogo}
               appName={appName}

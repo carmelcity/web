@@ -1,0 +1,28 @@
+name: Build the production release (production branch)
+
+on:
+  pull_request:
+    branches:
+      - production
+
+jobs:
+
+  build-development:
+    if: github.repository == 'carmelnetwork/web'
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.SITE_URL }}
+      NEXT_PUBLIC_GATEWAY_URL: ${{ secrets.GATEWAY_URL }}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.12
+      - name: Install yarn
+        run: npm i -g yarn
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build

@@ -8,7 +8,7 @@ import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Image from 'next/image';
-import { Spinner } from '~/components/spinner'
+import { Spinner } from '~/elements'
 import { useCarmelAuth } from '~/sdk';
 
 export const AppLayout = ({ env, children, user }: any) => {
@@ -56,6 +56,8 @@ export const PrivateLayout = ({ children }: any) => {
       router.push("/")
       return
     }
+
+    setIsLoading(false)
   }, [])
 
   return <AppLayout>

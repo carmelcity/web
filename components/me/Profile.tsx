@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { showSuccessToast } from '../toasts';
-import { SmallSpinner } from '../spinner';
+import { SmallSpinner, showSuccessToast, readex_pro } from '~/elements';
 import { useCarmelAuth } from '~/sdk';
-import { readex_pro } from '~/components/fonts'
 import { Intro } from './Intro'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
@@ -34,15 +32,16 @@ export const Profile = () => {
   }, [])
 
   useEffect(() => {
+    console.log("->", auth.profile)
     if (!auth.profile || !auth.profile.username) {
       return 
     }
     
     const { bio, banner, profile } = auth.profile
-      
-    bio && setBio(bio)
-    banner && setBannerImage(banner)
-    profile && setProfileImage(profile)
+
+    setBio(bio)
+    setBannerImage(banner || BANNER_PLACEHOLDER)
+    setProfileImage(profile || PROFILE_PLACEHOLDER)
 
     setIsLoading(false)
   }, [auth.profile])

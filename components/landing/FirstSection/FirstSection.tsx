@@ -7,7 +7,7 @@ import heroSpot from '~/images/landing/HeroSpot.webp';
 import heroSpotXS from '~/images/landing/HeroSpot_XS.webp';
 import { motion } from 'framer-motion';
 import { rightBottomCorner_SLOW_Variants, imageFadeInVariants } from '~/utils/animations';
-import { readexPro } from '~/components/fonts';
+import { readexPro } from '~/elements/fonts';
 
 export const FirstSection = ({ text }: any) => {
   const router = useRouter();

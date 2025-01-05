@@ -1,5 +1,5 @@
 import React from 'react';
-import { readex_pro } from '~/components/fonts';
+import { readex_pro } from '~/elements/fonts';
 import Head from 'next/head';
 
 export const PageNotFound = () => {

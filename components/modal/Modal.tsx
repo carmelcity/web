@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { ModalProps } from './props';
-import Link from 'next/link'
-import DynamicIcon from '~/components/icons/Dynamic'
+import { DynamicIcon } from '~/elements'
 
 export const Modal = ({ children, forceClose, isModalOpen, setModalOpen }: any) => {
   return (

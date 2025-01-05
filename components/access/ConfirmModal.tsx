@@ -1,11 +1,7 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Modal } from '~/components/modal';
-import { showSuccessToast, showErrorToast } from '~/components/toasts';
-import DynamicIcon from '~/components/icons/Dynamic';
-import { useCarmelAuth } from '~/sdk';
-import { SmallSpinner } from '~/components/spinner';
-import { readexPro } from '~/components/fonts'
+import { DynamicIcon, readexPro } from '~/elements';
 
 export const ConfirmModal = ({ isModalOpen, setModalOpen, message, onConfirm }: any) => {
 
