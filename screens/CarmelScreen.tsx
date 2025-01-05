@@ -15,14 +15,17 @@ export const CarmelScreen = () => {
 
     const [selectedTab, setSelectedTab] = useState('pro')
 
+    const antiPosts = data.item.posts.filter((post: any) => post.isAnti ? true : false)
+    const proPosts = data.item.posts.filter((post: any) => post.isAnti ? false : true)
+    
     const tabs = useMemo(
       () => [
         {
-          description: 'For',
+          description: `PRO (${proPosts.length})`,
           value: 'pro',
         },
         {
-          description: 'Against',
+          description: `Against (${antiPosts.length})`,
           value: 'anti',
         }
     ],[])
@@ -41,9 +44,14 @@ export const CarmelScreen = () => {
       return <ProfileHeaderPlaceholder/>
     }
 
-    return <Container>
-      <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
-      <div className='mb-8 border-b w-full pb-4 border-primary/40'>
+    const TabBar = () => {
+      if (!data.item.posts || data.item.posts.length === 0) {
+        return <div className='text-sm text-gray-400'>
+          This Carmel does not have any comments yet
+        </div>
+      }
+
+      return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
           <Tabs
             isLoading={false}
             tabs={tabs}
@@ -53,6 +61,11 @@ export const CarmelScreen = () => {
             }}
           />
       </div>
+    }
+
+    return <Container>
+      <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
+      <TabBar/>
       <CarmelPosts posts={filteredPosts}/>
     </Container>
   }
