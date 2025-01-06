@@ -1,17 +1,23 @@
 import { readexPro } from '~/elements/fonts'
 import { PostAuthor } from '~/elements';
 import { CarmelPostComments } from '~/components/posts'
-import { CommentButton } from '~/elements'
+import { CommentButton, CommentBox } from '~/elements'
 
 export const CarmelPostCard = ({ 
   text,
+  highlight,
   carmelId,
+  loading,
   authorImage,
   author,
   updatedOn,
   postId,
+  editing,
   parentId,
   community,
+  onReply,
+  onCancelEdit,
+  onEdit,
   comments
 }: any) => {    
 
@@ -30,19 +36,35 @@ export const CarmelPostCard = ({
       </span>
     }
 
-    const onAddComment = () => {
-      console.log(carmelId, postId, parentId)
+    const MainAction = () => {
+      if (loading) {
+        return <div className="mt-4 pl-14 w-full flex flex-col gap-4">
+              <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
+              <div className={`h-5 w-56 bg-cyan/40 animate-pulse`}></div>
+              <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
+              </div>
+      }
+
+      if (editing) {
+        return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
+              <CommentBox onCancel={onCancelEdit} name="comment" text={text}/>
+          </div>
+      }
+
+      return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
+            { highlight && <CommentButton title="Edit" onPress={onEdit} icon="PencilSquareIcon"/> }
+            <CommentButton title="Reply" onPress={onReply} icon="ChatBubbleLeftIcon"/>
+        </div>
     }
     
-    return <div className={`flex flex-col justify-start relative w-full`}>
+    return <div className={`flex flex-col justify-start relative w-full ${highlight ? 'bg-primary/20' : 'bg-primary/5'} mb-4 border border-primary/20`}>
         <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
-          <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14`}>
-            <Text text={text}/>
-          </p>     
-            <div className="mt-4 pl-14 w-full">
-              <CommentButton title="Reply" onSave={onAddComment} icon="ChatBubbleLeftIcon"/>
-            </div>
+          { loading || editing || <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14`}>
+               <Text text={text}/>
+            </p>     
+          }
+          <MainAction/>
         </div>
         <CarmelPostComments comments={comments}/>
     </div>

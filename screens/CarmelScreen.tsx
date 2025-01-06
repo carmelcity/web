@@ -7,7 +7,7 @@ import { CarmelCard } from '~/components/cards'
 import { CarmelPosts } from '~/components/posts'
 import { Tabs } from '~/elements';
 
-export const CarmelScreen = () => {
+export const CarmelScreen = (props: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
     
@@ -37,6 +37,17 @@ export const CarmelScreen = () => {
         return selectedTab === "anti" ? isAnti : !isAnti
       })
     }, [selectedTab, data]);
+
+    const myPost = () => {
+      if (!data.item.posts || !props.auth.isLoggedIn()) {
+        return
+      }
+
+      const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
+      const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+
+      return {...post, onSide }
+    }
   
     if (data.isLoading) {
       return <ProfileHeaderPlaceholder/>
@@ -61,9 +72,13 @@ export const CarmelScreen = () => {
       </div>
     }
 
+    const onRefresh = () => {
+      data.refresh()
+    }
+
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
       <TabBar/>
-      <CarmelPosts  {...data.item} posts={filteredPosts}/>
+      <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/>
     </Container>
   }
