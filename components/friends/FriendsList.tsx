@@ -34,7 +34,7 @@ export const FriendsList = ({ auth, data, isLoading }: any) => {
       return []
     }
 
-    return auth.profile.friends.friends || []
+    return (auth.profile.friends.friends || []).sort((a: any, b: any) => b.updatedOn - a.updatedOn)
   }
 
   const totalFriends = friends().length
