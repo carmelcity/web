@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SmallSpinner, showSuccessToast, readex_pro } from '~/elements';
+import { showSuccessToast, readex_pro } from '~/elements';
 import { useCarmelAuth } from '~/sdk';
 import { Intro } from './Intro'
 
@@ -32,7 +32,6 @@ export const Profile = () => {
   }, [])
 
   useEffect(() => {
-    console.log("->", auth.profile)
     if (!auth.profile || !auth.profile.username) {
       return 
     }
@@ -120,7 +119,7 @@ export const Profile = () => {
 
   const ActionButtons = () => {
     if (isLoading) {
-      return <SmallSpinner/>
+      return <div/>
     }
 
     return <div className="flex flex-col w-full items-center">
