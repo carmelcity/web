@@ -51,6 +51,9 @@ export const AccessButton = () => {
       case "wallet":
         router.push('/wallet')
         break
+      case "friends":
+        router.push('/friends')
+        break
       case "signout":
         setIsConfirm(`Are you sure you want to sign out?`)
         setIsConfirmOpen(true)
@@ -73,6 +76,10 @@ export const AccessButton = () => {
       id: "wallet",
       title: "Wallet",
       icon: "WalletIcon"
+    }, {
+      id: "friends",
+      title: "Friends",
+      icon: "UsersIcon"
     }, {
       id: "signout",
       title: "Sign out",
