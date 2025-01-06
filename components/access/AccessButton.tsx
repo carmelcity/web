@@ -7,9 +7,8 @@ import profile_placeholder from '~/images/profile_placeholder.webp';
 import { DynamicIcon, showSuccessToast } from '~/elements';
 import { AccessModal } from './AccessModal'
 import { ConfirmModal } from './ConfirmModal';
-import { useCarmelAuth } from '~/sdk';
 
-export const AccessButton = () => {
+export const AccessButton = ({ auth }: any) => {
   const router = useRouter()
   const [isModalOpen, setModalOpen] = useState(false)
   const [isReady, setIsReady] = useState(false)
@@ -17,7 +16,6 @@ export const AccessButton = () => {
   const [isConfirm, setIsConfirm] = useState("")
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const auth = useCarmelAuth()
  
   const onToggleConfirm = (v: boolean) => {
     if (!v) {
@@ -103,7 +101,7 @@ export const AccessButton = () => {
             </div>
           </div>
           <div className='ml-4 mr-2 w-full text-xl text-primary lg:flex hidden'>
-            { auth.session.username }
+            { auth.profile.username }
           </div>
         </div>
         <div

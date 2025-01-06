@@ -12,7 +12,7 @@ export const useCarmelAuth = () => {
     const uap = new UAParser()
     
     const getFreshProfile = async () => {        
-        if (!session.id) {
+        if (!session.id || !isLoggedIn()) {
             return
         }
 
@@ -67,6 +67,10 @@ export const useCarmelAuth = () => {
         return makeCall({ service: `post/${action}`, args })
     }
 
+    const sendInvite = async (action: string, args: any) => {
+        return makeCall({ service: `invite/${action}`, args })
+    }
+
     const getProfile = async () => {
         return makeCall({ service: "me" })
     }
@@ -79,6 +83,19 @@ export const useCarmelAuth = () => {
         return makeCall({ service: "auth/verify", args: { 
             username: session.username,
             email: session.email,
+            token
+        }})
+    }
+
+    const activateAccount = async ({ token, username }: any) => {
+        let newSession = { ...session }
+        delete newSession.email 
+        delete newSession.username
+
+        setSession({ ...newSession, username })
+
+        return makeCall({ service: "auth/activate", args: { 
+            username,
             token
         }})
     }
@@ -103,6 +120,8 @@ export const useCarmelAuth = () => {
         getAuthToken, 
         updateProfile, 
         session, 
+        activateAccount,
+        sendInvite,
         user,
         profile, 
         getFreshProfile, 

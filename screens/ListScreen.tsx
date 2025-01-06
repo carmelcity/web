@@ -10,7 +10,7 @@ import { BaseCard } from '~/components/cards'
 import { useRouter } from 'next/router'
 import logo from '~/public/images/logo/logo-white.svg';
 
-const List = ({ items, shortIntro, card, onItemPress, actionTitle, placeholder }: any) => {
+const List = ({ items, shortIntro, card, onItemPress, actionTitle, placeholder, auth }: any) => {
   const ListPlaceholder = placeholder
   const Card = card
   
