@@ -9,7 +9,7 @@ const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ image, isLoading }: any) => {
-  return <div className="absolute lg:top-[45%] top-[20%] lg:left-10">
+  return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={image || PROFILE_PLACEHOLDER}
@@ -28,6 +28,7 @@ const ProfileImage = ({ image, isLoading }: any) => {
         )} */}
       </div>
 }
+
 export const Container = ({ noThumbnail, children, data }: any) => {
     const BannerSection = () => {
       if (!data) {

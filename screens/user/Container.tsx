@@ -3,6 +3,7 @@ import Image from 'next/image';
 import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
+import { ActionButton } from '~/elements';
 
 import { readex_pro, DynamicIcon } from '~/elements';
 
@@ -15,7 +16,7 @@ const Header = ({ text, icon }: any) => {
   </div>
 }
 
-export const Container = ({ name, children, icon }: any) => {
+export const Container = ({ name, children, icon, actions }: any) => {
     return (
       <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4 w-full">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />

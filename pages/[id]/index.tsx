@@ -22,7 +22,7 @@ const Main = (props: any) => {
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
+      <AppLayout {...props}>
         <Content/>
       </AppLayout>
     </>

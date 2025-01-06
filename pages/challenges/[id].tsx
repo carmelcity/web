@@ -3,15 +3,15 @@ import Head from 'next/head';
 import { ChallengeScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = () => {
+const Main = (props: any) => {
   return (
     <>
       <Head>
         <title>Carmel Challenge</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-        <ChallengeScreen />
+      <AppLayout {...props}>
+        <ChallengeScreen {...props}/>
       </AppLayout>
     </>
   );
