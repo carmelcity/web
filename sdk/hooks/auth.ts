@@ -11,7 +11,7 @@ export const useCarmelAuth = () => {
     const [profile, setProfile] = useState<any>({ })
     const uap = new UAParser()
     
-    const getFreshProfile = async () => {
+    const getFreshProfile = async () => {        
         if (!session.id) {
             return
         }
@@ -63,8 +63,8 @@ export const useCarmelAuth = () => {
         return session && session.authToken
     }
 
-    const addComment = async (args: any) => {
-        return makeCall({ service: "comment", args })
+    const postAction = async (action: string, args: any) => {
+        return makeCall({ service: `post/${action}`, args })
     }
 
     const getProfile = async () => {
@@ -95,15 +95,20 @@ export const useCarmelAuth = () => {
         return makeCall({ service: "auth/start", args })
     }
 
+    const user = () => {
+        return { ...profile }
+    }
+
     return {
         getAuthToken, 
         updateProfile, 
         session, 
+        user,
         profile, 
         getFreshProfile, 
         logout, 
         initialize, 
-        addComment,
+        postAction,
         checkUsername, 
         getProfile, 
         verifyAuthToken, 
