@@ -1,15 +1,12 @@
 import { Container } from './Container';
 import { useEffect, useState } from 'react';
 import { showSuccessToast, readex_pro } from '~/elements';
-import { useCarmelAuth } from '~/sdk';
 import { ProfileIntro } from './ProfileIntro'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
-export const ProfileScreen = () => {
-  const auth = useCarmelAuth()
-
+export const ProfileScreen = ({ auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
   const [bannerImage, setBannerImage] = useState(BANNER_PLACEHOLDER);
   const [profileImage, setProfileImage] = useState(PROFILE_PLACEHOLDER);

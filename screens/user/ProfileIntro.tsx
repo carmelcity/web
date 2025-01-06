@@ -8,7 +8,7 @@ const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
-    return <div className={`absolute lg:top-[${isEditable ? 35 : 50}%] top-[10%] lg:left-10 left-[32%]`}>
+    return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
           <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
             { isLoading || <Image
               src={image || PROFILE_PLACEHOLDER}
@@ -20,7 +20,7 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
           </div>
           {isEditable && (
             <div
-              className={`${readex_pro.className} text-white px-1 font-thin cursor-pointer absolute flex items-center right-0 z-50 bottom-8`}
+              className={`${readex_pro.className} text-white px-1 font-thin cursor-pointer absolute flex items-center right-0 z-50 bottom-2 lg:bottom-8`}
               onClick={onEdit}>
               <Image src={EditIcon} alt="edit" />
             </div>

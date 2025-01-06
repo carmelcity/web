@@ -32,6 +32,10 @@ function App({ Component }: any) {
   }, [])
 
   useEffect(() => {
+    if (auth.isLoggedIn() && (!auth.profile || !auth.profile.username)) {
+      return 
+    }
+
     setReady (!auth.isLoggedIn() || (auth.profile || !auth.profile.username))
   }, [auth.profile])
 
