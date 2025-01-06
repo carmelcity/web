@@ -37,6 +37,17 @@ export const CarmelScreen = (props: any) => {
         return selectedTab === "anti" ? isAnti : !isAnti
       })
     }, [selectedTab, data]);
+
+    const myPost = () => {
+      if (!data.item.posts || !props.auth.isLoggedIn()) {
+        return
+      }
+
+      const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
+      const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+
+      return {...post, onSide }
+    }
   
     if (data.isLoading) {
       return <ProfileHeaderPlaceholder/>
@@ -68,6 +79,6 @@ export const CarmelScreen = (props: any) => {
     return <Container>
       <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
       <TabBar/>
-      <CarmelPosts onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/>
+      <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/>
     </Container>
   }

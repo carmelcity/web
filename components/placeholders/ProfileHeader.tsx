@@ -1,9 +1,9 @@
 export const ProfileHeaderPlaceholder = () => {
   return (
-    <div className="flex flex-col justify-start items-center w-full mb-4 pb-10 bg-gradient-to-b from-cyan/50 to-[#052F3500] h-[800px]">
+    <div className="flex flex-col justify-start items-center w-full mb-4 pb-10 animate-pulse bg-gradient-to-b from-cyan/50 to-[#052F3500] h-[800px]">
       <div
         className={`
-                  w-full flex justify-center
+                  w-full flex justify-center animate-pulse
                    relative h-96
                   `}>
         <div className="mask mask-hexagon bg-primary bg-opacity-20 absolute top-[59%] xs:top-[67%] xs:left-10 xs:left-10 animate-pulse">

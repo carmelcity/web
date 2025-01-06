@@ -1,6 +1,6 @@
 import { Container } from './Container';
 import { useEffect, useState } from 'react';
-import { SmallSpinner, showSuccessToast, readex_pro } from '~/elements';
+import { showSuccessToast, readex_pro } from '~/elements';
 import { useCarmelAuth } from '~/sdk';
 import { ProfileIntro } from './ProfileIntro'
 
@@ -125,7 +125,7 @@ export const ProfileScreen = () => {
 
   const ActionButtons = () => {
     if (isLoading) {
-      return <SmallSpinner/>
+      return <div/>
     }
 
     return <div className="flex flex-row w-full justify-center">

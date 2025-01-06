@@ -4,22 +4,10 @@ import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelPostCard } from '~/components/cards'
 import { CommentButton, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
 
-export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) => {
+export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, ready }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  if (!posts || posts.length === 0) {
-    return <div/>
-  }
-
-  const myPost = () => {
-    if (!auth.isLoggedIn()) {
-      return
-    }
-
-    return posts.find((p: any) => p.author === auth.profile.username)
-  }
 
   const onReply = (post: any) => {
     console.log("reply ->", post)
@@ -40,13 +28,14 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
   const showPosts = () => {
     const oldPost = myPost()
 
-    let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => <CarmelPostCard 
-        key={`${elementId}`} 
-        onReply={() => onReply(element)}
-         {...element} 
-    />)
+    let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => 
+        <CarmelPostCard 
+            key={`${elementId}`} 
+            onReply={() => onReply(element)}
+            {...element} 
+        />)
 
-    if (oldPost) {
+    if (oldPost && oldPost.onSide) {
       return [<CarmelPostCard 
         editing={editing} 
         highlight 
@@ -77,7 +66,7 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
     
     const oldPost = myPost()
 
-    if (oldPost) {
+    if (oldPost && oldPost.postId) {
       setLoading(true)
 
       const result = await auth.postAction("edit", {
@@ -110,9 +99,13 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
       return 
     }
 
-    showSuccessToast("Your comment was added")
-    setAdding(false)
-    setLoading(false)
+    onRefresh()
+
+    setTimeout(() => {
+      showSuccessToast("Your comment was added")
+      setAdding(false)
+      setLoading(false)
+    }, 1000)
   }
 
   const onAddComment = async () => {
@@ -123,7 +116,7 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
 
     const oldPost = myPost()
 
-    if (oldPost) {
+    if (oldPost && oldPost.postId) {
       showErrorToast('You already joined this side')
       return 
     }
@@ -139,8 +132,8 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
 
     const oldPost = myPost()
 
-    if (!oldPost) {
-      showErrorToast('You did not join this side yet')
+    if (!oldPost || !oldPost.postId) {
+      showErrorToast('You did not join this side yet!')
       return 
     }
 
@@ -158,7 +151,15 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
 
     const oldPost = myPost()
 
-    if (!oldPost) {
+    if (!oldPost || !oldPost.postId) {
+      if (loading) {
+          return <div className="mt-4 pl-14 w-full flex flex-col gap-4">
+                <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
+                <div className={`h-5 w-56 bg-cyan/40 animate-pulse`}></div>
+                <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
+            </div>
+      }
+
       return <div className='w-full flex flex-col'>
         { adding ? 
           <CommentBox onCancel={onCancelAddComment} name="comment"/> : 
@@ -170,10 +171,23 @@ export const CarmelPosts = ({ carmelId, onRefresh, posts, auth, ready }: any) =>
     return <div/>
   }
 
+  const TopLabel = () => {
+    if (!posts || posts.length === 0) {
+      return <div className='text-gray-500 font-sm'>
+          No one chose this side yet
+      </div>
+    }
+    
+    return <div className='text-gray-500 font-sm'>
+          { posts.length } { posts.length > 1 ? 'people' : 'person' } chose this side so far
+    </div>
+  }
+
   return (
     <div className='w-full flex flex-col'>
       <form method='post' onSubmit={onAction}>
         <MainAction/>
+        <TopLabel/>
         <div className='w-full mt-8'>
           <InfiniteScrollComponent
             renderItem={showPosts()}
