@@ -6,8 +6,21 @@ import 'remixicon/fonts/remixicon.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCarmelAuth } from '~/sdk';
+import Head from 'next/head';
+import { AppLoadingLayout } from '~/components/layout/Layout';
 
-function App({ Component, pageProps }: any) {
+const Loading = () => {
+  return (
+    <>
+      <Head>
+        <title>Carmel</title>
+        <link rel="icon" href="/favicon/favicon.ico" />
+      </Head>
+      <AppLoadingLayout/>
+    </>
+  );
+}
+function App({ Component }: any) {
   const [ready, setReady] = useState(false)
   const auth = useCarmelAuth()
 
@@ -19,16 +32,12 @@ function App({ Component, pageProps }: any) {
   }, [])
 
   useEffect(() => {
-    if (!auth.profile || !auth.profile.username) {
-      return 
-    }
-
-    setReady(true)
+    setReady (!auth.isLoggedIn() || (auth.profile || !auth.profile.username))
   }, [auth.profile])
 
   return (
       <ThemeProvider attribute="class">
-        <Component {...pageProps} auth={auth} ready={ready}/>
+        { ready ? <Component auth={auth}/> : <Loading/> }
         <ToastContainer />
     </ThemeProvider>
   );

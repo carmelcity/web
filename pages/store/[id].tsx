@@ -3,15 +3,15 @@ import Head from 'next/head';
 import { AssetGroupScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = () => {
+const Main = (props: any) => {
   return (
     <>
       <Head>
         <title>Carmel Assets</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-        <AssetGroupScreen />
+      <AppLayout {...props}>
+        <AssetGroupScreen {...props}/>
       </AppLayout>
     </>
   );

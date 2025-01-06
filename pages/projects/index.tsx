@@ -3,15 +3,15 @@ import Head from 'next/head';
 import { ProjectsListScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = () => {
+const Main = (props: any) => {
   return (
     <>
       <Head>
         <title>Carmel Projects</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-        <ProjectsListScreen />
+      <AppLayout {...props}>
+        <ProjectsListScreen {...props}/>
       </AppLayout>
     </>
   );

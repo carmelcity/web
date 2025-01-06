@@ -3,7 +3,7 @@ import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelCard } from '~/components/cards'
 import { ListScreen } from './ListScreen'
 
-export const CarmelListScreen = () => {
+export const CarmelListScreen = (props: any) => {
     return <ListScreen
       title="Top Carmels"
       onItemPress='/:carmelId'
@@ -13,6 +13,7 @@ export const CarmelListScreen = () => {
       placeholder={ListPlaceholder}
       shortIntro
       card={CarmelCard}
+      {...props}
     >
       <div className='w-full text-lg mt-4 mb-10 text-center'>
         A Carmel is meaningful conversation about how to build a more human world.

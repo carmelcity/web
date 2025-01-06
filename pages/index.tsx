@@ -3,15 +3,15 @@ import Head from 'next/head';
 import { CarmelListScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = () => {
+const Main = (props: any) => {
   return (
     <>
       <Head>
         <title>Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-          <CarmelListScreen/>
+      <AppLayout {...props}>
+          <CarmelListScreen {...props}/>
       </AppLayout>
     </>
   );
