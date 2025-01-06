@@ -7,11 +7,11 @@ const Main = (props: any) => {
   return (
     <>
       <Head>
-        <title>My Carmel Profile</title>
+        <title>My Carmel Friends</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <PrivateLayout {...props}>
-        <User.ProfileScreen {...props}/>
+        <User.FriendsScreen {...props}/>
       </PrivateLayout>
     </>
   )

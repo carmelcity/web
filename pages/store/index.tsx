@@ -3,15 +3,15 @@ import Head from 'next/head';
 import { StoreScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
-const Main = () => {  
+const Main = (props: any) => {  
   return (
     <>
       <Head>
         <title>Carmel Store</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <AppLayout>
-        <StoreScreen/>
+      <AppLayout {...props}>
+        <StoreScreen {...props}/>
       </AppLayout>
     </>
   );

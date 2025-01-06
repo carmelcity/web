@@ -9,31 +9,17 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import Image from 'next/image';
 import { Spinner } from '~/elements'
-import { useCarmelAuth } from '~/sdk';
 
-export const AppLayout = ({ env, children, user }: any) => {
-  const router = useRouter();
-  const [isReady, setIsready] = useState(false)
-
-  useEffect(() => {
-    setIsready(true)
-  }, [])
-
-  if (!isReady) {
-    return <div className="flex w-full h-screen flex-col items-center mx-auto justify-center lg:pb-0">
-      <Spinner/>
-    </div>
-  }
-
+export const AppLayout = ({ auth, children }: any) => {
   return (
     <div className="">
       <div className="flex w-full max-w-[1920px] mx-auto justify-center lg:pb-0">
         <div className="w-80 hidden lg:flex">
-          <SidebarNavigation/>
+          <SidebarNavigation auth={auth}/>
         </div>
         
           <div className="lg:hidden">
-            <MobileTopNavbar/>
+            <MobileTopNavbar auth={auth}/>
             <MobileNavigation />
           </div>
 
@@ -46,9 +32,27 @@ export const AppLayout = ({ env, children, user }: any) => {
   )
 }
 
-export const PrivateLayout = ({ children }: any) => {
+
+export const AppLoadingLayout = ({ children }: any) => {
+  return (
+    <div className="">
+      <div className="flex w-full mx-auto justify-center lg:pb-0">       
+          <div className="lg:hidden">
+            <MobileNavigation />
+          </div>
+        <div className="flex flex-col w-full z-0 ">
+            <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full animate-pulse" />
+            <Image src={wire1} alt="wire1" className="z-0 top-[40%] absolute animate-pulse" />
+            <Image src={wire2} alt="wire2" className="z-0 top-[40%] absolute animate-pulse" />     
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export const PrivateLayout = ({ children, auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
-  const auth = useCarmelAuth()
   const router = useRouter();
 
   useEffect(() => {
@@ -60,7 +64,7 @@ export const PrivateLayout = ({ children }: any) => {
     setIsLoading(false)
   }, [])
 
-  return <AppLayout>
+  return <AppLayout auth={auth}>
            <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
             <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
             <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />     
