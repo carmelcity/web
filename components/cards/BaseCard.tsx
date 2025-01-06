@@ -18,6 +18,7 @@ export const BaseCard = ({
   project,
   comments,
   upVotes,
+  followers,
   projectImage,
   communityImage,
   downVotes,
@@ -36,11 +37,26 @@ export const BaseCard = ({
         return <div/>
       }
 
-    return <div className={`relative z-10 lg:ml-0 mx-auto`}>
-        <h1 className={`${readexPro.className} mt-5 lg:text-4xl text-3xl`}>
-          { isLoading ? '' : username }
-        </h1>
-      </div>
+    // return <div className={`relative z-10 lg:ml-0 mx-auto`}>
+    //     <h1 className={`${readexPro.className} mt-5 lg:text-4xl text-3xl`}>
+    //       { isLoading ? '' : username }
+    //     </h1>
+    //   </div>
+      let fol = followers ? followers.length : 0
+    
+      return <div className={`relative z-10 z-10`}>
+            <h1 className={`${readexPro.className} mt-5 lg:text-4xl text-3xl`}>
+              { isLoading ? '' : username }
+            </h1>
+            <div className='flex flex-row'>
+              <div className='text-white font-bold mr-1'>
+              { fol > 0 ? fol : '' }
+              </div>
+              <div className='text-gray-400'>
+              { fol === 0 ? 'No followers yet' : fol === 1 ? `follower` : `${fol} followers` }
+              </div>
+            </div>
+          </div>
     }
 
     const CardAuthor = () => {
@@ -72,7 +88,7 @@ export const BaseCard = ({
           <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4`}>
             { shortIntro && intro.length > 200 ? intro.substring(0, 200) + " ..." : intro }
           </p>     
-          <div className='flex flex-col items-center lg:flex-row'>
+          <div className='flex flex-col items-center lg:flex-row mt-4'>
               { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
               { people && <People size={5} all={people}/> }
               { noAction || <ActionButton title={actionTitle} onPress={onPress}/> }
