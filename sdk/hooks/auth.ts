@@ -67,6 +67,10 @@ export const useCarmelAuth = () => {
         return makeCall({ service: `post/${action}`, args })
     }
 
+    const accountAction = async (action: string, args: any) => {
+        return makeCall({ service: `account/${action}`, args })
+    }
+
     const sendInvite = async (action: string, args: any) => {
         return makeCall({ service: `invite/${action}`, args })
     }
@@ -120,6 +124,7 @@ export const useCarmelAuth = () => {
         getAuthToken, 
         updateProfile, 
         session, 
+        accountAction,
         activateAccount,
         sendInvite,
         user,

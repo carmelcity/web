@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { ContactTableProps } from './props';
-import Image from 'next/image';
-import placeholder from '~/images/userPlaceholder.svg';
 import { Readex_Pro } from 'next/font/google';
 import { showSuccessToast } from '~/elements';
-import { DocumentDuplicateGrey, DotsVertical } from '~/elements/icons';
-// import { QrModal } from '../QrModal';
-// import { SelectCurrencyModal, SendModal } from '../SendModal';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ActionDropdown } from '~/elements';
-import { formatAddress } from '../utils';
-import { SendToContactModal } from './SendToContactModal';
+import { DotsVertical } from '~/elements/icons';
+import moment from 'moment'
+import Link from 'next/link';
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
 
 export const FriendRow = (friend: any) => {
-  const status = friend.status === "invite_sent" ? "Invite Sent" : friend.status
+  let status = friend.status
+  
+  switch(friend.status) {
+    case "invite_sent":
+      status = "Invite Sent"
+      break
+    case "invite_accepted":
+      status = "Accepted invite"
+      break
+  }
 
   return (
     <div className="flex items-center w-full bg-black/50 px-6 py-3 border-b border-cyan/10">
@@ -35,47 +37,19 @@ export const FriendRow = (friend: any) => {
             clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
           }}></div> }
       </div>
-      <div className="flex flex-col w-4/5 lg:w-2/5 xl:w-1/5">
-        <div className="flex">
-          {/* {herotag && (
-            <div className={`${readexPro.className} flex ml-5`}>
-              <span className={`${readexPro.className} text-cyan mr-1`}>@</span>
-              {herotag}
+      <div className="flex flex-row gap-4">
+      <div className={`${readexPro.className} flex ml-5 text-primary text-md`}>
+        <Link href={friend.username ? `/${friend.username}` : ''} className='p-1 text-primary hover:bg-primary/30'>
+          {friend.username || friend.email}
+        </Link>
+      </div>
+      <div className={`${readexPro.className} flex ml-5 text-gray-300 text-sm p-1`}>
+            {status}
+            <div className={`${readexPro.className} flex ml-1 text-sm text-gray-500`}>
+                {moment.unix(friend.updatedOn / 1000).fromNow()}
             </div>
-          )} */}
-          <div className={`${readexPro.className} flex ml-5`}>{friend.email}</div>
-          <div className="lg:hidden ml-auto hover:cursor-pointer" onClick={() => {}}>
-            <DotsVertical />
-          </div>
-        </div>
+            </div>
       </div>
-      <div className="hidden lg:flex w-2/5">
-        <div className={`${readexPro.className} hidden xl:flex text-grey font-thin`}>{status}</div>
-        {/* <div className={`${readexPro.className} flex xl:hidden text-grey font-thin`}>{formatAddress(address, 6)}</div> */}
-       
-      </div>
-      {/* <div className="hidden lg:flex items-center ml-auto ">
-        <button
-          onClick={handleSendClick}
-          className={`${readexPro.className} w-24 h-8 text-sm text-cyan rounded-sm items-center bg-dark-green-secondary border border-cyan border-opacity-10 border-solid border-1`}>
-          Send
-        </button>
-        <button
-          onClick={handleQRClick}
-          className={`${readexPro.className} text-cyan text-sm ml-3 w-24 h-8 rounded-sm items-center bg-dark-green-secondary border border-cyan border-opacity-10 border-solid border-1`}>
-          Receive
-        </button>
-        <div className="ml-2 hover:cursor-pointer" onClick={() => {}}>
-          <ActionDropdown items={['Option 1', 'Option 2']}/>
-        </div>
-      </div> */}
-
-      {/* <QrModal isModalOpen={isQrModalOpen} setModalOpen={setQrModalOpen} address={address}/> */}
-      {/* <SendToContactModal isModalOpen={isSendModalOpen}
-        setModalOpen={setSendModalOpen}
-        contactData={data}
-        formatAddress={formatAddress}
-        onAddressCopy={onAddressCopy}/> */}
     </div>
   );
 };
