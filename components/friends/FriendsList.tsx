@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Readex_Pro } from 'next/font/google';
-import Image from 'next/image';
 import { FriendRow } from './FriendRow';
-import { contactsData } from './WalletSection/mockData';
-import { AddContactModal } from './AddContact';
-import { ContactListProps } from './props';
 import { ContactListPlaceholder } from '~/components/placeholders/ContactList';
 import { ActionButton } from '~/elements';
 import { InviteModal } from './InviteModal';

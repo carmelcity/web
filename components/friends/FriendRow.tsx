@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import { ContactTableProps } from './props';
-import Image from 'next/image';
-import placeholder from '~/images/userPlaceholder.svg';
 import { Readex_Pro } from 'next/font/google';
 import { showSuccessToast } from '~/elements';
-import { DocumentDuplicateGrey, DotsVertical } from '~/elements/icons';
-// import { QrModal } from '../QrModal';
-// import { SelectCurrencyModal, SendModal } from '../SendModal';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ActionDropdown } from '~/elements';
-import { formatAddress } from '../utils';
-import { SendToContactModal } from './SendToContactModal';
+import { DotsVertical } from '~/elements/icons';
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
