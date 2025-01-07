@@ -52,6 +52,9 @@ export const AccessButton = ({ auth }: any) => {
       case "friends":
         router.push('/friends')
         break
+      case "settings":
+        router.push('/settings')
+        break
       case "signout":
         setIsConfirm(`Are you sure you want to sign out?`)
         setIsConfirmOpen(true)
@@ -79,6 +82,10 @@ export const AccessButton = ({ auth }: any) => {
       title: "Friends",
       icon: "UsersIcon"
     }, {
+      id: "settings",
+      title: "Settings",
+      icon: "Cog8ToothIcon"
+    }, {
       id: "signout",
       title: "Sign out",
       icon: "ArrowLeftOnRectangleIcon"
@@ -100,7 +107,7 @@ export const AccessButton = ({ auth }: any) => {
               />
             </div>
           </div>
-          <div className='ml-4 mr-2 w-full text-xl text-primary lg:flex hidden'>
+          <div className='ml-2 mr-2 w-full text-sm text-primary lg:flex hidden'>
             { auth.profile.username }
           </div>
         </div>

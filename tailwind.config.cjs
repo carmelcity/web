@@ -115,6 +115,7 @@ module.exports = {
         'dark-cyan': '#03664E',
         'dark-indigo': '#0E0D17',
         'light-green': '#ADFFAB',
+        'red': "#AD1457"
       },
       boxShadow: {
         'inner-input-sm': 'inset 1px 1px 7px 0 rgb(0 0 0 / 0.05)',
