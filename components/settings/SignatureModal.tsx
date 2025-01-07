@@ -82,29 +82,6 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
     </div>
   }
 
-  // const NameField = () => {
-  //   return <div className="flex flex-col flex-col">
-  //             <div className={`${readexPro.className} font-thin leading-6 text-grey mb-1 mt-8`}>Give this device a friendly name:</div>
-  //             <div className="flex flex-col relative mb-8">
-  //                 <input
-  //                   name="name"
-  //                   type="text"
-  //                   placeholder="Type here ..."
-  //                   className={`${
-  //                     readexPro.className
-  //                   } font-thin focus:border-none focus:ring-[0.7px] focus:ring-[#00FFFF] placeholder:text-cyan/50 placeholder:font-light focus:placeholder:text-transparent w-full h-10 px-4 bg-[#022A27] text-sm text-white ${
-  //                     'border-cyan/20'
-  //                   } border-solid border-1`}
-  //                   style={{
-  //                     WebkitAppearance: 'none',
-  //                     margin: 0,
-  //                     MozAppearance: 'textfield',
-  //                   }}
-  //                 />
-  //             </div>
-  //       </div>
-  // }
-
   const ModalContent = () => {
     if (isWaiting) {
         return <div className="flex flex-col flex-col">
@@ -113,7 +90,6 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
             </div>
         </div>
     }
-    // return <NameField/>
   }
 
   const ModalButton = () => {
@@ -135,7 +111,6 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
       <form method='post' onSubmit={handleSubmit}>
         <div className="w-11/12 mx-auto">
           <ModalHeader/>
-          <ModalContent/>
           <ModalButton/>  
         </div>
       </form>
