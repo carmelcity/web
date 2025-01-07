@@ -129,20 +129,20 @@ export const getDigest = async (assertion: any) => {
   };
 };
 
-export const getSignature = async (assertion: any) => {
-  const der = new Serialize.SerialBuffer({ array: new Uint8Array(assertion.response.signature) });
-  if (der.get() !== 0x30) throw new Error('Signature missing DER prefix');
-  if (der.get() !== der.array.length - 2) throw new Error('Signature has bad length');
-  if (der.get() !== 0x02) throw new Error('Signature has bad r marker');
-  const _r = fixup(der.getUint8Array(der.get()));
-  if (der.get() !== 0x02) throw new Error('Signature has bad s marker');
-  const _s = fixup(der.getUint8Array(der.get()));
+// export const getSignature = async (assertion: any) => {
+//   const der = new Serialize.SerialBuffer({ array: new Uint8Array(assertion.response.signature) });
+//   if (der.get() !== 0x30) throw new Error('Signature missing DER prefix');
+//   if (der.get() !== der.array.length - 2) throw new Error('Signature has bad length');
+//   if (der.get() !== 0x02) throw new Error('Signature has bad r marker');
+//   const _r = fixup(der.getUint8Array(der.get()));
+//   if (der.get() !== 0x02) throw new Error('Signature has bad s marker');
+//   const _s = fixup(der.getUint8Array(der.get()));
 
-  let r = arrayBufferToHex(_r);
-  let s = arrayBufferToHex(_s);
+//   let r = arrayBufferToHex(_r);
+//   let s = arrayBufferToHex(_s);
 
-  return { r, s };
-};
+//   return { r, s };
+// };
 
 export const loginOptions = ({ attestationId, challenge }: any) => {
   return {
