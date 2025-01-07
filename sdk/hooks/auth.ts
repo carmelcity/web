@@ -40,6 +40,17 @@ export const useCarmelAuth = () => {
         return data
     }
 
+    const isDeviceSecured = () => {
+        if (profile.signatures) {
+        const found = profile.signatures.signatures.find((s: any) => s.clientId === session.id)
+        if (found) {
+            return true
+        }
+        }
+
+        return false
+    }
+
     const makeCall = async ({ service, args = {} }: any) => {
         const s = await initialize()
 
@@ -69,6 +80,10 @@ export const useCarmelAuth = () => {
 
     const accountAction = async (action: string, args: any) => {
         return makeCall({ service: `account/${action}`, args })
+    }
+
+    const signatureAction = async (action: string, args: any) => {
+        return makeCall({ service: `signature/${action}`, args })
     }
 
     const sendInvite = async (action: string, args: any) => {
@@ -124,9 +139,11 @@ export const useCarmelAuth = () => {
         getAuthToken, 
         updateProfile, 
         session, 
+        isDeviceSecured,
         accountAction,
         activateAccount,
         sendInvite,
+        signatureAction,
         user,
         profile, 
         getFreshProfile, 

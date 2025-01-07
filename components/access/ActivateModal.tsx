@@ -10,7 +10,7 @@ export const ActivateModal = ({ isModalOpen, onDone, token, setModalOpen }: any)
   const [isWaiting, setIsWaiting] = useState<boolean>(false)
 
   const handleAuth = async (data: any) => {
-    const res = await auth.checkUsername(data)
+    const res = await auth.checkUsername({ username: `${data.username}`.trim().toLowerCase() })
 
     if (res.error) {
       showErrorToast(res.error)
@@ -38,6 +38,28 @@ export const ActivateModal = ({ isModalOpen, onDone, token, setModalOpen }: any)
 
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
+
+    if (!data.username || `${data.username}`.trim().length === 0) {
+      showErrorToast(`Your username cannot be empty`)
+      return 
+    }
+
+    if (!data.username || `${data.username}`.trim().length === 0) {
+      showErrorToast(`Your username cannot be empty`)
+      return 
+    }
+
+    if (`${data.username}`.trim().length > 20) {
+      showErrorToast(`Your username cannot be more than 20 characters`)
+      return 
+    }
+
+    const isValid = `${data.username}`.match(/^[0-9a-zA-Z\-]+$/);
+
+    if (!isValid) {
+      showErrorToast(`Only letters, numbers and '-' are allowed`)
+      return 
+    }
 
     return handleAuth(data)
   }
