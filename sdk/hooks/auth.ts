@@ -17,6 +17,7 @@ export const useCarmelAuth = () => {
         }
 
         const p = await getProfile()
+
         setProfile(p.account)
 
         return p.account
@@ -71,7 +72,7 @@ export const useCarmelAuth = () => {
     }
 
     const isLoggedIn = () => {
-        return session && session.authToken
+        return session && session.authToken ? true : false
     }
 
     const postAction = async (action: string, args: any) => {
