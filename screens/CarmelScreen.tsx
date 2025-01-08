@@ -55,9 +55,7 @@ export const CarmelScreen = (props: any) => {
 
     const TabBar = () => {
       if (!data.item.posts || data.item.posts.length === 0) {
-        return <div className='text-sm text-gray-400'>
-          This Carmel does not have any comments yet
-        </div>
+        return <div/>
       }
 
       return <div className='mb-8 border-b w-full pb-4 border-primary/40'>

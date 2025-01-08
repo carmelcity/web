@@ -7,6 +7,7 @@ export const CarmelPostCard = ({
   text,
   highlight,
   carmelId,
+  replying,
   loading,
   authorImage,
   author,
@@ -20,7 +21,7 @@ export const CarmelPostCard = ({
   onEdit,
   comments
 }: any) => {    
-
+  
     const CardAuthor = () => {
       return <div className='flex flex-row'>
               <PostAuthor
@@ -45,9 +46,9 @@ export const CarmelPostCard = ({
               </div>
       }
 
-      if (editing) {
+      if (editing || replying) {
         return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
-              <CommentBox onCancel={onCancelEdit} name="comment" text={text}/>
+              <CommentBox onCancel={onCancelEdit} name="comment" text={replying ? "" : text}/>
           </div>
       }
 
