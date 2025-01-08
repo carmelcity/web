@@ -23,7 +23,7 @@ const Loading = () => {
 function App({ Component }: any) {
   const [ready, setReady] = useState(false)
   const auth = useCarmelAuth()
-
+  
   useEffect(() => {
     (async () => {
       await auth.initialize()
@@ -35,7 +35,6 @@ function App({ Component }: any) {
     if (auth.isLoggedIn() && (!auth.profile || !auth.profile.username)) {
       return 
     }
-
     setReady (!auth.isLoggedIn() || (auth.profile || !auth.profile.username))
   }, [auth.profile])
 

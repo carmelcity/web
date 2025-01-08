@@ -22,7 +22,7 @@ export const FriendRow = (friend: any) => {
   }
 
   return (
-    <div className="flex items-center w-full bg-black/50 px-6 py-3 border-b border-cyan/10">
+    <div className="flex items-center w-full bg-black/50 px-6 py-3 border-t border-cyan/10">
       <div className="flex justify-center">
         { friend.image && <div
           className="w-12 h-14 z-10 mt-0.5 bg-dark-green-secondary"

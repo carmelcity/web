@@ -4,21 +4,19 @@ import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelPostCard } from '~/components/cards'
 import { CommentButton, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
 
-export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, ready }: any) => {
+export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts, auth }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [replyingPostId, setReplyingPostId] = useState(-10)
 
   const onReply = (post: any) => {
-    console.log("reply ->", post)
-  }
-
-  const onReplyToMyPost = (post: any) => {
-    console.log("reply to mine ->", post)
+    setReplyingPostId(post.postId)
   }
 
   const onCancelEdit = async () => {
     setEditing(false)
+    setReplyingPostId(-10)
   }
 
   const onEdit = (post: any) => {
@@ -28,26 +26,37 @@ export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, 
   const showPosts = () => {
     const oldPost = myPost()
 
-    let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => 
-        <CarmelPostCard 
+    let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => {
+       return <CarmelPostCard 
+            replying={replyingPostId === element.postId}
+            onCancelEdit={onCancelEdit}
+            loading={loading && replyingPostId === element.postId}
             key={`${elementId}`} 
             onReply={() => onReply(element)}
             {...element} 
-        />)
+        />})
 
     if (oldPost && oldPost.onSide) {
       return [<CarmelPostCard 
         editing={editing} 
+        replying={replyingPostId === oldPost.postId}
         highlight 
         loading={loading}
         text={oldPost ? oldPost.text : ""}
         onCancelEdit={onCancelEdit}
         key={'mypost'} 
-        onReply={() => onReplyToMyPost(oldPost)} 
+        onReply={() => onReply(oldPost)} 
         onEdit={() => onEdit(oldPost)} {...oldPost}/>, ...otherPosts]
     }
 
     return [...otherPosts]
+  }
+
+  const resetFields = () => {
+    setEditing(false)
+    setLoading(false)  
+    setAdding(false)
+    setReplyingPostId(-10)
   }
 
   const onAction = async (e: any) => {
@@ -66,45 +75,67 @@ export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, 
     
     const oldPost = myPost()
 
-    if (oldPost && oldPost.postId) {
+    if (auth.profile.username !== author && !oldPost && replyingPostId === -10) {
       setLoading(true)
 
-      const result = await auth.postAction("edit", {
-        text: data.comment, carmelId, postId: oldPost.postId
+      const result = await auth.postAction("new", {
+        text: data.comment, carmelId
       })
 
       if (result.error) {
         showErrorToast(result.error)
+        return resetFields()
+      }
+
+      onRefresh()
+
+      setTimeout(() => {
+        showSuccessToast("Your comment was added")
+        return resetFields()
+      }, 1000)
+      return 
+    }
+    
+    if (replyingPostId > -10) {
+      setLoading(true)
+
+      const result = await auth.postAction("reply", {
+        text: data.comment, carmelId, postId: oldPost.postId, parentId: replyingPostId
+      })
+
+      if (result.error) {
+        showErrorToast(result.error)
+        setEditing(false)
+        setLoading(false)
         return 
       }
   
       onRefresh()
 
       setTimeout(() => {
-        showSuccessToast("Your comment was updated")
-        setEditing(false)
-        setLoading(false)  
+        showSuccessToast("Your reply was added")
+        return resetFields()
       }, 1000)
-      return 
+
+      return
     }
 
     setLoading(true)
 
-    const result = await auth.postAction("new", {
-      text: data.comment, carmelId
+    const result = await auth.postAction("edit", {
+      text: data.comment, carmelId, postId: oldPost.postId
     })
 
     if (result.error) {
       showErrorToast(result.error)
-      return 
+      return resetFields()
     }
 
     onRefresh()
 
     setTimeout(() => {
-      showSuccessToast("Your comment was added")
-      setAdding(false)
-      setLoading(false)
+      showSuccessToast("Your comment was updated")
+      return resetFields()
     }, 1000)
   }
 
@@ -118,26 +149,10 @@ export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, 
 
     if (oldPost && oldPost.postId) {
       showErrorToast('You already joined this side')
-      return 
+      return resetFields()
     }
 
     setAdding(true)
-  }
-
-  const onEditMyComment = async () => {
-    if (!auth.isLoggedIn()) {
-      showErrorToast("Please sign in first")
-      return 
-    }
-
-    const oldPost = myPost()
-
-    if (!oldPost || !oldPost.postId) {
-      showErrorToast('You did not join this side yet!')
-      return 
-    }
-
-    setEditing(true)
   }
 
   const onCancelAddComment = async () => {
@@ -145,19 +160,19 @@ export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, 
   }
 
   const MainAction = () => {
-    if (!ready) {
-      return <div/>
-    }
-
     const oldPost = myPost()
 
     if (!oldPost || !oldPost.postId) {
-      if (loading) {
-          return <div className="mt-4 pl-14 w-full flex flex-col gap-4">
+      if (loading && replyingPostId === -10) {
+          return <div className="mt-4 pl-14 w-full flex flex-col gap-4 mb-8" >
                 <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
                 <div className={`h-5 w-56 bg-cyan/40 animate-pulse`}></div>
                 <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
             </div>
+      }
+
+      if (auth.profile.username === author) {
+        return <div/>
       }
 
       return <div className='w-full flex flex-col'>
@@ -187,7 +202,7 @@ export const CarmelPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, 
     <div className='w-full flex flex-col'>
       <form method='post' onSubmit={onAction}>
         <MainAction/>
-        <TopLabel/>
+        { editing || loading || adding || <TopLabel/> }
         <div className='w-full mt-8'>
           <InfiniteScrollComponent
             renderItem={showPosts()}
