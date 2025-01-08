@@ -11,7 +11,7 @@ const CardAuthor = ({
 }: any) => {
   if (!author) {
     if (community) {
-      return <div className={`flex flex-row relative z-10 lg:ml-56 mx-auto mt-4`}>
+      return <div className={`flex flex-row relative z-10 lg:ml-56 mt-4`}>
           <Community
             image={communityImage}
             username={community}
