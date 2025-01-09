@@ -3,7 +3,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { DynamicIcon } from '~/elements'
 import { readexPro } from '~/elements/fonts';
 import { Container } from './Container';
-
+import { TopupModal } from '~/components/wallet';
 
 const Balance = () => {
   return <div
@@ -21,9 +21,19 @@ const Balance = () => {
   </div>
 }
 
-export const WalletScreen = () => {
-  const onAddFunds = () => {
+export const WalletScreen = ({ auth }: any) => {
+  const [showTopup, setShowTopup] = useState(false);
+  const [isReady, setIsReady] = useState(false)
 
+  const onToggle = (v: boolean) => {
+    if (!v) {
+      setIsReady(false)
+    }
+    setShowTopup(v)
+  }
+  
+  const onAddFunds = () => {
+    setShowTopup(true)
   }
 
   const ActionButtons = () => {
@@ -39,8 +49,9 @@ export const WalletScreen = () => {
       </div>
   }
 
-
   return <Container name="Wallet" icon="WalletIcon">
+    <TopupModal auth={auth} isModalOpen={showTopup} setModalOpen={onToggle}/>
+
     <div className={`w-full flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative`}>
         <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
           <div className='w-full px-4'>
