@@ -3,27 +3,60 @@ import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
 import { UAParser } from 'ua-parser-js'
 import { sendGatewayRequest } from './utils'
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, onValue } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: `${process.env['NEXT_PUBLIC_FIREBASE_KEY']}`,
+  authDomain: "chunky-platform.firebaseapp.com",
+  databaseURL: `${process.env['NEXT_PUBLIC_FIREBASE_URL']}`,
+  projectId: "chunky-platform",
+  storageBucket: "chunky-platform.firebasestorage.app",
+  messagingSenderId: "749572323876",
+  appId: "1:749572323876:web:1f484e8ccf4e0e900a36b1",
+  measurementId: "G-3GLT0KHLW5"
+}
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
 export const useCarmelAuth = () => {
     const [session, setSession]: any = useLocalStorage('carmel.session', {})
     const [profile, setProfile] = useState<any>({ })
+    const [isListeningForUser, setIsListeningForUser] = useState(false)
+    const [userNotifications, setUserNotifications] = useState<any>({})
+
+    const app = initializeApp(firebaseConfig)
+    // const analytics = getAnalytics(app)
+    const db = getDatabase(app);
     const uap = new UAParser()
-    
+
+    const listenForUserNotifications = (username: string) => {
+        if (isListeningForUser) {
+            return 
+        }
+
+        const topups = ref(db, 'topups/' + username)        
+        onValue(topups, (snapshot: any) => { setUserNotifications({
+            ...userNotifications,
+            topups: snapshot.val()
+        })})
+        setIsListeningForUser(true)
+    }
+
+
     const getFreshProfile = async () => {        
         if (!session.id || !isLoggedIn()) {
             return
         }
 
         const p = await getProfile()
-
+        listenForUserNotifications(p.account.username)
         setProfile(p.account)
-
         return p.account
     }
 
-    const initialize = async () => {
+    const initialize = async () => {        
         if (session.id) {
             return session
         }
@@ -43,10 +76,10 @@ export const useCarmelAuth = () => {
 
     const isDeviceSecured = () => {
         if (profile.signatures) {
-        const found = profile.signatures.signatures.find((s: any) => s.clientId === session.id)
-        if (found) {
-            return true
-        }
+            const found = profile.signatures.signatures.find((s: any) => s.clientId === session.id)
+            if (found) {
+                return true
+            }
         }
 
         return false
@@ -145,6 +178,7 @@ export const useCarmelAuth = () => {
         activateAccount,
         sendInvite,
         signatureAction,
+        userNotifications,
         user,
         profile, 
         getFreshProfile, 

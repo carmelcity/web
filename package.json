@@ -33,6 +33,7 @@
     "debug": "^4.4.0",
     "dotenv": "^16.0.3",
     "eosjs": "^22.1.0",
+    "firebase": "^11.1.0",
     "framer-motion": "^8.5.0",
     "front-matter": "^4.0.2",
     "helia": "^5.1.1",
