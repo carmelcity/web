@@ -16,7 +16,6 @@ export const TopupModal = ({ isModalOpen, setModalOpen, auth }: any) => {
 
   const onNewTopup = () => {
     setTimeout(() => {
-        showSuccessToast("Your wallet was topped up")
         forceClose()
     }, 2500)
   }
@@ -29,19 +28,15 @@ export const TopupModal = ({ isModalOpen, setModalOpen, auth }: any) => {
   }, [isModalOpen])
 
   useEffect(() => {
-    if (!auth.userNotifications || !auth.userNotifications.topups) {
-      return 
-    }
-    
-    const all = Object.values(auth.userNotifications.topups).filter((d: any) => parseInt(d.timestamp) > now)
-    
+    const all = Object.values(auth.userTransactions).filter((d: any) => parseInt(d.timestamp) > now)
+
     if (!all || all.length <= 0) {
       return
     }
 
     setTopup(all[0])
     onNewTopup()
-  }, [auth.userNotifications])
+  }, [auth.userTransactions])
 
   const modalTitle = () => error ? "Please try again" : "Top Up your Wallet"
   const modalIcon = () => error ? "ExclamationTriangleIcon" : "CurrencyDollarIcon" 
