@@ -40,7 +40,7 @@ export const useCarmelAuth = () => {
         onValue(topups, (snapshot: any) => { 
             let all = [
                 ...userTransactions,
-                ...Object.values(snapshot ? snapshot.val(): {})
+                ...Object.values(snapshot.val() || {})
             ]
             all = all.sort((a: any, b: any) => b.timestamp - a.timestamp)
             setUserTransactions(all)
