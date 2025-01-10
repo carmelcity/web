@@ -46,6 +46,10 @@ export const CarmelScreen = (props: any) => {
       const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
       const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
 
+      if (isNaN(post.postId)) {
+        return 
+      }
+      
       return {...post, onSide }
     }
   
