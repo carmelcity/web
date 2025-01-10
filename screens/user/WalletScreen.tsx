@@ -6,7 +6,13 @@ import { Container } from './Container';
 import { TopupModal } from '~/components/wallet';
 import { TransactionsList } from '~/components/wallet';
 
-const Balance = () => {
+const Balance = ({ auth }: any) => {
+  let balance: number = 0
+
+  if (auth.profile.wallet && auth.profile.wallet.balance) {
+    balance = auth.profile.wallet.balance.usd
+  }
+  
   return <div
     key="balance"
     className="flex relative p-5 w-full bg-black lg:border-r border-primary/20 border-opacity-20 border-solid border-1 rounded-md z-10">
@@ -16,7 +22,7 @@ const Balance = () => {
         Balance
       </div>
       <div className={`${readexPro.className} text-4xl font-normal mt-4 mr-auto`}>
-        ${parseFloat(`0`).toFixed(2)} USD{' '}
+        ${balance.toFixed(2)} USD{' '}
       </div>
     </div>
   </div>
@@ -56,7 +62,7 @@ export const WalletScreen = ({ auth }: any) => {
     <div className={`w-full flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative`}>
         <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
           <div className='w-full px-4'>
-              <Balance/>
+              <Balance auth={auth}/>
           </div>
           <div className='w-full'>
               <ActionButtons/>
