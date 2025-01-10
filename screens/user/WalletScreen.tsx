@@ -4,6 +4,7 @@ import { DynamicIcon } from '~/elements'
 import { readexPro } from '~/elements/fonts';
 import { Container } from './Container';
 import { TopupModal } from '~/components/wallet';
+import { TransactionsList } from '~/components/wallet';
 
 const Balance = () => {
   return <div
@@ -60,6 +61,9 @@ export const WalletScreen = ({ auth }: any) => {
           <div className='w-full'>
               <ActionButtons/>
           </div>
+        </div>
+        <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
+          <TransactionsList auth={auth}/>
         </div>
       </div>
   </Container>

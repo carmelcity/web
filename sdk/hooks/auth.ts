@@ -24,7 +24,7 @@ export const useCarmelAuth = () => {
     const [session, setSession]: any = useLocalStorage('carmel.session', {})
     const [profile, setProfile] = useState<any>({ })
     const [isListeningForUser, setIsListeningForUser] = useState(false)
-    const [userNotifications, setUserNotifications] = useState<any>({})
+    const [userTransactions, setUserTransactions] = useState<any>([])
 
     const app = initializeApp(firebaseConfig)
     // const analytics = getAnalytics(app)
@@ -36,11 +36,15 @@ export const useCarmelAuth = () => {
             return 
         }
 
-        const topups = ref(db, 'topups/' + username)        
-        onValue(topups, (snapshot: any) => { setUserNotifications({
-            ...userNotifications,
-            topups: snapshot.val()
-        })})
+        const topups = ref(db, '/transactions/' + username)        
+        onValue(topups, (snapshot: any) => { 
+            let all = [
+                ...userTransactions,
+                ...Object.values(snapshot ? snapshot.val(): {})
+            ]
+            all = all.sort((a: any, b: any) => b.timestamp - a.timestamp)
+            setUserTransactions(all)
+        })
         setIsListeningForUser(true)
     }
 
@@ -178,7 +182,7 @@ export const useCarmelAuth = () => {
         activateAccount,
         sendInvite,
         signatureAction,
-        userNotifications,
+        userTransactions,
         user,
         profile, 
         getFreshProfile, 
