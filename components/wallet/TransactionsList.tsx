@@ -9,9 +9,12 @@ const readexPro = Readex_Pro({
 });
 
 export const TransactionsList = ({ auth }: any) => {
+  const latestTransaction = auth.userTransactions.length > 0 ? auth.userTransactions[0] : undefined
+  console.log(latestTransaction)
+
   const TransactionsRows = () => {
     return auth.userTransactions.map((item: any, index: number) => <div key={index}>
-        <TransactionRow {...item} />
+        <TransactionRow {...item} latest={latestTransaction ? item.eventId === latestTransaction.eventId : false } />
       </div>)
   }
 
