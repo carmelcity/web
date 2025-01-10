@@ -74,8 +74,9 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
     }
     
     const oldPost = myPost()
+    console.log(isNaN(oldPost.postId))
 
-    if (auth.profile.username !== author && !oldPost && replyingPostId === -10) {
+    if (auth.profile.username !== author && isNaN(oldPost.postId) && replyingPostId === -10) {
       setLoading(true)
 
       const result = await auth.postAction("new", {
