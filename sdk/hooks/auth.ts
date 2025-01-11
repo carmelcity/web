@@ -132,6 +132,10 @@ export const useCarmelAuth = () => {
         return makeCall({ service: "me" })
     }
 
+    const getCrypto = async () => {
+        return makeCall({ service: "crypto" })
+    }
+
     const updateProfile = async (args: any) => {
         return makeCall({ service: "update", args })
     }
@@ -177,6 +181,7 @@ export const useCarmelAuth = () => {
         getAuthToken, 
         updateProfile, 
         session, 
+        getCrypto,
         isDeviceSecured,
         accountAction,
         activateAccount,
