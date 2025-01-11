@@ -2,6 +2,7 @@ import { Container } from './Container';
 import { useEffect, useState } from 'react';
 import { showSuccessToast, readex_pro } from '~/elements';
 import { ProfileIntro } from './ProfileIntro'
+import Image from 'next/image'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
@@ -154,6 +155,7 @@ export const ProfileScreen = ({ auth }: any) => {
          username={auth.profile.username}
          bio={auth.profile.bio}        
         />
+        
         <ActionButtons/>
       </form>
     </div>     

@@ -55,6 +55,9 @@ export const AccessButton = ({ auth }: any) => {
       case "settings":
         router.push('/settings')
         break
+      case "card":
+        router.push('/card')
+        break
       case "signout":
         setIsConfirm(`Are you sure you want to sign out?`)
         setIsConfirmOpen(true)
@@ -72,6 +75,10 @@ export const AccessButton = ({ auth }: any) => {
     return [{
       id: "profile",
       title: "Profile",
+      icon: "UserIcon"
+    }, {
+      id: "card",
+      title: "Card",
       icon: "IdentificationIcon"
     }, {
       id: "wallet",
