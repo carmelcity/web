@@ -8,13 +8,12 @@ const readexPro = Readex_Pro({
   subsets: ['latin'],
 });
 
-export const TransactionsList = ({ auth }: any) => {
+export const TransactionsList = ({ ethPrice, auth }: any) => {
   const latestTransaction = auth.userTransactions.length > 0 ? auth.userTransactions[0] : undefined
-  console.log(latestTransaction)
 
   const TransactionsRows = () => {
     return auth.userTransactions.map((item: any, index: number) => <div key={index}>
-        <TransactionRow {...item} latest={latestTransaction ? item.eventId === latestTransaction.eventId : false } />
+        <TransactionRow ethPrice={ethPrice} {...item} latest={latestTransaction ? item.eventId === latestTransaction.eventId : false } />
       </div>)
   }
 

@@ -14,13 +14,16 @@ export const TransactionRow = (transaction: any) => {
   }
   let link = `https://etherscan.io/tx/${transaction.hash}`
   let title = 'Transaction'
-  let value = `${transaction.value.toFixed(4)} ETH`
+  let valueETH = `${transaction.value.toFixed(4)} ETH`
+  let valueUSD = `$${(transaction.ethPrice * transaction.value).toFixed(2)} USD`
+  let value = valueUSD
   let progressString = ""
 
   switch(transaction.stage) {
     case 1:
       title = `Topup received`
       progressString = transaction.latest  ? "Deposit will start in a few seconds ..." : ""
+      value = valueETH
       break;
     case 2:
       title = `Deposit started`
@@ -51,10 +54,10 @@ export const TransactionRow = (transaction: any) => {
         <Progress/>
         <div className="flex flex-row gap-4">
             <DynamicIcon name={"CheckCircleIcon"} width={24} height={24} className={"text-primary"}/>
-            <Link href={link} className='p-1 text-primary hover:bg-primary/30 text-sm lg:w-48 w-24'>
+            <Link href={link} className='p-1 text-primary hover:bg-primary/30 text-sm lg:w-40 w-24'>
                 { title }
             </Link>
-          <div className={`${readexPro.className} flex ml-5 text-white text-sm mt-1`}>
+          <div className={`${readexPro.className} flex ml-5 text-white text-sm mt-1 lg:w-20 w-20`}>
                 { value }
           </div>
           <div className={`${readexPro.className} flex ml-5 text-gray-300 text-sm p-1`}>

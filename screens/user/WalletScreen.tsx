@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { DynamicIcon } from '~/elements'
 import { readexPro } from '~/elements/fonts';
@@ -6,13 +6,17 @@ import { Container } from './Container';
 import { TopupModal } from '~/components/wallet';
 import { TransactionsList } from '~/components/wallet';
 
-const Balance = ({ auth }: any) => {
-  let balance: number = 0
+const Balance = ({ ethBalance, ethPrice }: any) => {
+  const BalanceContent = () => {
+    if (!ethBalance || !ethPrice) {
+      return <div className="flex flex-col mt-4 mb-2 w-full"><div className={`h-12 w-80 bg-cyan/20 animate-pulse`}/></div>
+    }
 
-  if (auth.profile.wallet && auth.profile.wallet.balance) {
-    balance = auth.profile.wallet.balance.usd
+    return <div className={`${readexPro.className} text-4xl font-normal mt-4 mr-auto`}>
+            ${ (ethBalance * ethPrice).toFixed(2) } USD
+      </div>
   }
-  
+
   return <div
     key="balance"
     className="flex relative p-5 w-full bg-black lg:border-r border-primary/20 border-opacity-20 border-solid border-1 rounded-md z-10">
@@ -21,9 +25,7 @@ const Balance = ({ auth }: any) => {
         className={`${readexPro.className} font-normal text-2xl text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green mr-auto`}>
         Balance
       </div>
-      <div className={`${readexPro.className} text-4xl font-normal mt-4 mr-auto`}>
-        ${balance.toFixed(2)} USD{' '}
-      </div>
+      <BalanceContent/>
     </div>
   </div>
 }
@@ -31,6 +33,8 @@ const Balance = ({ auth }: any) => {
 export const WalletScreen = ({ auth }: any) => {
   const [showTopup, setShowTopup] = useState(false);
   const [isReady, setIsReady] = useState(false)
+  const [ethPrice, setETHPrice] = useState(0)
+  const [ethBalance, setETHBalance] = useState(0)
 
   const onToggle = (v: boolean) => {
     if (!v) {
@@ -42,6 +46,20 @@ export const WalletScreen = ({ auth }: any) => {
   const onAddFunds = () => {
     setShowTopup(true)
   }
+
+  useEffect(() => {
+    (async () => {
+      const crypto = await auth.getCrypto()
+
+      if (crypto && crypto.ethPrice) {
+        setETHPrice(crypto.ethPrice)
+      }
+
+      if (auth.profile.wallet && auth.profile.wallet.balance) {
+        setETHBalance(auth.profile.wallet.balance.eth)
+      }
+    })()
+  }, [])
 
   const ActionButtons = () => {
     return <div 
@@ -62,14 +80,20 @@ export const WalletScreen = ({ auth }: any) => {
     <div className={`w-full flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative`}>
         <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
           <div className='w-full px-4'>
-              <Balance auth={auth}/>
+              <Balance ethPrice={ethPrice} ethBalance={ethBalance}/>
           </div>
           <div className='w-full'>
               <ActionButtons/>
           </div>
         </div>
         <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
-          <TransactionsList auth={auth}/>
+         { ethPrice ? <TransactionsList ethPrice={ethPrice} auth={auth}/>
+          : <div className="flex flex-col mt-4 mb-2 w-full">
+              <div className={`h-8 w-80 bg-cyan/20 ml-10 animate-pulse`}/>
+              <div className={`h-8 w-80 bg-cyan/20 ml-10 mt-4 animate-pulse`}/>
+              <div className={`h-8 w-80 bg-cyan/20 ml-10 mt-4 animate-pulse`}/>
+            </div>
+          }
         </div>
       </div>
   </Container>
