@@ -44,7 +44,8 @@ export const WalletScreen = ({ auth }: any) => {
   }
   
   const onAddFunds = () => {
-    setShowTopup(true)
+    console.log("!!!")
+    // setShowTopup(true)
   }
 
   useEffect(() => {
