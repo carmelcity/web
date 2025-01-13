@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { Modal } from '~/components/modal'
 import { DynamicIcon, readexPro, showSuccessToast, showErrorToast } from '~/elements'
-import { registerPublicKey, getPublicKey } from '~/sdk/security'
+import { signPublicKey, getSignature } from '~/sdk/security'
 
-export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
+export const SignModal = ({ isModalOpen, setModalOpen, auth }: any) => {
   const [error, setError] = useState("")
   const [isWaiting, setIsWaiting] = useState<boolean>(false)
 
-  const handleAdd = async (data: any) => {
+  const handleSign = async (data: any) => {
     setIsWaiting(true)
 
-    let result = await auth.signatureAction("attest", { name: data.name })
+    let result = await auth.signatureAction("assert", { name: data.name })
 
     if (result.error) {
       showErrorToast(result.error)
       return 
     }
 
-    const attestationJSON = JSON.parse(Buffer.from(result.attestation, 'base64').toString())
-    const { challenge } = attestationJSON
+    const assertionJSON = JSON.parse(Buffer.from(result.assertion, 'base64').toString())
+    const publicKey: any = signPublicKey(assertionJSON)
+    const assertion: any = await navigator.credentials.get({ publicKey })       
+    const signature = await getSignature(assertion, { challenge: assertionJSON.challenge })
 
-    const siteUrl = `${process.env.NEXT_PUBLIC_SITE_URL}`
-    const user = {
-      id: `${auth.profile.username}@carmel`, 
-      username: `${auth.profile.username}@carmel`
-    }
-
-    const publicKey: any = registerPublicKey({ siteUrl, user, challenge })
-    const attestation: any = await navigator.credentials.create({ publicKey })
-    const signatureJWK: any = await getPublicKey(attestation)
-
-    const jwk = Buffer.from(JSON.stringify({ ...signatureJWK, challenge })).toString('base64')
-    result = await auth.signatureAction("add", { jwk })
+    result = await auth.signatureAction("sign", { signature })
 
     if (result.error) {
       showErrorToast(result.error)
@@ -40,7 +31,7 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
 
     await auth.getFreshProfile()    
 
-    showSuccessToast(`The signature was added`)
+    showSuccessToast(`The signature was successful`)
     forceClose()
   }
 
@@ -50,7 +41,7 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
     
-    return handleAdd(data)
+    return handleSign(data)
   }
 
   useEffect(() => {
@@ -64,7 +55,7 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
     setModalOpen(false)
   }
 
-  const modalTitle = () => error ? "Please try again" : "Secure this device"
+  const modalTitle = () => error ? "Please try again" : "Sign now"
   const modalIcon = () => error ? "ExclamationTriangleIcon" : "LockClosedIcon" 
   const waitingMessage = () => error ? error : "The signature is being added"
 
@@ -77,7 +68,7 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
         { modalTitle() }
       </div>
       <div className="mt-2 text-center font-normal leading-6 text-white text-md mt-8 mb-8">
-        To secure this device, click to add a biometric signature right now.
+        Click to sign with your biometric signature.
       </div>
     </div>
   }
@@ -102,7 +93,7 @@ export const SignatureModal = ({ isModalOpen, setModalOpen, auth }: any) => {
       className={`${
         readexPro.className
       } w-full h-12 mb-4 mt-4 justify-center m-auto text-sm text-black border border-primary border-opacity-40 border-solid border-1 bg-primary/10 border-2 bg-dark-green text-primary`}>
-          Add Signature
+          Sign
      </button>
   }
 
