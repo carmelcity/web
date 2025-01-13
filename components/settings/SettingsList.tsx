@@ -3,8 +3,10 @@ import { Readex_Pro } from 'next/font/google';
 import { ContactListPlaceholder } from '~/components/placeholders/ContactList';
 import { ActionButton } from '~/elements';
 import { SignatureModal } from './SignatureModal';
+import { SignModal } from './SignModal';
 import { readex_pro, DynamicIcon } from '~/elements';
 import { supportsPasskeys } from '~/sdk/security'
+import { registerPublicKey, getSignatureJWK } from '~/sdk/security'
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
@@ -12,6 +14,7 @@ const readexPro = Readex_Pro({
 
 export const SettingsList = ({ auth, data, isLoading }: any) => {
   const [showSignatureModal, setShowSignatureModal] = useState(false);
+  const [showSignModal, setShowSignModal] = useState(false);
   const [isReady, setIsReady] = useState(false)
 
   if (isLoading) {
@@ -23,10 +26,15 @@ export const SettingsList = ({ auth, data, isLoading }: any) => {
       setIsReady(false)
     }
     setShowSignatureModal(v)
+    setShowSignModal(v)
   }
 
   const onNewSignature = () => {
     setShowSignatureModal(true)
+  }
+
+  const onSign = () => {
+    setShowSignModal(true)
   }
 
   const SignaturesSectionAction = () => {
@@ -36,13 +44,14 @@ export const SettingsList = ({ auth, data, isLoading }: any) => {
       </div>
     }
 
-    return <div className='w-full flex justify-start mt-4'>
+    return <div className='w-full flex justify-start mt-4 gap-4'>
               <ActionButton title="Secure now" onPress={onNewSignature}/>
-        </div>
+              <ActionButton title="Sign now" onPress={onSign}/>
+              </div>
   }
 
   const SignaturesSection = () => {
-    const isSecured = auth.isDeviceSecured()
+    const isSecured = false//auth.isDeviceSecured()
 
     return <div className="flex flex-col justify-start items-start p-4">
               <div className={`text-lg flex flex-row items-center ${isSecured ? 'text-primary' : 'text-red'} align-center w-full text-nowrap`}>
@@ -59,6 +68,7 @@ export const SettingsList = ({ auth, data, isLoading }: any) => {
   return (
     <div className="w-full">
       <SignatureModal auth={auth} isModalOpen={showSignatureModal} setModalOpen={onToggle}/>
+      <SignModal auth={auth} isModalOpen={showSignModal} setModalOpen={onToggle}/>
       <SignaturesSection/>
     </div>
   );
