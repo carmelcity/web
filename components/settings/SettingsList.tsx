@@ -6,7 +6,6 @@ import { SignatureModal } from './SignatureModal';
 import { SignModal } from './SignModal';
 import { readex_pro, DynamicIcon } from '~/elements';
 import { supportsPasskeys } from '~/sdk/security'
-import { registerPublicKey, getSignatureJWK } from '~/sdk/security'
 
 const readexPro = Readex_Pro({
   subsets: ['latin'],
