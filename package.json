@@ -17,6 +17,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.8",
+    "@tanstack/react-query": "^5.64.1",
     "@types/debug": "^4.1.7",
     "@types/marked": "^4.0.8",
     "@types/react-burger-menu": "^2.8.3",
@@ -42,7 +43,7 @@
     "marked": "^4.2.5",
     "moment": "^2.29.4",
     "nanoid": "^5.0.9",
-    "next": "latest",
+    "next": "15.1.1-canary.24",
     "next-runtime-env": "^3.2.2",
     "next-themes": "^0.2.1",
     "qrcode.react": "^3.1.0",
@@ -92,7 +93,9 @@
     "ua-parser-js": "^2.0.0",
     "unified": "^10.1.2",
     "usehooks-ts": "^3.1.0",
-    "vfile": "^5.3.6"
+    "vfile": "^5.3.6",
+    "viem": "2.x",
+    "wagmi": "^2.14.7"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

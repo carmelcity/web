@@ -8,6 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useCarmelAuth } from '~/sdk';
 import Head from 'next/head';
 import { AppLoadingLayout } from '~/components/layout/Layout';
+import { WagmiProvider } from 'wagmi'
+import { config } from '../config'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 const Loading = () => {
   return (
@@ -39,10 +44,14 @@ function App({ Component }: any) {
   }, [auth.profile])
 
   return (
-      <ThemeProvider attribute="class">
-        { ready ? <Component auth={auth}/> : <Loading/> }
-        <ToastContainer />
-    </ThemeProvider>
+        <ThemeProvider attribute="class">
+            <WagmiProvider config={config}>
+              <QueryClientProvider client={queryClient}>
+                { ready ? <Component auth={auth}/> : <Loading/> }
+              </QueryClientProvider>
+            </WagmiProvider>
+          <ToastContainer />
+      </ThemeProvider>
   );
 }
 
