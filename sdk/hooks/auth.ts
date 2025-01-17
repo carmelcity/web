@@ -48,15 +48,19 @@ export const useCarmelAuth = () => {
         setIsListeningForUser(true)
     }
 
-
     const getFreshProfile = async () => {        
         if (!session.id || !isLoggedIn()) {
             return
         }
 
         const p = await getProfile()
-        listenForUserNotifications(p.account.username)
+     
+        if (p && p.account && p.account.username) {
+            listenForUserNotifications(p.account.username)
+        }
+    
         setProfile(p.account)
+    
         return p.account
     }
 
