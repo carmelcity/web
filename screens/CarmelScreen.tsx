@@ -84,8 +84,8 @@ export const CarmelScreen = (props: any) => {
       // data.refresh()
     }
 
-    return <div className='w-full flex flex-col items-center mt-20 mb-20'>
-      <CarmelCard {...getCarmel()} shortIntro={false} noAction isLoading={carmel.isLoading}/>
+    return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
+      <CarmelCard {...getCarmel()} shortIntro={false} noAction isLoading={carmel.isLoading} wide highlight/>
       <TabBar/>
       {/* <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/> */}
     </div>

@@ -7,16 +7,17 @@ export const CarmelListScreen = (props: any) => {
     return <ListScreen
       title="Top Carmels"
       onItemPress='/:carmelId'
-      actionTitle="View Carmel"
+      actionTitle="Join debate"
       subtitle=""
       name="carmels"   
       placeholder={ListPlaceholder}
       shortIntro
+      highlight
       card={CarmelCard}
       {...props}
     >
-      <div className='w-full text-lg mt-4 mb-10 text-center'>
-        A Carmel is a meaningful conversation about how to build a more human world.
-      </div>
+      <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-md mb-8 text-center'>
+          Carmels are thoughtful debates about how to build a more human world.
+      </span>
     </ListScreen>
 }
