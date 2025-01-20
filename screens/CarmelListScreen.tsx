@@ -16,7 +16,7 @@ export const CarmelListScreen = (props: any) => {
       {...props}
     >
       <div className='w-full text-lg mt-4 mb-10 text-center'>
-        A Carmel is meaningful conversation about how to build a more human world.
+        A Carmel is a meaningful conversation about how to build a more human world.
       </div>
     </ListScreen>
 }

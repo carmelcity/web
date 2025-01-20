@@ -4,26 +4,29 @@ import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { Title, DynamicIcon, InfiniteScrollComponent } from '~/elements';
-import { useCarmelList } from '~/sdk/hooks';
 import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { BaseCard } from '~/components/cards'
 import { useRouter } from 'next/router'
 import logo from '~/public/images/logo/logo-white.svg';
+import { useCarmel } from '~/sdk';
 
-const List = ({ items, shortIntro, card, onItemPress, actionTitle, placeholder, auth }: any) => {
+const List = ({ items, wide, isLoading, card, section, onItemPress, actionTitle, placeholder, shortIntro }: any) => {
   const ListPlaceholder = placeholder
   const Card = card
-  
-  if (items.isLoading) {
+    
+  if (isLoading || !items) {
     return <ListPlaceholder />
   }
 
   return (
     <div className='w-full'>
     <InfiniteScrollComponent
-      renderItem={items.all.map((element: any, elementId: any) => <Card 
+      containerClasses={wide ? `w-full` : `lg:flex lg:gap-4 lg:flex-wrap justify-center`}
+      renderItem={items.map((element: any, elementId: any) => <Card 
         actionTitle={actionTitle}
+        section={section}
         key={elementId} 
+        wide={wide}
         shortIntro
         onPress={() => onItemPress(element)}
          {...element} 
@@ -35,15 +38,21 @@ const List = ({ items, shortIntro, card, onItemPress, actionTitle, placeholder, 
   )
 }
 
-export const ListScreen = ({ name, children, shortIntro, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
-  const items = useCarmelList(name)
+export const ListScreen = ({ auth, wide, filter, name, children, shortIntro, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const router = useRouter()
+  const carmel = useCarmel()
 
   const onPress = (item: any) => {
     const parts = onItemPress.split(":")
     const link = `${parts[0]}${item[parts[1]]}`
 
     router.push(link)
+  }
+
+  const getItems = () => {
+    if (!carmel.data[name]) return []
+    return carmel.data[name].filter(filter || (() => true)).sort((a: any, b: any) => a.order - b.order)
+
   }
 
   return (
@@ -64,18 +73,21 @@ export const ListScreen = ({ name, children, shortIntro, onItemPress, actionTitl
             <Title
               decription={title}
               moreClasses={`text-center text-xl text-primary uppercase mb-0`}
-              isLoading={items.isLoading}
+              isLoading={carmel.isLoading}
             />
             <Title
               decription={subtitle}
               moreClasses={`text-center lg:text-lg text-sm text-white uppercase mb-4`}
-              isLoading={items.isLoading}
+              isLoading={carmel.isLoading}
             />
             { children }
             <List 
-              items={items}
+              items={getItems()}
+              wide={wide}
+              isLoading={carmel.isLoading}
               card={card}
               shortIntro
+              section={name}
               onItemPress={onPress}
               actionTitle={actionTitle}
               placeholder={placeholder}
