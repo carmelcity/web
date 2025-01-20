@@ -5,14 +5,14 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { BannerImage } from '~/elements'
 
-const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
+const BASE_URL = `http://files.chunky.io/main/carmel/`
 
 const ProfileImage = ({ image, isLoading }: any) => {
   return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
-            src={image || PROFILE_PLACEHOLDER}
+            src={image ? `${BASE_URL}${image}` : PROFILE_PLACEHOLDER}
             alt="profile"
             width={80}
             height={80}
@@ -29,18 +29,15 @@ const ProfileImage = ({ image, isLoading }: any) => {
       </div>
 }
 
-export const Container = ({ noThumbnail, children, data }: any) => {
+export const Container = ({ noThumbnail, children, banner, username, avatar, section = "accounts" }: any) => {
+  console.log({ banner })
     const BannerSection = () => {
-      if (!data) {
-        return <div/>
-      }
-
-      return <BannerImage isLoading={data.isLoading} 
+      return <BannerImage
         forceBanner
-        banner={data.item.banner || BANNER_PLACEHOLDER}
-        thumbnail={data.item.banner || BANNER_PLACEHOLDER}
+        banner={banner ?  `${section}/${username}/${banner}` : undefined}
+        avatar={banner ?  `${section}/${username}/${banner}`: undefined}
       >
-          { noThumbnail || <ProfileImage isLoading={data.isLoading} image={data.item.profile || PROFILE_PLACEHOLDER}/> }
+          { noThumbnail || <ProfileImage image={avatar ? `${section}/${username}/${avatar}`: undefined}/> }
       </BannerImage>
     }
 

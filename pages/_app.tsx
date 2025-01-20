@@ -11,6 +11,7 @@ import { AppLoadingLayout } from '~/components/layout/Layout';
 import { WagmiProvider } from 'wagmi'
 import { config } from '../config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useCarmel } from '~/sdk';
 
 const queryClient = new QueryClient()
 
@@ -28,26 +29,28 @@ const Loading = () => {
 function App({ Component }: any) {
   const [ready, setReady] = useState(false)
   const auth = useCarmelAuth()
-  
-  useEffect(() => {
-    (async () => {
-      await auth.initialize()
-      await auth.getFreshProfile()
-    })()
-  }, [])
+  // const { data } = useCarmel()
 
-  useEffect(() => {
-    if (auth.isLoggedIn() && (!auth.profile || !auth.profile.username)) {
-      return 
-    }
-    setReady (!auth.isLoggedIn() || (auth.profile || !auth.profile.username))
-  }, [auth.profile])
+  // console.log("????", data)
+  // useEffect(() => {
+  //   (async () => {
+  //     await auth.initialize()
+  //     await auth.getFreshProfile()
+  //   })()
+  // }, [])
+
+  // useEffect(() => {
+  //   if (auth.isLoggedIn() && (!auth.profile || !auth.profile.username)) {
+  //     return 
+  //   }
+  //   setReady (!auth.isLoggedIn() || (auth.profile || !auth.profile.username))
+  // }, [auth.profile])
 
   return (
         <ThemeProvider attribute="class">
             <WagmiProvider config={config}>
               <QueryClientProvider client={queryClient}>
-                { ready ? <Component auth={auth}/> : <Loading/> }
+                <Component auth={auth}/>
               </QueryClientProvider>
             </WagmiProvider>
           <ToastContainer />

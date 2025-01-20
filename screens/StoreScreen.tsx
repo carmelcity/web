@@ -10,7 +10,7 @@ export const StoreScreen = () => {
       actionTitle="View Assets"
       subtitle="Asset Store"
       icon="CurrencyDollarIcon"
-      name="assetgroups"   
+      name="collections"   
       placeholder={ListPlaceholder}
       shortIntro
       card={AssetGroupCard}

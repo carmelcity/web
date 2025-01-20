@@ -9,8 +9,10 @@ export const CommunitiesListScreen = () => {
       onItemPress='/:username'
       actionTitle="View Community"
       subtitle="Communities"
+      wide
+      filter={(item: any) => item.type === "community"}
       icon="UserGroupIcon"
-      name="communities"   
+      name="accounts"   
       placeholder={ListPlaceholder}
       shortIntro
       card={CommunityCard}

@@ -10,7 +10,8 @@ export const ProjectsListScreen = () => {
       actionTitle="View Project"
       subtitle="Projects"
       icon="SparklesIcon"
-      name="projects"   
+      name="accounts"
+      filter={(item: any) => item.type === "project"}   
       placeholder={ListPlaceholder}
       shortIntro
       card={ProjectCard}
