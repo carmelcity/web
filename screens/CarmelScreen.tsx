@@ -18,7 +18,6 @@ export const CarmelScreen = (props: any) => {
       if (carmel.isLoading || !carmel.data || !carmel.data.carmels) return
       const item = carmel.data.carmels.find((i: any) => parseInt(i.carmelId) === parseInt(itemId))
 
-      console.log(item)
       return item
     }
 
@@ -86,7 +85,7 @@ export const CarmelScreen = (props: any) => {
     }
 
     return <div className='w-full flex flex-col items-center mt-20 mb-20'>
-      <CarmelCard {...getCarmel()} noAction isLoading={carmel.isLoading}/>
+      <CarmelCard {...getCarmel()} shortIntro={false} noAction isLoading={carmel.isLoading}/>
       <TabBar/>
       {/* <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/> */}
     </div>

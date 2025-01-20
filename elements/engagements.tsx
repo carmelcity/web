@@ -7,8 +7,8 @@ export const Engagements = ({
       return <div/>
     }
 
-    return <div className="flex h-20 mr-2 flex-row items-center">
-            <div className="ml-2 flex justify-center text-primary items-center mt-1 ">
+    return <div className="flex mr-2 flex-row items-center">
+            <div className="ml-2 flex justify-center text-primary items-center mt-1">
               <DynamicIcon name={"ChatBubbleOvalLeftEllipsisIcon"} width={24} height={24} />
               <span className='text-text-gray-300 px-1'>{ comments }</span>
               <span className='text-text-gray-300'>comments</span>
