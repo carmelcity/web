@@ -13,6 +13,7 @@ export const BaseCard = ({
   avatar,
   username,
   intro, 
+  highlight,
   wide,
   actionTitle,
   section,
@@ -83,23 +84,23 @@ export const BaseCard = ({
         </div>
     }
     
-    return <div className={`flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  border-2 border-primary/70`}>
+    return <div className={`flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  ${highlight ? 'border-2 border-primary/70' : 'border border-primary/30'}`}>
         { banner && <BannerImage isLoading={isLoading} banner={`${section}/${username}/${banner}`} avatar={`${section}/${username}/${avatar}`}/> }     
         <div className="flex flex-col p-4 leading-normal text-left w-full">
-           <h4 className={`${readexPro.className} text-xl lg:text-xl tracking-tight dark:text-white line-clamp-2`}>
-           <div className="badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2"/>
+           <h4 className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
+           <div className={`${highlight ? '' : 'hidden'} badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2`}/>
            { title }
           </h4>
           <Username/>
           <CardAuthor/>
           { tags && <Tags tags={tags || []} containerClass="mt-4" /> }
-          <p className={`${readexPro.className} text-md font-thin text-gray-400 2xl:w-5/6 mt-4 line-clamp-4`}>
+          <p className={`${readexPro.className} text-md font-thin text-gray-400 2xl:w-5/6 mt-4 ${shortIntro ? 'line-clamp-2' : ''}`}>
             { intro }
           </p>     
           <div className='flex flex-col items-center pb-10 w-full'>
               { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
               { people && <People size={5} all={people}/> }
-              { noAction || <ActionButton title={actionTitle} onPress={onPress}/> }
+              { noAction || <ActionButton highlight={highlight} title={actionTitle} onPress={onPress}/> }
           </div>
         </div>
     </div>

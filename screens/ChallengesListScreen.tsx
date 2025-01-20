@@ -14,6 +14,10 @@ export const ChallengesListScreen = () => {
       placeholder={ListPlaceholder}
       shortIntro
       card={ChallengeCard}
-    />
+    >
+      <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-md mb-8 text-center'>
+              Carmel Challenges are chunks of work commissioned and performed by communities to advance projects.
+      </span>
+  </ListScreen>
   }
   
