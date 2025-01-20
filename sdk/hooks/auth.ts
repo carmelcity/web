@@ -3,20 +3,6 @@ import { useLocalStorage } from 'usehooks-ts'
 import { customAlphabet } from 'nanoid'
 import { UAParser } from 'ua-parser-js'
 import { sendGatewayRequest } from './utils'
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, onValue } from "firebase/database";
-
-const firebaseConfig = {
-  apiKey: `${process.env['NEXT_PUBLIC_FIREBASE_KEY']}`,
-  authDomain: "chunky-platform.firebaseapp.com",
-  databaseURL: `${process.env['NEXT_PUBLIC_FIREBASE_URL']}`,
-  projectId: "chunky-platform",
-  storageBucket: "chunky-platform.firebasestorage.app",
-  messagingSenderId: "749572323876",
-  appId: "1:749572323876:web:1f484e8ccf4e0e900a36b1",
-  measurementId: "G-3GLT0KHLW5"
-}
 
 const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
@@ -26,39 +12,15 @@ export const useCarmelAuth = () => {
     const [isListeningForUser, setIsListeningForUser] = useState(false)
     const [userTransactions, setUserTransactions] = useState<any>([])
 
-    const app = initializeApp(firebaseConfig)
-    // const analytics = getAnalytics(app)
-    const db = getDatabase(app);
     const uap = new UAParser()
 
-    const listenForUserNotifications = (username: string) => {
-        if (isListeningForUser) {
-            return 
-        }
-
-        const topups = ref(db, '/transactions/' + username)        
-        onValue(topups, (snapshot: any) => { 
-            let all = [
-                ...userTransactions,
-                ...Object.values(snapshot.val() || {})
-            ]
-            all = all.sort((a: any, b: any) => b.timestamp - a.timestamp)
-            setUserTransactions(all)
-        })
-        setIsListeningForUser(true)
-    }
 
     const getFreshProfile = async () => {        
         if (!session.id || !isLoggedIn()) {
             return
         }
 
-        const p = await getProfile()
-     
-        if (p && p.account && p.account.username) {
-            listenForUserNotifications(p.account.username)
-        }
-    
+        const p = await getProfile()    
         setProfile(p.account)
     
         return p.account
