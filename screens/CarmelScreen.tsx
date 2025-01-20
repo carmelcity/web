@@ -1,19 +1,26 @@
 import React, { useMemo, useState } from 'react';
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
-import { useCarmelItem } from '~/sdk/hooks';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { CarmelCard } from '~/components/cards'
 import { CarmelPosts } from '~/components/posts'
 import { Tabs } from '~/elements';
+import { useCarmel } from '~/sdk'
 
 export const CarmelScreen = (props: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
-    
-    const data = useCarmelItem('carmels', itemId)
+    const carmel = useCarmel()
 
     const [selectedTab, setSelectedTab] = useState('pro')
+
+    const getCarmel = () => {
+      if (carmel.isLoading || !carmel.data || !carmel.data.carmels) return
+      const item = carmel.data.carmels.find((i: any) => parseInt(i.carmelId) === parseInt(itemId))
+
+      console.log(item)
+      return item
+    }
 
     const tabs = useMemo(
       () => [
@@ -27,40 +34,40 @@ export const CarmelScreen = (props: any) => {
         }
     ],[])
 
-    const filteredPosts = useMemo(() => {
-      if (!data.item.posts) {
-        return []
-      }
+    // const filteredPosts = useMemo(() => {
+    //   if (!data.item.posts) {
+    //     return []
+    //   }
 
-      return data.item.posts.filter((post: any) => {
-        const isAnti = post.isAnti ? true : false
-        return selectedTab === "anti" ? isAnti : !isAnti
-      })
-    }, [selectedTab, data]);
+    //   return data.item.posts.filter((post: any) => {
+    //     const isAnti = post.isAnti ? true : false
+    //     return selectedTab === "anti" ? isAnti : !isAnti
+    //   })
+    // }, [selectedTab, data]);
 
-    const myPost = () => {
-      if (!data.item.posts || !props.auth.isLoggedIn()) {
-        return
-      }
+    // const myPost = () => {
+    //   if (!data.item.posts || !props.auth.isLoggedIn()) {
+    //     return
+    //   }
 
-      const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
-      const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+    //   const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
+    //   const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
 
-      if (isNaN(post.postId)) {
-        return 
-      }
+    //   if (isNaN(post.postId)) {
+    //     return 
+    //   }
       
-      return {...post, onSide }
-    }
+    //   return {...post, onSide }
+    // }
   
-    if (data.isLoading) {
+    if (carmel.isLoading) {
       return <ProfileHeaderPlaceholder/>
     }
 
     const TabBar = () => {
-      if (!data.item.posts || data.item.posts.length === 0) {
-        return <div/>
-      }
+      // if (!data.item.posts || data.item.posts.length === 0) {
+      //   return <div/>
+      // }
 
       return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
           <Tabs
@@ -75,12 +82,12 @@ export const CarmelScreen = (props: any) => {
     }
 
     const onRefresh = () => {
-      data.refresh()
+      // data.refresh()
     }
 
-    return <Container>
-      <CarmelCard {...data.item} noAction isLoading={data.isLoading}/>
+    return <div className='w-full flex flex-col items-center mt-20 mb-20'>
+      <CarmelCard {...getCarmel()} noAction isLoading={carmel.isLoading}/>
       <TabBar/>
-      <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/>
-    </Container>
+      {/* <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/> */}
+    </div>
   }

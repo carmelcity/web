@@ -2,15 +2,27 @@ import Image from 'next/image';
 import PhotoIcon from '~/images/dashboard/PhotoIcon.webp';
 import { readex_pro } from '~/elements'
 
-export const BannerImage = ({ banner, isEditable, onEdit, forceBanner, thumbnail, children }: any) => {
+const BASE_URL = `http://files.chunky.io/main/carmel/`
+
+const BANNER_PLACEHOLDER = `/images/bg-1.png`
+const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
+
+export const BannerImage = ({ banner, isEditable, onEdit, forceBanner, avatar, children }: any) => {
+  const bannerImageSmall = banner ? BASE_URL + (forceBanner ? banner : avatar) : BANNER_PLACEHOLDER
+  const bannerImage = banner ? BASE_URL + banner : BANNER_PLACEHOLDER
+
+  console.log({
+      bannerImage, bannerImageSmall
+  })
+
   return <div
       className={`w-full flex-col flex justify-center items-center`}>
       <div className="lg:hidden block relative flex">
-            <Image src={forceBanner ? banner : thumbnail} alt="card" className="object-cover w-full" width={500} height={500}/>
+            <Image src={bannerImageSmall} alt="card" className="object-cover w-full" width={500} height={500}/>
             { children }  
       </div>
       <div className="hidden lg:block relative flex bg-black w-full">
-            <Image src={banner} alt="card" className="object-cover w-full" width={1500} height={500}/>
+            <Image src={bannerImage} alt="card" className="object-cover w-full" width={1500} height={500}/>
             { children }  
       </div>  
       { isEditable && <div className={`${readex_pro.className} flex text-white bg-black bg-opacity-40 lg:p-4 p-1 mr-2 font-thin cursor-pointer absolute items-center mt-2 top-0 right-0 border border-1 border-cyan`} onClick={onEdit}>

@@ -1,10 +1,9 @@
 import { readex_pro } from '~/elements/fonts'
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
-import { useCarmelItem } from '~/sdk/hooks';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { BannerImage, SoftActionButton, ActionButton, Community, Author, People, Tags } from '~/elements';
-import moment from 'moment'
+import { useCarmel } from '~/sdk'
 
 const CardAuthor = ({
   author, community, communityImage, authorImage
@@ -29,10 +28,10 @@ const CardAuthor = ({
     </div>
 }
 
-const ProfileSummary = ({ bio }: any) => {
+const ProfileSummary = ({ intro }: any) => {
     return <div className="relative z-10 lg:ml-56">
               <div className={`${readex_pro.className} font-thin text-gray-400 text-left text-lg mt-5 mb-0`}>
-                  { bio }
+                  { intro }
               </div>
             </div>
 }
@@ -72,27 +71,35 @@ const Actions = ({ actions, item, onPress }: any) => {
 export const AccountScreen = ({ auth }: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
-    
-    const data = useCarmelItem('accounts', itemId)
+    const carmel = useCarmel()
 
     const onAction = async (type: string, args: any) => {
-        await auth.accountAction(type, args)
-        await auth.getFreshProfile()
-        await data.refresh()
+        // await auth.accountAction(type, args)
+        // await auth.getFreshProfile()
+        // await data.refresh()
     }
 
-    if (data.isLoading) {
+    const getItem = () => {
+      if (carmel.isLoading || !carmel.data || !carmel.data.accounts) return
+      return carmel.data.accounts.find((i: any) => i.username === itemId)
+    }
+
+    const isLoading = () => {
+      return (carmel.isLoading || !carmel.data || !carmel.data.accounts)
+    }
+
+    if (isLoading()) {
       return <ProfileHeaderPlaceholder/>
     }
 
-    return <Container data={data}>
-          <div className={`flex flex-col ${data.isLoading && 'animate-pulse'} align-start items-start w-full bg-black/80 border border-primary/20 pb-10 px-4`}>
-              <Username item={data.item} isLoading={data.isLoading}/>
+    return <Container {...getItem()}>
+          <div className={`flex flex-col ${isLoading() && 'animate-pulse'} align-start items-start w-full bg-black/80 border border-primary/20 pb-10 px-4`}>
+              <Username item={getItem()} isLoading={isLoading()}/>
               <CardAuthor
-                {...data.item}  
+                {...getItem()}  
               />
-              <ProfileSummary bio={data.item.bio}/>
-              { auth.isLoggedIn() && <Actions onPress={onAction} item={data.item} actions={auth.profile.actions}/> }
+              <ProfileSummary {...getItem()}/>
+              {/* { auth.isLoggedIn() && <Actions onPress={onAction} item={getItem()} actions={auth.profile.actions}/> } */}
           </div>
     </Container>
   }
