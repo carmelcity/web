@@ -21,7 +21,7 @@ export const Tags = ({ tags, tagClass, containerClass, toggleEnabled = false }: 
           key={tag}
           className={`${tagClass ?? ''} flex justify-center items-center font-thin cursor-pointer hover:bg-dark-green-secondary  ${
             readex_pro.className
-          } px-1 bg-[#0B6F6F] bg-opacity-25 text-white border border-light-primary border-[0.5px] border-opacity-50 backdrop-blur-sm`}>
+          } px-1 bg-[#0B6F6F] bg-opacity-25 text-white border text-xs border-light-primary border-[0.5px] border-opacity-50 backdrop-blur-sm`}>
           {tag}
         </span>
       ))}

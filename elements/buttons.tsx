@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { DynamicIcon, readex_pro, showSuccessToast } from '~/elements';
 
-export const ActionButton = ({ title, onPress }: any)  => {
-    return <div className="lg:ml-auto text-right flex flex-col mt-4">
-    <div className="mt-auto">
-      <button
-        className="border border-cyan bg-transparent hover:bg-dark-green-secondary py-2 px-4 lg:w-48 text-cyan font-bold w-full"
-        onClick={onPress}>
-          <div className='text-nowrap text-primary'>
-          { title } 
-          </div>
-      </button>
-    </div>
+export const ActionButton = ({ highlight, title, onPress }: any)  => {
+  return <div className="lg:ml-auto text-right flex flex-col mt-4">
+  <div className="mt-auto">
+    <button
+      className={`border border-cyan ${highlight ? 'bg-primary/25' : 'bg-transparent'} hover:bg-dark-green-secondary py-2 px-4 lg:w-48 text-cyan font-bold w-full`}
+      onClick={onPress}>
+        <div className='text-nowrap text-primary'>
+        { title } 
+        </div>
+    </button>
   </div>
+</div>
 } 
+
 
 export const SoftActionButton = ({ title, onPress }: any)  => {
   return <div className="lg:ml-auto text-right flex flex-col">
