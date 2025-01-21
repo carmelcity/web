@@ -48,7 +48,7 @@ export const CarmelPostCard = ({
 
       if (editing || replying) {
         return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
-              <CommentBox onCancel={onCancelEdit} name="comment" text={replying ? "" : text}/>
+              <CommentBox onCancel={onCancelEdit} name="comment" text={replying ? "" : Buffer.from(text, 'base64').toString('utf8')}/>
           </div>
       }
 
@@ -57,12 +57,12 @@ export const CarmelPostCard = ({
             <CommentButton title="Reply" onPress={onReply} icon="ChatBubbleLeftIcon"/>
         </div>
     }
-    
+
     return <div className={`flex flex-col justify-start relative w-full ${highlight ? 'bg-primary/20' : 'bg-primary/5'} mb-4 border border-primary/20`}>
         <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
           { loading || editing || <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14`}>
-               <Text text={text}/>
+               <Text text={Buffer.from(text, 'base64').toString('utf8')}/>
             </p>     
           }
           <MainAction/>
