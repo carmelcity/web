@@ -2,16 +2,25 @@ import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeade
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { ChallengeCard } from '~/components/cards'
-
+import { useCarmel } from '~/sdk'
+ 
 export const ChallengeScreen = () => {
     const router = useRouter()
     const itemId: any = router.query.id
-    
-    // if (data.isLoading) {
+    const carmel = useCarmel()
+   
+    if (carmel.isLoading) {
       return <ProfileHeaderPlaceholder/>
-    // }
+    }
 
-    // return <Container>
-    //     <ChallengeCard {...data.item} noAction isLoading={data.isLoading}/>
-    // </Container>
+    const getChallenge = () => {
+      if (carmel.isLoading || !carmel.data || !carmel.data.challenges) return
+      const item = carmel.data.challenges.find((i: any) => parseInt(i.challengeId) === parseInt(itemId))
+
+      return item
+    }
+
+    return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
+         <ChallengeCard {...getChallenge()} noAction wide isLoading={carmel.isLoading}/>
+     </div>
   }
