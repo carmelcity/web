@@ -2,8 +2,9 @@ import React, { useState, useCallback } from 'react';
 import { useDebounce } from '~/sdk/hooks/useDebounce';
 import { TabsPlaceholder } from '~/components/placeholders/Tabs';
 import { readexPro } from '~/elements/fonts'
+import { DynamicIcon } from '~/elements'
 
-export const Tab = ({ description, value, onClick, selectedValue, isLoading }: any) => {
+export const Tab = ({ description, icon, value, onClick, selectedValue, isLoading }: any) => {
     if (isLoading) {
       return <TabsPlaceholder />;
     }
@@ -15,9 +16,10 @@ export const Tab = ({ description, value, onClick, selectedValue, isLoading }: a
   
     return (
       <button
-        className={`${readexPro.className} ${selected ? selectedStyles : notSelectedStyles} py-2 px-2 lg:px-4 text-sm lg:text-lg`}
+        className={`${readexPro.className} ${selected ? selectedStyles : notSelectedStyles} py-2 px-2 lg:px-4 text-sm lg:text-lg flex flex-row`}
         onClick={() => onClick(value)}>
-        {description}
+              { icon && <DynamicIcon name={icon} width={24} height={24} className='mr-2'/>}
+              {description}
       </button>
     );
 };

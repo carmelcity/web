@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { InfiniteScrollComponent } from '~/elements';
 import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelPostCard } from '~/components/cards'
-import { CommentButton, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
+import { CommentButton, DynamicIcon, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
 
-export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts, auth }: any) => {
+export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -33,7 +33,8 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
             loading={loading && replyingPostId === element.postId}
             key={`${elementId}`} 
             onReply={() => onReply(element)}
-            {...element} 
+            {...element}
+            text={element.text} 
         />})
 
     if (oldPost && oldPost.onSide) {
@@ -59,6 +60,61 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
     setReplyingPostId(-10)
   }
 
+
+  const editOwnPost = async ({ comment }: any) => {
+    setLoading(true)
+
+    const result = await auth.postAction("edit", {
+      text: Buffer.from(comment).toString('base64'), carmelId
+    })
+
+    if (result.error) {
+      showErrorToast(result.error)
+      return resetFields()
+    }
+
+    setTimeout(() => {
+      showSuccessToast("Your post was edited")
+      return resetFields()
+    }, 1000)
+}
+
+  const createNewPost = async ({ comment }: any) => {
+      setLoading(true)
+
+      const result = await auth.postAction("new", {
+        text: Buffer.from(comment).toString('base64'), carmelId
+      })
+
+      if (result.error) {
+        showErrorToast(result.error)
+        return resetFields()
+      }
+
+      setTimeout(() => {
+        showSuccessToast("Your post was added")
+        return resetFields()
+      }, 1000)
+  }
+
+  const createNewComment = async ({ comment }: any) => {
+      setLoading(true)
+
+      const result = await auth.postAction("comment", {
+        text: Buffer.from(comment).toString('base64'), carmelId, parentId: replyingPostId
+      })
+
+      if (result.error) {
+        showErrorToast(result.error)
+        return resetFields()
+      }
+
+      setTimeout(() => {
+        showSuccessToast("Your comment was added")
+        return resetFields()
+      }, 1000)
+  }
+
   const onAction = async (e: any) => {
     e.preventDefault()
 
@@ -74,70 +130,18 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
     }
     
     const oldPost = myPost()
-    console.log(isNaN(oldPost.postId))
 
-    if (auth.profile.username !== author && isNaN(oldPost.postId) && replyingPostId === -10) {
-      setLoading(true)
-
-      const result = await auth.postAction("new", {
-        text: data.comment, carmelId
-      })
-
-      if (result.error) {
-        showErrorToast(result.error)
-        return resetFields()
-      }
-
-      onRefresh()
-
-      setTimeout(() => {
-        showSuccessToast("Your comment was added")
-        return resetFields()
-      }, 1000)
-      return 
+    if (auth.profile.username !== author && !oldPost && replyingPostId === -10) {
+      await createNewPost(data)
+      return
     }
     
     if (replyingPostId > -10) {
-      setLoading(true)
-
-      const result = await auth.postAction("reply", {
-        text: data.comment, carmelId, postId: oldPost.postId, parentId: replyingPostId
-      })
-
-      if (result.error) {
-        showErrorToast(result.error)
-        setEditing(false)
-        setLoading(false)
-        return 
-      }
-  
-      onRefresh()
-
-      setTimeout(() => {
-        showSuccessToast("Your reply was added")
-        return resetFields()
-      }, 1000)
-
+      await createNewComment(data)
       return
     }
 
-    setLoading(true)
-
-    const result = await auth.postAction("edit", {
-      text: data.comment, carmelId, postId: oldPost.postId
-    })
-
-    if (result.error) {
-      showErrorToast(result.error)
-      return resetFields()
-    }
-
-    onRefresh()
-
-    setTimeout(() => {
-      showSuccessToast("Your comment was updated")
-      return resetFields()
-    }, 1000)
+    await editOwnPost(data)
   }
 
   const onAddComment = async () => {
@@ -162,7 +166,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
 
   const MainAction = () => {
     const oldPost = myPost()
-
+    
     if (!oldPost || !oldPost.postId) {
       if (loading && replyingPostId === -10) {
           return <div className="mt-4 pl-14 w-full flex flex-col gap-4 mb-8" >
@@ -171,7 +175,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
                 <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
             </div>
       }
-
+      
       if (auth.profile.username === author) {
         return <div/>
       }
@@ -197,6 +201,10 @@ export const CarmelPosts = ({ carmelId, author, myPost, onRefresh, isAnti, posts
     return <div className='text-gray-500 font-sm'>
           { posts.length } { posts.length > 1 ? 'people' : 'person' } chose this side so far
     </div>
+  }
+
+  if (!author) {
+    return <div/>
   }
 
   return (

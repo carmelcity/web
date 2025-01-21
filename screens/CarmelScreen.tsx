@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
@@ -8,66 +8,76 @@ import { Tabs } from '~/elements';
 import { useCarmel } from '~/sdk'
 
 export const CarmelScreen = (props: any) => {
+    const [item, setItem] = useState<any>(undefined)
     const router = useRouter()
     const itemId: any = router.query.id
     const carmel = useCarmel()
 
     const [selectedTab, setSelectedTab] = useState('agree')
 
-    const getCarmel = () => {
-      if (carmel.isLoading || !carmel.data || !carmel.data.carmels) return
-      const item = carmel.data.carmels.find((i: any) => parseInt(i.carmelId) === parseInt(itemId))
-
-      return item
+    const isLoading = () => {
+      return (carmel.isLoading || !carmel.data || !carmel.data.carmels)
     }
+
+    useEffect(() => {
+      if (isLoading()) return
+      const i = carmel.data.carmels.find((i: any) => parseInt(i.carmelId) === parseInt(itemId))
+      setItem(i) 
+    }, [carmel.data])
 
     const tabs = useMemo(
       () => [
         {
           description: `AGREE`,
           value: 'agree',
+          icon: "HandThumbUpIcon"
         },
         {
           description: `DISAGREE`,
           value: 'diagree',
+          icon: "HandThumbDownIcon"
         }
     ],[])
 
-    // const filteredPosts = useMemo(() => {
-    //   if (!data.item.posts) {
-    //     return []
-    //   }
+   
 
-    //   return data.item.posts.filter((post: any) => {
-    //     const isAnti = post.isAnti ? true : false
-    //     return selectedTab === "anti" ? isAnti : !isAnti
-    //   })
-    // }, [selectedTab, data]);
+    const posts: any = () => item && item.posts ? Object.values(item.posts).filter((p: any) => p) : []
 
-    // const myPost = () => {
-    //   if (!data.item.posts || !props.auth.isLoggedIn()) {
-    //     return
-    //   }
+    const sidePosts = useMemo(() => {
+      const p = posts()
 
-    //   const post = data.item.posts.find((p: any) => p.author === props.auth.profile.username)
-    //   const onSide = post && filteredPosts && filteredPosts.length > 0 ? filteredPosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+      if (!item || !p || p.length == 0 ) {
+        return []
+      }
 
-    //   if (isNaN(post.postId)) {
-    //     return 
-    //   }
+      return p.filter((post: any) => {
+        const isAnti = post.isAnti ? true : false
+        return selectedTab === "anti" ? isAnti : !isAnti
+      })
+    }, [selectedTab, item]);
+
+    const myPost = () => {
+      const p = posts()
+
+      if (!item || !p || p.length == 0 || !props.auth.isLoggedIn()) {
+        return
+      }
+
+      const post = p.find((i: any) => i.author === props.auth.profile.username)
+      const onSide = post && sidePosts && sidePosts.length > 0 ? sidePosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+
+      if (!post || isNaN(post.postId)) {
+        return 
+      }
       
-    //   return {...post, onSide }
-    // }
+      return {...post, onSide }
+    }
   
-    if (carmel.isLoading) {
+    if (isLoading()) {
       return <ProfileHeaderPlaceholder/>
     }
 
     const TabBar = () => {
-      // if (!data.item.posts || data.item.posts.length === 0) {
-      //   return <div/>
-      // }
-
       return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
           <Tabs
             isLoading={false}
@@ -80,13 +90,9 @@ export const CarmelScreen = (props: any) => {
       </div>
     }
 
-    const onRefresh = () => {
-      // data.refresh()
-    }
-
     return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
-      <CarmelCard {...getCarmel()} shortIntro={false} noAction isLoading={carmel.isLoading} wide highlight/>
+      <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight/>
       <TabBar/>
-      {/* <CarmelPosts myPost={myPost} onRefresh={onRefresh} {...data.item} posts={filteredPosts} {...props}/> */}
+      <CarmelPosts myPost={myPost} {...item} {...props} posts={posts()}/>
     </div>
   }
