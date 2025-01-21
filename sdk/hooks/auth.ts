@@ -14,7 +14,6 @@ export const useCarmelAuth = () => {
 
     const uap = new UAParser()
 
-
     const getFreshProfile = async () => {        
         if (!session.id || !isLoggedIn()) {
             return
