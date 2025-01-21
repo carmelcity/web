@@ -6,6 +6,7 @@ import Image from 'next/image'
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
+const BASE_URL = `http://files.chunky.io/main/carmel/accounts`
 
 export const ProfileScreen = ({ auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -35,11 +36,11 @@ export const ProfileScreen = ({ auth }: any) => {
       return 
     }
     
-    const { bio, banner, profile } = auth.profile
+    const { intro, banner, avatar } = auth.profile
 
-    setBio(bio)
-    setBannerImage(banner || BANNER_PLACEHOLDER)
-    setProfileImage(profile || PROFILE_PLACEHOLDER)
+    setBio(intro)
+    setBannerImage(banner ? `${BASE_URL}/${auth.profile.username}/${banner}` : '')
+    setProfileImage(avatar ? `${BASE_URL}/${auth.profile.username}/${avatar}` : '')
 
     setIsLoading(false)
   }, [auth.profile])
@@ -58,18 +59,30 @@ export const ProfileScreen = ({ auth }: any) => {
     const formData = new FormData(e.target)
     const data: any = Object.fromEntries(formData.entries())
 
-    const bioText = data.bio.length > 0 ? `data:application/json;base64,${Buffer.from(data.bio).toString('base64')}` : ""
-    setBio(data.bio)
-
-    const result = await auth.updateProfile({
-      bannerImage, profileImage, bioText
+    const bioText = data.bio
+    console.log({
+          bannerImage, profileImage, bioText
     })
 
-    await auth.getFreshProfile()
+    const payload = Object.assign({
 
-    setIsLoading(false)
-    setIsEditable(false)
-    showSuccessToast("Profile updated")     
+    }, 
+      bannerImage.startsWith(BASE_URL) || { bannerImage },
+      profileImage.startsWith(BASE_URL) || { profileImage },
+    )
+
+    // const bioText = data.bio//bio.length > 0 ? `data:application/json;base64,${Buffer.from(data.bio).toString('base64')}` : ""
+    // setBio(data.bio)
+
+    // const result = await auth.updateProfile({
+    //   bannerImage, profileImage, bioText
+    // })
+
+    // await auth.getFreshProfile()
+
+    // setIsLoading(false)
+    // setIsEditable(false)
+    // showSuccessToast("Profile updated")     
   }
 
   const handleEditBannerEdit = async () => {
@@ -153,7 +166,7 @@ export const ProfileScreen = ({ auth }: any) => {
          onProfileEdit={handleEditProfileEdit}
          email={auth.profile.email}
          username={auth.profile.username}
-         bio={auth.profile.bio}        
+         bio={auth.profile.intro}        
         />
         
         <ActionButtons/>

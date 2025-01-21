@@ -12,7 +12,7 @@ export const CarmelScreen = (props: any) => {
     const itemId: any = router.query.id
     const carmel = useCarmel()
 
-    const [selectedTab, setSelectedTab] = useState('pro')
+    const [selectedTab, setSelectedTab] = useState('agree')
 
     const getCarmel = () => {
       if (carmel.isLoading || !carmel.data || !carmel.data.carmels) return
@@ -24,12 +24,12 @@ export const CarmelScreen = (props: any) => {
     const tabs = useMemo(
       () => [
         {
-          description: `PRO`,
-          value: 'pro',
+          description: `AGREE`,
+          value: 'agree',
         },
         {
-          description: `AGAINST`,
-          value: 'anti',
+          description: `DISAGREE`,
+          value: 'diagree',
         }
     ],[])
 

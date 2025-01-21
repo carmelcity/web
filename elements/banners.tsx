@@ -5,15 +5,10 @@ import { readex_pro } from '~/elements'
 const BASE_URL = `http://files.chunky.io/main/carmel/`
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
-const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
-export const BannerImage = ({ banner, isEditable, onEdit, forceBanner, avatar, children }: any) => {
-  const bannerImageSmall = banner ? BASE_URL + (forceBanner ? banner : avatar) : BANNER_PLACEHOLDER
-  const bannerImage = banner ? BASE_URL + banner : BANNER_PLACEHOLDER
-
-  console.log({
-      bannerImage, bannerImageSmall
-  })
+export const BannerImage = ({ banner, raw, isEditable, onEdit, forceBanner, avatar, children }: any) => {
+  const bannerImageSmall = banner ? raw ? banner : BASE_URL + (forceBanner ? banner : avatar) : BANNER_PLACEHOLDER
+  const bannerImage = banner ? raw ? banner : BASE_URL + banner : BANNER_PLACEHOLDER
 
   return <div
       className={`w-full flex-col flex justify-center items-center`}>
