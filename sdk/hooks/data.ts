@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: `${process.env['NEXT_PUBLIC_FIREBASE_KEY']}`,
@@ -18,8 +17,6 @@ const app = initializeApp(firebaseConfig)
 const db = getDatabase(app);
 
 export const useCarmel = () => {
-    const [isListeningForUser, setIsListeningForUser] = useState(false)
-    const [userTransactions, setUserTransactions] = useState<any>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isReady, setIsReady] = useState(false)
     
@@ -37,29 +34,6 @@ export const useCarmel = () => {
         })
         setIsReady(true)
     }, [])
-
-    // const getData = async (path: string) => {
-    //     const snapshot: any = await get(child(dbRef, path))
-    //     console.log(snapshot)
-    //     return snapshot && snapshot.exists() ? snapshot.val() : undefined
-    // }
-
-    // const listenForUserNotifications = (username: string) => {
-    //     if (isListeningForUser) {
-    //         return 
-    //     }
-
-    //     const topups = ref(db, '/transactions/' + username)        
-    //     onValue(topups, (snapshot: any) => { 
-    //         let all = [
-    //             ...userTransactions,
-    //             ...Object.values(snapshot.val() || {})
-    //         ]
-    //         all = all.sort((a: any, b: any) => b.timestamp - a.timestamp)
-    //         setUserTransactions(all)
-    //     })
-    //     setIsListeningForUser(true)
-    // }
 
     return { data, isLoading, isReady }
 }

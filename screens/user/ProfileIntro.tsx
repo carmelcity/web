@@ -4,7 +4,6 @@ import { readex_pro } from '~/elements/fonts'
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 import { BannerImage } from '~/elements'
 
-const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
@@ -78,6 +77,7 @@ const ProfileImage = ({ isEditable, image, onEdit, isLoading }: any) => {
     return <div className={`flex flex-col justify-start relative bg-black/80 border border-primary/20 mb-8 w-full`}>
          <BannerImage
             forceBanner
+            raw
             isLoading={isLoading} 
             banner={bannerImage} 
             isEditable={isEditable} 
