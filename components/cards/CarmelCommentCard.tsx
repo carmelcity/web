@@ -30,7 +30,7 @@ export const CarmelCommentCard = ({
         <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
           <div className={`${readexPro.className} mb-3 text-lg font-thin 2xl:w-5/6 pl-14`}>
-            <Text text={text}/>
+            <Text text={Buffer.from(text, 'base64').toString('utf8')}/>
           </div>     
         </div>
     </div>

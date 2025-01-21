@@ -13,7 +13,7 @@ export const LoginScreen = () => {
 
   const login = () => {
     setTimeout(() => {
-      // router.push('/profile')
+      router.push('/profile')
     }, 3000)
   }
 

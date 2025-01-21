@@ -9,7 +9,7 @@ export const CarmelPostComments = ({ comments }: any) => {
   }
 
   const showComments = () => {
-    return comments.map((element: any, elementId: any) => <CarmelCommentCard 
+    return comments.sort((a: any, b: any) => b.updatedOn - a.updatedOn).map((element: any, elementId: any) => <CarmelCommentCard 
         key={`${elementId}`} 
         onPress={() => {}}
          {...element} 
