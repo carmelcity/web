@@ -2,13 +2,35 @@ import React, { useState } from 'react'
 import { InfiniteScrollComponent } from '~/elements';
 import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelPostCard } from '~/components/cards'
-import { CommentButton, DynamicIcon, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
+import { CommentButton, Chunky, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
+import { RatingModal } from './RatingModal'
 
 export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [rating, setRating] = useState<any>(undefined)
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [isReady, setIsReady] = useState(false)
+  const [currentComment, setCurrentComment] = useState<any>("")
+  const [isReadyConfirm, setIsReadyConfirm] = useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+
   const [replyingPostId, setReplyingPostId] = useState(-10)
+
+  const onToggleConfirm = (v: boolean) => {
+    if (!v) {
+      setIsReadyConfirm(false)
+    }
+    setIsConfirmOpen(v)
+  }
+   
+  const onToggle = (v: boolean) => {
+    if (!v) {
+      setIsReady(false)
+    }
+    setModalOpen(v)
+  }
 
   const onReply = (post: any) => {
     setReplyingPostId(post.postId)
@@ -57,6 +79,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
     setEditing(false)
     setLoading(false)  
     setAdding(false)
+    setCurrentComment("")
     setReplyingPostId(-10)
   }
 
@@ -79,22 +102,36 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
     }, 1000)
 }
 
-  const createNewPost = async ({ comment }: any) => {
-      setLoading(true)
-
+  const onSaveComment = async () => {
       const result = await auth.postAction("new", {
-        text: Buffer.from(comment).toString('base64'), carmelId
+        text: Buffer.from(currentComment).toString('base64'), carmelId
       })
 
       if (result.error) {
         showErrorToast(result.error)
         return resetFields()
-      }
+     }
 
       setTimeout(() => {
         showSuccessToast("Your post was added")
-        return resetFields()
+        resetFields()
       }, 1000)
+  }
+
+  const createNewPost = async ({ comment }: any) => {
+    setLoading(true)
+
+    const res = await auth.aiAction("post", { text: comment, carmelId })
+  
+    if (res.error) {
+       showErrorToast(res.error)
+       return resetFields()
+    }
+
+     setCurrentComment(comment)
+     setRating(res.result)
+     setIsConfirmOpen(true)
+     setLoading(false)
   }
 
   const createNewComment = async ({ comment }: any) => {
@@ -180,9 +217,12 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
         return <div/>
       }
 
-      return <div className='w-full flex flex-col'>
+      return <div className='w-full flex flex-row'>
+        <div className='m-1'>
+          <Chunky/>
+        </div>
         { adding ? 
-          <CommentBox onCancel={onCancelAddComment} name="comment"/> : 
+          <CommentBox text={currentComment} onCancel={onCancelAddComment} name="comment" placeholder={`What do you think? Add a thoughtful comment to this debate.`}/> : 
           <CommentButton onPress={onAddComment} icon="ChatBubbleLeftIcon" title="Join this side"/> 
         }          
       </div>
@@ -209,6 +249,8 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
 
   return (
     <div className='w-full flex flex-col'>
+      <RatingModal isModalOpen={isConfirmOpen} onSave={onSaveComment} setModalOpen={onToggleConfirm} rating={rating} />
+      
       <form method='post' onSubmit={onAction}>
         <MainAction/>
         { editing || loading || adding || <TopLabel/> }
