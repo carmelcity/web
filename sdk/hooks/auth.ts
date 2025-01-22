@@ -81,6 +81,10 @@ export const useCarmelAuth = () => {
         return makeCall({ service: `post/${action}`, args })
     }
 
+    const aiAction = async (action: string, args: any) => {
+        return makeCall({ service: `ai/${action}`, args })
+    }
+
     const accountAction = async (action: string, args: any) => {
         return makeCall({ service: `account/${action}`, args })
     }
@@ -158,6 +162,7 @@ export const useCarmelAuth = () => {
         getFreshProfile, 
         logout, 
         initialize, 
+        aiAction,
         postAction,
         checkUsername, 
         getProfile, 

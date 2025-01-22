@@ -28,6 +28,51 @@ export const SimpleAvatar = (props: any) => {
   );
 }
 
+
+export const Chunky = (props: any) => {
+  return (
+    <div className="flex flex-col items-center">
+      <div
+        className="w-11 h-11 bg-primary z-10"
+        style={{
+          clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
+        }}/>
+      <div
+        className="w-10 h-10 z-20 bg-dark-green-secondary absolute mt-0.5"
+        style={{
+          clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
+        }}>
+        <Image
+          src={`http://files.chunky.io/main/carmel/accounts/chunky/avatar.png`}
+          alt={'chunky'}
+          width={10}
+          height={10}
+          className="object-cover w-full h-full"
+        />
+      </div>
+    </div>
+  );
+}
+
+
+export const ChunkyLarge = (props: any) => {
+  return (
+    <div className="flex flex-col items-center">
+      
+      <div
+        className="-mt-24">
+        <Image
+          src={`http://files.chunky.io/main/carmel/accounts/chunky/avatar.png`}
+          alt={'chunky'}
+          width={100}
+          height={100}
+          className="mask mask-hexagon"
+        />
+      </div>
+    </div>
+  );
+}
+
 export const ComplexAvatar = ({
   username,
   noCommunityLink,
