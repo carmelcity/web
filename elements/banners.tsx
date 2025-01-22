@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import PhotoIcon from '~/images/dashboard/PhotoIcon.webp';
 import { readex_pro } from '~/elements'
+import { fileUrl } from '~/utils/main';
 
-const BASE_URL = `http://files.chunky.io/main/carmel/`
-
+const BASE_URL = fileUrl(``)
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 
 export const BannerImage = ({ banner, raw, isEditable, onEdit, forceBanner, avatar, children }: any) => {

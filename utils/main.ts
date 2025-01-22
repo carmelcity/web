@@ -3,4 +3,8 @@ export const getOrigin = () => {
       ? window.location.origin
       : ''
 }
+
+export const fileUrl = (file: string) => {
+  return `${process.env['NEXT_PUBLIC_FILES_URL']}/${file}`
+}
     
