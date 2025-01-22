@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
+import node from '../node'
 
 const firebaseConfig = {
   apiKey: `${process.env['NEXT_PUBLIC_FIREBASE_KEY']}`,
@@ -19,21 +20,25 @@ const db = getDatabase(app);
 export const useCarmel = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isReady, setIsReady] = useState(false)
-    
+    const [started, setStarted] = useState(false)
+
     const [data, setData] = useState<any>({})
 
     useEffect(() => {
-        if (isReady) return 
-        onValue(ref(db, 'carmel'), (snapshot) => {
-          let _data = snapshot.val()
-          Object.keys(_data).map((section: string) => {
-            _data[section] = (Array.isArray( _data[section]) ? _data[section] :  Object.values(_data[section])).filter((i: any) => i)
+        (async () => {
+          if (isReady) return 
+          onValue(ref(db, 'carmel'), (snapshot) => {
+            let _data = snapshot.val()
+            Object.keys(_data).map((section: string) => {
+              _data[section] = (Array.isArray( _data[section]) ? _data[section] :  Object.values(_data[section])).filter((i: any) => i)
+            })
+            setData(_data)
+            setIsLoading(false)
           })
-          setData(_data)
-          setIsLoading(false)
-        })
-        setIsReady(true)
-    }, [])
+          await node.start()
+          setIsReady(true)
+        })()
+      }, [])
 
     return { data, isLoading, isReady }
 }

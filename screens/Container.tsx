@@ -4,9 +4,10 @@ import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { BannerImage } from '~/elements'
+import { fileUrl } from '~/utils/main';
 
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-const BASE_URL = `http://files.chunky.io/main/carmel/`
+const BASE_URL = fileUrl('')
 
 const ProfileImage = ({ image, isLoading }: any) => {
   return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>

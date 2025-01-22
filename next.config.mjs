@@ -1,6 +1,16 @@
+import path from 'path'
+
 /** @type {import('next').NextConfig} */
 export default {
-  reactStrictMode: false,
+  transpilePackages: ["@carmel/core"],
+  webpack(webpackConfig) {
+    console.log(path.resolve("./node_modules/@carmel/core"))
+    webpackConfig.resolve.alias["@carmel/core"] = path.resolve("./node_modules/@carmel/core");
+    return {
+      ...webpackConfig,
+    }
+  },
+  reactStrictMode: true,
   trailingSlash: true,
   images: {
     unoptimized: true,
