@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { showSuccessToast, readex_pro } from '~/elements';
 import { ProfileIntro } from './ProfileIntro'
 import Image from 'next/image'
+import { fileUrl } from '~/utils/main';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-const BASE_URL = `http://files.chunky.io/main/carmel/accounts`
+const BASE_URL = fileUrl(`accounts`)
 
 export const ProfileScreen = ({ auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
