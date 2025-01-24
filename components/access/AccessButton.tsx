@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import profile_placeholder from '~/images/profile_placeholder.webp';
-import { DynamicIcon, showSuccessToast } from '~/elements';
+import { DynamicIcon, showSuccessToast, AuthButton } from '~/elements';
 import { AccessModal } from './AccessModal'
 import { ConfirmModal } from './ConfirmModal';
 
@@ -46,18 +46,18 @@ export const AccessButton = ({ auth }: any) => {
       case "profile":
         router.push('/profile')
         break
-      case "wallet":
-        router.push('/wallet')
-        break
-      case "friends":
-        router.push('/friends')
-        break
-      case "settings":
-        router.push('/settings')
-        break
-      case "card":
-        router.push('/card')
-        break
+      // case "wallet":
+      //   router.push('/wallet')
+      //   break
+      // case "friends":
+      //   router.push('/friends')
+      //   break
+      // case "settings":
+      //   router.push('/settings')
+      //   break
+      // case "card":
+      //   router.push('/card')
+      //   break
       case "signout":
         setIsConfirm(`Are you sure you want to sign out?`)
         setIsConfirmOpen(true)
@@ -76,22 +76,22 @@ export const AccessButton = ({ auth }: any) => {
       id: "profile",
       title: "Profile",
       icon: "UserIcon"
-    }, {
-      id: "card",
-      title: "Card",
-      icon: "IdentificationIcon"
-    }, {
-      id: "wallet",
-      title: "Wallet",
-      icon: "WalletIcon"
-    }, {
-      id: "friends",
-      title: "Friends",
-      icon: "UsersIcon"
-    }, {
-      id: "settings",
-      title: "Settings",
-      icon: "Cog8ToothIcon"
+    // }, {
+    //   id: "card",
+    //   title: "Card",
+    //   icon: "IdentificationIcon"
+    // }, {
+    //   id: "wallet",
+    //   title: "Wallet",
+    //   icon: "WalletIcon"
+    // }, {
+    //   id: "friends",
+    //   title: "Friends",
+    //   icon: "UsersIcon"
+    // }, {
+    //   id: "settings",
+    //   title: "Settings",
+    //   icon: "Cog8ToothIcon"
     }, {
       id: "signout",
       title: "Sign out",
@@ -99,7 +99,7 @@ export const AccessButton = ({ auth }: any) => {
     }]
   }
 
-  if (auth.isLoggedIn()) {
+  if (auth && auth.isLoggedIn()) {
       return <div tabIndex={0} onClick={handleAccount} className={`dropdown dropdown-button ${menuOpen ? 'dropdown-open' : 'dropdown-close'} cursor-pointer h-12 lg:w-full bg-cyan bg-opacity-20 mb-5 flex items-center border border-primary/20 mt-4 ml-4 lg:ml-0`}>
         <div className="mr-auto ml-1 bg-transparent flex justify-center items-center w-full">
           <div className="flex items-center">
@@ -138,21 +138,9 @@ export const AccessButton = ({ auth }: any) => {
   }
 
   return <div onClick={handleLogin} className={`cursor-pointer h-12 lg:w-full mb-2 flex items-center mt-2 lg:ml-0`}>
-          <Image
-            src={`/images/login-lg.png`}
-            width={600}
-            height={200}
-            alt={'profile'}
-            className="mt-2 w-80 hidden lg:flex"
-          />
-          <Image
-            src={`/images/login.png`}
-            width={600}
-            height={200}
-            alt={'profile'}
-            className=" ml-4 w-80 lg:hidden flex"
-          />
-
+        <div className='lg:w-full text-center mt-2'>
+          <AuthButton title="Get Early Access" icon="UserIcon"/>
+        </div>
         <div className='z-200'>
           <AccessModal isModalOpen={isModalOpen} setModalOpen={onToggle} />
         </div>
