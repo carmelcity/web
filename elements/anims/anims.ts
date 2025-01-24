@@ -6,7 +6,9 @@ import biometric from "./biometric.json"
 import email from "./email.json"
 import emailSent from "./emailSent.json"
 import lock from "./lock.json"
+import ok from "./ok.json"
+import error from "./error.json"
 
 export { 
-    success, gift, start, account, biometric, email, emailSent, lock
+    success, gift, error, start, account, biometric, email, emailSent, lock, ok
 }
