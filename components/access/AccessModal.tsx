@@ -8,10 +8,10 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   const [error, setError] = useState("")
   const [username, setUsername] = useState<string>('')
   const [isWaiting, setIsWaiting] = useState<boolean>(false)
-  const [isRegister, setIsRegister] = useState<boolean>(false)
+  const [isRegister, setIsRegister] = useState<boolean>(true)
 
   const handleAuth = async (data: any) => {
-    if (isRegister && !username) {
+    if (isRegister && data.username) {
       const res = await auth.checkUsername(data)
 
       if (res.error) {
@@ -28,7 +28,8 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       return
     }
 
-    const result = await auth.getAuthToken(Object.assign({ ...data }, username && { username }))
+    const props = Object.assign({ ...data }, username && { username })
+    const result = await auth.getAuthToken(props)
     
     if (result.error) {
       showErrorToast(result.error)
@@ -53,7 +54,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       setUsername("")
       setError("")
       setIsWaiting(false)
-      setIsRegister(false)
+      setIsRegister(true)
     }
   }, [isModalOpen])
 
@@ -69,7 +70,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
   }
 
   const modalTitle = () => error ? "Oh no, please try again" : isWaiting ? isRegister ? "You're now on the list" : "Check your email" : isRegister ? "Get Early Access" : "Login"
-  const modalIcon = () => error ? "ExclamationTriangleIcon" : isWaiting ? isRegister ? "CheckCircleIcon" : "EnvelopeIcon" : isRegister ? "CalendarIcon" : "ArrowRightEndOnRectangleIcon"
+  const modalIcon = () => error ? "ExclamationTriangleIcon" : isWaiting ? isRegister ? "CheckCircleIcon" : "EnvelopeIcon" : isRegister ? "UserIcon" : "ArrowRightEndOnRectangleIcon"
   const waitingMessage = () => error ? error : isRegister ? "Stay tuned for early access activation" : "To login, click on the link in the email"
 
   const ModalHeader = () => {
@@ -77,10 +78,10 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       <div className="flex justify-center items-center text-primary">
         <DynamicIcon name={modalIcon()} width={48} height={48} />
       </div>
-      <div className="mt-2 text-center font-normal leading-6 text-primary text-2xl">
+      <div className="mt-2 text-center font-normal leading-6 text-white text-lg">
         { modalTitle() }
       </div>
-      <div className="mt-2 text-center font-normal leading-6 text-white text-md">
+      <div className="mt-2 text-center font-normal leading-6 text-primary text-xl">
           { username }
       </div>
 

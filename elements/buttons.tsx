@@ -15,7 +15,6 @@ export const ActionButton = ({ highlight, title, onPress }: any)  => {
 </div>
 } 
 
-
 export const SoftActionButton = ({ title, onPress }: any)  => {
   return <div className="lg:ml-auto text-right flex flex-col">
   <div className="mt-auto">
@@ -41,5 +40,19 @@ export const CommentButton = ({ title, onPress, icon }: any)  => {
       </button>
     </div>
   </div>
-  } 
+}
+
+export const AuthButton = ({ title, onPress, icon }: any)  => {
+  return <div className="flex flex-col ml-2 lg:ml-0">
+    <div className="mt-auto mb-1 ">
+    <button
+      className="bg-primary flex gap-2 flex-row hover:bg-dark-green-secondary p-2 text-gray-900 hover:text-primary font-bold border border-primary w-full justify-center text-nowrap"
+      onClick={onPress}>
+        <DynamicIcon name={icon} width={20} height={20} />
+        { title } 
+    </button>
+  </div>
+</div>
+} 
+
   
