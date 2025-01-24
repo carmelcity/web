@@ -10,13 +10,20 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
   const [rating, setRating] = useState<any>(undefined)
-  const [isModalOpen, setModalOpen] = useState(false)
-  const [isReady, setIsReady] = useState(false)
   const [currentComment, setCurrentComment] = useState<any>("")
   const [isReadyConfirm, setIsReadyConfirm] = useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [ratingAnim, setRatingAnim] = useState<any>(undefined)
 
   const [replyingPostId, setReplyingPostId] = useState(-10)
+
+  const resetFields = () => {
+    setEditing(false)
+    setLoading(false)  
+    setAdding(false)
+    setCurrentComment("")
+    setReplyingPostId(-10)
+  }
 
   const onToggleConfirm = (v: boolean) => {
     if (!v) {
@@ -24,21 +31,13 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
     }
     setIsConfirmOpen(v)
   }
-   
-  const onToggle = (v: boolean) => {
-    if (!v) {
-      setIsReady(false)
-    }
-    setModalOpen(v)
-  }
 
   const onReply = (post: any) => {
     setReplyingPostId(post.postId)
   }
 
   const onCancelEdit = async () => {
-    setEditing(false)
-    setReplyingPostId(-10)
+    resetFields()
   }
 
   const onEdit = (post: any) => {
@@ -54,6 +53,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
             onCancelEdit={onCancelEdit}
             loading={loading && replyingPostId === element.postId}
             key={`${elementId}`} 
+            currentComment={currentComment}
             onReply={() => onReply(element)}
             {...element}
             text={element.text} 
@@ -64,6 +64,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
         editing={editing} 
         replying={replyingPostId === oldPost.postId}
         highlight 
+        currentComment={currentComment}
         loading={loading}
         text={oldPost ? oldPost.text : ""}
         onCancelEdit={onCancelEdit}
@@ -75,81 +76,37 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
     return [...otherPosts]
   }
 
-  const resetFields = () => {
-    setEditing(false)
-    setLoading(false)  
-    setAdding(false)
-    setCurrentComment("")
-    setReplyingPostId(-10)
-  }
-
-
-  const editOwnPost = async ({ comment }: any) => {
+  const handlePostSubmission = async (text: string) => {
     setLoading(true)
-
-    const result = await auth.postAction("edit", {
-      text: Buffer.from(comment).toString('base64'), carmelId
-    })
+    
+    const oldPost = myPost()
+    let action = replyingPostId > -10 ? "comment" : (auth.profile.username !== author && !oldPost) ? "new" : "edit"    
+    const result = await auth.postAction(action, Object.assign({ text, carmelId }, replyingPostId > -10 && { parentId: replyingPostId }))
 
     if (result.error) {
       showErrorToast(result.error)
       return resetFields()
     }
 
-    setTimeout(() => {
-      showSuccessToast("Your post was edited")
-      return resetFields()
-    }, 1000)
-}
-
-  const onSaveComment = async () => {
-      const result = await auth.postAction("new", {
-        text: Buffer.from(currentComment).toString('base64'), carmelId
-      })
-
-      if (result.error) {
-        showErrorToast(result.error)
-        return resetFields()
-     }
-
-      setTimeout(() => {
-        showSuccessToast("Your post was added")
-        resetFields()
-      }, 1000)
-  }
-
-  const createNewPost = async ({ comment }: any) => {
-    setLoading(true)
-
-    const res = await auth.aiAction("post", { text: comment, carmelId })
-  
-    if (res.error) {
-       showErrorToast(res.error)
-       return resetFields()
+    setRating(result.rating)
+    
+    if (result.success) {
+      setRatingAnim({ id: "success", title: "Congrats, your post was added!" })
+      setTimeout(() => { setRatingAnim(undefined) }, 2000)
+    } else {
+      setRatingAnim({ id: "error", title: "Not quite there yet..." })
+      setTimeout(() => { setRatingAnim(undefined) }, 2000)
     }
 
-     setCurrentComment(comment)
-     setRating(res.result)
-     setIsConfirmOpen(true)
-     setLoading(false)
-  }
+    setIsConfirmOpen(true)
 
-  const createNewComment = async ({ comment }: any) => {
-      setLoading(true)
+    if (result.success) {
+      resetFields()
+      return 
+    }
 
-      const result = await auth.postAction("comment", {
-        text: Buffer.from(comment).toString('base64'), carmelId, parentId: replyingPostId
-      })
-
-      if (result.error) {
-        showErrorToast(result.error)
-        return resetFields()
-      }
-
-      setTimeout(() => {
-        showSuccessToast("Your comment was added")
-        return resetFields()
-      }, 1000)
+    setCurrentComment(text)
+    setLoading(false)
   }
 
   const onAction = async (e: any) => {
@@ -166,19 +123,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
       return 
     }
     
-    const oldPost = myPost()
-
-    if (auth.profile.username !== author && !oldPost && replyingPostId === -10) {
-      await createNewPost(data)
-      return
-    }
-    
-    if (replyingPostId > -10) {
-      await createNewComment(data)
-      return
-    }
-
-    await editOwnPost(data)
+    await handlePostSubmission(data.comment)
   }
 
   const onAddComment = async () => {
@@ -203,7 +148,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
 
   const MainAction = () => {
     const oldPost = myPost()
-    
+
     if (!oldPost || !oldPost.postId) {
       if (loading && replyingPostId === -10) {
           return <div className="mt-4 pl-14 w-full flex flex-col gap-4 mb-8" >
@@ -222,7 +167,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
           <Chunky/>
         </div>
         { adding ? 
-          <CommentBox text={currentComment} onCancel={onCancelAddComment} name="comment" placeholder={`What do you think? Add a thoughtful comment to this debate.`}/> : 
+          <CommentBox text={currentComment} onCancel={onCancelAddComment} name="comment" placeholder={`What do you think? Add a thoughtful post to this debate.`}/> : 
           <CommentButton onPress={onAddComment} icon="ChatBubbleLeftIcon" title="Join this side"/> 
         }          
       </div>
@@ -249,7 +194,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
 
   return (
     <div className='w-full flex flex-col'>
-      <RatingModal isModalOpen={isConfirmOpen} onSave={onSaveComment} setModalOpen={onToggleConfirm} rating={rating} />
+      <RatingModal isModalOpen={isConfirmOpen} anim={ratingAnim} setModalOpen={onToggleConfirm} rating={rating} />
       
       <form method='post' onSubmit={onAction}>
         <MainAction/>

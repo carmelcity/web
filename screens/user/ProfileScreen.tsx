@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { showSuccessToast, readex_pro } from '~/elements';
 import { ProfileIntro } from './ProfileIntro'
 import Image from 'next/image'
-import { fileUrl } from '~/utils/main';
+import { getImageUrl } from '~/utils/main';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-const BASE_URL = fileUrl(`accounts`)
+// const BASE_URL = fileUrl(`accounts`)
 
 export const ProfileScreen = ({ auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -40,8 +40,8 @@ export const ProfileScreen = ({ auth }: any) => {
     const { intro, banner, avatar } = auth.profile
 
     setBio(intro)
-    setBannerImage(banner ? `${BASE_URL}/${auth.profile.username}/${banner}` : '')
-    setProfileImage(avatar ? `${BASE_URL}/${auth.profile.username}/${avatar}` : '')
+    setBannerImage(banner ? getImageUrl(auth.profile.username, 'banner') : '')
+    setProfileImage(avatar ? getImageUrl(auth.profile.username, 'avatar') : '')
 
     setIsLoading(false)
   }, [auth.profile])
@@ -61,16 +61,16 @@ export const ProfileScreen = ({ auth }: any) => {
     const data: any = Object.fromEntries(formData.entries())
 
     const bioText = data.bio
-    console.log({
-          bannerImage, profileImage, bioText
-    })
+    // console.log({
+    //       bannerImage, profileImage, bioText
+    // })
 
-    const payload = Object.assign({
+    // const payload = Object.assign({
 
-    }, 
-      bannerImage.startsWith(BASE_URL) || { bannerImage },
-      profileImage.startsWith(BASE_URL) || { profileImage },
-    )
+    // }, 
+    //   bannerImage.startsWith(BASE_URL) || { bannerImage },
+    //   profileImage.startsWith(BASE_URL) || { profileImage },
+    // )
 
     // const bioText = data.bio//bio.length > 0 ? `data:application/json;base64,${Buffer.from(data.bio).toString('base64')}` : ""
     // setBio(data.bio)

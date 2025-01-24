@@ -137,7 +137,7 @@ export const imageFadeInVariants: Variants = {
     opacity: 1,
     transition: {
       ease: 'linear',
-      duration: 4,
+      duration: 3,
     },
   },
 };

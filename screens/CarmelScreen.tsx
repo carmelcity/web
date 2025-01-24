@@ -52,7 +52,7 @@ export const CarmelScreen = (props: any) => {
 
       return p.filter((post: any) => {
         const isAnti = post.isAnti ? true : false
-        return selectedTab === "anti" ? isAnti : !isAnti
+        return selectedTab === "diagree" ? isAnti : !isAnti
       })
     }, [selectedTab, item]);
 
@@ -90,9 +90,11 @@ export const CarmelScreen = (props: any) => {
       </div>
     }
 
+    console.log(sidePosts)
+
     return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
       <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight/>
       <TabBar/>
-      <CarmelPosts myPost={myPost} {...item} {...props} posts={posts()}/>
+      <CarmelPosts myPost={myPost} {...item} {...props} posts={sidePosts}/>
     </div>
   }
