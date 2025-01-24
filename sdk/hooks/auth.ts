@@ -9,8 +9,6 @@ const id = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 export const useCarmelAuth = () => {
     const [session, setSession]: any = useLocalStorage('carmel.session', {})
     const [profile, setProfile] = useState<any>({ })
-    const [isListeningForUser, setIsListeningForUser] = useState(false)
-    const [userTransactions, setUserTransactions] = useState<any>([])
 
     const uap = new UAParser()
 
@@ -79,10 +77,6 @@ export const useCarmelAuth = () => {
 
     const postAction = async (action: string, args: any) => {
         return makeCall({ service: `post/${action}`, args })
-    }
-
-    const aiAction = async (action: string, args: any) => {
-        return makeCall({ service: `ai/${action}`, args })
     }
 
     const accountAction = async (action: string, args: any) => {
@@ -156,13 +150,11 @@ export const useCarmelAuth = () => {
         activateAccount,
         sendInvite,
         signatureAction,
-        userTransactions,
         user,
         profile, 
         getFreshProfile, 
         logout, 
         initialize, 
-        aiAction,
         postAction,
         checkUsername, 
         getProfile, 

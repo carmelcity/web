@@ -4,7 +4,9 @@ export const getOrigin = () => {
       : ''
 }
 
-export const fileUrl = (file: string) => {
-  return `${process.env['NEXT_PUBLIC_FILES_URL']}/${file}`
-}
-    
+export const getImageUrl = (username: string, kind: string = "avatar", section: string = "accounts") => {
+  if (!username) return ''
+  
+  const url = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}/carmel/${kind}/${section}/${username}`
+  return url
+}    

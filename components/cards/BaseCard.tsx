@@ -1,6 +1,7 @@
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader'
 import { readexPro } from '~/elements/fonts'
 import { BannerImage, Engagements, ActionButton, Community, Author, People, Tags } from '~/elements';
+import { getImageUrl } from '~/utils/main';
 
 const MAX_TITLE = 80
 const MAX_INTRO = 120
@@ -42,11 +43,6 @@ export const BaseCard = ({
         return <div/>
       }
 
-    // return <div className={`relative z-10 lg:ml-0 mx-auto`}>
-    //     <h1 className={`${readexPro.className} mt-5 lg:text-4xl text-3xl`}>
-    //       { isLoading ? '' : username }
-    //     </h1>
-    //   </div>
       let fol = followers ? followers.length : 0
     
       return <div className={`relative z-10 z-10`}>
@@ -69,23 +65,23 @@ export const BaseCard = ({
         if (community) {
           return <div className='flex flex-row mt-2'>
             <Community
-              image={communityImage}
-              username={community}
-          /></div>
+              image={getImageUrl(community)}
+              username={community}/>
+          </div>
         }
         return <div/>
       }
 
       return <div className='flex flex-row mt-2'>
               <Author
-                image={projectImage || authorImage}
+                image={getImageUrl(project || author || '')}
                 community={community}
                 username={project || author}/>
         </div>
     }
     
     return <div className={`flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  ${highlight ? 'border-2 border-primary/70' : 'border border-primary/30'}`}>
-        { banner && <BannerImage isLoading={isLoading} banner={`${section}/${username}/${banner}`} avatar={`${section}/${username}/${avatar}`}/> }     
+        { banner && <BannerImage isLoading={isLoading} banner={banner} avatar={avatar} section={section} username={username}/> }     
         <div className="flex flex-col p-4 leading-normal text-left w-full">
            <h4 className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
            <div className={`${highlight ? '' : 'hidden'} badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2`}/>
