@@ -1,12 +1,13 @@
 import { readexPro } from '~/elements/fonts'
 import { PostAuthor } from '~/elements';
 import { CarmelPostComments } from '~/components/posts'
-import { CommentButton, CommentBox } from '~/elements'
+import { CommentButton, CommentBox, Chunky, RatingBadge } from '~/elements'
+import { getImageUrl } from '~/utils/main';
 
 export const CarmelPostCard = ({ 
   text,
   highlight,
-  carmelId,
+  currentComment,
   replying,
   loading,
   authorImage,
@@ -15,6 +16,7 @@ export const CarmelPostCard = ({
   postId,
   editing,
   parentId,
+  rating,
   community,
   onReply,
   onCancelEdit,
@@ -25,7 +27,7 @@ export const CarmelPostCard = ({
     const CardAuthor = () => {
       return <div className='flex flex-row'>
               <PostAuthor
-                image={authorImage}
+                image={getImageUrl(author)}
                 updatedOn={updatedOn}
                 username={author}/>
         </div>
@@ -48,7 +50,10 @@ export const CarmelPostCard = ({
 
       if (editing || replying) {
         return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
-              <CommentBox onCancel={onCancelEdit} name="comment" text={replying ? "" : Buffer.from(text, 'base64').toString('utf8')}/>
+                  <div className='m-1'>
+                    <Chunky/>
+                  </div>
+              <CommentBox onCancel={onCancelEdit} name="comment" text={currentComment} placeholder={`What do you think? Add a thoughtful comment to this post.`}/>
           </div>
       }
 
@@ -61,8 +66,9 @@ export const CarmelPostCard = ({
     return <div className={`flex flex-col justify-start relative w-full ${highlight ? 'bg-primary/20' : 'bg-primary/5'} mb-4 border border-primary/20`}>
         <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
-          { loading || editing || <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14`}>
-               <Text text={Buffer.from(text, 'base64').toString('utf8')}/>
+          { loading || editing || <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14 flex flex-col`}>
+               <RatingBadge {...rating}/> 
+               <Text text={text}/>
             </p>     
           }
           <MainAction/>

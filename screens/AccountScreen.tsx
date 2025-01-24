@@ -54,30 +54,30 @@ const Username = ({ item, isLoading }: any) => {
       </div>
 }
 
-const Actions = ({ actions, item, onPress }: any) => {
-  let followAction = undefined
-  if (actions && actions.follows) {
-    followAction = actions.follows.find((a: any) => a.username === item.username)
-  }
+// const Actions = ({ actions, item, onPress }: any) => {
+//   let followAction = undefined
+//   if (actions && actions.follows) {
+//     followAction = actions.follows.find((a: any) => a.username === item.username)
+//   }
 
-  const isFollowing = followAction ? true: false 
+//   const isFollowing = followAction ? true: false 
 
-  return <div className='relative z-10 lg:pl-56 mt-8 flex flex-row gap-4 lg:justify-start justify-center w-full '>
-        { isFollowing || <ActionButton title="Follow" onPress={() => onPress("follow", { username: item.username })}/> }
-        { isFollowing && <SoftActionButton title="Unfollow" onPress={() => onPress("unfollow", { username: item.username })}/> }
-    </div>
-}
+//   return <div className='relative z-10 lg:pl-56 mt-8 flex flex-row gap-4 lg:justify-start justify-center w-full '>
+//         { isFollowing || <ActionButton title="Follow" onPress={() => onPress("follow", { username: item.username })}/> }
+//         { isFollowing && <SoftActionButton title="Unfollow" onPress={() => onPress("unfollow", { username: item.username })}/> }
+//     </div>
+// }
 
 export const AccountScreen = ({ auth }: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
     const carmel = useCarmel()
 
-    const onAction = async (type: string, args: any) => {
-        // await auth.accountAction(type, args)
-        // await auth.getFreshProfile()
-        // await data.refresh()
-    }
+    // const onAction = async (type: string, args: any) => {
+    //     // await auth.accountAction(type, args)
+    //     // await auth.getFreshProfile()
+    //     // await data.refresh()
+    // }
 
     const getItem = () => {
       if (carmel.isLoading || !carmel.data || !carmel.data.accounts) return

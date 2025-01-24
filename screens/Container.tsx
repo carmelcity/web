@@ -4,41 +4,32 @@ import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { BannerImage } from '~/elements'
-import { fileUrl } from '~/utils/main';
+import { getImageUrl } from '~/utils/main';
 
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-const BASE_URL = fileUrl('')
 
-const ProfileImage = ({ image, isLoading }: any) => {
+const ProfileImage = ({ avatar, username, isLoading }: any) => {
   return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
-            src={image ? `${BASE_URL}${image}` : PROFILE_PLACEHOLDER}
+            src={avatar ? getImageUrl(username) : PROFILE_PLACEHOLDER}
             alt="profile"
             width={80}
             height={80}
             className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-32 h-32 mask-hexagon object-fit`}
           /> }
         </div>
-        {/* {isEditable && (
-          <div
-            className={`${readex_pro.className} text-white px-1 font-thin cursor-pointer absolute flex items-center right-0 z-50 bottom-8`}
-            onClick={onEdit}>
-            <Image src={EditIcon} alt="edit" />
-          </div>
-        )} */}
       </div>
 }
 
 export const Container = ({ noThumbnail, children, banner, username, avatar, section = "accounts" }: any) => {
-  console.log({ banner })
     const BannerSection = () => {
       return <BannerImage
         forceBanner
-        banner={banner ?  `${section}/${username}/${banner}` : undefined}
-        avatar={banner ?  `${section}/${username}/${banner}`: undefined}
-      >
-          { noThumbnail || <ProfileImage image={avatar ? `${section}/${username}/${avatar}`: undefined}/> }
+        username={username}
+        banner={banner}
+        avatar={avatar}>
+            { noThumbnail || <ProfileImage avatar={avatar} username={username}/> }
       </BannerImage>
     }
 

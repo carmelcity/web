@@ -22,5 +22,5 @@ export const CommentBox = ({ name, onCancel, placeholder = "", text = "" }: any)
         </button>
     </div>
     </div>
-  } 
+} 
   
