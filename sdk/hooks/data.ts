@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import node from '../node'
 
 const firebaseConfig = {
   apiKey: `${process.env['NEXT_PUBLIC_FIREBASE_KEY']}`,
@@ -35,7 +34,6 @@ export const useCarmel = () => {
             setData(_data)
             setIsLoading(false)
           })
-          await node.start()
           setIsReady(true)
         })()
       }, [])

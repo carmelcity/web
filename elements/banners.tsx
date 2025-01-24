@@ -9,12 +9,6 @@ export const BannerImage = ({ banner, section, username, raw, isEditable, onEdit
       const bannerImageSmall = banner ? raw ? banner : getImageUrl(username, 'banner', section) : BANNER_PLACEHOLDER
       const bannerImage  = banner ? raw ? banner : getImageUrl(username, 'banner', section) : BANNER_PLACEHOLDER
       
-      console.log({
-            bannerImage,
-            bannerImageSmall,
-            section
-      })
-      
       return <div
             className={`w-full flex-col flex justify-center items-center`}>
             <div className="lg:hidden block relative flex">

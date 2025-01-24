@@ -2,12 +2,10 @@ import { Container } from './Container';
 import { useEffect, useState } from 'react';
 import { showSuccessToast, readex_pro } from '~/elements';
 import { ProfileIntro } from './ProfileIntro'
-import Image from 'next/image'
 import { getImageUrl } from '~/utils/main';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
-// const BASE_URL = fileUrl(`accounts`)
 
 export const ProfileScreen = ({ auth }: any) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -21,6 +19,7 @@ export const ProfileScreen = ({ auth }: any) => {
   const [hasChanges, setHasChanges] = useState(false)
   const [bannerImageData, setBannerImageData] = useState<any>()
   const [avatarImageData, setAvatarImageData] = useState<any>()
+  const [nonce, setNonce] = useState(0)
 
   const refreshData = () => {
     (async () => {
@@ -59,31 +58,23 @@ export const ProfileScreen = ({ auth }: any) => {
 
     const formData = new FormData(e.target)
     const data: any = Object.fromEntries(formData.entries())
-
     const bioText = data.bio
-    // console.log({
-    //       bannerImage, profileImage, bioText
-    // })
 
-    // const payload = Object.assign({
+    const payload = Object.assign({
+      bioText
+    },
+      bannerImage.startsWith('data:') && { bannerImage },
+      profileImage.startsWith('data:') && { profileImage },
+    )
 
-    // }, 
-    //   bannerImage.startsWith(BASE_URL) || { bannerImage },
-    //   profileImage.startsWith(BASE_URL) || { profileImage },
-    // )
+    setBio(data.bio)
 
-    // const bioText = data.bio//bio.length > 0 ? `data:application/json;base64,${Buffer.from(data.bio).toString('base64')}` : ""
-    // setBio(data.bio)
+    const result = await auth.updateProfile(payload)
+    await auth.getFreshProfile()
 
-    // const result = await auth.updateProfile({
-    //   bannerImage, profileImage, bioText
-    // })
-
-    // await auth.getFreshProfile()
-
-    // setIsLoading(false)
-    // setIsEditable(false)
-    // showSuccessToast("Profile updated")     
+    setIsLoading(false)
+    setIsEditable(false)
+    showSuccessToast("Profile updated")     
   }
 
   const handleEditBannerEdit = async () => {
@@ -133,7 +124,8 @@ export const ProfileScreen = ({ auth }: any) => {
     setIsLoading(false)
     setIsEditable(false)
     await auth.getFreshProfile()
-  }
+    setNonce(Date.now())
+ }
 
   const ActionButtons = () => {
     if (isLoading) {
@@ -151,11 +143,10 @@ export const ProfileScreen = ({ auth }: any) => {
           className={`${readex_pro.className} font-normal text-gray-900 xs:mt-4 p-3 w-40 sm:w-40 bg-primary`}>
             { isEditable ? 'Save Changes' : 'Edit Profile' }
         </button>
-      
       </div>
   }
 
-  return <Container name="Profile" icon="UserIcon">
+  return <Container name="Profile" icon="UserIcon" key={`key-${nonce}`}>
       <div className={`flex flex-col justify-start relative w-full mb-20`}>
       <form method='post' onSubmit={handleEdit}>
         <ProfileIntro 
