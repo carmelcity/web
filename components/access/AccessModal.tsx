@@ -12,7 +12,9 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
 
   const handleAuth = async (data: any) => {
     if (isRegister && data.username) {
-      const res = await auth.checkUsername(data)
+      const res = await auth.checkUsername({
+        username: `${data.username.toLowerCase().trim()}`
+      })
 
       if (res.error) {
         showErrorToast(res.error)
@@ -28,7 +30,8 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       return
     }
 
-    const props = Object.assign({ ...data }, username && { username })
+    let props = Object.assign({ email: `${data.email.toLowerCase().trim()}` }, username && { username: `${data.username.toLowerCase().trim()}` })
+
     const result = await auth.getAuthToken(props)
     
     if (result.error) {
