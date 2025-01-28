@@ -90,8 +90,6 @@ export const CarmelScreen = (props: any) => {
       </div>
     }
 
-    console.log(sidePosts)
-
     return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
       <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight/>
       <TabBar/>

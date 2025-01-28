@@ -21,7 +21,7 @@ const List = ({ items, wide, isLoading, card, section, shortIntro, onItemPress, 
   return (
     <div className='w-full'>
     <InfiniteScrollComponent
-      containerClasses={wide ? `w-full` : `lg:flex lg:gap-4 lg:flex-wrap justify-center`}
+      containerClasses={wide ? `w-full` : `lg:flex lg:gap-0 lg:flex-wrap justify-center`}
       renderItem={items.map((element: any, elementId: any) => <Card 
         actionTitle={actionTitle}
         section={section}
