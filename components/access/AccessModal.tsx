@@ -30,7 +30,19 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       return
     }
 
-    let props = Object.assign({ email: `${data.email.toLowerCase().trim()}` }, username && { username: `${username.toLowerCase().trim()}` })
+    let props: any = {}
+
+    if (data.email) {
+       props.email = `${data.email.toLowerCase().trim()}`
+    }
+
+    if (data.username) {
+        props.username = `${data.username.toLowerCase().trim()}`
+    }
+
+    if (username) {
+      props.username = `${username.toLowerCase().trim()}`
+    }
 
     const result = await auth.getAuthToken(props)
     
