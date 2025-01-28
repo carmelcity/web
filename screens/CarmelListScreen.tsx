@@ -7,7 +7,7 @@ export const CarmelListScreen = (props: any) => {
     return <ListScreen
       title="Top Carmels"
       onItemPress='/:carmelId'
-      actionTitle="Join debate"
+      actionTitle="Join debate"  
       subtitle=""
       name="carmels"   
       placeholder={ListPlaceholder}
