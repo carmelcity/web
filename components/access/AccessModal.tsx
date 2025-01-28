@@ -100,7 +100,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
             placeholder="Type here ..."
             className={`${
               readexPro.className
-            } font-thin focus:border-none focus:ring-[0.7px] focus:ring-[#00FFFF] placeholder:text-cyan/50 placeholder:font-light focus:placeholder:text-transparent w-full h-10 px-4 bg-[#022A27] text-sm text-white ${
+            } font-thin lowercase focus:border-none focus:ring-[0.7px] focus:ring-[#00FFFF] placeholder:text-cyan/50 placeholder:font-light focus:placeholder:text-transparent w-full h-10 px-4 bg-[#022A27] text-sm text-white ${
               'border-cyan/20'
             } border-solid border-1`}
             style={{
@@ -123,7 +123,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
                     placeholder="Type here ..."
                     className={`${
                       readexPro.className
-                    } font-thin focus:border-none focus:ring-[0.7px] focus:ring-[#00FFFF] placeholder:text-cyan/50 placeholder:font-light focus:placeholder:text-transparent w-full h-10 px-4 bg-[#022A27] text-sm text-white ${
+                    } font-thin lowercase focus:border-none focus:ring-[0.7px] focus:ring-[#00FFFF] placeholder:text-cyan/50 placeholder:font-light focus:placeholder:text-transparent w-full h-10 px-4 bg-[#022A27] text-sm text-white ${
                       'border-cyan/20'
                     } border-solid border-1`}
                     style={{
