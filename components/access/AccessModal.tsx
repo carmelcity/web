@@ -30,7 +30,7 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
       return
     }
 
-    let props = Object.assign({ email: `${data.email.toLowerCase().trim()}` }, username && { username: `${data.username.toLowerCase().trim()}` })
+    let props = Object.assign({ email: `${data.email.toLowerCase().trim()}` }, username && { username: `${username.toLowerCase().trim()}` })
 
     const result = await auth.getAuthToken(props)
     
@@ -85,9 +85,8 @@ export const AccessModal = ({ isModalOpen, setModalOpen }: any) => {
         { modalTitle() }
       </div>
       <div className="mt-2 text-center font-normal leading-6 text-primary text-xl">
-          { username }
+          { username ? `${username.toLowerCase().trim()}` : '' }
       </div>
-
     </div>
   }
 
