@@ -37,19 +37,19 @@ const ProfileSummary = ({ intro }: any) => {
 }
 
 const Username = ({ item, isLoading }: any) => {
-  let followers = item.followers ? item.followers.length : 0
+  // let followers = item.followers ? item.followers.length : 0
 
   return <div className={`relative z-10 lg:ml-56 lg:mt-0 mt-16`}>
         <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
           { isLoading ? '' : item.username }
         </h1>
         <div className='flex flex-row'>
-          <div className='text-white font-bold mr-1'>
+          {/* <div className='text-white font-bold mr-1'>
           { followers > 0 ? followers : '' }
-          </div>
-          <div className='text-gray-400'>
+          </div> */}
+          {/* <div className='text-gray-400'>
           { followers === 0 ? 'No followers yet' : followers === 1 ? `follower` : `${followers} followers` }
-          </div>
+          </div> */}
         </div>
       </div>
 }
