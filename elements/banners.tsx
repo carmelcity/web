@@ -5,18 +5,19 @@ import { getImageUrl } from '~/utils/main';
 
 const BANNER_PLACEHOLDER = `/images/bg-1.png`
 
-export const BannerImage = ({ banner, section, username, raw, isEditable, onEdit, forceBanner, avatar, children }: any) => {
+export const BannerImage = ({ banner, onPress, section, username, raw, isEditable, onEdit, forceBanner, avatar, children }: any) => {
       const bannerImageSmall = banner ? raw ? banner : getImageUrl(username, 'banner', section) : BANNER_PLACEHOLDER
       const bannerImage  = banner ? raw ? banner : getImageUrl(username, 'banner', section) : BANNER_PLACEHOLDER
       
       return <div
+            onClick={onPress}
             className={`w-full flex-col flex justify-center items-center`}>
-            <div className="lg:hidden block relative flex">
+            <div className="lg:hidden block relative flex h-32 w-full">
                   <Image src={bannerImageSmall} alt="card" className="object-cover w-full" width={500} height={500}/>
-                  { children }  
+                  { children }
             </div>
             <div className="hidden lg:block relative flex bg-black w-full">
-                  <Image src={bannerImage} alt="card" className="object-cover w-full" width={1500} height={500}/>
+                  <Image src={bannerImage} alt="card" className="object-cover w-full h-[400px]" width={1500} height={500}/>
                   { children }  
             </div>  
             { isEditable && <div className={`${readex_pro.className} flex text-white bg-black bg-opacity-40 lg:p-4 p-1 mr-2 font-thin cursor-pointer absolute items-center mt-2 top-0 right-0 border border-1 border-cyan`} onClick={onEdit}>

@@ -33,8 +33,6 @@ export const RatingModal = ({ isModalOpen, anim, setModalOpen, rating }: any) =>
       </div>
     } 
 
-    console.log(rating)
-
     return <div className="w-11/12 mx-auto">
               <motion.div
                   variants={imageFadeInVariants}

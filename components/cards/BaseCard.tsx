@@ -49,14 +49,14 @@ export const BaseCard = ({
             <h1 className={`${readexPro.className} lg:text-2xl text-2xl text-primary`}>
               { isLoading ? '' : '@' + username }
             </h1>
-            <div className='flex flex-row'>
+            {/* <div className='flex flex-row'>
               <div className='text-white font-bold mr-1'>
               { fol > 0 ? fol : '' }
               </div>
               <div className='text-gray-400 mt-2'>
               { fol === 0 ? 'No followers yet' : fol === 1 ? `follower` : `${fol} followers` }
               </div>
-            </div>
+            </div> */}
           </div>
     }
 
@@ -80,10 +80,10 @@ export const BaseCard = ({
         </div>
     }
     
-    return <div className={`flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  ${highlight ? 'border-2 border-primary/70' : 'border border-primary/30'}`}>
-        { banner && <BannerImage isLoading={isLoading} banner={banner} avatar={avatar} section={section} username={username}/> }     
+    return <div className={`cursor-pointer flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  ${highlight ? 'border-2 border-primary/70' : 'border border-primary/30'}`}>
+        { banner && <BannerImage onPress={onPress} isLoading={isLoading} banner={banner} avatar={avatar} section={section} username={username}/> }     
         <div className="flex flex-col p-4 leading-normal text-left w-full">
-           <h4 className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
+           <h4 onClick={onPress} className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
            <div className={`${highlight ? '' : 'hidden'} badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2`}/>
            { title }
           </h4>
@@ -96,7 +96,7 @@ export const BaseCard = ({
           <div className='flex flex-col items-center pb-10 w-full'>
               { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
               { people && <People size={5} all={people}/> }
-              { noAction || <ActionButton highlight={highlight} title={actionTitle} onPress={onPress}/> }
+              {/* { noAction || <ActionButton highlight={highlight} title={actionTitle} onPress={onPress}/> } */}
           </div>
         </div>
     </div>
