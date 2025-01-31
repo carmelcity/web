@@ -17,7 +17,7 @@ export const RatingModal = ({ isModalOpen, anim, setModalOpen, rating }: any) =>
   if (!rating) {
     return <div/>
   }
-
+  
   const ModalContentDone = () => {
     if (anim) {
       return <div className="w-11/12 mx-auto">
@@ -62,7 +62,7 @@ export const RatingModal = ({ isModalOpen, anim, setModalOpen, rating }: any) =>
                       className={`${
                         readexPro.className
                       } w-full h-12 mb-4 mt-8 justify-center m-auto text-sm text-black border border-primary border-opacity-40 border-solid border-1 border-2 bg-dark-green bg-primary/10 text-primary`}>
-                        { 'Back to the Carmel' }
+                        { 'go back' }
                     </button>
                 </div>
             </motion.div>

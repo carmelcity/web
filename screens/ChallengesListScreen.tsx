@@ -13,6 +13,7 @@ export const ChallengesListScreen = () => {
       name="challenges"   
       placeholder={ListPlaceholder}
       shortIntro
+      containerClasses={`gap-4`}
       card={ChallengeCard}
     >
       <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-md mb-8 text-center'>

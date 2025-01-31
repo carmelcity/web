@@ -29,7 +29,7 @@ export const BaseCard = ({
   communityImage,
   downVotes,
   noAction,
-  people,
+  members,
   tags,
   shortIntro
 }: any) => {    
@@ -93,9 +93,9 @@ export const BaseCard = ({
           <p className={`${readexPro.className} text-md font-thin text-gray-400 2xl:w-5/6 mt-4 ${shortIntro ? 'line-clamp-2' : ''}`}>
             { intro }
           </p>     
-          <div className='flex flex-col items-center pb-10 w-full'>
-              { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
-              { people && <People size={5} all={people}/> }
+          <div className='flex flex-col items-start pb-10 w-full'>
+              {/* { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> } */}
+              { members && <People size={3} all={members}/> }
               {/* { noAction || <ActionButton highlight={highlight} title={actionTitle} onPress={onPress}/> } */}
           </div>
         </div>

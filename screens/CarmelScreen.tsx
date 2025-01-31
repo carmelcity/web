@@ -39,8 +39,6 @@ export const CarmelScreen = (props: any) => {
         }
     ],[])
 
-   
-
     const posts: any = () => item && item.posts ? Object.values(item.posts).filter((p: any) => p) : []
 
     const sidePosts = useMemo(() => {
@@ -78,7 +76,7 @@ export const CarmelScreen = (props: any) => {
     }
 
     const TabBar = () => {
-      return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
+      return <div className='mb-8 mt-8 border-b w-full pb-4 border-primary/40'>
           <Tabs
             isLoading={false}
             tabs={tabs}

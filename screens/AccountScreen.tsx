@@ -1,9 +1,12 @@
+import React, { useEffect, useMemo, useState } from 'react';
 import { readex_pro } from '~/elements/fonts'
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
 import { BannerImage, SoftActionButton, ActionButton, Community, Author, People, Tags } from '~/elements';
 import { useCarmel } from '~/sdk'
+import { Tabs } from '~/elements';
+import { CommunityPosts } from '~/components/posts'
 
 const CardAuthor = ({
   author, community, communityImage, authorImage
@@ -68,10 +71,25 @@ const Username = ({ item, isLoading }: any) => {
 //     </div>
 // }
 
-export const AccountScreen = ({ auth }: any) => {
+export const AccountScreen = (props: any) => {
     const router = useRouter()
     const itemId: any = router.query.id
     const carmel = useCarmel()
+    const [selectedTab, setSelectedTab] = useState('carmels')
+    const [item, setItem] = useState<any>(undefined)
+    const [carmels, setCarmels] = useState<any>([])
+
+    const tabs = useMemo(
+          () => [
+            {
+              description: `CARMELS`,
+              value: 'carmels'
+            }
+    ],[])
+    
+    const isLoading = () => {
+      return (carmel.isLoading || !carmel.data || !carmel.data.accounts || !carmel.data.carmels)
+    }
 
     // const onAction = async (type: string, args: any) => {
     //     // await auth.accountAction(type, args)
@@ -79,27 +97,87 @@ export const AccountScreen = ({ auth }: any) => {
     //     // await data.refresh()
     // }
 
-    const getItem = () => {
-      if (carmel.isLoading || !carmel.data || !carmel.data.accounts) return
-      return carmel.data.accounts.find((i: any) => i.username === itemId)
+    useEffect(() => {
+        if (isLoading()) return
+          const i = carmel.data.accounts.find((i: any) => i.username === itemId)
+
+          if (!i) {
+            return 
+          }
+
+          const all = carmel.data.carmels.find((c: any) => c.author === i.username)
+
+          setItem(i) 
+          setCarmels(all)
+    }, [carmel.data])
+
+    const TabBar = () => {
+      return <div className='mb-8 mt-8 border-b w-full pb-4 border-primary/40'>
+          <Tabs
+            isLoading={false}
+            tabs={tabs}
+            selectedTab={selectedTab}
+            onClickTab={(value: string) => {
+              setSelectedTab(value);
+            }}
+          />
+      </div>
     }
 
-    const isLoading = () => {
-      return (carmel.isLoading || !carmel.data || !carmel.data.accounts)
+    const isMember = () => {
+      if (!(item.type === "community" || item.type === "project")) {
+        return false
+      }
+
+      const found = (item.members || []).find((p: string) => p === props.auth.profile.username)
+
+      return found ? true : false
     }
 
-    if (isLoading()) {
+    const isMembershipPending = () => {
+      if (!(item.type === "community" || item.type === "project")) {
+        return false
+      }
+
+      const found = (item.queue || []).find((p: any) => p.username === props.auth.profile.username)
+
+      return found ? true : false
+    }
+
+    const posts: any = () => item && item.posts ? Object.values(item.posts).filter((p: any) => p) : []
+
+    const filteredPosts = useMemo(() => {
+      const p = posts()
+
+      if (!item || !p || p.length == 0 ) {
+        return []
+      }
+
+      return p.filter((post: any) => true)
+    }, [selectedTab, item]);
+
+    if (isLoading() || !item) {
       return <ProfileHeaderPlaceholder/>
     }
 
-    return <Container {...getItem()}>
+    const Posts = () => {
+      if (item.type === "community" || item.type === "project") {
+        return <CommunityPosts {...props} {...item} posts={filteredPosts} isMember={isMember()} isMembershipPending={isMembershipPending()}/>
+      }
+
+      return <div/>
+    }
+
+    return <Container {...item}>
           <div className={`flex flex-col ${isLoading() && 'animate-pulse'} align-start items-start w-full bg-black/80 border border-primary/20 pb-10 px-4`}>
-              <Username item={getItem()} isLoading={isLoading()}/>
-              <CardAuthor
-                {...getItem()}  
-              />
-              <ProfileSummary {...getItem()}/>
+              <Username item={item} isLoading={isLoading()}/>
+              <CardAuthor {...item} />
+              <ProfileSummary {...item}/>
+              <div className='lg:ml-56 mt-8'>
+                { item.members && <People size={3} all={item.members}/> }
+              </div>
               {/* { auth.isLoggedIn() && <Actions onPress={onAction} item={getItem()} actions={auth.profile.actions}/> } */}
           </div>
+          <Posts/>
     </Container>
   }
