@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { readex_pro } from '~/elements';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export const CommentBox = ({ name, onCancel, placeholder = "", text = "" }: any)  => {
     return <div className="lg:ml-auto text-right flex flex-col w-full">
-        <textarea
+        <TextareaAutosize
+            minRows={3}
             placeholder={placeholder}
             defaultValue={text}
             name={name}
@@ -20,7 +22,7 @@ export const CommentBox = ({ name, onCancel, placeholder = "", text = "" }: any)
         type="submit">
             Submit
         </button>
-    </div>
+      </div>
     </div>
 } 
   
