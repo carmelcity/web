@@ -1,7 +1,8 @@
+import { useState } from 'react' 
 import { readexPro } from '~/elements/fonts'
 import { PostAuthor } from '~/elements';
 import { CarmelPostComments } from '~/components/posts'
-import { CommentButton, CommentBox, Chunky, RatingBadge } from '~/elements'
+import { CommentButton, CommentBox, Chunky, RatingBadge, PostText, DynamicIcon } from '~/elements'
 import { getImageUrl } from '~/utils/main';
 
 export const CarmelPostCard = ({ 
@@ -25,6 +26,14 @@ export const CarmelPostCard = ({
   comments
 }: any) => {    
   
+  const [showComments, setShowComments] = useState(false)
+
+  const onToggleComments = () => {
+    setShowComments(!showComments)
+  }
+
+  const subposts = () => comments ? comments.filter((p: any) => p) : []
+
     const CardAuthor = () => {
       return <div className='flex flex-row'>
               <PostAuthor
@@ -32,12 +41,6 @@ export const CarmelPostCard = ({
                 updatedOn={updatedOn}
                 username={author}/>
         </div>
-    }
-
-    const Text = ({ text }: any) => {
-      return <span className='whitespace-pre text-gray-300 text-wrap'>
-        { text }
-      </span>
     }
 
     const MainAction = () => {
@@ -62,9 +65,15 @@ export const CarmelPostCard = ({
           </div>
       }
 
+      const hasComments = subposts().length > 0
+
       return <div className="mt-4 pl-14 w-full flex flex-row gap-4">
             { highlight && <CommentButton title="Edit" onPress={onEdit} icon="PencilSquareIcon"/> }
             <CommentButton title="Reply" onPress={onReply} icon="ChatBubbleLeftIcon"/>
+            { hasComments && <button className='text-md mt-2 text-primary flex flex-row' onClick={onToggleComments}>        
+                  { `${subposts().length} comments` }
+                  <DynamicIcon name={showComments ? 'ChevronUpIcon' : 'ChevronDownIcon'} width={20} height={20} className='ml-1 text-primary'/>
+              </button> }
         </div>
     }
 
@@ -74,11 +83,11 @@ export const CarmelPostCard = ({
           <CardAuthor/>
           { loading || editing || <div className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14 flex flex-col`}>
                <RatingBadge {...rating}/> 
-               <Text text={text}/>
+               <PostText text={text}/>
             </div>     
           }
           <MainAction/>
         </div>
-        <CarmelPostComments comments={comments}/>
+        { showComments && <CarmelPostComments comments={subposts()}/> }
     </div>
 }
