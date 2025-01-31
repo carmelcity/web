@@ -49,7 +49,7 @@ export const CarmelScreen = (props: any) => {
       }
 
       return p.filter((post: any) => {
-        const isAnti = post.isAnti ? true : false
+        const isAnti = post.anti ? true : false
         return selectedTab === "diagree" ? isAnti : !isAnti
       })
     }, [selectedTab, item]);
