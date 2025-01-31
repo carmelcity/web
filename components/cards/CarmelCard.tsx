@@ -6,7 +6,7 @@
 
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader'
 import { readexPro } from '~/elements/fonts'
-import { BannerImage, Engagements, ActionButton, Community, Author, People, Tags, DynamicIcon } from '~/elements';
+import { BannerImage, Engagements, ActionButton, Community, Author, People, Tags, DynamicIcon, PostIntro } from '~/elements';
 import { getImageUrl } from '~/utils/main';
 import { useRouter } from 'next/router';
 
@@ -134,12 +134,15 @@ export const CarmelCard = ({
                 { title }
               </h4>
               { wide && tags && <Tags tags={tags || []} containerClass="" /> }
-              <p className={`${readexPro.className} whitespace-break-spaces text-md font-thin text-gray-400 ${shortIntro ? 'line-clamp-2' : ''}`}>
-                   { text }
-              </p>  
+              <PostIntro text={text} short={shortIntro}/>
               <div className='flex w-64 flex-row'>
                 <CardAuthor/>
-                { people && <People size={3} all={people}/> }
+                <div className='ml-2 lg:hidden'>
+                    { people && <People size={4} all={people}/> }
+                </div>
+                <div className='ml-4 lg:block hidden'>
+                    { people && <People size={7} all={people}/> }
+                </div>
               </div>
         </div>        
       </div>
