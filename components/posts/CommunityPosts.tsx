@@ -1,16 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { InfiniteScrollComponent } from '~/elements';
 import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
 import { CarmelPostCard } from '~/components/cards'
-import { CommentButton, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
+import { CommentButton, ActionButton, CommentBox, showSuccessToast, DynamicIcon, showErrorToast } from '~/elements'
+import { RatingModal } from './RatingModal'
 
-export const CommunityPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, auth, ready }: any) => {
+export const CommunityPosts = ({ posts, auth, members, isMembershipPending, username, closed, type, isMember }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [joining, setJoining] = useState(false)
+  const [isReadyConfirm, setIsReadyConfirm] = useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [ratingAnim, setRatingAnim] = useState<any>(undefined)
+  const [rating, setRating] = useState<any>(undefined)
+  const [currentComment, setCurrentComment] = useState<any>("")
+  const [replyingPostId, setReplyingPostId] = useState(-10)
+
+  const resetFields = () => {
+    setEditing(false)
+    setLoading(false)  
+    setAdding(false)
+    setCurrentComment("")
+    setJoining(false)
+    setReplyingPostId(-10)
+  }
+
+  const onToggleConfirm = (v: boolean) => {
+    if (!v) {
+      setIsReadyConfirm(false)
+    }
+    setIsConfirmOpen(v)
+  }
 
   const onReply = (post: any) => {
-    console.log("reply ->", post)
+    setReplyingPostId(post.postId)
   }
 
   const onReplyToMyPost = (post: any) => {
@@ -24,30 +48,90 @@ export const CommunityPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, aut
   const onEdit = (post: any) => {
     setEditing(true)
   }
-
+ 
   const showPosts = () => {
-    const oldPost = myPost()
+    return posts.map((element: any, elementId: any) => {
+      return <CarmelPostCard 
+      replying={replyingPostId === element.postId}
+      onCancelEdit={undefined}
+      loading={loading}
+      key={`${elementId}`} 
+      auth={auth}
+      currentComment={currentComment}
+      onReply={() => onReply(element)}
+      {...element}
+      text={element.text}/>
+    })
+  }
 
-    let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => 
-        <CarmelPostCard 
-            key={`${elementId}`} 
-            onReply={() => onReply(element)}
-            {...element} 
-        />)
+  // const myPost = () => {
+  //   const p = posts()
 
-    if (oldPost && oldPost.onSide) {
-      return [<CarmelPostCard 
-        editing={editing} 
-        highlight 
-        loading={loading}
-        text={oldPost ? oldPost.text : ""}
-        onCancelEdit={onCancelEdit}
-        key={'mypost'} 
-        onReply={() => onReplyToMyPost(oldPost)} 
-        onEdit={() => onEdit(oldPost)} {...oldPost}/>, ...otherPosts]
-    }
+  //   if (!item || !p || p.length == 0 || !props.auth.isLoggedIn()) {
+  //     return
+  //   }
 
-    return [...otherPosts]
+  //   const post = p.find((i: any) => i.author === props.auth.profile.username)
+  //   const onSide = post && sidePosts && sidePosts.length > 0 ? sidePosts.find((p: any) => parseInt(p.postId) === parseInt(post.postId)) : false
+
+  //   if (!post || isNaN(post.postId)) {
+  //     return 
+  //   }
+    
+  //   return {...post, onSide }
+  // }
+
+  const handlePostSubmission = async (text: string) => {
+      setLoading(true)
+      
+      // setLoading(true)
+
+      // const result = await auth.communityAction("newpost", {
+      //   text: data.comment, username, type
+      // })
+  
+      // console.log(result)
+  
+      // if (result.error) {
+      //   showErrorToast(result.error)
+      //   return 
+      // }
+  
+      // setTimeout(() => {
+      //   showSuccessToast("Your post was added")
+      //   setAdding(false)
+      //   setLoading(false)
+      // }, 1000)
+
+
+      // const oldPost = myPost()
+      let action = "newpost"//replyingPostId > -10 ? "comment" :  "newpost"
+      const result = await auth.communityAction(action, Object.assign({ text, username, type }, replyingPostId > -10 && { parentId: replyingPostId }))
+        
+      if (result.error) {
+        showErrorToast(result.error)
+        return resetFields()
+      }
+  
+      setRating(result.rating)
+      
+      if (result.success) {
+        setRatingAnim({ id: "success", title: "Congrats, your post was added!" })
+        setTimeout(() => { setRatingAnim(undefined) }, 2000)
+      } else {
+        setRatingAnim({ id: "error", title: "Not quite there yet..." })
+        setTimeout(() => { setRatingAnim(undefined) }, 2000)
+      }
+  
+      setIsConfirmOpen(true)
+  
+      if (result.success) {
+        resetFields()
+        return 
+      }
+  
+      setCurrentComment(text)
+      setLoading(false)
   }
 
   const onAction = async (e: any) => {
@@ -63,49 +147,8 @@ export const CommunityPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, aut
     if (!data.comment) {
       return 
     }
-    
-    const oldPost = myPost()
 
-    if (oldPost && oldPost.postId) {
-      setLoading(true)
-
-      const result = await auth.postAction("edit", {
-        text: data.comment, carmelId, postId: oldPost.postId
-      })
-
-      if (result.error) {
-        showErrorToast(result.error)
-        return 
-      }
-  
-      onRefresh()
-
-      setTimeout(() => {
-        showSuccessToast("Your comment was updated")
-        setEditing(false)
-        setLoading(false)  
-      }, 1000)
-      return 
-    }
-
-    setLoading(true)
-
-    const result = await auth.postAction("new", {
-      text: data.comment, carmelId
-    })
-
-    if (result.error) {
-      showErrorToast(result.error)
-      return 
-    }
-
-    onRefresh()
-
-    setTimeout(() => {
-      showSuccessToast("Your comment was added")
-      setAdding(false)
-      setLoading(false)
-    }, 1000)
+    await handlePostSubmission(data.comment)
   }
 
   const onAddComment = async () => {
@@ -114,80 +157,108 @@ export const CommunityPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, aut
       return 
     }
 
-    const oldPost = myPost()
+  //   const oldPost = myPost()
 
-    if (oldPost && oldPost.postId) {
-      showErrorToast('You already joined this side')
-      return 
-    }
+  //   if (oldPost && oldPost.postId) {
+  //     showErrorToast('You already joined this side')
+  //     return 
+  //   }
 
     setAdding(true)
   }
 
-  const onEditMyComment = async () => {
-    if (!auth.isLoggedIn()) {
-      showErrorToast("Please sign in first")
-      return 
-    }
+  // const onEditMyComment = async () => {
+  //   if (!auth.isLoggedIn()) {
+  //     showErrorToast("Please sign in first")
+  //     return 
+  //   }
 
-    const oldPost = myPost()
+  //   const oldPost = myPost()
 
-    if (!oldPost || !oldPost.postId) {
-      showErrorToast('You did not join this side yet!')
-      return 
-    }
+  //   if (!oldPost || !oldPost.postId) {
+  //     showErrorToast('You did not join this side yet!')
+  //     return 
+  //   }
 
-    setEditing(true)
-  }
+  //   setEditing(true)
+  // }
 
   const onCancelAddComment = async () => {
     setAdding(false)
   }
 
-  const MainAction = () => {
-    if (!ready) {
-      return <div/>
+  const onJoin = async () => {
+    if (!auth.isLoggedIn()) {
+      showErrorToast("Please sign in first")
+      return 
     }
 
-    const oldPost = myPost()
+    setJoining(true)
+    const result = await auth.communityAction('join', { username, type }) 
 
-    if (!oldPost || !oldPost.postId) {
+    if (result.error) {
+      showErrorToast(result.error)
+      return resetFields()
+    }
+
+    showSuccessToast("Your request was sent")
+    return resetFields()
+  }
+
+  const MainAction = () => {
+      if (!auth.isLoggedIn()) {
+        return <div/>
+      }
+
+      if (!isMember && closed) {
+        return <div className='text-sm mt-4 text-gray-500 flex flex-row gap-2'>
+          <DynamicIcon width={20} height={20} name="LockClosedIcon" className='text-primary'/> { `Access to this ${type} is closed.`}
+        </div>
+      }
+
+      if (!isMember && !closed) {
+        if (joining) {
+          return <div className=''>          
+             <div className={`h-10 w-48 bg-cyan/40 animate-pulse`}></div>
+          </div>
+        }
+
+        if (isMembershipPending) {
+              return <div className='text-sm text-gray-500 mt-4 flex flex-row gap-2'>
+                  <DynamicIcon width={20} height={20} name="InformationCircleIcon" className='text-primary'/> { `Your membership request is pending`}
+              </div>  
+        }
+
+        return <div className=''>          
+            <ActionButton highlight onPress={onJoin} icon="UserPlusIcon" title={`Request Access`}/> 
+         </div>
+      }
+    
       if (loading) {
           return <div className="mt-4 pl-14 w-full flex flex-col gap-4">
-                <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
-                <div className={`h-5 w-56 bg-cyan/40 animate-pulse`}></div>
-                <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
-            </div>
+                 <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
+                 <div className={`h-5 w-56 bg-cyan/40 animate-pulse`}></div>
+                 <div className={`h-5 w-48 bg-cyan/40 animate-pulse`}></div>
+             </div>
       }
 
       return <div className='w-full flex flex-col'>
-        { adding ? 
-          <CommentBox onCancel={onCancelAddComment} name="comment"/> : 
-          <CommentButton onPress={onAddComment} icon="ChatBubbleLeftIcon" title="Join this side"/> 
-        }          
-      </div>
-    }
-
-    return <div/>
+          <div className='text-sm text-gray-500 mt-4 flex flex-row gap-2'>
+                <DynamicIcon width={20} height={20} name="ShieldExclamationIcon" className='text-primary'/> { `You are a member of this ${type}`}
+          </div>
+         { adding ? 
+           <CommentBox onCancel={onCancelAddComment} name="comment" text={currentComment}/> : 
+           <ActionButton onPress={onAddComment} icon="ChatBubbleLeftIcon" title="Add a post"/> 
+         }          
+       </div>
   }
 
-  const TopLabel = () => {
-    if (!posts || posts.length === 0) {
-      return <div className='text-gray-500 font-sm'>
-          No one chose this side yet
-      </div>
-    }
-    
-    return <div className='text-gray-500 font-sm'>
-          { posts.length } { posts.length > 1 ? 'people' : 'person' } chose this side so far
-    </div>
-  }
-
-  return (
-    <div className='w-full flex flex-col'>
+  return (<div className='w-full flex flex-col'>
+      <RatingModal isModalOpen={isConfirmOpen} anim={ratingAnim} setModalOpen={onToggleConfirm} rating={rating} />
       <form method='post' onSubmit={onAction}>
-        <MainAction/>
-        <TopLabel/>
+        { auth.isLoggedIn() && <div className='w-full flex flex-row align-center border-primary/20 border-b pb-4'>
+          <MainAction/>
+        </div> }
         <div className='w-full mt-8'>
           <InfiniteScrollComponent
             renderItem={showPosts()}
@@ -196,6 +267,5 @@ export const CommunityPosts = ({ carmelId, myPost, onRefresh, isAnti, posts, aut
           />
         </div>
     </form>
-  </div>
-  )
+  </div>)
 }

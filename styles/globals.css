@@ -231,3 +231,8 @@ blockquote.twitter-tweet a:focus {
   filter: blur(0px);
   transition: filter 0.5s linear;
 }
+
+
+.ProseMirror:focus {
+  outline: none;
+}

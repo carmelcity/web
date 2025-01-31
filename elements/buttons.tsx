@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { DynamicIcon, readex_pro, showSuccessToast } from '~/elements';
 
-export const ActionButton = ({ highlight, title, onPress }: any)  => {
-  return <div className="lg:ml-auto text-right flex flex-col mt-4">
+export const ActionButton = ({ highlight, title, onPress, icon }: any)  => {
+  return <div className="lg:ml-auto text-start flex flex-col mt-4">
   <div className="mt-auto">
     <button
-      className={`border border-cyan ${highlight ? 'bg-primary/25' : 'bg-transparent'} hover:bg-dark-green-secondary py-2 px-4 lg:w-48 text-cyan font-bold w-full`}
+      className={`border border-cyan ${highlight ? 'bg-primary/25' : 'bg-transparent'} hover:bg-dark-green-secondary py-2 px-4 w-48 text-cyan font-bold`}
       onClick={onPress}>
-        <div className='text-nowrap text-primary'>
+        <div className='text-nowrap text-primary flex flex-row gap-2 justify-center'>
+        { icon && <DynamicIcon name={icon} width={20} height={20} /> }
         { title } 
         </div>
     </button>

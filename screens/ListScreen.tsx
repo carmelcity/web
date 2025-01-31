@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmel } from '~/sdk';
 
-const List = ({ items, wide, isLoading, card, section, shortIntro, onItemPress, actionTitle, placeholder, highlight }: any) => {
+const List = ({ items, wide, isLoading, card, section, containerClasses, shortIntro, onItemPress, actionTitle, placeholder, highlight }: any) => {
   const ListPlaceholder = placeholder
   const Card = card
     
@@ -21,7 +21,7 @@ const List = ({ items, wide, isLoading, card, section, shortIntro, onItemPress, 
   return (
     <div className='w-full'>
     <InfiniteScrollComponent
-      containerClasses={wide ? `w-full` : `lg:flex lg:gap-0 lg:flex-wrap justify-center`}
+      containerClasses={wide ? `w-full` : `lg:flex lg:flex-wrap justify-center ${containerClasses || ''}`}
       renderItem={items.map((element: any, elementId: any) => <Card 
         actionTitle={actionTitle}
         section={section}
@@ -39,7 +39,7 @@ const List = ({ items, wide, isLoading, card, section, shortIntro, onItemPress, 
   )
 }
 
-export const ListScreen = ({ auth, wide, filter, name, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
+export const ListScreen = ({ auth, wide, filter, name, containerClasses, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const router = useRouter()
   const carmel = useCarmel()
 
@@ -88,6 +88,7 @@ export const ListScreen = ({ auth, wide, filter, name, children, highlight, onIt
               highlight={highlight}
               isLoading={carmel.isLoading}
               card={card}
+              containerClasses={containerClasses}
               shortIntro
               section={name}
               onItemPress={onPress}

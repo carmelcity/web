@@ -6,6 +6,7 @@ import { getImageUrl } from '~/utils/main';
 
 export const CarmelPostCard = ({ 
   text,
+  auth,
   highlight,
   currentComment,
   replying,
@@ -40,6 +41,10 @@ export const CarmelPostCard = ({
     }
 
     const MainAction = () => {
+      if (auth && !auth.isLoggedIn()) {
+        return <div/>
+      }
+      
       if (loading) {
         return <div className="mt-4 pl-14 w-full flex flex-col gap-4">
               <div className={`h-5 w-32 bg-cyan/40 animate-pulse`}></div>
@@ -67,10 +72,10 @@ export const CarmelPostCard = ({
         
         <div className="flex flex-col p-4 leading-normal text-left w-full">
           <CardAuthor/>
-          { loading || editing || <p className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14 flex flex-col`}>
+          { loading || editing || <div className={`${readexPro.className} mb-3 text-lg font-thin text-gray-400 2xl:w-5/6 mt-4 pl-14 flex flex-col`}>
                <RatingBadge {...rating}/> 
                <Text text={text}/>
-            </p>     
+            </div>     
           }
           <MainAction/>
         </div>
