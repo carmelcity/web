@@ -32,7 +32,7 @@ export const RatingModal = ({ isModalOpen, anim, setModalOpen, rating }: any) =>
                 </div>
       </div>
     } 
-
+    
     return <div className="w-11/12 mx-auto">
               <motion.div
                   variants={imageFadeInVariants}
@@ -46,7 +46,7 @@ export const RatingModal = ({ isModalOpen, anim, setModalOpen, rating }: any) =>
 
                 <div className='w-full flex flex-col'>
                     <div className='text-primary text-lg font-bold p-2 text-center'>
-                        Carmel Score: { rating.score } / 10
+                        { rating.score ? `Carmel Score: ${rating.score} / 10` : rating.pass ? 'Passed Guidelines' : 'Failed Guidelines'}
                     </div>
                     <div className='text-white text-md p-2'>
                         { rating.description }
