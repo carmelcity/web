@@ -1,6 +1,9 @@
 import { useState } from 'react' 
 import { readexPro, DynamicIcon } from '~/elements'
 
+const SM_MAX = 64
+const LG_MAX = 256
+
 export const PostText = ({ text }: any) => { 
     const [show, setShow] = useState(false)
 
@@ -12,10 +15,14 @@ export const PostText = ({ text }: any) => {
         <p className={show ? '' : `line-clamp-2`}>
             { text }
         </p>
-        <button className='text-sm mt-4 text-gray-500 flex flex-row' onClick={onToggle}>        
+        { text.length > SM_MAX && <button className='text-sm mt-4 text-gray-500 flex flex-row lg:hidden' onClick={onToggle}>        
              {show ? `show less` : `show more`}
             <DynamicIcon name={show ? 'ChevronUpIcon' : 'ChevronDownIcon'} width={16} height={16} className='ml-1 mt-0.5 text-white'/>
-        </button> 
+        </button> }
+        { text.length > LG_MAX && <button className='text-sm mt-4 text-gray-500 invisible lg:visible flex' onClick={onToggle}>        
+             {show ? `show less` : `show more`}
+            <DynamicIcon name={show ? 'ChevronUpIcon' : 'ChevronDownIcon'} width={16} height={16} className='ml-1 mt-0.5 text-white'/>
+        </button> }
     </span>
 }
 
