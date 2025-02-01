@@ -112,9 +112,9 @@ export const CommunityPosts = ({ posts, auth, members, isMembershipPending, user
         showErrorToast(result.error)
         return resetFields()
       }
-  
-      setRating(result.rating)
       
+      setRating(result.rating)
+
       if (result.success) {
         setRatingAnim({ id: "success", title: "Congrats, your post was added!" })
         setTimeout(() => { setRatingAnim(undefined) }, 2000)
@@ -252,6 +252,10 @@ export const CommunityPosts = ({ posts, auth, members, isMembershipPending, user
          }          
        </div>
   }
+
+  console.log({
+    rating
+  })
 
   return (<div className='w-full flex flex-col'>
       <RatingModal isModalOpen={isConfirmOpen} anim={ratingAnim} setModalOpen={onToggleConfirm} rating={rating} />
