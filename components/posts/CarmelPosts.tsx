@@ -87,7 +87,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: a
       showErrorToast(result.error)
       return resetFields()
     }
-
+    
     setRating(result.rating)
     
     if (result.success) {
