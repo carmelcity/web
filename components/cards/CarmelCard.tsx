@@ -138,10 +138,10 @@ export const CarmelCard = ({
               <div className='flex w-64 flex-row'>
                 <CardAuthor/>
                 <div className='ml-2 lg:hidden'>
-                    { people && <People size={4} all={people}/> }
+                    { people && <People size={2} all={people}/> }
                 </div>
                 <div className='ml-4 lg:block hidden'>
-                    { people && <People size={7} all={people}/> }
+                    { people && <People size={4} all={people}/> }
                 </div>
               </div>
         </div>        
