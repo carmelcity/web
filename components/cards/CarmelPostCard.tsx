@@ -77,8 +77,6 @@ export const CarmelPostCard = ({
         </div>
     }
 
-    console.log({ rating })
-
     return <div className={`flex flex-col justify-start relative w-full ${highlight ? 'bg-primary/20' : 'bg-primary/5'} mb-4 border border-primary/20`}>
         
         <div className="flex flex-col p-4 leading-normal text-left w-full">
