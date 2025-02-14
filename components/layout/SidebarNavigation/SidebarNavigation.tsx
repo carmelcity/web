@@ -6,6 +6,8 @@ import { SidebarNavigationPlaceholder } from '~/components/placeholders/SidebarN
 import { sidebarRoutes } from './routes';
 import { AccessButton } from '~/components/access/AccessButton'
 import { DynamicIcon, readexPro } from '~/elements';
+import logo from '~/images/logo/logo-white-with-white-text.svg'
+import logoSM from '~/images/logo/logo-white.svg'
 
 export const SidebarNavigation = ({ isLoading, auth }: any) => {
   const router = useRouter();
@@ -38,8 +40,11 @@ export const SidebarNavigation = ({ isLoading, auth }: any) => {
 
   return (
     <div className="flex z-10 grow sticky top-0 relative flex-col gap-y-5 overflow-y-auto bg-gradient-to-br from-dark-green to-dark-green min-w-[300px] px-6 w-full mr-auto md:h-screen border-r border-cyan/10">
-      <AccessButton auth={auth}/>
-      <nav className="flex flex-1 flex-col border-t border-primary/20 pt-4 -mt-4">
+       <a href="/" className='cursor-pointer mt-4'>
+          <Image src={logoSM} width={60} height={60} alt='logo' className='lg:hidden ml-2'/>
+          <Image src={logo} width={200} height={60} alt='logo' className='hidden lg:block'/>
+        </a>
+        <nav className="flex flex-1 flex-col border-t border-primary/20 pt-4">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
             <ul role="list" className="-mx-2 space-y-1">
@@ -70,7 +75,9 @@ export const SidebarNavigation = ({ isLoading, auth }: any) => {
               ))}
             </ul>
           </li>
-          <li className="-mx-6 mt-auto"></li>
+          {/* <li className="-mx-6 mt-auto">
+            
+          </li> */}
         </ul>
       </nav>
      

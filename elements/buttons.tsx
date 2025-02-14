@@ -20,7 +20,7 @@ export const SoftActionButton = ({ title, onPress }: any)  => {
   return <div className="lg:ml-auto text-right flex flex-col">
   <div className="mt-auto">
     <button
-      className="border border-primary/20 bg-primary/10 hover:bg-dark-green-secondary py-2 px-4 lg:w-48 font-bold w-full"
+      className="border border-primary/20 bg-primary/10 hover:bg-dark-green-secondary py-2 px-4 font-bold w-full"
       onClick={onPress}>
         <div className='text-nowrap text-gray-400'>
         { title } 

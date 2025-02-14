@@ -7,11 +7,11 @@ const Main = (props: any) => {
    return (
     <>
       <Head>
-        <title>Carmel Access</title>
+        <title>Carmel Register</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AccessLayout {...props}>
-        <Access.LoginCompleteScreen {...props}/>
+        <Access.RegisterScreen {...props}/>
       </AccessLayout>
     </>
   );
