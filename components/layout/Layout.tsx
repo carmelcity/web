@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { MobileNavigation } from '~/components/layout/MobileNavigation';
-import { MobileTopNavbar } from '~/components/layout/MobileTopNavbar';
 import { SidebarNavigation } from '~/components/layout/SidebarNavigation';
 import { Navbar } from '~/components/layout/Navbar';
 import spot from '~/images/stories/Background.webp';
@@ -12,26 +11,22 @@ import { Spinner } from '~/elements'
 
 export const AppLayout = ({ auth, children }: any) => {
   return (
-    <div className="">
-      <div className="flex w-full max-w-[1920px] mx-auto justify-center lg:pb-0">
-        <div className="w-80 hidden lg:flex">
-          <SidebarNavigation auth={auth}/>
-        </div>
-        
+      <div className="flex w-full mx-auto justify-center lg:pb-0">
+          <div className="w-80 hidden lg:flex">
+            <SidebarNavigation auth={auth}/>
+          </div>     
           <div className="lg:hidden">
-            <MobileTopNavbar auth={auth}/>
             <MobileNavigation />
           </div>
-
-        <div className="flex flex-col w-full z-0">
-          {children}
-        </div>
-
-      </div>
+          <div className="flex flex-col w-full z-0">
+            <Navbar auth={auth}/>
+            <div className='lg:mt-20 mt-0'>
+                {children}
+             </div>
+          </div>
     </div>
   )
 }
-
 
 export const AppLoadingLayout = ({ children }: any) => {
   return (
@@ -107,7 +102,7 @@ export const AccessLayout = ({ children, env }: any) => {
             <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
        
             <div className="w-full mb-10 flex justify-center min-h-screen max-w-[1920px] relative z-30">
-              <div className="flex flex-col justify-center items-center w-11/12 pb-32 pt-32 lg:pt-4 min-h-full">
+              <div className="flex flex-col justify-center items-center w-11/12 min-h-full">
                 {children}
               </div>
           </div>      

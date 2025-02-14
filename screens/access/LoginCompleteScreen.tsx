@@ -5,7 +5,7 @@ import Image from 'next/image';
 import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmelAuth } from '~/sdk';
 
-export const LoginScreen = () => {
+export const LoginCompleteScreen = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(false)
   const auth = useCarmelAuth()
