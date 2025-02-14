@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import profile_placeholder from '~/images/profile_placeholder.webp';
-import { DynamicIcon, showSuccessToast, AuthButton } from '~/elements';
+import { DynamicIcon, showSuccessToast, AuthButton, SoftActionButton } from '~/elements';
 import { AccessModal } from './AccessModal'
 import { ConfirmModal } from './ConfirmModal';
+import logo from '~/images/logo/logo-white-with-white-text.svg'
+import logoSM from '~/images/logo/logo-white.svg'
 
 export const AccessButton = ({ auth }: any) => {
   const router = useRouter()
@@ -66,9 +68,15 @@ export const AccessButton = ({ auth }: any) => {
   }
 
   const handleLogin = () => {
-    if (isReady) return 
-    setIsReady(true)
-    setModalOpen(true);
+    // if (isReady) return 
+    // setIsReady(true)
+    // setModalOpen(true);
+  }
+
+  const handleRegister = () => {
+    // if (isReady) return 
+    // setIsReady(true)
+    // setModalOpen(true);
   }
 
   const MyMenus = () => {
@@ -137,12 +145,34 @@ export const AccessButton = ({ auth }: any) => {
       </div>
   }
 
-  return <div onClick={handleLogin} className={`cursor-pointer h-12 lg:w-full mb-2 flex items-center mt-2 lg:ml-0`}>
-        <div className='lg:w-full text-center mt-2'>
-          <AuthButton title="Get Early Access" icon="UserIcon"/>
-        </div>
-        <div className='z-200'>
-          <AccessModal isModalOpen={isModalOpen} setModalOpen={onToggle} />
-        </div>
-      </div>
+  return <div className='flex flex-col mt-2'>
+        <a href="/" className='cursor-pointer'>
+          <Image src={logoSM} width={60} height={60} alt='logo' className='lg:hidden ml-2'/>
+          <Image src={logo} width={200} height={60} alt='logo' className='hidden lg:block'/>
+        </a>
+    </div>
+
+  // return <div className={`cursor-pointer h-12 lg:w-full mb-2 flex items-center mt-2 lg:ml-0`}>
+  //     <div>
+  //       <Image src={logo}/>
+  //     </div>
+  //       <div className='lg:w-full text-center mt-2 flex flex-row gap-2'>
+  //       <button className="bg-primary flex gap-2 flex-row hover:bg-dark-green-secondary p-2 text-gray-900 hover:text-primary font-bold border border-primary w-full justify-center text-nowrap"
+  //               onClick={handleRegister}>
+  //               <DynamicIcon name={"UserIcon"} width={20} height={20} />                  
+  //                 Register
+  //       </button>
+  //       <button
+  //             className="border border-primary/20 bg-primary/10 hover:bg-dark-green-secondary py-2 px-4 font-bold w-full"
+  //             onClick={handleLogin}>
+  //               <div className='text-nowrap text-gray-400'>
+  //               Sign In
+  //               </div>
+  //       </button>
+        
+  //       </div>
+  //       <div className='z-200'>
+  //         <AccessModal isModalOpen={isModalOpen} setModalOpen={onToggle} />
+  //       </div>
+  //     </div>
 }

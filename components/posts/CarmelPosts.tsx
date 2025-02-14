@@ -5,7 +5,7 @@ import { CarmelPostCard } from '~/components/cards'
 import { CommentButton, Chunky, CommentBox, showSuccessToast, showErrorToast } from '~/elements'
 import { RatingModal } from './RatingModal'
 
-export const CarmelPosts = ({ carmelId, author, myPost, isAnti, posts, auth }: any) => {
+export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any) => {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(false)
   const [loading, setLoading] = useState(false)
