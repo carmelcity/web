@@ -6,7 +6,6 @@ import LogoSmall from '~/images/carmel.webp';
 import Logo from '~/images/logo/logo-white-with-white-text.svg'
 import Image from 'next/image';
 import { readexPro } from '~/elements/fonts';
-import { AccessButton } from '~/components/access/AccessButton'
 import profile_placeholder from '~/images/profile_placeholder.webp';
 import { ConfirmModal } from '~/components/access/ConfirmModal';
 import { DynamicIcon, showSuccessToast, AuthButton, SoftActionButton } from '~/elements';
