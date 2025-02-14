@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SidebarNavigationPlaceholder } from '~/components/placeholders/SidebarNavigation';
 import { sidebarRoutes } from './routes';
-import { AccessButton } from '~/components/access/AccessButton'
 import { DynamicIcon, readexPro } from '~/elements';
 import logo from '~/images/logo/logo-white-with-white-text.svg'
 import logoSM from '~/images/logo/logo-white.svg'
@@ -40,10 +39,10 @@ export const SidebarNavigation = ({ isLoading, auth }: any) => {
 
   return (
     <div className="flex z-10 grow sticky top-0 relative flex-col gap-y-5 overflow-y-auto bg-gradient-to-br from-dark-green to-dark-green min-w-[300px] px-6 w-full mr-auto md:h-screen border-r border-cyan/10">
-       <a href="/" className='cursor-pointer mt-4'>
+       <Link href="/" className='cursor-pointer mt-4'>
           <Image src={logoSM} width={60} height={60} alt='logo' className='lg:hidden ml-2'/>
           <Image src={logo} width={200} height={60} alt='logo' className='hidden lg:block'/>
-        </a>
+        </Link>
         <nav className="flex flex-1 flex-col border-t border-primary/20 pt-4">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>

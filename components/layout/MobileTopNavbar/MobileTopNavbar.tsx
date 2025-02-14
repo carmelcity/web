@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { topNavbarRoutes } from './routes';
 import Link from 'next/link';
-import { AccessButton } from '~/components/access/AccessButton'
+// import { AccessButton } from '~/components/access/AccessButton'
 import { readexPro } from '~/elements/fonts';
 
 export const MobileTopNavbar = ({ auth }: any) => {
@@ -21,7 +21,7 @@ export const MobileTopNavbar = ({ auth }: any) => {
   return (
     <div className="fixed top-0 left-0 z-50 w-full items-center justify-center">
       <nav className="flex items-center w-full bg-dark-green border-b border-primary/50">    
-          <AccessButton auth={auth}/>
+          {/* <AccessButton auth={auth}/> */}
           <div className='w-full'>
           </div>
           <div className="border border-cyan border-opacity-20 bg-black h-12 p-2 items-center flex mr-4">
