@@ -37,6 +37,8 @@ export const CarmelCard = ({
   communityImage,
   downVotes,
   noAction,
+  isEditable,
+  onEdit,
   people,
   tags,
   shortIntro
@@ -48,27 +50,27 @@ export const CarmelCard = ({
       return <ProfileHeaderPlaceholder/>
     }
 
-    const Username = () => {
-      if (!username) {
-        return <div/>
-      }
+    // const Username = () => {
+    //   if (!username) {
+    //     return <div/>
+    //   }
 
-      let fol = followers ? followers.length : 0
+    //   let fol = followers ? followers.length : 0
     
-      return <div className={`relative z-10 z-10`}>
-            <h1 className={`${readexPro.className} lg:text-2xl text-2xl text-primary`}>
-              { isLoading ? '' : '@' + username }
-            </h1>
-            <div className='flex flex-row'>
-              <div className='text-white font-bold mr-1'>
-              { fol > 0 ? fol : '' }
-              </div>
-              <div className='text-gray-400 mt-2'>
-              { fol === 0 ? 'No followers yet' : fol === 1 ? `follower` : `${fol} followers` }
-              </div>
-            </div>
-          </div>
-    }
+    //   return <div className={`relative z-10 z-10`}>
+    //         <h1 className={`${readexPro.className} lg:text-2xl text-2xl text-primary`}>
+    //           { isLoading ? '' : '@' + username }
+    //         </h1>
+    //         <div className='flex flex-row'>
+    //           <div className='text-white font-bold mr-1'>
+    //           { fol > 0 ? fol : '' }
+    //           </div>
+    //           <div className='text-gray-400 mt-2'>
+    //           { fol === 0 ? 'No followers yet' : fol === 1 ? `follower` : `${fol} followers` }
+    //           </div>
+    //         </div>
+    //       </div>
+    // }
 
     const CardAuthor = () => {
       if (!author) {
@@ -110,7 +112,7 @@ export const CarmelCard = ({
     //     </div>
     // </div>
     // { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> }
-    
+
     const onSelect = () => {
       router.push(`/${carmelId}`)
     }
@@ -119,6 +121,9 @@ export const CarmelCard = ({
 
     return <div onClick={onSelect} className={`${wide ? '' : 'hover:scale-100 scale-95 transform transition duration-500'} cursor-pointer flex lg:flex-row flex-col justify-start relative mb-0 w-full border border-primary/50 p-4 bg-black/50`}>
          <div className='flex items-start lg:items-center lg:justify-start w-full lg:w-24 lg:flex-col flex-row gap-2 mr-4 lg:mb-0 mb-2 lg:mt-2 text-sm'>
+            { isEditable && <div className={`border flex flex-row border-primary/50 p-1 flex-nowrap bg-black w-16 justify-center bg-primary text-gray-900`} onClick={onEdit}>
+                <DynamicIcon name={"PencilSquareIcon"} width={16} height={16} className='mr-2 text-gray-900 mt-0.5'/> Edit
+            </div> }
              <div className={`border text-primary flex flex-row border-primary/50 p-1 flex-nowrap bg-black w-16 justify-center`}>
                 <DynamicIcon name={"ChevronUpIcon"} width={16} height={16} className='mr-2 text-primary mt-0.5'/> { upVotes }
             </div>
@@ -146,5 +151,4 @@ export const CarmelCard = ({
               </div>
         </div>        
       </div>
-
 }

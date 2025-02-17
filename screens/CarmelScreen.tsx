@@ -2,13 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader';
 import { useRouter } from 'next/router'
 import { Container } from './Container';
-import { CarmelCard } from '~/components/cards'
+import { CarmelCard, CarmelEditCard } from '~/components/cards'
 import { CarmelPosts } from '~/components/posts'
 import { Tabs } from '~/elements';
 import { useCarmel } from '~/sdk'
 
 export const CarmelScreen = (props: any) => {
     const [item, setItem] = useState<any>(undefined)
+    const [editing, setEditing] = useState(1)
     const router = useRouter()
     const itemId: any = router.query.id
     const carmel = useCarmel()
@@ -17,6 +18,17 @@ export const CarmelScreen = (props: any) => {
 
     const isLoading = () => {
       return (carmel.isLoading || !carmel.data || !carmel.data.carmels)
+    }
+    
+    const onEdit = () => {
+      console.log("edit", editing)
+      if (!isEditable) return 
+      setEditing(2)
+    }
+
+    const onSave = () => {
+      if (!isEditable) return 
+      setEditing(3)
     }
 
     useEffect(() => {
@@ -70,6 +82,8 @@ export const CarmelScreen = (props: any) => {
       
       return {...post, onSide }
     }
+
+    const isEditable = props.auth && props.auth.profile.level > 50
   
     if (isLoading()) {
       return <ProfileHeaderPlaceholder/>
@@ -88,8 +102,12 @@ export const CarmelScreen = (props: any) => {
       </div>
     }
 
+    console.log("????", editing)
+
     return <div className='w-full flex flex-col items-center lg:mt-2 mt-20 mb-20 p-4'>
-      <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight/>
+      { editing > 2 ? <CarmelEditCard {...item} noAction isLoading={isLoading()} onSave={onSave}/> : 
+        <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight isEditable={isEditable} onEdit={onEdit}/> }
+  
       <TabBar/>
       <CarmelPosts myPost={myPost} {...item} {...props} posts={sidePosts}/>
     </div>
