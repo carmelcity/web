@@ -117,7 +117,9 @@ export const CarmelCard = ({
 
     const text = `${intro}`
 
-    return <div onClick={onSelect} className={`${wide ? '' : 'hover:scale-100 scale-95 transform transition duration-500'} cursor-pointer flex lg:flex-row flex-col justify-start relative mb-0 w-full border border-primary/50 p-4 bg-black/50`}>
+
+
+    return <div onClick={wide? () => {} : onSelect} className={`${wide ? '' : 'hover:scale-100 scale-95 transform transition duration-500'} cursor-pointer flex lg:flex-row flex-col justify-start relative mb-0 w-full border border-primary/50 p-4 bg-black/50`}>
          <div className='flex items-start lg:items-center lg:justify-start w-full lg:w-24 lg:flex-col flex-row gap-2 mr-4 lg:mb-0 mb-2 lg:mt-2 text-sm'>
              <div className={`border text-primary flex flex-row border-primary/50 p-1 flex-nowrap bg-black w-16 justify-center`}>
                 <DynamicIcon name={"ChevronUpIcon"} width={16} height={16} className='mr-2 text-primary mt-0.5'/> { upVotes }
