@@ -7,11 +7,11 @@ const Main = (props: any) => {
   return (
     <>
       <Head>
-        <title>Carmel Admin</title>
+        <title>New Carmel</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
-      <PrivateLayout {...props}>
-        <User.GovernScreen {...props}/>
+      <PrivateLayout {...props} minLevel={50}>
+        <User.NewCarmelScreen {...props}/>
       </PrivateLayout>
     </>
   )

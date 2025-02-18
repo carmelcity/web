@@ -39,9 +39,9 @@ export const Navbar = ({ auth }: any) => {
       case "profile":
         router.push('/profile')
         break
-      case "govern":
-        router.push('/govern')
-        break
+      // case "govern":
+      //   router.push('/govern')
+      //   break
       // case "friends":
       //   router.push('/friends')
       //   break
@@ -71,10 +71,10 @@ export const Navbar = ({ auth }: any) => {
       id: "profile",
       title: "Profile",
       icon: "UserIcon"
-    }, {
-      id: "govern",
-      title: "Govern",
-      icon: "ShieldCheckIcon"
+    // }, {
+    //   id: "govern",
+    //   title: "Govern",
+    //   icon: "ShieldCheckIcon"
     // }, {
     //   id: "wallet",
     //   title: "Wallet",

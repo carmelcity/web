@@ -9,7 +9,7 @@ import { useCarmel } from '~/sdk'
 
 export const CarmelScreen = (props: any) => {
     const [item, setItem] = useState<any>(undefined)
-    const [editing, setEditing] = useState(1)
+    const [editing, setEditing] = useState(false)
     const router = useRouter()
     const itemId: any = router.query.id
     const carmel = useCarmel()
@@ -23,12 +23,12 @@ export const CarmelScreen = (props: any) => {
     const onEdit = () => {
       console.log("edit", editing)
       if (!isEditable) return 
-      setEditing(2)
+      setEditing(true)
     }
 
     const onSave = () => {
       if (!isEditable) return 
-      setEditing(3)
+      setEditing(false)
     }
 
     useEffect(() => {
@@ -102,12 +102,22 @@ export const CarmelScreen = (props: any) => {
       </div>
     }
 
-    console.log("????", editing)
+    const onEditDone = () => {
+      setEditing(false)
+    }
+
+    const onEditCancel = () => {
+      setEditing(false)
+    }
+
+    if (editing) {
+      return <div className='w-full flex flex-col items-center lg:mt-2 mt-20 mb-20 p-4'>
+            <CarmelEditCard {...item} noAction isLoading={isLoading()} onDone={onEditDone} onCancel={onEditCancel}/> 
+      </div>
+    }
 
     return <div className='w-full flex flex-col items-center lg:mt-2 mt-20 mb-20 p-4'>
-      { editing > 2 ? <CarmelEditCard {...item} noAction isLoading={isLoading()} onSave={onSave}/> : 
-        <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight isEditable={isEditable} onEdit={onEdit}/> }
-  
+      <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight isEditable={isEditable} onEdit={onEdit}/>
       <TabBar/>
       <CarmelPosts myPost={myPost} {...item} {...props} posts={sidePosts}/>
     </div>
