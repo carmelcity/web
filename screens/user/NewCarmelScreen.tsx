@@ -15,13 +15,10 @@ export const NewCarmelScreen = (props: any) => {
   const router = useRouter()
 
   const onDone = () => {
-    // setEditing(false)
-    // showSuccessToast("")
     router.push("/")
   }
 
   const onCancel = () => {
-    // setEditing(false)
     router.push("/")
   }
 
