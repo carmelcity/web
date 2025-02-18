@@ -4,20 +4,19 @@ import { CarmelCard } from '~/components/cards'
 import { ListScreen } from './ListScreen'
 
 export const CarmelListScreen = (props: any) => {
+    const isEditable = props.auth && props.auth.profile.level > 50
+
     return <ListScreen
       title="Top Carmels"
       onItemPress='/:carmelId'
       actionTitle="Join debate"  
-      subtitle=""
-      name="carmels"   
+      subtitle="Carmels are thoughtful debates about how to build a more human world."
+      name="carmels"
+      mainAction={ isEditable ? { title: "Add a new Carmel", link: "/new/carmel"} : undefined} 
       placeholder={ListPlaceholder}
       shortIntro
       highlight
       card={CarmelCard}
       {...props}
-    >
-      <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-md mb-8 text-center'>
-          Carmels are thoughtful debates about how to build a more human world.
-      </span>
-    </ListScreen>
+    />
 }

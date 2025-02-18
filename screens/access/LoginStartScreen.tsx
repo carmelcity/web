@@ -138,7 +138,7 @@ export const LoginStartScreen = () => {
           className={`flex justify-center items-center font-thin cursor-pointer hover:text-primary ${
             readexPro.className
           } px-3 py-1 text-gray-400 backdrop-blur-sm text-sm`}>
-          {`Get an account if don't have one`}
+          {`Get an account if you don't have one`}
         </span>
     }
 
