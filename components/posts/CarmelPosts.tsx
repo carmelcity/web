@@ -54,6 +54,8 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
             onCancelEdit={onCancelEdit}
             loading={loading && replyingPostId === element.postId}
             key={`${elementId}`} 
+            carmelId={carmelId}
+            auth={auth}
             currentComment={currentComment}
             onReply={() => onReply(element)}
             {...element}
@@ -65,6 +67,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
         editing={editing} 
         replying={replyingPostId === oldPost.postId}
         highlight 
+        carmelId={carmelId}
         currentComment={currentComment}
         ogComment={ogComment}
         loading={loading}
@@ -120,6 +123,10 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
 
     const formData = new FormData(e.target)
     const data: any = Object.fromEntries(formData.entries())
+
+    if (data.commentReplyEdit) {
+      return 
+    }
 
     if (!data.comment) {
       return 
