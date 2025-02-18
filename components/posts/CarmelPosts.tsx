@@ -46,6 +46,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
 
   const showPosts = () => {
     const oldPost = myPost()
+    const ogComment = oldPost && oldPost.text;
 
     let otherPosts = posts.filter((p: any) => !(oldPost && oldPost.postId === p.postId)).map((element: any, elementId: any) => {
        return <CarmelPostCard 
@@ -65,6 +66,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
         replying={replyingPostId === oldPost.postId}
         highlight 
         currentComment={currentComment}
+        ogComment={ogComment}
         loading={loading}
         text={oldPost ? oldPost.text : ""}
         onCancelEdit={onCancelEdit}

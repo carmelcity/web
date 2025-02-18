@@ -10,6 +10,7 @@ export const CarmelPostCard = ({
   auth,
   highlight,
   currentComment,
+  ogComment,
   replying,
   loading,
   authorImage,
@@ -61,7 +62,7 @@ export const CarmelPostCard = ({
                   <div className='m-1'>
                     <Chunky/>
                   </div>
-              <CommentBox onCancel={onCancelEdit} name="comment" text={currentComment} placeholder={`What do you think? Add a thoughtful comment to this post.`}/>
+              <CommentBox onCancel={onCancelEdit} name="comment" text={ogComment} placeholder={`What do you think? Add a thoughtful comment to this post.`}/>
           </div>
       }
 

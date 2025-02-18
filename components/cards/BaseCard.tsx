@@ -82,8 +82,8 @@ export const BaseCard = ({
     
     return <div className={`cursor-pointer flex flex-col justify-start relative mb-8 w-full ${wide ? '' : 'lg:w-[300px]'} bg-black/70  ${highlight ? 'border-2 border-primary/70' : 'border border-primary/30'}`}>
         { banner && <BannerImage onPress={onPress} isLoading={isLoading} banner={banner} avatar={avatar} section={section} username={username}/> }     
-        <div className="flex flex-col p-4 leading-normal text-left w-full">
-           <h4 onClick={onPress} className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
+        <div onClick={onPress} className="flex flex-col p-4 leading-normal text-left w-full">
+           <h4 className={`${readexPro.className} ${wide ? 'text-3xl lg:text-3xl' : 'text-xl lg:text-xl'} tracking-tight dark:text-white ${shortIntro ? 'line-clamp-2' : ''}`}>
            <div className={`${highlight ? '' : 'hidden'} badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2`}/>
            { title }
           </h4>
