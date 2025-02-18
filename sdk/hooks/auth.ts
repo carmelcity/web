@@ -87,6 +87,10 @@ export const useCarmelAuth = () => {
         return makeCall({ service: `account/${action}`, args })
     }
 
+    const governanceAction = async (action: string, args: any) => {
+        return makeCall({ service: `govern/${action}`, args })
+    }
+
     const signatureAction = async (action: string, args: any) => {
         return makeCall({ service: `signature/${action}`, args })
     }
@@ -150,6 +154,7 @@ export const useCarmelAuth = () => {
         session, 
         getCrypto,
         isDeviceSecured,
+        governanceAction,
         accountAction,
         activateAccount,
         sendInvite,

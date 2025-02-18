@@ -46,12 +46,12 @@ export const AppLoadingLayout = ({ children }: any) => {
   )
 }
 
-export const PrivateLayout = ({ children, auth }: any) => {
+export const PrivateLayout = ({ children, auth, minLevel = 0 }: any) => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth.isLoggedIn()) {
+    if (!auth.isLoggedIn() || auth.profile.level < minLevel) {
       router.push("/")
       return
     }
