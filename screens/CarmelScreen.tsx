@@ -21,14 +21,8 @@ export const CarmelScreen = (props: any) => {
     }
     
     const onEdit = () => {
-      console.log("edit", editing)
       if (!isEditable) return 
       setEditing(true)
-    }
-
-    const onSave = () => {
-      if (!isEditable) return 
-      setEditing(false)
     }
 
     useEffect(() => {
@@ -46,7 +40,7 @@ export const CarmelScreen = (props: any) => {
         },
         {
           description: `DISAGREE`,
-          value: 'diagree',
+          value: 'disagree',
           icon: "HandThumbDownIcon"
         }
     ],[])
@@ -62,7 +56,7 @@ export const CarmelScreen = (props: any) => {
 
       return p.filter((post: any) => {
         const anti = post.anti ? true : false
-        return selectedTab === "diagree" ? anti : !anti
+        return selectedTab === "disagree" ? anti : !anti
       })
     }, [selectedTab, item]);
 
@@ -119,6 +113,6 @@ export const CarmelScreen = (props: any) => {
     return <div className='w-full flex flex-col items-center lg:mt-2 mt-20 mb-20 p-4'>
       <CarmelCard {...item} shortIntro={false} noAction isLoading={isLoading()} wide highlight isEditable={isEditable} onEdit={onEdit}/>
       <TabBar/>
-      <CarmelPosts myPost={myPost} {...item} {...props} posts={sidePosts}/>
+      <CarmelPosts myPost={myPost} {...item} {...props} anti={selectedTab === "disagree" ? true : false} posts={sidePosts}/>
     </div>
   }

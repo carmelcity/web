@@ -81,7 +81,7 @@ export const CarmelPosts = ({ carmelId, author, myPost, anti, posts, auth }: any
     
     const oldPost = myPost()
     let action = replyingPostId > -10 ? "comment" : (auth.profile.username !== author && !oldPost) ? "new" : "edit"    
-    const result = await auth.postAction(action, Object.assign({ text, carmelId }, replyingPostId > -10 && { parentId: replyingPostId }))
+    const result = await auth.postAction(action, Object.assign({ anti, text, carmelId }, replyingPostId > -10 && { parentId: replyingPostId }))
 
     if (result.error) {
       showErrorToast(result.error)
