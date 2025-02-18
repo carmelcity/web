@@ -10,6 +10,7 @@ export const CarmelPostCard = ({
   auth,
   highlight,
   currentComment,
+  carmelId,
   ogComment,
   replying,
   loading,
@@ -89,6 +90,6 @@ export const CarmelPostCard = ({
           }
           <MainAction/>
         </div>
-        { showComments && <CarmelPostComments comments={subposts()}/> }
+        { showComments && <CarmelPostComments carmelId={carmelId} auth={auth} comments={subposts()}/> }
     </div>
 }
