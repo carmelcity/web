@@ -41,7 +41,7 @@ const List = ({ items, wide, isLoading, card, section, containerClasses, shortIn
   )
 }
 
-export const ListScreen = ({ auth, sections = [], mainAction, wide, name, containerClasses, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
+export const ListScreen = ({ auth, sections = [], mainAction, wide, name, containerClasses, filter, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const router = useRouter()
   const carmel = useCarmel()
   const [selectedTab, setSelectedTab] = useState(sections.length > 0 ? sections[0].id : '')
@@ -84,8 +84,9 @@ export const ListScreen = ({ auth, sections = [], mainAction, wide, name, contai
   const getItems = () => {
     if (!carmel.data[name]) return []
     let sec = section()
-    let filter = ((i: any) => sec ? i[sec.filter.key] === sec.filter.value : true)
-    return carmel.data[name].filter(filter).sort((a: any, b: any) => a.order - b.order)
+    let f = filter || (() => true) //sec ? i[sec.filter.key] === sec.filter.value : true)
+    f = sec ? (i: any) => i[sec.filter.key] === sec.filter.value : f 
+    return carmel.data[name].filter(f).sort((a: any, b: any) => a.order - b.order)
   }
 
   const Header = ({ text, icon }: any) => {
