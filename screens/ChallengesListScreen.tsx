@@ -13,6 +13,10 @@ export const ChallengesListScreen = () => {
       name="challenges"   
       placeholder={ListPlaceholder}
       shortIntro
+      sections={[
+        { id: "open",icon: "PlayIcon", title: "Open", filter: { key: "status", value: "open" } }, 
+        { id: "closed", icon: "CheckCircleIcon", title: "Closed", filter: {  key: "status", value: "closed"} } 
+      ]}
       containerClasses={`gap-4`}
       card={ChallengeCard}
     />
