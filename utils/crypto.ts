@@ -1,5 +1,10 @@
 import { Serialize } from 'eosjs';
 
+export const usd = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 export const enum UserPresence {
   none = 0,
   present = 1,
