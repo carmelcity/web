@@ -20,7 +20,7 @@ export const ChallengeScreen = () => {
       return item
     }
 
-    return <div className='w-full flex flex-col items-center mt-20 mb-20 p-4'>
+    return <div className='w-full flex flex-col items-center lg:mt-0 mt-20 mb-20 p-4'>
          <ChallengeCard {...getChallenge()} noAction wide isLoading={carmel.isLoading}/>
      </div>
   }

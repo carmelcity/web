@@ -35,8 +35,8 @@ export const PostIntro = ({ text, short }: any) => {
       setShow(!show)
     }
 
-   return  <span className='whitespace-pre text-gray-300 text-wrap'>
-    <p className={`${readexPro.className} whitespace-break-spaces text-md font-thin text-gray-400 ${short ? 'line-clamp-2' : ''}`}>
+   return  <span className='whitespace-pre text-gray-400 text-wrap'>
+    <p className={`${readexPro.className} whitespace-break-spaces text-md font-thin text-gray-300 ${short ? 'line-clamp-2' : ''}`}>
         { text }
     </p> 
     </span> 
