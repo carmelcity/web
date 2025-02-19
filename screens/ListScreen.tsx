@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import spot from '~/images/stories/Background.webp';
 import wire1 from '~/images/stories/Wire1.webp';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import logo from '~/public/images/logo/logo-white.svg';
 import { useCarmel } from '~/sdk';
 import Link from 'next/link';
+import { Tabs } from '~/elements';
 
 const List = ({ items, wide, isLoading, card, section, containerClasses, shortIntro, onItemPress, actionTitle, placeholder, highlight }: any) => {
   const ListPlaceholder = placeholder
@@ -40,9 +41,38 @@ const List = ({ items, wide, isLoading, card, section, containerClasses, shortIn
   )
 }
 
-export const ListScreen = ({ auth, mainAction, wide, filter, name, containerClasses, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
+export const ListScreen = ({ auth, sections = [], mainAction, wide, name, containerClasses, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const router = useRouter()
   const carmel = useCarmel()
+  const [selectedTab, setSelectedTab] = useState(sections.length > 0 ? sections[0].id : '')
+
+  const tabs = useMemo(
+    () => sections.map((s: any) => ({
+        description: s.title,
+        value: s.id,
+        icon: s.icon
+  })),[])
+
+  const section = () => sections.find((s: any) => s.id === selectedTab)
+
+  const TabBar = () => {
+  
+    if (sections.length === 0) {
+      return <div/>
+    }
+
+    return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
+
+          <Tabs
+            isLoading={false}
+            tabs={tabs}
+            selectedTab={selectedTab}
+            onClickTab={(value: string) => {
+              setSelectedTab(value);
+            }}
+          />
+      </div>
+  }
 
   const onPress = (item: any) => {
     const parts = onItemPress.split(":")
@@ -53,8 +83,9 @@ export const ListScreen = ({ auth, mainAction, wide, filter, name, containerClas
 
   const getItems = () => {
     if (!carmel.data[name]) return []
-    return carmel.data[name].filter(filter || (() => true)).sort((a: any, b: any) => a.order - b.order)
-
+    let sec = section()
+    let filter = ((i: any) => sec ? i[sec.filter.key] === sec.filter.value : true)
+    return carmel.data[name].filter(filter).sort((a: any, b: any) => a.order - b.order)
   }
 
   const Header = ({ text, icon }: any) => {
@@ -81,14 +112,15 @@ export const ListScreen = ({ auth, mainAction, wide, filter, name, containerClas
     <div>
       <div className="bg-dark-indigo w-full flex justify-center m-auto lg:mt-4 mt-24">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
-        <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
-        <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
+        <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute opacity-20" />
+        <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute opacity-20" />
         <div className="w-full mb-10 flex justify-center relative z-30">
           <div className="flex flex-col justify-start items-center pb-32 min-h-full px-4 w-full">
             <Header text={title} icon={icon}/>
             <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-md mb-4 w-full'>
               { subtitle }
             </span>
+            <TabBar/>
             <List 
               items={getItems()}
               wide={wide}
