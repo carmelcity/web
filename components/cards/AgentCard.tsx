@@ -14,7 +14,7 @@ export const AgentCard = ({
   title, 
   avatar,
   name,
-  intro, 
+  description, 
   highlight,
   wide,
   actionTitle,
@@ -95,7 +95,7 @@ export const AgentCard = ({
           <CardAuthor/>
           { tags && <Tags tags={tags || []} containerClass="mt-4" /> }
           <p className={`${readexPro.className} text-md font-thin text-gray-400 2xl:w-5/6 mt-4 ${shortIntro ? 'line-clamp-2' : ''}`}>
-            { intro }
+            { description }
           </p>     
           <div className='flex flex-col items-start pb-10 w-full'>
               {/* { <Engagements comments={comments} upVotes={upVotes} downVotes={downVotes}/> } */}
