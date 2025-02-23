@@ -9,4 +9,10 @@ export const getImageUrl = (username: string, kind: string = "avatar", section: 
   
   const url = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}/carmel/${kind}/${section}/${username}`
   return url
-}    
+}   
+
+export const getCompositeImageUrl = (collection: string, id: number) => {
+  const url = `${process.env['NEXT_PUBLIC_GATEWAY_URL']}/carmel/composite/${collection}/${id}`
+  console.log(url)
+  return url
+}   

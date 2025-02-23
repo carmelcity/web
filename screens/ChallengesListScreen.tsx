@@ -8,7 +8,7 @@ export const ChallengesListScreen = () => {
       title="Challenges"
       onItemPress='/challenges/:challengeId'
       actionTitle="View Challenge"
-      subtitle="Carmel Challenges are chunks of work commissioned and performed by communities to advance projects."
+      subtitle="Carmel Challenges are chunks of work commissioned by studios to advance the studio mission and products."
       icon="TrophyIcon"
       name="challenges"   
       placeholder={ListPlaceholder}
