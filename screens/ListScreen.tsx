@@ -82,7 +82,7 @@ export const ListScreen = ({ auth, nodes, sections = [], mainAction, onItemPress
 
   const MainSection = () => {
     let sec = section()
-    return sec.section || "accounts"
+    return sec && sec.section || "accounts"
   }
 
   const MainCard = () => {
