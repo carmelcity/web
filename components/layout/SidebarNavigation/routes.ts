@@ -28,21 +28,21 @@ export const sidebarRoutes = [
     current: false,
   },
   {
-    name: 'Communities',
-    href: '/communities',
+    name: 'Studios',
+    href: '/studios',
     img: 'UserGroupIcon',
-    current: false,
-  },
-  {
-    name: 'Projects',
-    href: '/projects',
-    img: 'SparklesIcon',
     current: false,
   },
   {
     name: 'Challenges',
     href: '/challenges',
     img: 'TrophyIcon',
+    current: false,
+  },
+  {
+    name: 'Stories',
+    href: '/stories',
+    img: 'NewspaperIcon',
     current: false,
   },
   {

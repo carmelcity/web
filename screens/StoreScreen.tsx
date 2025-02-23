@@ -8,12 +8,16 @@ export const StoreScreen = () => {
       title="Store"
       onItemPress='/store/:username'
       actionTitle="View Assets"
-      subtitle="Carmel Assets are unique digital collectibles that unlock functionality, earn rewards and level up with usage."
+      subtitle="Do more with agents, try out new products and collect digital assets."
       icon="CurrencyDollarIcon"
-      name="collections"   
       wide
       placeholder={ListPlaceholder}
       shortIntro
+      sections={[
+        { node: "agents", id: "agents",icon: "PlayIcon", title: "Agents" }, 
+        { node: "accounts", id: "products", icon: "RocketLaunchIcon", title: "Products", filter: {  key: "type", value: "product" } },
+        { node: "collections", id: "assets", icon: "SparklesIcon", title: "Assets" } 
+      ]}
       card={AssetGroupCard}
     />
   }
