@@ -15,7 +15,7 @@ import { Tabs } from '~/elements';
 const List = ({ items, wide, isLoading, card, section, containerClasses, shortIntro, onItemPress, actionTitle, placeholder, highlight }: any) => {
   const ListPlaceholder = placeholder
   const Card = card
-    
+
   if (isLoading || !items) {
     return <ListPlaceholder />
   }
@@ -31,9 +31,9 @@ const List = ({ items, wide, isLoading, card, section, containerClasses, shortIn
         key={elementId} 
         wide={wide}
         shortIntro={shortIntro}
-        onPress={() => onItemPress(element)}
-         {...element} 
-      />)}
+        {...element} 
+        onPress={() => onItemPress(element) }
+        />)}
       elementsNumber={3}
       loader={<ListPlaceholder />}
     />
@@ -41,7 +41,7 @@ const List = ({ items, wide, isLoading, card, section, containerClasses, shortIn
   )
 }
 
-export const ListScreen = ({ auth, sections = [], mainAction, wide, name, containerClasses, filter, children, highlight, onItemPress, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
+export const ListScreen = ({ auth, nodes, sections = [], mainAction, onItemPress, wide, name, containerClasses, filter, children, highlight, actionTitle, icon, title, subtitle, card, placeholder }: any) => {
   const router = useRouter()
   const carmel = useCarmel()
   const [selectedTab, setSelectedTab] = useState(sections.length > 0 ? sections[0].id : '')
@@ -75,18 +75,36 @@ export const ListScreen = ({ auth, sections = [], mainAction, wide, name, contai
   }
 
   const onPress = (item: any) => {
-    const parts = onItemPress.split(":")
-    const link = `${parts[0]}${item[parts[1]]}`
+    const parts = (item.onItemPress || onItemPress).split(":")
+    const link = `${parts[0]}${item[parts[1]]}`  
+    router.push(link.toLowerCase())
+  }
 
-    router.push(link)
+  const MainSection = () => {
+    let sec = section()
+    return sec.section || "accounts"
+  }
+
+  const MainCard = () => {
+    let sec = section()
+
+    return card || sec.card
   }
 
   const getItems = () => {
-    if (!carmel.data[name]) return []
+    if (name) {
+      if (!carmel.data[name]) return []
+      let sec = section()
+      let f = filter || (() => true)
+      f = sec ? (i: any) => i[sec.filter.key] === sec.filter.value : f 
+      return carmel.data[name].filter(f).sort((a: any, b: any) => a.order - b.order)
+    }
+
     let sec = section()
-    let f = filter || (() => true) //sec ? i[sec.filter.key] === sec.filter.value : true)
-    f = sec ? (i: any) => i[sec.filter.key] === sec.filter.value : f 
-    return carmel.data[name].filter(f).sort((a: any, b: any) => a.order - b.order)
+    if (!carmel.data[sec.node]) return []
+    let f = filter || (() => true)
+    f = sec && sec.filter ? (i: any) => i[sec.filter.key] === sec.filter.value : f 
+    return carmel.data[sec.node].filter(f).sort((a: any, b: any) => a.order - b.order).map((item: any) => ({ ...item, onItemPress: sec.onItemPress }))
   }
 
   const Header = ({ text, icon }: any) => {
@@ -123,14 +141,15 @@ export const ListScreen = ({ auth, sections = [], mainAction, wide, name, contai
             </span>
             <TabBar/>
             <List 
+              nodes={nodes}
               items={getItems()}
               wide={wide}
               highlight={highlight}
               isLoading={carmel.isLoading}
-              card={card}
+              card={MainCard()}
               containerClasses={containerClasses}
               shortIntro
-              section={name}
+              section={MainSection()}
               onItemPress={onPress}
               actionTitle={actionTitle}
               placeholder={placeholder}

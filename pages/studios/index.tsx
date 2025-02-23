@@ -7,7 +7,7 @@ const Main = (props: any) => {
   return (
     <>
       <Head>
-        <title>Carmel Communities</title>
+        <title>Carmel Studios</title>
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout {...props}>

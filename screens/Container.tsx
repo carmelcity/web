@@ -26,8 +26,10 @@ export const Container = ({ noThumbnail, children, banner, username, avatar, sec
     const BannerSection = () => {
       return <BannerImage
         forceBanner
+        section={section}
         username={username}
         banner={banner}
+        wide
         avatar={avatar}>
             { noThumbnail || <ProfileImage avatar={avatar} username={username}/> }
       </BannerImage>
