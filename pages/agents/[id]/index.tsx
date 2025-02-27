@@ -7,8 +7,9 @@ const Main = (props: any) => {
   return (
     <>
       <Head>
-        <title>Carmel Assets</title>
-        <link rel="icon" href="/favicon/favicon.ico" />
+        <title>Carmel Assets1</title>
+        <link rel="icon" href="/favicon/favicon.ico" />        
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
       </Head>
       <AppLayout {...props}>
         <AgentScreen {...props}/>
