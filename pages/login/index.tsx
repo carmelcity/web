@@ -9,6 +9,7 @@ const Main = (props: any) => {
       <Head>
         <title>Carmel Login</title>
         <link rel="icon" href="/favicon/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
       </Head>
       <AccessLayout {...props}>
         <Access.LoginStartScreen {...props}/>
