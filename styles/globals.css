@@ -236,3 +236,53 @@ blockquote.twitter-tweet a:focus {
 .ProseMirror:focus {
   outline: none;
 }
+
+.markdown-content h1 {
+  font-size: 2rem;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.markdown-content h2 {
+  color: #00bcd4;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.markdown-content h3 {
+  color: #00bcd4;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.markdown-content p {
+  font-size: 1rem;
+  color:#b0bec5;
+}
+
+.markdown-content p strong {
+  font-size: 1rem;
+  color:#fff;
+}
+
+.markdown-content li {
+  color:#b0bec5;
+  font-size: 1rem;
+  font-weight: lighter;
+  list-style-type: square;
+}
+
+.markdown-content li strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.markdown-content hr {
+  border: 1px solid #022a27;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
