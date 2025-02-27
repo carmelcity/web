@@ -93,7 +93,7 @@ export const AgentCard = ({
           </h4>
           { tags && <Tags tags={tags || []} containerClass="mt-4" /> }
           <p className={`${readexPro.className} text-md font-thin text-left text-white mt-4}`}>
-            { intro }
+            { headline }
           </p>               
           <p className={`${readexPro.className} text-md font-thin text-left text-gray-400 ${shortIntro ? 'line-clamp-3' : ''}`}>
             { summary }
