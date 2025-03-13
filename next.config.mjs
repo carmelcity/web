@@ -10,10 +10,9 @@ const  nextConfig = {
         destination: "https://carmel-app-:id.vercel.app/app/:id/:path*"
       },
       {
-        source: "/app/:id([a-z0-9_-]+)/",
-        destination: "https://carmel-app-:id.vercel.app/app/:id/"
+        source: "/app/:id([a-z0-9_-]+)",
+        destination: "https://carmel-app-:id.vercel.app/app/:id/home"
       }
-
     ]
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
