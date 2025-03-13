@@ -16,3 +16,4 @@ out
 *.tsbuildinfo
 tsconfig.tsbuildinfo
 .fleek
+.aider*

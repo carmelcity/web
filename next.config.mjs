@@ -3,6 +3,12 @@ import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */
 const  nextConfig = {
+  redirects: [
+    {
+      source: "/app/:id([a-z0-9_-]+)",
+      destination: "https://:id.vercel.app/"
+    }
+  ],
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   transpilePackages: ["@carmel/core"],
   webpack(webpackConfig) {
