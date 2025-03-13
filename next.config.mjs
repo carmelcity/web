@@ -6,13 +6,17 @@ const  nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/app/:id([a-z0-9_-]+)",
+        destination: "https://carmel-app-:id.vercel.app/app/:id/home"
+      },
+      {
+        source: "/app/:id([a-z0-9_-]+)/",
+        destination: "https://carmel-app-:id.vercel.app/app/:id/home"
+      },
+      {
         source: "/app/:id([a-z0-9_-]+)/:path*",
         destination: "https://carmel-app-:id.vercel.app/app/:id/:path*"
       },
-      {
-        source: "/app/:id([a-z0-9_-]+)",
-        destination: "https://carmel-app-:id.vercel.app/app/:id/home"
-      }
     ]
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
