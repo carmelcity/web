@@ -16,8 +16,8 @@ const  nextConfig = {
       {
         source: "/app/:id([a-z0-9_-]+)/:path*",
         destination: "https://carmel-app-:id.vercel.app/app/:id/:path*"
-      },
-    ]
+      }
+   ]
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   transpilePackages: ["@carmel/core"],
