@@ -21,16 +21,15 @@ import { BeakerIcon } from '@heroicons/react/24/solid';
 
 export const sidebarRoutes = [
   {
-    name: 'Carmels',
+    name: 'Home',
     href: `/`,
-    iconActive: logo,
-    icon: logo,
+    img: 'HomeIcon',
     current: false,
   },
   {
-    name: 'Studios',
-    href: '/studios',
-    img: 'UserGroupIcon',
+    name: 'Carmels',
+    href: `/carmels`,
+    img: 'ChatBubbleLeftRightIcon',
     current: false,
   },
   {
@@ -40,9 +39,9 @@ export const sidebarRoutes = [
     current: false,
   },
   {
-    name: 'Stories',
-    href: '/stories',
-    img: 'NewspaperIcon',
+    name: 'Studios',
+    href: '/studios',
+    img: 'UserGroupIcon',
     current: false,
   },
   {
