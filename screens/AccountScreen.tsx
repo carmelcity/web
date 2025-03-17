@@ -8,6 +8,8 @@ import { useCarmel } from '~/sdk'
 import { Tabs } from '~/elements';
 import { CommunityPosts } from '~/components/posts'
 import { getImageUrl } from '~/utils/main';
+import Link from 'next/link';
+import { DynamicIcon } from '~/elements';
 
 const CardAuthor = ({
   author, community, communityImage, authorImage
@@ -115,6 +117,22 @@ export const AccountScreen = (props: any) => {
           setCarmels(all)
     }, [carmel.data])
 
+    const ActionsSection = () => {
+      if (item.type !== "product") {
+        return <div className='mt-16'>
+          </div>
+      }
+      
+      return <div className={`w-full flex flex-row justify-end mt-4`}>
+                <Link href={`/app/${item.username}`} key={'app'}>
+                  <button
+                      className={`${readex_pro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-2 shadow-early-access-button shrink-0`}>
+                          Open App
+                  </button>
+                </Link>
+            </div>
+    }
+
     const TabBar = () => {
       return <div className='mb-8 mt-8 border-b w-full pb-4 border-primary/40'>
           <Tabs
@@ -174,7 +192,8 @@ export const AccountScreen = (props: any) => {
 
     return <Container {...item}>
           <div className={`flex flex-col ${isLoading() && 'animate-pulse'} align-start items-start w-full bg-black/80 border border-primary/20 pb-10 px-4`}>
-                <h4 className={`${readex_pro.className} lg:ml-56 text-3xl lg:text-3xl tracking-tight dark:text-white lg:mt-4 mt-20`}>
+              <ActionsSection/>
+              <h4 className={`${readex_pro.className} lg:ml-56 text-3xl lg:text-3xl tracking-tight dark:text-white mt-4 lg:-mt-12`}>
                      { item.title }
               </h4>
               <Username item={item} isLoading={isLoading()}/>
