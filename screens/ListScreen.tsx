@@ -62,7 +62,6 @@ export const ListScreen = ({ auth, nodes, sections = [], mainAction, onItemPress
     }
 
     return <div className='mb-8 border-b w-full pb-4 border-primary/40'>
-
           <Tabs
             isLoading={false}
             tabs={tabs}

@@ -37,14 +37,14 @@ export const Community = ({
     <ComplexAvatar
       noCommunityLink
       profileImage={image}
-      alt="Community"
-      communityName={"community"}
+      alt="studio"
+      communityName={"studio"}
       username={username}
     />           
   </div>
 }
 
- export const People = ({ all, size }: any) => {
+export const People = ({ all, size }: any) => {
     return <div className="px-4 flex flex-row items-center">
       { all.slice(0, size).map((p: any, i: number) => <div key={`${i}-num`} className='-ml-2 z-10'><SimpleAvatar src={getImageUrl(p)} className=""/></div>) }
           <div className="flex items-center justify-center ml-3 mt-1">
