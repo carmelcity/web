@@ -29,6 +29,46 @@ export const SimpleAvatar = (props: any) => {
   );
 }
 
+// export const LargeAvatar = (props: any) => {
+//   return (
+//     <div className="flex flex-col items-center border">
+//       {/* <div
+//         className="w-20 h-20 bg-primary/30 z-10"
+//         style={{
+//           // clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
+//         }}/> */}
+//       {/* <div
+//         className="z-20 bg-primary absolute"
+//         style={{
+//           // clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
+//         }}> */}
+//         <Image
+//           src={props.src || placeholder}
+//           alt={props.alt ?? ''}
+//           width={100}
+//           height={100}
+//           className="object-cover w-40 h-40"
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+export const LargeAvatar = (props: any) => {
+  return (
+    <div className="flex flex-col items-center">
+        <Image
+          src={props.src || placeholder}
+          alt={props.alt ?? ''}
+          width={100}
+          height={100}
+          className="object-cover w-32 h-32 mask mask-hexagon"
+        />
+    </div>
+  );
+}
+
 export const Chunky = (props: any) => {
   return (
     <div className="flex flex-col items-center">

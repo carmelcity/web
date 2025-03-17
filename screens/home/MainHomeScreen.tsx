@@ -5,9 +5,12 @@ import wire1 from '~/images/stories/Wire1.webp';
 import wire2 from '~/images/stories/Wire2.webp';
 import { ActionButton } from '~/elements';
 import Link from 'next/link';
-
-import { readex_pro, DynamicIcon } from '~/elements';
-
+import { readex_pro } from '~/elements';
+import { ListPlaceholder } from '~/components/placeholders/ListPlaceholder';
+import { HomeItemCard } from '~/components/cards'
+import { ListScreen } from '../ListScreen'
+import { Title, DynamicIcon, InfiniteScrollComponent, readexPro } from '~/elements';
+import { useRouter } from 'next/router'
 
 export const Container = ({ children }: any) => {
     return (
@@ -25,7 +28,7 @@ export const Container = ({ children }: any) => {
   )
 }
 
-export const MainHomeScreen = () => {
+const EmptyHome = () => {
     return <Container>
         <div className="w-full flex flex-col justify-start items-center mt-64 lg:mt-10 pb-80 bg-black/0 z-50">
             <DynamicIcon name={'SquaresPlusIcon'} width={48} height={48} className='text-primary mr-3'/>
@@ -42,5 +45,36 @@ export const MainHomeScreen = () => {
             </Link>
         </div>
     </Container>
+}
+
+const onItemPress = (element: any, router: any) => {
+    router.push(`/app/${element.username}`)
+}
+
+const HomeList = ({ home }: any) => {
+    const items = Object.values(home)
+    const router = useRouter()
+
+    return <div className='w-full mb-20 min-h-screen'>
+        <InfiniteScrollComponent
+          containerClasses={`justify-center gap-4 mt-24 lg:mt-4 grid grid-cols-3 lg:grid-cols-4 p-2`} 
+          renderItem={items.map((element: any, elementId: any) => <HomeItemCard 
+            {...element} 
+            onPress={() => onItemPress(element, router) }
+            />)}
+          elementsNumber={3}
+          loader={<ListPlaceholder />}
+    />
+    </div>
+}
+
+export const MainHomeScreen = (props: any) => {
+    const { home } = props.auth.profile
+
+    if (!home) {
+        return <EmptyHome/>
+    }
+
+    return <HomeList home={home}/>
   }
   
