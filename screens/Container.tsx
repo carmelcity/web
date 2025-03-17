@@ -8,8 +8,23 @@ import { getImageUrl } from '~/utils/main';
 
 const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
+// const ProfileImage = ({ avatar, username, isLoading }: any) => {
+//   return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
+//         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
+//           { isLoading || <Image
+//             src={avatar ? getImageUrl(username) : PROFILE_PLACEHOLDER}
+//             alt="profile"
+//             width={80}
+//             height={80}
+//             className={`mask ${isLoading && 'animate-pulse' } lg:w-48 lg:h-48 w-32 h-32 mask-hexagon object-fit`}
+//           /> }
+//         </div>
+//       </div>
+// }
+
+
 const ProfileImage = ({ avatar, username, isLoading }: any) => {
-  return <div className={`absolute lg:top-[70%] top-[30%] lg:left-10 left-[32%]`}>
+  return <div className={`absolute mt-20 lg:-mt-8 ml-2`}>
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={avatar ? getImageUrl(username) : PROFILE_PLACEHOLDER}
