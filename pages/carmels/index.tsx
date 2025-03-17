@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Home } from '~/screens';
+import { CarmelListScreen } from '~/screens';
 import { AppLayout } from '~/components/layout/Layout';
 
 const Main = (props: any) => {
@@ -11,7 +11,7 @@ const Main = (props: any) => {
         <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
       <AppLayout {...props}>
-          <Home.MainHomeScreen {...props}/>
+          <CarmelListScreen {...props}/>
       </AppLayout>
     </>
   );

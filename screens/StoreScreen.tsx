@@ -12,8 +12,8 @@ export const StoreScreen = () => {
       placeholder={ListPlaceholder}
       shortIntro
       sections={[
+        { node: "accounts", card: ProjectCard, onItemPress: '/:username', id: "products", icon: "RocketLaunchIcon", title: "Apps", filter: {  key: "type", value: "product" } },
         { node: "agents", card: AgentCard, onItemPress: '/agents/:name', id: "agents", icon: "PlayIcon", title: "Agents" }, 
-        { node: "accounts", card: ProjectCard, onItemPress: '/:username', id: "products", icon: "RocketLaunchIcon", title: "Products", filter: {  key: "type", value: "product" } },
         { node: "collections", section: "collections", card: AssetGroupCard, onItemPress: '/assets/:username', id: "assets", icon: "SparklesIcon", title: "Assets" } 
       ]}
     />

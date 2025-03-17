@@ -7,8 +7,9 @@ export const CarmelListScreen = (props: any) => {
     const isEditable = props.auth && props.auth.profile.level > 50
 
     return <ListScreen
-      title="Top Carmels"
+      title="Carmels"
       onItemPress='/:carmelId'
+      icon="ChatBubbleLeftRightIcon"
       actionTitle="Join debate"  
       subtitle="Carmels are thoughtful debates about how to build a more human world."
       name="carmels"
