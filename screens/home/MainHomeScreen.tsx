@@ -24,6 +24,7 @@ export const Container = ({ children }: any) => {
       </div>
   )
 }
+
 export const MainHomeScreen = () => {
     return <Container>
         <div className="w-full flex flex-col justify-start items-center mt-64 lg:mt-10 pb-80 bg-black/0 z-50">
@@ -39,7 +40,6 @@ export const MainHomeScreen = () => {
                         Browse the store
                 </button>
             </Link>
-
         </div>
     </Container>
   }
