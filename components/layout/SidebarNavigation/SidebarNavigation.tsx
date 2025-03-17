@@ -59,15 +59,9 @@ export const SidebarNavigation = ({ isLoading, auth }: any) => {
                       readexPro.className
                     } font-normal group flex gap-x-3 rounded-md p-2 text-sm leading-6 items-center cursor-pointer`}
                     onClick={() => handleNavClick(item.href)}>
-                    {item.img ? (
+                    {
                       <DynamicIcon name={item.img} width={24} height={24} />
-                    ) : (
-                      <Image
-                        src={item.current ? item.iconActive : item.icon}
-                        alt="card"
-                        className={`object-fit w-8 h-8 -m-1`}
-                      />
-                    )}
+                    }
                     {item.name}
                   </Link>
                 </li>

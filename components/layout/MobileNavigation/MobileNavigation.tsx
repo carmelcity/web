@@ -39,15 +39,9 @@ export const MobileNavigation = () => {
                   `${readexPro.className} font-thin h-16 text-xs flex flex-col gap-x-3 gap-y-2 rounded-md p-2 text-sm leading-3 font-semibold items-center cursor-pointer`
                 }
                 onClick={() => handleNavClick(item.href)}>
-                {item.img ? (
+                {
                   <DynamicIcon name={item.img} width={40} height={40} className={`-m-1`} />
-                ) : (
-                  <Image
-                    src={item.current ? item.iconActive : item.icon}
-                    alt="card"
-                    className={`object-fit w-11 h-11 -m-2`}
-                  />
-                )}
+                }
                 {item.name}
               </Link>
             </li>
