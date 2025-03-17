@@ -14,9 +14,6 @@ import { DynamicIcon } from '~/elements';
 const CardAuthor = ({
   author, community, communityImage, authorImage
 }: any) => {
-  console.log({
-    author, community, communityImage, authorImage
-  })
   if (!author) {
     if (community) {
       return <div className={`flex flex-row relative z-10 lg:ml-56 mt-4`}>
@@ -117,19 +114,47 @@ export const AccountScreen = (props: any) => {
           setCarmels(all)
     }, [carmel.data])
 
+    const isOnHome = () => {
+      return (props.auth.isLoggedIn && 
+             props.auth.profile.home && 
+             props.auth.profile.home[item.username])
+    }
+
+    const onAddToHome = async () => {
+      if (!props.auth.isLoggedIn()) {
+        router.push("/register")
+        return
+      }
+
+      if (isOnHome()) {
+        router.push(`/app/${item.username}`)
+        return 
+      }
+
+      const result = await props.auth.accountAction("addtohome", {
+        details: {
+          ...item          
+        }
+      })
+
+      await props.auth.getFreshProfile()
+
+      router.push('/')
+    }
+
     const ActionsSection = () => {
       if (item.type !== "product") {
         return <div className='mt-16'>
           </div>
       }
-      
+
       return <div className={`w-full flex flex-row justify-end mt-4`}>
-                <Link href={`/app/${item.username}`} key={'app'}>
                   <button
-                      className={`${readex_pro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-2 shadow-early-access-button shrink-0`}>
-                          Open App
+                      onClick={onAddToHome}
+                      className={`${readex_pro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border px-2 py-2 shadow-early-access-button shrink-0 flex flex-row items-center text-white`}>
+                            <DynamicIcon name={isOnHome() ? 'PlayIcon' : 'SquaresPlusIcon'} width={24} height={24} className='text-primary mr-3'/>
+                          { isOnHome() ? `Open App` : `Add to Home` }
                   </button>
-                </Link>
             </div>
     }
 

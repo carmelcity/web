@@ -24,7 +24,7 @@ const PROFILE_PLACEHOLDER = `/images/profile_placeholder.webp`
 
 
 const ProfileImage = ({ avatar, username, isLoading }: any) => {
-  return <div className={`absolute mt-20 lg:-mt-8 ml-2`}>
+  return <div className={`absolute mt-16 lg:-mt-8 ml-2`}>
         <div className="mask mask-hexagon rounded-none bg-primary bg-opacity-20 border border-1 border-cyan/50">
           { isLoading || <Image
             src={avatar ? getImageUrl(username) : PROFILE_PLACEHOLDER}
