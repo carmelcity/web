@@ -7,15 +7,19 @@ import { BannerImage, SoftActionButton, ActionButton, Community, Author, People,
 import { useCarmel } from '~/sdk'
 import { Tabs } from '~/elements';
 import { CommunityPosts } from '~/components/posts'
+import { getImageUrl } from '~/utils/main';
 
 const CardAuthor = ({
   author, community, communityImage, authorImage
 }: any) => {
+  console.log({
+    author, community, communityImage, authorImage
+  })
   if (!author) {
     if (community) {
       return <div className={`flex flex-row relative z-10 lg:ml-56 mt-4`}>
           <Community
-            image={communityImage}
+            image={getImageUrl(community)}
             username={community}
         />
       </div>
@@ -42,9 +46,9 @@ const ProfileSummary = ({ intro }: any) => {
 const Username = ({ item, isLoading }: any) => {
   // let followers = item.followers ? item.followers.length : 0
 
-  return <div className={`relative z-10 lg:ml-56 lg:mt-0 mt-16`}>
-        <h1 className={`${readex_pro.className} mt-5 lg:text-4xl text-3xl`}>
-          { isLoading ? '' : item.username }
+  return <div className={`relative z-10 lg:ml-56 -mt-2`}>
+        <h1 className={`${readex_pro.className} lg:text-2xl text-2xl text-primary`}>
+          { isLoading ? '' : "@" + item.username }
         </h1>
         <div className='flex flex-row'>
           {/* <div className='text-white font-bold mr-1'>
@@ -170,6 +174,9 @@ export const AccountScreen = (props: any) => {
 
     return <Container {...item}>
           <div className={`flex flex-col ${isLoading() && 'animate-pulse'} align-start items-start w-full bg-black/80 border border-primary/20 pb-10 px-4`}>
+                <h4 className={`${readex_pro.className} lg:ml-56 text-3xl lg:text-3xl tracking-tight dark:text-white lg:mt-4 mt-20`}>
+                     { item.title }
+              </h4>
               <Username item={item} isLoading={isLoading()}/>
               <CardAuthor {...item} />
               <ProfileSummary {...item}/>
