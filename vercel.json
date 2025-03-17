@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+          {
+            "source": "/app/:id([a-z0-9_-]+)/:path*",
+            "destination": "https://carmel-app-:id.vercel.app/app/:id/:path*"
+          }
+    ]
+}
