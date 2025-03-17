@@ -8,12 +8,12 @@ export const SimpleAvatar = (props: any) => {
   return (
     <div className="flex flex-col items-center">
       <div
-        className="w-11 h-11 bg-cyan z-10"
+        className="w-12 h-12 bg-primary/30 z-10"
         style={{
           clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
         }}/>
       <div
-        className="w-10 h-10 z-20 bg-dark-green-secondary absolute mt-0.5"
+        className="w-10 h-10 z-20 bg-primary absolute m-1"
         style={{
           clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
         }}>
@@ -22,13 +22,12 @@ export const SimpleAvatar = (props: any) => {
           alt={props.alt ?? ''}
           width={10}
           height={10}
-          className="object-cover w-full h-full"
+          className="object-cover w-10 h-10 border-4 border-white"
         />
       </div>
     </div>
   );
 }
-
 
 export const Chunky = (props: any) => {
   return (
@@ -39,7 +38,7 @@ export const Chunky = (props: any) => {
           clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
         }}/>
       <div
-        className="w-10 h-10 z-20 bg-dark-green-secondary absolute mt-0.5"
+        className="w-10 h-10 z-20 bg-dark-green-secondary mt-0.5"
         style={{
           clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
         }}>
@@ -82,8 +81,10 @@ export const ComplexAvatar = ({
   communityName,
 }: any) => {
   return (
-    <div className="flex">
+    <div className="flex flex-row">
+      <div className="flex">
       <SimpleAvatar src={profileImage || placeholder}/>
+      </div>
       <div className={`${readexPro.className} block items-center font-normal justify-center ml-3 max-w-1/2`}>
         <Link href={`/${username}`} className={`${readexPro.className} hover:underline text-white`}>
           {username?.length > 20 ? username.substring(0, 20) : username}
