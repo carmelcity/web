@@ -22,7 +22,7 @@ export const SimpleAvatar = (props: any) => {
           alt={props.alt ?? ''}
           width={10}
           height={10}
-          className="object-cover w-10 h-10 border-4 border-white"
+          className="object-cover w-10 h-10"
         />
       </div>
     </div>
