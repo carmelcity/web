@@ -9,6 +9,7 @@ import { readexPro } from '~/elements/fonts';
 import profile_placeholder from '~/images/profile_placeholder.webp';
 import { ConfirmModal } from '~/components/access/ConfirmModal';
 import { DynamicIcon, showSuccessToast, AuthButton, SoftActionButton } from '~/elements';
+import { getImageUrl } from '~/utils/main';
 
 export const Navbar = ({ auth }: any) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -89,7 +90,7 @@ export const Navbar = ({ auth }: any) => {
     //   icon: "Cog8ToothIcon"
     }, {
       id: "signout",
-      title: "Sign out",
+      title: "Logout",
       icon: "ArrowLeftOnRectangleIcon"
     }]
   }
@@ -108,7 +109,7 @@ export const Navbar = ({ auth }: any) => {
             <div
               className="w-10 h-10 m-auto z-10 bg-transparent">
               <Image
-                src={auth.session.avatarImage || profile_placeholder}
+                src={getImageUrl(auth.profile.username)}
                 width={180}
                 height={180}
                 alt={'profile'}
@@ -143,7 +144,7 @@ export const Navbar = ({ auth }: any) => {
         <Link href={'/login'} key={'reg1'}>
           <button
             className={`${readexPro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium text-primary px-4 py-3 shrink-0`}>
-                Sign in
+                Login
           </button>
         </Link>
         <Link href={'/register'} key={'reg1'}>
