@@ -11,7 +11,7 @@ import { readex_pro, DynamicIcon } from '~/elements';
 
 export const Container = ({ children }: any) => {
     return (
-      <div className="bg-dark-indigo w-full flex justify-center m-auto -mt-24 lg:mt-4 w-full">
+      <div className="bg-dark-indigo w-full flex justify-center m-auto lg:mt-20 -mt-24 lg:mt-4 w-full">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
         <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
         <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
@@ -26,7 +26,7 @@ export const Container = ({ children }: any) => {
 }
 export const MainHomeScreen = () => {
     return <Container>
-        <div className="w-full flex flex-col justify-start items-center mt-10 h-screen bg-black/0 z-50">
+        <div className="w-full flex flex-col justify-start items-center mt-64 lg:mt-10 pb-80 bg-black/0 z-50">
             <DynamicIcon name={'SquaresPlusIcon'} width={48} height={48} className='text-primary mr-3'/>
             <div className={`${readex_pro.className} text-left flex flex-row mb-8 lg:mt-0`}>
                     <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-2xl'>
