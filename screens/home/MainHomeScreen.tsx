@@ -69,7 +69,7 @@ const EmptyHome = () => {
 }
 
 const onItemPress = (element: any, router: any) => {
-    router.push(`/${element.type === "agent" ? 'agent/main' : 'app'}/${element.username}`)
+    router.push(`/${element.type === "agent" ? 'agent' : 'app'}/${element.username}`)
 }
 
 const HomeList = ({ home }: any) => {
