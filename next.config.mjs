@@ -19,7 +19,7 @@ const  nextConfig = {
       },
       {
         source: "/agent/:path*",
-        destination: "https://carmel-agent-main.vercel.app/agent/main/:path*"
+        destination: "https://carmel-agent-main.vercel.app/agent/:path*"
       }
    ]
   },
