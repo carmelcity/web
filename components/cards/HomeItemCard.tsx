@@ -1,7 +1,7 @@
 import { ProfileHeaderPlaceholder } from '~/components/placeholders/ProfileHeader'
 import { readexPro } from '~/elements/fonts'
 import { BannerImage, CompositeImage, Engagements, DynamicIcon, SimpleAvatar, Community, Animation, Author, People, Tags, LargeAvatar } from '~/elements';
-import { getImageUrl } from '~/utils/main';
+import { getImageUrl, getCompositeImageUrl } from '~/utils/main';
 import Image from 'next/image';
 
 const MAX_TITLE = 80
@@ -11,6 +11,7 @@ export const HomeItemCard = ({
   onPress, 
   isLoading, 
   title, 
+  team,
   banner, 
   avatar,
   username,
@@ -82,7 +83,7 @@ export const HomeItemCard = ({
   }
   
   return <div onClick={onPress} className={`cursor-pointer flex flex-col justify-start`}>
-              <LargeAvatar src={getImageUrl(username)}/>
+             <LargeAvatar src={team ? getCompositeImageUrl(team.collection, team.owner) : getImageUrl(username)}/> 
               <div className={`${readexPro.className} mt-1 text-sm text-center`}>
                   { title }
               </div>
