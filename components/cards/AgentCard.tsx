@@ -50,7 +50,7 @@ export const AgentCard = ({
                       onClick={onAddToHome}
                       className={`${readexPro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border px-2 py-2 shadow-early-access-button shrink-0 flex flex-row items-center text-white`}>
                             <DynamicIcon name={isOnHome() ? 'PlayIcon' : 'SquaresPlusIcon'} width={24} height={24} className='text-primary mr-3'/>
-                          { isOnHome() ? `Open App` : `Add to Home` }
+                          { isOnHome() ? `Talk to agent` : `Add to Home` }
                   </button>
             </div>
     }
