@@ -18,8 +18,8 @@ const  nextConfig = {
         destination: "https://carmel-app-:id.vercel.app/app/:id/:path*"
       },
       {
-        source: "/agent/:id([a-z0-9_-]+)/:path*",
-        destination: "https://carmel-agent-main.vercel.app/agent/main/:id/:path*"
+        source: "/agent/:path*",
+        destination: "https://carmel-agent-main.vercel.app/agent/main/:path*"
       }
    ]
   },
