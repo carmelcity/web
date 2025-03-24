@@ -20,7 +20,8 @@ export const AgentCard = ({
   community,
   author,
   project,
-  members,
+  onAddToHome,
+  isOnHome,
   tags,
   shortIntro
 }: any) => {    
@@ -43,6 +44,19 @@ export const AgentCard = ({
           </div>
     }
 
+    const ActionsSection = () => {
+      return <div className={`w-full flex flex-row justify-center mt-4 mb-4`}>
+                  <button
+                      onClick={onAddToHome}
+                      className={`${readexPro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border px-2 py-2 shadow-early-access-button shrink-0 flex flex-row items-center text-white`}>
+                            <DynamicIcon name={isOnHome() ? 'PlayIcon' : 'SquaresPlusIcon'} width={24} height={24} className='text-primary mr-3'/>
+                          { isOnHome() ? `Open App` : `Add to Home` }
+                  </button>
+            </div>
+    }
+
+
+    
     const CardAuthor = () => {
       if (!author) {
         if (community) {
@@ -74,6 +88,7 @@ export const AgentCard = ({
             <div className={`${highlight ? '' : 'hidden'} badge badge-success badge-xs animate-pulse text-[#8BC34A] mr-2`}/>
             { title }
           </h4>         
+          <ActionsSection/>
         </div>
         <div className='flex flex-col w-full items-start lg:mt-0 mt-2'>
           <div onClick={onPress} className="flex flex-col p-4 border bg-black/50  lg:ml-4 border-primary/20 min-h-screen leading-normal text-center w-full">
