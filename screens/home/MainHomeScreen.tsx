@@ -30,16 +30,16 @@ const Header = () => {
     </div>
   }
 
-export const Container = ({ children }: any) => {
+export const Container = ({ children, noHeader }: any) => {
     return (
       <div className="bg-dark-indigo w-full flex justify-center m-auto lg:mt-20 -mt-24 lg:mt-4 w-full">
         <Image src={spot} alt="spot" className="z-0 block top-0 ml-auto absolute h-full" />
-        <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute" />
-        <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute" />
+        <Image src={wire1} alt="wire1" className="hidden sm:block z-0 top-[40%] absolute opacity-20" />
+        <Image src={wire2} alt="wire2" className="hidden sm:block z-0 top-[40%] absolute opacity-50" />
 
         <div className="w-full mb-10 flex justify-center relative z-30 mt-24 lg:mt-0">
          <div className="flex flex-col justify-start items-center pb-32 min-h-full px-4 w-full">
-         <Header/>
+         { noHeader || <Header/> }
          <div className="flex flex-col justify-start items-center w-full">
               { children }
               </div>
@@ -50,20 +50,59 @@ export const Container = ({ children }: any) => {
 }
 
 const EmptyHome = () => {
-    return <Container>
-        <div className="w-full flex flex-col justify-start items-center mt-64 lg:mt-10 pb-80 bg-black/0 z-50">
-            <DynamicIcon name={'SquaresPlusIcon'} width={48} height={48} className='text-primary mr-3'/>
-            <div className={`${readex_pro.className} text-left flex flex-row mb-8 lg:mt-0`}>
-                    <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-2xl'>
-                        {`Add apps and agents`}
+    return <Container noHeader>
+        <div className="w-full flex flex-col justify-start items-center mt-32 lg:mt-8 pb-20 bg-black/0 z-50">
+            <div className={`${readex_pro.className} text-left flex flex-row lg:mt-0`}>
+                    <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-2xl lg:text-3xl'>
+                        {`Welcome to Carmel`}
                     </span>
+            </div> 
+            <div className={`${readex_pro.className} text-left flex flex-row lg:px-20 px-2 mt-4`}>
+                    <p className='font-normal text-primary text-center text-xl'>
+                        {
+                            `                             
+✓ A different way of using the Web.
+                            `
+                        }
+                    </p>
             </div>
+            <div className={`${readex_pro.className} text-left flex flex-row lg:px-20 px-2 lg:mt-0`}>
+                    <p className='font-normal text-center text-md'>
+                        {
+                            `                             
+In Carmel, you're a co-creator, not just a consumer. Use Apps and AI Agents but also contribute to co-creating them. 
+                            `
+                        }
+                    </p>
+            </div>
+
+            <div className={`${readex_pro.className} text-left flex flex-row lg:px-20 px-2 mt-0`}>
+                    <p className='font-normal text-primary text-center text-xl'>
+                        {
+                            `                             
+✓ A circular Digital Economy.
+`
+                        }
+                    </p>
+            </div>
+
+            <div className={`${readex_pro.className} text-left flex flex-row lg:px-20 px-2 lg:mt-0`}>
+                    <p className='font-normal text-center text-md'>
+                        {
+                            `                             
+Build a Digital Asset portfolio and collect rent. Pay to use Apps and Agents but also mint new Carmel Assets and rent them out.
+                            `
+                        }
+                    </p>
+            </div>
+
             <Link href={'/store'} key={'reg1'}>
                 <button
-                    className={`${readex_pro.className} text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0`}>
-                        Browse the store
+                    className={`${readex_pro.className} mt-4 text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0`}>
+                        Browse the Carmel Store
                 </button>
             </Link>
+           
         </div>
     </Container>
 }
