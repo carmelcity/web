@@ -80,7 +80,7 @@ In Carmel, you're a co-creator, not just a consumer. Use Apps and AI Agents but 
                     <p className='font-normal text-primary text-center text-xl'>
                         {
                             `                             
-✓ A circular Digital Economy.
+✓ A community-owned platform.
 `
                         }
                     </p>
@@ -89,8 +89,8 @@ In Carmel, you're a co-creator, not just a consumer. Use Apps and AI Agents but 
             <div className={`${readex_pro.className} text-left flex flex-row lg:px-20 px-2 lg:mt-0`}>
                     <p className='font-normal text-center text-md'>
                         {
-                            `                             
-Build a Digital Asset portfolio and collect rent. Pay to use Apps and Agents but also mint new Carmel Assets and rent them out.
+                            ` 
+Co-own the platform by minting new Digital Assets. Earn an income by renting out your assets and collecting payments.
                             `
                         }
                     </p>
