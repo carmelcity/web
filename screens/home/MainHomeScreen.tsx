@@ -79,13 +79,13 @@ const EmptyHome = () => {
       </h2>
       <Link href={'/carmels'} key={'reg1'}>
           <button
-              className={`${readex_pro.className} w-full mt-20 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
+              className={`${readex_pro.className} w-full mt-16 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
                   Join the conversation
           </button>
       </Link>
       <Link href={'/store'} key={'reg2'}>
           <button
-              className={`${readex_pro.className} w-full mt-8 text-nowrap text-sm shrink-0 hover:opacity-80 font-medium text-primary px-2 py-3 `}>
+              className={`${readex_pro.className} w-full mt-4 text-nowrap text-sm shrink-0 hover:opacity-80 font-medium text-primary px-2 py-3 `}>
                  See what the community is already building
           </button>
       </Link>
