@@ -13,7 +13,7 @@ export const TransactionsList = ({ ethPrice, auth }: any) => {
 
   const TransactionsRows = () => {
     return auth.userTransactions.map((item: any, index: number) => <div key={index}>
-        <TransactionRow ethPrice={ethPrice} {...item} latest={latestTransaction ? item.eventId === latestTransaction.eventId : false } />
+        {/* <TransactionRow ethPrice={ethPrice} {...item} latest={latestTransaction ? item.eventId === latestTransaction.eventId : false } /> */}
       </div>)
   }
 
@@ -27,7 +27,7 @@ export const TransactionsList = ({ ethPrice, auth }: any) => {
           <ActionButton title="Invite a friend" onPress={onInvite}/>
         </div> */}
       </div>
-      <TransactionsRows/>
+      {/* <TransactionsRows/> */}
     </div>
   );
 };
