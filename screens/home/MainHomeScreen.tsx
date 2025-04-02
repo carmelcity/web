@@ -75,7 +75,7 @@ const EmptyHome = () => {
         How do we build a more human world?
       </h1>
       <h2 className="mt-4 text-white font-normal text-xl lg:text-2xl inter-var text-center">
-        See what  other Carmel members in debating how we build a more human world.
+        Members are currently debating on "carmels" - proposals to build a more human world.
       </h2>
       <Link href={'/carmels'} key={'reg1'}>
           <button
@@ -85,7 +85,7 @@ const EmptyHome = () => {
       </Link>
       <Link href={'/store'} key={'reg2'}>
           <button
-              className={`${readex_pro.className} w-full mt-2 text-nowrap text-sm shrink-0 hover:opacity-80 font-medium text-primary px-2 py-3 `}>
+              className={`${readex_pro.className} w-full mt-8 text-nowrap text-sm shrink-0 hover:opacity-80 font-medium text-primary px-2 py-3 `}>
                  See what the community is already building
           </button>
       </Link>
