@@ -50,15 +50,16 @@ export const WalletScreen = ({ auth }: any) => {
 
   useEffect(() => {
     (async () => {
-      const crypto = await auth.getCrypto()
+      console.log(auth.profile)
+      // const crypto = await auth.getCrypto()
 
-      if (crypto && crypto.ethPrice) {
-        setETHPrice(crypto.ethPrice)
-      }
+      // if (crypto && crypto.ethPrice) {
+      //   setETHPrice(crypto.ethPrice)
+      // }
 
-      if (auth.profile.wallet && auth.profile.wallet.balance) {
-        setETHBalance(auth.profile.wallet.balance.eth)
-      }
+      // if (auth.profile.wallet && auth.profile.wallet.balance) {
+      //   setETHBalance(auth.profile.wallet.balance.eth)
+      // }
     })()
   }, [])
 
@@ -78,7 +79,7 @@ export const WalletScreen = ({ auth }: any) => {
   return <Container name="Wallet" icon="WalletIcon">
     {/* <TopupModal auth={auth} isModalOpen={showTopup} setModalOpen={onToggle}/> */}
 
-    {/* <div className={`w-full flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative`}>
+    <div className={`w-full flex flex-col justify-start h-auto mx-auto mb-4 pb-10 relative`}>
         <div className={`flex items-center mb-5 py-4 bg-black border border-primary/50 w-full lg:flex-row flex-col pb-4`}>
           <div className='w-full px-4'>
               <Balance ethPrice={ethPrice} ethBalance={ethBalance}/>
@@ -96,6 +97,6 @@ export const WalletScreen = ({ auth }: any) => {
             </div>
           }
         </div>
-      </div> */}
+      </div>
   </Container>
 }
