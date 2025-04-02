@@ -103,16 +103,18 @@ const TopIntro = () => {
 const EmptyHome = () => {
     return <WavyBackground className="w-full black/10 p-4 lg:p-24" backgroundFill='#0A0F12' colors={["#053D36", "#00796B", "#00ACC1", "#4CAF50"]}>
     <div className='w-full flex flex-col items-center'>
-    <TopIntro/>
+    <Link href={'/carmels'} key={'reg2'}>
+      <TopIntro/>
+    </Link>
     <h1 className="text-3xl lg:text-6xl text-white font-bold inter-var text-center mt-4">
         How would you build a more human world?
       </h1>
-      <h2 className="mt-4 text-white font-normal text-xl lg:text-2xl inter-var text-center">
+      {/* <h2 className="mt-4 text-white font-normal text-xl lg:text-2xl inter-var text-center">
         Please are currently debating on Carmels how to build a more human world.
-      </h2> 
+      </h2>  */}
       <Link href={'/carmels'} key={'reg1'}>
           <button
-              className={`${readex_pro.className} w-full mt-16 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
+              className={`${readex_pro.className} w-full lg:mt-16 mt-8 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
                   Join the conversation
           </button>
       </Link>
