@@ -29,7 +29,8 @@ import { ChevronRight } from "lucide-react";
 import { cn } from "~/lib/utils";
 // import { Button } from "@/components/ui/button";
 import { BoxReveal } from "~/components/magicui/box-reveal";
- 
+import { WavyBackground } from "~/components/ui/wavy-background";
+
 const Header = () => {
     return <div className={`${readexPro.className} text-left flex flex-row mb-4 border-b border-primary/20 w-full lg:mt-0 mt-20`}>
       <span className='font-normal text-transparent bg-clip-text bg-gradient-to-r from-cyan to-light-green text-2xl flex flex-row items-center w-full'>
@@ -68,66 +69,28 @@ export const Container = ({ children, noHeader }: any) => {
 }
 
 const EmptyHome = () => {
-    return <Container noHeader>
-        <div className="group mt-12 relative mx-auto bg-black/50 flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
-      <span
-        className={cn(
-          "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-cyan/50 via-green/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]",
-        )}
-        style={{
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "destination-out",
-          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "subtract",
-          WebkitClipPath: "padding-box",
-        }}
-      />
-      <AnimatedGradientText className="text-sm font-medium">
-        Welcome to Carmel City
-      </AnimatedGradientText>
-    </div>
-        <div className="w-full flex flex-col justify-start items-center mt-32 lg:mt-8 bg-black/0 z-50">
-            <div className="h-[12rem] flex items-center justify-center w-full">
-            <TextHoverEffect text="CARMEL" />
-            </div>
-           
-<div className=" items-center justify-center align-center flex flex-col overflow-hidden pt-8">
-    <BoxReveal boxColor={"#0097A7"} duration={0.5}>
-        <h2 className="mt-[.5rem] text-[1rem]">
-          People are debating about
-        </h2>
-      </BoxReveal>
-
-      <BoxReveal boxColor={"#0097A7"} duration={0.5}>
-        <h1 className="text-3xl font-semibold">
-          how to build more human world
-        </h1>
-      </BoxReveal>
- 
-      <BoxReveal boxColor={"#0097A7"} duration={0.5}>
-            <Link href={'/carmels'} key={'reg1'}>
-                <button
-                    className={`${readex_pro.className} mt-4 text-nowrap text-sm md:text-md shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
-                        Join the conversation
-                </button>
-            </Link>
-      </BoxReveal>
-     
-      <BoxReveal boxColor={"#0097A7"} duration={0.5}>
-        <p className="text-lg font-semibold mt-12" >
-            <Link href={'/store'} key={'reg1'} className='mr-1'>
-                Check out what the community is building
-            </Link>
-        </p>
-      </BoxReveal>
-    </div>
-
-
-    
-     
-        </div>
-    </Container>
+    return <WavyBackground className="w-full black/10 p-4 lg:p-24" backgroundFill='#0A0F12'>
+    <div className='w-full flex flex-col items-center'>
+      <h1 className="text-3xl lg:text-5xl text-white font-bold inter-var text-center">
+        How do we build a more human world?
+      </h1>
+      <h2 className="mt-4 text-white font-normal text-xl lg:text-2xl inter-var text-center">
+        See what  other Carmel members in debating how we build a more human world.
+      </h2>
+      <Link href={'/carmels'} key={'reg1'}>
+          <button
+              className={`${readex_pro.className} w-full mt-20 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
+                  Join the conversation
+          </button>
+      </Link>
+      <Link href={'/store'} key={'reg2'}>
+          <button
+              className={`${readex_pro.className} w-full mt-2 text-nowrap text-sm shrink-0 hover:opacity-80 font-medium text-primary px-2 py-3 `}>
+                 See what the community is already building
+          </button>
+      </Link>
+      </div>
+    </WavyBackground>
 }
 
 const onItemPress = (element: any, router: any) => {
