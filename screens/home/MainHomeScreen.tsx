@@ -68,15 +68,48 @@ export const Container = ({ children, noHeader }: any) => {
   )
 }
 
+const TopIntro = () => {
+  return (
+    <div className="group bg-black/80 relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
+      <span
+        className={cn(
+          "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#053D36]/50 via-[#00796B]/50 to-[#00ACC1]/50 bg-[length:300%_100%] p-[1px]",
+        )}
+        style={{
+          WebkitMask:
+            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "destination-out",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "subtract",
+          WebkitClipPath: "padding-box",
+        }}
+      />
+      <AnimatedGradientText className="text-sm font-medium">
+        Browse Carmels
+      </AnimatedGradientText>
+     
+            <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-500" />
+          <span className='text-sm text-white/70'>
+            Community debates
+            </span>
+            <ChevronRight
+        className="ml-1 size-4 stroke-neutral-500 transition-transform
+ duration-300 ease-in-out group-hover:translate-x-0.5"
+      />
+    </div>
+  );
+}
+
 const EmptyHome = () => {
-    return <WavyBackground className="w-full black/10 p-4 lg:p-24" backgroundFill='#0A0F12'>
+    return <WavyBackground className="w-full black/10 p-4 lg:p-24" backgroundFill='#0A0F12' colors={["#053D36", "#00796B", "#00ACC1", "#4CAF50"]}>
     <div className='w-full flex flex-col items-center'>
-      <h1 className="text-3xl lg:text-5xl text-white font-bold inter-var text-center">
-        How do we build a more human world?
+    <TopIntro/>
+    <h1 className="text-3xl lg:text-6xl text-white font-bold inter-var text-center mt-4">
+        How would you build a more human world?
       </h1>
       <h2 className="mt-4 text-white font-normal text-xl lg:text-2xl inter-var text-center">
-        Members are currently debating on "carmels" - proposals to build a more human world.
-      </h2>
+        Please are currently debating on Carmels how to build a more human world.
+      </h2> 
       <Link href={'/carmels'} key={'reg1'}>
           <button
               className={`${readex_pro.className} w-full mt-16 text-nowrap shrink-0 hover:opacity-80 border-cyan font-medium border text-white px-2 py-3 shadow-early-access-button shrink-0 rounded-md`}>
